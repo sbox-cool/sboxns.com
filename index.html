@@ -45,14 +45,12 @@
       <ol class="steps">
         <li>
           <h3>Install your backend</h3>
-          <p>On a Linux VPS with sudo access, one command installs the server, creates a project and API keys, gives it a free HTTPS name and starts the service. Pick the line that matches your machine.</p>
+          <p>On a Linux VPS with sudo access, the tunnel command installs the server, creates a project and API keys, gives it a free HTTPS name and starts the service.</p>
           <div class="methods">
             <article>
               <h4>Public IP (most VPS)</h4>
-              <p>Players connect straight to your server at <code>NAME.n1.sboxns.com</code>. Open ports 443 and 8080.</p>
-              <pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
-  | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_DNS=1 \
-    SBOX_NS_ACME_EMAIL="you@example.com" SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1 sh</code></pre>
+              <p>Signed DNS names use addresses such as <code>NAME.n1.sboxns.com</code>. Players connect directly to your public IP. Ports 443 and the HTTP verification port must be reachable.</p>
+              <p>The DNS registry is live. Installer support is not yet available in a published release. Use the tunnel command below for the current release, or follow the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">signed DNS instructions</a> when running a build that includes <code>sbox-ns dns</code>.</p>
             </article>
             <article>
               <h4>Home network or no open ports</h4>
@@ -61,7 +59,7 @@
   | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_TUNNEL=1 sh</code></pre>
             </article>
           </div>
-          <p>Have your own domain? Set <code>SBOX_NS_PUBLIC_URL="https://ns.example.com"</code> instead. Windows, Docker and PostgreSQL are covered in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
+          <p>Have your own domain? Install without <code>SBOX_NS_TUNNEL=1</code>, set <code>SBOX_NS_PUBLIC_URL="https://ns.example.com"</code>, and configure a certificate or HTTPS reverse proxy. Windows, Docker and PostgreSQL are covered in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
           <div class="notice">
             <h4>Does my server depend on sboxns.com?</h4>
             <p>Only to create your name and to update it when your IP changes. Once your name exists, players reach your server without going through sboxcool's servers: with a public IP they connect to you directly and Bunny DNS answers the lookup; with a tunnel, Cloudflare carries the traffic to you. If sboxcool.com goes down, your existing name keeps working.</p>
