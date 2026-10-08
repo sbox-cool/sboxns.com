@@ -17,6 +17,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="stylesheet" href="site.css">
   <script src="capacity.js" defer></script>
+  <script src="code.js" defer></script>
 </head>
 <body>
   <header class="navigation">
@@ -44,24 +45,49 @@
       <ol class="steps">
         <li>
           <h3>Install your backend</h3>
-          <p>On a fresh Linux VPS with sudo access, this installs the server, creates a project and API keys, enables the HTTPS tunnel and starts the service.</p>
-          <pre><code>curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+          <p>On a Linux VPS with sudo access, one command installs the server, creates a project and API keys, gives it a free HTTPS name and starts the service. Pick the line that matches your machine.</p>
+          <div class="methods">
+            <article>
+              <h4>Public IP (most VPS)</h4>
+              <p>Players connect straight to your server at <code>NAME.n1.sboxns.com</code>. Open ports 443 and 8080.</p>
+              <pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_DNS=1 \
+    SBOX_NS_ACME_EMAIL="you@example.com" SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1 sh</code></pre>
+            </article>
+            <article>
+              <h4>Home network or no open ports</h4>
+              <p>Cloudflare Tunnel connects out from your machine, so nothing needs to be opened. Your name is <code>NAME.sboxns.com</code>.</p>
+              <pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
   | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_TUNNEL=1 sh</code></pre>
-          <p>Keep the credentials printed by the installer private. For Windows, Docker, PostgreSQL or an existing installation, use the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
+            </article>
+          </div>
+          <p>Have your own domain? Set <code>SBOX_NS_PUBLIC_URL="https://ns.example.com"</code> instead. Windows, Docker and PostgreSQL are covered in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
+          <div class="notice">
+            <h4>Does my server depend on sboxns.com?</h4>
+            <p>Only to create your name and to update it when your IP changes. Once your name exists, players reach your server without going through sboxcool's servers: with a public IP they connect to you directly and Bunny DNS answers the lookup; with a tunnel, Cloudflare carries the traffic to you. If sboxcool.com goes down, your existing name keeps working.</p>
+          </div>
         </li>
         <li>
-          <h3>Point the library at your HTTPS name</h3>
-          <p>Use your project ID, public key and the generated hostname in the official <a href="https://sbox.game/sboxcool/network-storage">Network Storage library</a>.</p>
-          <pre><code>NetworkStorage.Configure(
+          <h3>Keep the printed credentials</h3>
+          <p>The installer prints your project ID, public key, secret key and HTTPS address. That is all the configuration a first game needs. To see them again or add a project later:</p>
+          <pre><code class="language-sh">sudo sbox-ns quickstart "My Game"
+sudo sbox-ns doctor</code></pre>
+          <p><code>doctor</code> checks the database, ports, certificate and that your name points at this server.</p>
+        </li>
+        <li>
+          <h3>Open your dashboard</h3>
+          <p>Visit your HTTPS address and sign in at <code>/login</code>. For the first sign-in, create a single-use link on the server:</p>
+          <pre><code class="language-sh">sudo sbox-ns admin login-link</code></pre>
+        </li>
+        <li>
+          <h3>Connect the s&amp;box editor</h3>
+          <p>Install the official <a href="https://sbox.game/sboxcool/network-storage">Network Storage library</a>, then open <strong>Editor &gt; Network Storage &gt; Setup</strong> and enter the project ID, public key, secret key and your HTTPS address as the Base URL. Save, then push your collections, endpoints and workflows with <strong>Editor &gt; Network Storage &gt; Sync Tool</strong>. A successful sync confirms the editor can reach your server.</p>
+          <p>In game code, only the public key is used:</p>
+          <pre><code class="language-csharp">NetworkStorage.Configure(
     "YOUR_PROJECT_ID",
     "sbox_ns_YOUR_PUBLIC_KEY",
-    "https://YOUR_NAME.sboxns.com" );</code></pre>
-          <p>Set the same Base URL and credentials in the editor Setup Tool. The secret key belongs only in editor tooling or trusted servers, never in a published game.</p>
-        </li>
-        <li>
-          <h3>Sync your project and own your database</h3>
-          <p>Author collections, endpoints and workflows in YAML Source, then push their definitions with the editor Sync Tool. Runtime player records live in SQLite or PostgreSQL on your server. Syncing definitions is not a database migration.</p>
-          <p>Manage projects and keys, browse records and export backups from your owner dashboard.</p>
+    "https://YOUR_NAME.n1.sboxns.com" );</code></pre>
+          <p>The secret key belongs only in editor tooling or trusted servers, never in a published game. Runtime player records live in SQLite or PostgreSQL on your server.</p>
         </li>
       </ol>
     </section>
@@ -79,8 +105,8 @@
 
     <section>
       <h2>Free HTTPS, without buying a domain</h2>
-      <p>sboxns.com gives your server a stable name derived from its key. Cloudflare Tunnel connects to your server from the inside, so you do not need to expose the backend port publicly.</p>
-      <p>The tunnel is optional. You can use your own domain, certificate or reverse proxy instead. sboxns.com is a sister landing page of <a href="https://sboxcool.com">sboxcool.com</a>, not a shared database or a central admin panel.</p>
+      <p>sboxns.com gives your server a stable name derived from its own key, so nobody else can claim or change it. With a public IP your name points straight at your server and it gets its own Let's Encrypt certificate. Without one, a Cloudflare Tunnel connects from the inside, so you do not need to expose any port.</p>
+      <p>Both are optional. You can use your own domain, certificate or reverse proxy instead. sboxns.com is a sister landing page of <a href="https://sboxcool.com">sboxcool.com</a>, not a shared database or a central admin panel.</p>
       <div class="capacity" id="capacity" hidden>
         <h3>Hosted name capacity</h3>
         <dl class="capacity-grid">
@@ -91,13 +117,13 @@
         <p class="small">Live from the sboxns.com registry. Capacity grows as we add zones.</p>
       </div>
       <h3>Where is my admin panel?</h3>
-      <p>Visit <code>https://YOUR_NAME.sboxns.com/login</code> to sign in and <code>/dashboard</code> to manage your server. There is no <code>/admin/login</code> route. For initial setup or passwordless access, run <code>sbox-ns admin login-link</code> on your server and open its single-use link.</p>
+      <p>Visit <code>https://YOUR_NAME/login</code> to sign in and <code>/dashboard</code> to manage your server. There is no <code>/admin/login</code> route. For initial setup or passwordless access, run <code>sbox-ns admin login-link</code> on your server and open its single-use link.</p>
     </section>
 
     <section>
       <h2>No lock-in. Clear boundaries.</h2>
       <p>The server does not require a sboxcool account, payment, email registration or usage reports. Anonymous install statistics and security emails are separate opt-ins. Your database stays on your machine.</p>
-      <p>Using the hosted name sends registration metadata to sboxcool and routes requests through Cloudflare. It is not a promise of zero third-party traffic. The connector also has its own crash reporting. For an independent deployment, use your own HTTPS setup and leave optional services disabled.</p>
+      <p>Creating a hosted name sends registration metadata (your name, public key and, for public-IP names, your IP address) to sboxcool. Public-IP names publish your server's IP in DNS. Tunnel names route requests through Cloudflare, whose connector has its own crash reporting. For an independent deployment, use your own HTTPS setup and leave optional services disabled.</p>
       <p>Each subdomain belongs to an independently operated server. Contact that game's operator about its player data. For hosted-name abuse, <a href="https://sboxcool.com/support">contact support</a> with the hostname and evidence. Read the <a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">acceptable-use policy</a> and <a href="https://sboxcool.com/privacy">privacy policy</a>.</p>
     </section>
 

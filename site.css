@@ -37,6 +37,26 @@ pre code { padding: 0; background: none; }
 .capacity-grid div { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 22px; }
 .capacity-grid dt { color: var(--muted); font-size: .9rem; }
 .capacity-grid dd { margin: 4px 0 0; font-size: 1.8rem; font-weight: 750; font-variant-numeric: tabular-nums; }
+.methods { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 20px 0; max-width: 870px; }
+.methods article { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 22px; min-width: 0; }
+.methods pre { background: var(--bg); margin-bottom: 0; }
+h4 { font-size: 1rem; margin: 0 0 8px; }
+.notice { border: 1px solid var(--accent); border-radius: 8px; padding: 18px 22px; margin: 20px 0 0; max-width: 870px; }
+.notice p { margin-bottom: 0; }
+.has-copy { position: relative; padding-top: 44px; }
+.copy-button { position: absolute; top: 10px; right: 10px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 3px 12px; font: inherit; font-size: .8rem; cursor: pointer; }
+.copy-button:hover { color: var(--fg); border-color: var(--muted); }
+.copy-buffer { position: fixed; top: -100px; opacity: 0; }
+.tok-comment { color: #7f7a88; }
+.tok-string { color: #a6e3a1; }
+.tok-variable { color: #f9c97a; }
+.tok-flag { color: #89b4fa; }
+.tok-command, .tok-keyword { color: var(--accent); font-weight: 600; }
+.tok-url { color: #94e2d5; }
+.tok-operator { color: var(--muted); }
+.tok-type { color: #f9c97a; }
+.tok-method { color: #89b4fa; }
+.tok-number { color: #fab387; }
 footer { display: flex; flex-wrap: wrap; gap: 24px; padding-top: 32px; padding-bottom: 40px; font-size: .9rem; }
 footer span { margin-right: auto; color: var(--muted); }
 @media (max-width: 640px) {
