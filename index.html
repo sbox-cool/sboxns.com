@@ -11,11 +11,16 @@
   <meta property="og:url" content="https://sboxns.com/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
+  <link rel="icon" href="images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="stylesheet" href="site.css">
+  <script src="capacity.js" defer></script>
 </head>
 <body>
   <header class="navigation">
-    <a class="brand" href="/">sboxns.com</a>
+    <a class="brand" href="/"><img src="images/logo-80.webp" alt="" width="32" height="32">sboxns.com</a>
     <nav aria-label="Main navigation">
       <a href="https://sboxcool.com/wiki/network-storage-v3">Documentation</a>
       <a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>
@@ -76,6 +81,15 @@
       <h2>Free HTTPS, without buying a domain</h2>
       <p>sboxns.com gives your server a stable name derived from its key. Cloudflare Tunnel connects to your server from the inside, so you do not need to expose the backend port publicly.</p>
       <p>The tunnel is optional. You can use your own domain, certificate or reverse proxy instead. sboxns.com is a sister landing page of <a href="https://sboxcool.com">sboxcool.com</a>, not a shared database or a central admin panel.</p>
+      <div class="capacity" id="capacity" hidden>
+        <h3>Hosted name capacity</h3>
+        <dl class="capacity-grid">
+          <div><dt>Names in use</dt><dd data-stat="names">-</dd></div>
+          <div><dt>Current capacity</dt><dd data-stat="capacity">-</dd></div>
+          <div><dt>DNS records kept</dt><dd data-stat="records">-</dd></div>
+        </dl>
+        <p class="small">Live from the sboxns.com registry. Capacity grows as we add zones.</p>
+      </div>
       <h3>Where is my admin panel?</h3>
       <p>Visit <code>https://YOUR_NAME.sboxns.com/login</code> to sign in and <code>/dashboard</code> to manage your server. There is no <code>/admin/login</code> route. For initial setup or passwordless access, run <code>sbox-ns admin login-link</code> on your server and open its single-use link.</p>
     </section>
