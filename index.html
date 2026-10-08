@@ -3,29 +3,100 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>sboxns.com: hosted HTTPS names for self-hosted s&amp;box Network Storage</title>
-  <meta name="description" content="Free HTTPS hostnames for self-hosted sbox Network Storage servers. No domain, no signup.">
+  <title>Self-host s&amp;box Network Storage | Free HTTPS with sboxns.com</title>
+  <meta name="description" content="Run the open source s&amp;box game backend on your VPS. No sboxcool signup, subscription or mandatory telemetry. Player saves, endpoints and a free HTTPS tunnel.">
+  <link rel="canonical" href="https://sboxns.com/">
+  <meta property="og:title" content="Your s&amp;box backend. Your server. Your data.">
+  <meta property="og:description" content="Open source Network Storage with a one-command install and optional free HTTPS. No sboxcool account or subscription.">
+  <meta property="og:url" content="https://sboxns.com/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
+  <header class="navigation">
+    <a class="brand" href="/">sboxns.com</a>
+    <nav aria-label="Main navigation">
+      <a href="https://sboxcool.com/wiki/network-storage-v3">Documentation</a>
+      <a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>
+      <a href="https://sboxcool.com">sboxcool.com</a>
+    </nav>
+  </header>
   <main>
-    <h1>sboxns.com</h1>
-    <p class="lead">Free HTTPS hostnames for self-hosted <a href="https://github.com/sbox-cool/sbox-network-storage-server">sbox Network Storage</a> servers. No domain to buy, no account to create.</p>
+    <section class="hero">
+      <h1>Your s&amp;box backend.<br>Your server. Your data.</h1>
+      <p class="lead">Open source Network Storage for player saves, leaderboards and server-side game logic. Install on your own machine or a cheap VPS, then connect your game through a free HTTPS name.</p>
+      <p class="promise">No sboxcool signup. No subscription. No mandatory telemetry.</p>
+      <div class="actions">
+        <a class="button" href="#install">Install Server</a>
+        <a class="button secondary" href="https://github.com/sbox-cool/sbox-network-storage-server">View Source</a>
+      </div>
+      <p class="small">A VPS around $5/month can be a starting point for a small game. You pay your provider, not us. Capacity and prices depend on your workload and provider.</p>
+    </section>
 
-    <h2>Get a name</h2>
-    <p>Install the open source server, then enable the tunnel. Your server gets a stable address like <code>abcd2345wxyz.sboxns.com</code> derived from its own key.</p>
-    <pre><code>curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+    <section id="install">
+      <h2>From VPS to game</h2>
+      <ol class="steps">
+        <li>
+          <h3>Install your backend</h3>
+          <p>On a fresh Linux VPS with sudo access, this installs the server, creates a project and API keys, enables the HTTPS tunnel and starts the service.</p>
+          <pre><code>curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
   | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_TUNNEL=1 sh</code></pre>
-    <p>Already installed? Run <code>sbox-ns tunnel enable</code> and restart the service.</p>
+          <p>Keep the credentials printed by the installer private. For Windows, Docker, PostgreSQL or an existing installation, use the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
+        </li>
+        <li>
+          <h3>Point the library at your HTTPS name</h3>
+          <p>Use your project ID, public key and the generated hostname in the official <a href="https://sbox.game/sboxcool/network-storage">Network Storage library</a>.</p>
+          <pre><code>NetworkStorage.Configure(
+    "YOUR_PROJECT_ID",
+    "sbox_ns_YOUR_PUBLIC_KEY",
+    "https://YOUR_NAME.sboxns.com" );</code></pre>
+          <p>Set the same Base URL and credentials in the editor Setup Tool. The secret key belongs only in editor tooling or trusted servers, never in a published game.</p>
+        </li>
+        <li>
+          <h3>Sync your project and own your database</h3>
+          <p>Author collections, endpoints and workflows in YAML Source, then push their definitions with the editor Sync Tool. Runtime player records live in SQLite or PostgreSQL on your server. Syncing definitions is not a database migration.</p>
+          <p>Manage projects and keys, browse records and export backups from your owner dashboard.</p>
+        </li>
+      </ol>
+    </section>
 
-    <h2>What these names are</h2>
-    <p>Each subdomain points at one independently operated server, reached through a Cloudflare Tunnel. Those servers and their data belong to the people who run them, not to sboxcool.</p>
+    <section>
+      <h2>A backend built for s&amp;box</h2>
+      <div class="features">
+        <article><h3>Player persistence</h3><p>Save data keyed by player, shared world records, queries and leaderboards.</p></article>
+        <article><h3>Server-side logic</h3><p>Endpoints and workflows keep authoritative game logic off the client.</p></article>
+        <article><h3>Agent-friendly operations</h3><p>CLI commands, JSON output and an allowlisted stdio MCP server for local or SSH-based management.</p></article>
+        <article><h3>Portable storage</h3><p>Start with SQLite. Use PostgreSQL when you need it. Export your configuration and data for backups or migration.</p></article>
+      </div>
+      <p>The server is AGPL-3.0 open source and pre-1.0 software. Keep backups and read release notes before updating.</p>
+    </section>
 
-    <h2>Report abuse</h2>
-    <p>Names are covered by the <a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">hosted names acceptable-use policy</a>. To report a name, <a href="https://sboxcool.com/support">contact sboxcool support</a> with the hostname and what you saw.</p>
+    <section>
+      <h2>Free HTTPS, without buying a domain</h2>
+      <p>sboxns.com gives your server a stable name derived from its key. Cloudflare Tunnel connects to your server from the inside, so you do not need to expose the backend port publicly.</p>
+      <p>The tunnel is optional. You can use your own domain, certificate or reverse proxy instead. sboxns.com is a sister landing page of <a href="https://sboxcool.com">sboxcool.com</a>, not a shared database or a central admin panel.</p>
+      <h3>Where is my admin panel?</h3>
+      <p>Visit <code>https://YOUR_NAME.sboxns.com/login</code> to sign in and <code>/dashboard</code> to manage your server. There is no <code>/admin/login</code> route. For initial setup or passwordless access, run <code>sbox-ns admin login-link</code> on your server and open its single-use link.</p>
+    </section>
+
+    <section>
+      <h2>No lock-in. Clear boundaries.</h2>
+      <p>The server does not require a sboxcool account, payment, email registration or usage reports. Anonymous install statistics and security emails are separate opt-ins. Your database stays on your machine.</p>
+      <p>Using the hosted name sends registration metadata to sboxcool and routes requests through Cloudflare. It is not a promise of zero third-party traffic. The connector also has its own crash reporting. For an independent deployment, use your own HTTPS setup and leave optional services disabled.</p>
+      <p>Each subdomain belongs to an independently operated server. Contact that game's operator about its player data. For hosted-name abuse, <a href="https://sboxcool.com/support">contact support</a> with the hostname and evidence. Read the <a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">acceptable-use policy</a> and <a href="https://sboxcool.com/privacy">privacy policy</a>.</p>
+    </section>
+
+    <section class="resources">
+      <h2>Build with the official documentation</h2>
+      <p><a href="https://sboxcool.com/wiki/network-storage-v3">Network Storage documentation</a> covers the library, YAML Source, endpoints, workflows and game integration.</p>
+      <p><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md">MCP and agent guide</a> covers operating your server with an AI assistant. Contributions and reproducible bug reports are welcome on GitHub.</p>
+    </section>
   </main>
   <footer>
-    <a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a>
+    <span>sboxns.com by sboxcool</span>
+    <a href="https://github.com/sbox-cool/sbox-network-storage-server">Source</a>
+    <a href="https://sboxcool.com/wiki/network-storage-v3">Official docs</a>
     <a href="https://sboxcool.com">sboxcool.com</a>
   </footer>
 </body>

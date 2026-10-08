@@ -1,0 +1,15 @@
+# sboxns.com
+
+> Optional free HTTPS hostnames for the open source s&box Network Storage Server. A sister landing page of sboxcool.com, not a shared database or central admin panel.
+
+Self-hosting requires no sboxcool signup, subscription, email or telemetry. Operators pay their own VPS provider. The optional hosted tunnel shares operational registration metadata and carries requests through Cloudflare. Player databases stay on the operator's server. Owner login: https://YOUR_NAME.sboxns.com/login. Owner dashboard: /dashboard. /admin/login is not a supported route.
+
+## Official sources
+
+- [Server README](https://github.com/sbox-cool/sbox-network-storage-server): installation, client integration, features and preview limitations.
+- [Self-hosting](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md): Linux, Windows, Docker, HTTPS, backups and optional services.
+- [Network Storage documentation](https://sboxcool.com/wiki/network-storage-v3): game library, YAML Source, endpoint and workflow reference.
+- [Client setup](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/client-setup.md): project credentials and custom Base URL.
+- [MCP](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md): allowlisted stdio tools and SSH operations.
+- [Hosted-name acceptable use](https://sboxcool.com/network-storage/hosted-names/acceptable-use): abuse reporting and service boundaries.
+- [Privacy](https://sboxcool.com/privacy): sboxcool-operated services.
