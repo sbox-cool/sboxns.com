@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sboxns.com: hosted HTTPS names for self-hosted s&amp;box Network Storage</title>
+  <meta name="description" content="Free HTTPS hostnames for self-hosted sbox Network Storage servers. No domain, no signup.">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <main>
+    <h1>sboxns.com</h1>
+    <p class="lead">Free HTTPS hostnames for self-hosted <a href="https://github.com/sbox-cool/sbox-network-storage-server">sbox Network Storage</a> servers. No domain to buy, no account to create.</p>
+
+    <h2>Get a name</h2>
+    <p>Install the open source server, then enable the tunnel. Your server gets a stable address like <code>abcd2345wxyz.sboxns.com</code> derived from its own key.</p>
+    <pre><code>curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_TUNNEL=1 sh</code></pre>
+    <p>Already installed? Run <code>sbox-ns tunnel enable</code> and restart the service.</p>
+
+    <h2>What these names are</h2>
+    <p>Each subdomain points at one independently operated server, reached through a Cloudflare Tunnel. Those servers and their data belong to the people who run them, not to sboxcool.</p>
+
+    <h2>Report abuse</h2>
+    <p>Names are covered by the <a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">hosted names acceptable-use policy</a>. To report a name, <a href="https://sboxcool.com/support">contact sboxcool support</a> with the hostname and what you saw.</p>
+  </main>
+  <footer>
+    <a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a>
+    <a href="https://sboxcool.com">sboxcool.com</a>
+  </footer>
+</body>
+</html>
