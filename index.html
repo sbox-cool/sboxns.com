@@ -23,6 +23,7 @@
   <header class="navigation">
     <a class="brand" href="/"><img src="images/logo-80.webp" alt="" width="32" height="32">sboxns.com</a>
     <nav aria-label="Main navigation">
+      <a href="#demo">Live demo</a>
       <a href="https://sboxcool.com/wiki/network-storage-v3">Documentation</a>
       <a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>
       <a href="https://sboxcool.com">sboxcool.com</a>
@@ -35,6 +36,7 @@
       <p class="promise">No sboxcool signup. No subscription. No mandatory telemetry.</p>
       <div class="actions">
         <a class="button" href="#install">Install Server</a>
+        <a class="button secondary" href="#demo">Try the Live Demo</a>
         <a class="button secondary" href="https://github.com/sbox-cool/sbox-network-storage-server">View Source</a>
       </div>
       <p class="small">A VPS around $5/month can be a starting point for a small game. You pay your provider, not us. Capacity and prices depend on your workload and provider.</p>
@@ -88,6 +90,31 @@ sudo sbox-ns doctor</code></pre>
           <p>The secret key belongs only in editor tooling or trusted servers, never in a published game. Runtime player records live in SQLite or PostgreSQL on your server.</p>
         </li>
       </ol>
+    </section>
+
+    <section id="demo">
+      <h2>Try the live demo</h2>
+      <p>Explore a real server running generated sample data: player progress, inventories, world state and backend definitions. The demo is read-only, so every button that would change anything is disabled server-side. No login needed.</p>
+      <div class="actions">
+        <a class="button" href="https://demo.sboxns.com">Open demo.sboxns.com</a>
+      </div>
+      <div class="gallery">
+        <figure>
+          <a href="#shot-dashboard"><img src="images/demo-dashboard-thumb.png" alt="Demo project dashboard with generated Island survival project"></a>
+          <figcaption>Project dashboard with generated sample data</figcaption>
+        </figure>
+        <figure>
+          <a href="#shot-data"><img src="images/demo-data-browser-thumb.png" alt="Demo data browser listing player, inventory and world collections"></a>
+          <figcaption>Data browser across player and world collections</figcaption>
+        </figure>
+        <figure>
+          <a href="#shot-players"><img src="images/demo-player-records-thumb.png" alt="Demo player progress records with levels, coins and quests"></a>
+          <figcaption>Player records with levels, coins and quests</figcaption>
+        </figure>
+      </div>
+      <div class="lightbox" id="shot-dashboard"><a class="lightbox-close" href="#demo" aria-label="Close">Close</a><img src="images/demo-dashboard.png" alt="Demo project dashboard with generated Island survival project"></div>
+      <div class="lightbox" id="shot-data"><a class="lightbox-close" href="#demo" aria-label="Close">Close</a><img src="images/demo-data-browser.png" alt="Demo data browser listing player, inventory and world collections"></div>
+      <div class="lightbox" id="shot-players"><a class="lightbox-close" href="#demo" aria-label="Close">Close</a><img src="images/demo-player-records.png" alt="Demo player progress records with levels, coins and quests"></div>
     </section>
 
     <section>
