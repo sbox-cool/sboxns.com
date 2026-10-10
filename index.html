@@ -117,12 +117,23 @@ sudo sbox-ns doctor</code></pre>
       <div class="lightbox" id="shot-players"><a class="lightbox-close" href="#demo" aria-label="Close">Close</a><img src="images/demo-player-records.png" alt="Demo player progress records with levels, coins and quests"></div>
     </section>
 
+    <section id="agents">
+      <h2>Build it with your coding agent</h2>
+      <p>Your server includes an MCP server for Claude Code, Cursor and other coding agents. It runs over SSH, so nothing new is exposed. Ask in plain words: the agent sets up a project, gives you the line for your game, writes and validates collections and endpoints, dry-runs them, and reads request logs, errors and player records when something breaks.</p>
+      <pre><code class="language-sh">claude mcp add sbox-ns -- ssh my-vps sudo sbox-ns mcp</code></pre>
+      <p>Claude Code users can also install the plugin, which adds skills for setup, design, debugging and operations:</p>
+      <pre><code class="language-sh">/plugin marketplace add sbox-cool/sbox-network-storage-server
+/plugin install sbox-ns@sbox-ns</code></pre>
+      <p>Reading and dry runs are always allowed. Saving definitions, changing player records and deleting anything stay off until you turn them on with <code>sbox-ns config set mcp.allow_writes true</code> and its siblings. Saved endpoints go to a staged revision first, so live players are not affected until you publish.</p>
+      <p><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md">MCP and agent guide</a></p>
+    </section>
+
     <section>
       <h2>A backend built for s&amp;box</h2>
       <div class="features">
         <article><h3>Player persistence</h3><p>Save data keyed by player, shared world records, queries and leaderboards.</p></article>
         <article><h3>Server-side logic</h3><p>Endpoints and workflows keep authoritative game logic off the client.</p></article>
-        <article><h3>Agent-friendly operations</h3><p>CLI commands, JSON output and an allowlisted stdio MCP server for local or SSH-based management.</p></article>
+        <article><h3>Agent-friendly development</h3><p>An MCP server and Claude Code plugin let your coding agent build, test and debug your backend, with every change opt-in.</p></article>
         <article><h3>Portable storage</h3><p>Start with SQLite. Use PostgreSQL when you need it. Export your configuration and data for backups or migration.</p></article>
       </div>
       <p>The server is AGPL-3.0 open source and pre-1.0 software. Keep backups and read release notes before updating.</p>
