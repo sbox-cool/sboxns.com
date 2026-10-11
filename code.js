@@ -67,6 +67,18 @@
     });
   }
 
+  var status = document.createElement("div");
+  status.className = "sr-only";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  document.body.appendChild(status);
+
+  function announce(message) {
+    // Clear first so repeating the same message is announced again.
+    status.textContent = "";
+    setTimeout(function () { status.textContent = message; }, 50);
+  }
+
   document.querySelectorAll("pre > code").forEach(function (code) {
     var source = code.textContent;
     var language = (code.className.match(/language-(\w+)/) || [])[1];
@@ -76,11 +88,17 @@
     button.type = "button";
     button.className = "copy-button";
     button.textContent = "Copy";
+    var container = code.closest("article, li, section");
+    var heading = container && container.querySelector("h4, h3, h2");
+    var subject = heading ? heading.textContent.trim() : "code";
+    button.setAttribute("aria-label", "Copy code: " + subject);
     button.addEventListener("click", function () {
       copyText(source).then(function () {
         button.textContent = "Copied";
+        announce("Copied code: " + subject);
       }, function () {
         button.textContent = "Select and copy";
+        announce("Could not copy automatically. Select the text and copy it.");
       }).then(function () {
         setTimeout(function () { button.textContent = "Copy"; }, 1800);
       });

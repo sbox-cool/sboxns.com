@@ -10,7 +10,12 @@
   <meta property="og:description" content="Open source Network Storage with a one-command install and optional free HTTPS. No sboxcool account or subscription.">
   <meta property="og:url" content="https://sboxns.com/">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://sboxns.com/images/demo-dashboard.png">
+  <meta property="og:image:width" content="1440">
+  <meta property="og:image:height" content="722">
+  <meta property="og:image:alt" content="Demo project dashboard of a self-hosted s&amp;box Network Storage server">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://sboxns.com/images/demo-dashboard.png">
   <link rel="icon" href="images/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
@@ -18,8 +23,10 @@
   <link rel="stylesheet" href="site.css">
   <script src="capacity.js" defer></script>
   <script src="code.js" defer></script>
+  <script src="gallery.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="navigation">
     <a class="brand" href="/"><img src="images/logo-80.webp" alt="" width="32" height="32">sboxns.com</a>
     <nav aria-label="Main navigation">
@@ -30,7 +37,7 @@
       <a href="https://sboxcool.com">sboxcool.com</a>
     </nav>
   </header>
-  <main>
+  <main id="main">
     <section class="hero">
       <h1>Your s&amp;box backend.<br>Your server. Your data.</h1>
       <p class="lead">Open source Network Storage for player saves, leaderboards and server-side game logic. Install on your own machine or a cheap VPS, then connect your game through a free HTTPS name.</p>
@@ -65,7 +72,16 @@
   | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_TUNNEL=1 sh</code></pre>
             </article>
           </div>
-          <p>Have your own domain? Install without <code>SBOX_NS_TUNNEL=1</code>, set <code>SBOX_NS_PUBLIC_URL="https://ns.example.com"</code>, and configure a certificate or HTTPS reverse proxy. Windows, Docker and PostgreSQL are covered in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
+          <p>The installer downloads the release's <code>SHA256SUMS</code> and refuses to install if the archive does not match. To inspect the script first, download <code>install.sh</code> from the <a href="https://github.com/sbox-cool/sbox-network-storage-server/releases/latest">latest release</a> and read it before running it.</p>
+          <div class="methods">
+            <article>
+              <h4>Windows</h4>
+              <p>In PowerShell. Without administrator rights it installs to <code>%LOCALAPPDATA%\Programs\sbox-ns</code> and adds that folder to your <code>PATH</code>; as administrator it installs to Program Files for all users. It then runs <code>sbox-ns setup</code>, and it also checks the archive against <code>SHA256SUMS</code> before installing.</p>
+              <pre><code>irm https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.ps1 | iex</code></pre>
+              <p>The <code>SBOX_NS_*</code> install variables above need an elevated PowerShell on Windows; the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a> has the Windows details.</p>
+            </article>
+          </div>
+          <p>Have your own domain? Install without <code>SBOX_NS_TUNNEL=1</code>, set <code>SBOX_NS_PUBLIC_URL="https://ns.example.com"</code>, and configure a certificate or HTTPS reverse proxy. Docker and PostgreSQL are covered in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
           <div class="notice">
             <h4>Does my server depend on sboxns.com?</h4>
             <p>Only to create your name and to update it when your IP changes. Once your name exists, players reach your server without going through sboxcool's servers: with a public IP they connect to you directly and Bunny DNS answers the lookup; with a tunnel, Cloudflare carries the traffic to you. If sboxcool.com goes down, your existing name keeps working.</p>
@@ -105,21 +121,21 @@ sudo sbox-ns doctor</code></pre>
       </div>
       <div class="gallery">
         <figure>
-          <a href="#shot-dashboard"><img src="images/demo-dashboard-thumb.png" alt="Demo project dashboard with generated Island survival project"></a>
+          <a href="images/demo-dashboard.png" data-lightbox="shot-dashboard"><img src="images/demo-dashboard-thumb.png" alt="Demo project dashboard with generated Island survival project. Enlarge." width="480" height="240" loading="lazy"></a>
           <figcaption>Project dashboard with generated sample data</figcaption>
         </figure>
         <figure>
-          <a href="#shot-data"><img src="images/demo-data-browser-thumb.png" alt="Demo data browser listing player, inventory and world collections"></a>
+          <a href="images/demo-data-browser.png" data-lightbox="shot-data"><img src="images/demo-data-browser-thumb.png" alt="Demo data browser listing player, inventory and world collections. Enlarge." width="480" height="240" loading="lazy"></a>
           <figcaption>Data browser across player and world collections</figcaption>
         </figure>
         <figure>
-          <a href="#shot-players"><img src="images/demo-player-records-thumb.png" alt="Demo player progress records with levels, coins and quests"></a>
+          <a href="images/demo-player-records.png" data-lightbox="shot-players"><img src="images/demo-player-records-thumb.png" alt="Demo player progress records with levels, coins and quests. Enlarge." width="480" height="240" loading="lazy"></a>
           <figcaption>Player records with levels, coins and quests</figcaption>
         </figure>
       </div>
-      <div class="lightbox" id="shot-dashboard"><a class="lightbox-close" href="#demo" aria-label="Close">Close</a><img src="images/demo-dashboard.png" alt="Demo project dashboard with generated Island survival project"></div>
-      <div class="lightbox" id="shot-data"><a class="lightbox-close" href="#demo" aria-label="Close">Close</a><img src="images/demo-data-browser.png" alt="Demo data browser listing player, inventory and world collections"></div>
-      <div class="lightbox" id="shot-players"><a class="lightbox-close" href="#demo" aria-label="Close">Close</a><img src="images/demo-player-records.png" alt="Demo player progress records with levels, coins and quests"></div>
+      <dialog class="lightbox" id="shot-dashboard" aria-label="Demo project dashboard with generated Island survival project"><form method="dialog"><button class="lightbox-close" autofocus>Close</button></form><img src="images/demo-dashboard.png" alt="Demo project dashboard with generated Island survival project" width="1440" height="722"></dialog>
+      <dialog class="lightbox" id="shot-data" aria-label="Demo data browser listing player, inventory and world collections"><form method="dialog"><button class="lightbox-close" autofocus>Close</button></form><img src="images/demo-data-browser.png" alt="Demo data browser listing player, inventory and world collections" width="1440" height="722"></dialog>
+      <dialog class="lightbox" id="shot-players" aria-label="Demo player progress records with levels, coins and quests"><form method="dialog"><button class="lightbox-close" autofocus>Close</button></form><img src="images/demo-player-records.png" alt="Demo player progress records with levels, coins and quests" width="1440" height="722"></dialog>
     </section>
 
     <section>
@@ -140,9 +156,9 @@ sudo sbox-ns doctor</code></pre>
       <div class="capacity" id="capacity" hidden>
         <h3>Hosted name capacity</h3>
         <dl class="capacity-grid">
-          <div><dt>Names in use</dt><dd data-stat="names">-</dd></div>
+          <div data-tile="names"><dt>Names registered</dt><dd data-stat="names">-</dd></div>
           <div><dt>Current capacity</dt><dd data-stat="capacity">-</dd></div>
-          <div><dt>DNS records kept</dt><dd data-stat="records">-</dd></div>
+          <div data-tile="records"><dt>DNS records kept</dt><dd data-stat="records">-</dd></div>
         </dl>
         <p class="small">Live from the sboxns.com registry. Capacity grows as we add zones.</p>
       </div>
