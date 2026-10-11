@@ -2,7 +2,7 @@
 
 > Optional free HTTPS hostnames for the open source s&box Network Storage Server. A sister landing page of sboxcool.com, not a shared database or central admin panel.
 
-Self-hosting requires no sboxcool signup, subscription, email or telemetry. Operators pay their own VPS provider. The optional hosted tunnel shares operational registration metadata and carries requests through Cloudflare. Player databases stay on the operator's server. Owner login: https://YOUR_NAME.sboxns.com/login. Owner dashboard: /dashboard. /admin/login is not a supported route.
+Self-hosting requires no sboxcool signup, subscription, email or telemetry. Operators pay their own VPS provider. The optional hosted tunnel shares operational registration metadata and carries requests through Cloudflare. Player databases stay on the operator's server. Owner login: https://YOUR_HOSTNAME/login (your tunnel or public-IP name). Owner dashboard: /dashboard. /admin/login is not a supported route.
 
 ## Official sources
 

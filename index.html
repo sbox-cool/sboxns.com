@@ -25,6 +25,7 @@
     <nav aria-label="Main navigation">
       <a href="#demo">Live demo</a>
       <a href="https://sboxcool.com/wiki/network-storage-v3">Documentation</a>
+      <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/client-setup.md">Self-hosting docs</a>
       <a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>
       <a href="https://sboxcool.com">sboxcool.com</a>
     </nav>
@@ -52,7 +53,10 @@
             <article>
               <h4>Public IP (most VPS)</h4>
               <p>Signed DNS names use addresses such as <code>NAME.n1.sboxns.com</code>. Players connect directly to your public IP. Ports 443 and the HTTP verification port must be reachable.</p>
-              <p>The DNS registry is live. Installer support is not yet available in a published release. Use the tunnel command below for the current release, or follow the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">signed DNS instructions</a> when running a build that includes <code>sbox-ns dns</code>.</p>
+              <pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_DNS=1 \
+      SBOX_NS_ACME_EMAIL="you@example.com" SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1 sh</code></pre>
+              <p>Setting <code>SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1</code> accepts the Let's Encrypt subscriber agreement; the email is the certificate contact. DNS and tunnel are mutually exclusive. Details and manual setup (<code>sbox-ns dns enable</code>, <code>dns status</code>) are in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
             </article>
             <article>
               <h4>Home network or no open ports</h4>
@@ -81,12 +85,13 @@ sudo sbox-ns doctor</code></pre>
         </li>
         <li>
           <h3>Connect the s&amp;box editor</h3>
-          <p>Install the official <a href="https://sbox.game/sboxcool/network-storage">Network Storage library</a>, then open <strong>Editor &gt; Network Storage &gt; Setup</strong> and enter the project ID, public key, secret key and your HTTPS address as the Base URL. Save, then push your collections, endpoints and workflows with <strong>Editor &gt; Network Storage &gt; Sync Tool</strong>. A successful sync confirms the editor can reach your server.</p>
+          <p>Install the official <a href="https://sbox.game/sboxcool/network-storage">Network Storage library</a> (version 1.0.309133 or newer; older versions do not start on s&amp;box editor 26.10), then open <strong>Editor &gt; Network Storage &gt; Setup</strong> and enter the project ID, public key, secret key and your HTTPS address as the Base URL. Save, then push your collections, endpoints and workflows with <strong>Editor &gt; Network Storage &gt; Sync Tool</strong>. A successful sync confirms the editor can reach your server.</p>
           <p>In game code, only the public key is used:</p>
           <pre><code class="language-csharp">NetworkStorage.Configure(
     "YOUR_PROJECT_ID",
     "sbox_ns_YOUR_PUBLIC_KEY",
-    "https://YOUR_NAME.n1.sboxns.com" );</code></pre>
+    "https://YOUR_HOSTNAME" );</code></pre>
+          <p>Use the exact HTTPS address the installer printed: <code>NAME.sboxns.com</code> for tunnel names, <code>NAME.n1.sboxns.com</code>-style for public-IP names.</p>
           <p>The secret key belongs only in editor tooling or trusted servers, never in a published game. Runtime player records live in SQLite or PostgreSQL on your server.</p>
         </li>
       </ol>
