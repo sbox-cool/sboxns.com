@@ -24,6 +24,7 @@
     <a class="brand" href="/"><img src="images/logo-80.webp" alt="" width="32" height="32">sboxns.com</a>
     <nav aria-label="Main navigation">
       <a href="#demo">Live demo</a>
+      <a href="#hosting">Hosting</a>
       <a href="https://sboxcool.com/wiki/network-storage-v3">Documentation</a>
       <a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>
       <a href="https://sboxcool.com">sboxcool.com</a>
@@ -31,9 +32,9 @@
   </header>
   <main>
     <section class="hero">
-      <h1>Your s&amp;box backend.<br>Your server. Your data.</h1>
-      <p class="lead">Open source Network Storage for player saves, leaderboards and server-side game logic. Install on your own machine or a cheap VPS, then connect your game through a free HTTPS name.</p>
-      <p class="promise">No sboxcool signup. No subscription. No mandatory telemetry.</p>
+      <h1>The central server your s&amp;box game was missing.</h1>
+      <p class="lead">s&amp;box Network Storage is the backend you own. Player-hosted or dedicated, point your saves, leaderboards and stats at one HTTPS endpoint. Install on your own machine or a cheap VPS, then connect your game through a free HTTPS name.</p>
+      <p class="promise">Your players host the game. You host the truth. No sboxcool signup. No subscription. No mandatory telemetry.</p>
       <div class="actions">
         <a class="button" href="#install">Install Server</a>
         <a class="button secondary" href="#demo">Try the Live Demo</a>
@@ -92,6 +93,26 @@ sudo sbox-ns doctor</code></pre>
       </ol>
     </section>
 
+    <section id="hosting">
+      <h2>Player-hosted or dedicated, your backend stays the truth</h2>
+      <p>Your players host the game. You host the truth. Currency, XP, levels, items and high scores are calculated behind your HTTPS endpoint, never on a client or listen server you do not control.</p>
+      <div class="methods">
+        <article>
+          <h3>Player-hosted</h3>
+          <p>A player runs the listen server from their own game. It only holds the public key, so every important rule still runs on your backend. Cheapest way to start, safe by default.</p>
+        </article>
+        <article>
+          <h3>Dedicated</h3>
+          <p>Your own box runs the game server with a secret key. It can call dedicated-only endpoints and see more, while players still only hold the public key.</p>
+        </article>
+        <article>
+          <h3>Hybrid</h3>
+          <p>Players host day-to-day sessions, and your dedicated box handles tournaments, seasons or anything worth protecting. One project, both at once.</p>
+        </article>
+      </div>
+      <p>Each project declares how it is hosted, and the dashboard shows you any game data a client could still change directly.</p>
+    </section>
+
     <section id="demo">
       <h2>Try the live demo</h2>
       <p>Explore a real server running generated sample data: player progress, inventories, world state and backend definitions. The demo is read-only, so every button that would change anything is disabled server-side. No login needed.</p>
@@ -132,11 +153,11 @@ sudo sbox-ns doctor</code></pre>
       <h2>A backend built for s&amp;box</h2>
       <div class="features">
         <article><h3>Player persistence</h3><p>Save data keyed by player, shared world records, queries and leaderboards.</p></article>
-        <article><h3>Server-side logic</h3><p>Endpoints and workflows keep authoritative game logic off the client.</p></article>
+        <article><h3>Server-side logic</h3><p>Your players host the game. You host the truth. Endpoints and workflows keep currency, XP, items and scores authoritative on your backend.</p></article>
         <article><h3>Agent-friendly development</h3><p>An MCP server and Claude Code plugin let your coding agent build, test and debug your backend, with every change opt-in.</p></article>
         <article><h3>Portable storage</h3><p>Start with SQLite. Use PostgreSQL when you need it. Export your configuration and data for backups or migration.</p></article>
       </div>
-      <p>The server is AGPL-3.0 open source and pre-1.0 software. Keep backups and read release notes before updating.</p>
+      <p>The server is AGPL-3.0 open source and pre-1.0 software. Installable modules (economy and progression starter kits, anticheat, player analytics) are on the way. Keep backups and read release notes before updating.</p>
     </section>
 
     <section>
