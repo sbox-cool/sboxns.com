@@ -10,6 +10,6 @@ Self-hosting requires no sboxcool signup, subscription, email or telemetry. Oper
 - [Self-hosting](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md): Linux, Windows, Docker, HTTPS, backups and optional services.
 - [Network Storage documentation](https://sboxcool.com/wiki/network-storage-v3): game library, YAML Source, endpoint and workflow reference.
 - [Client setup](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/client-setup.md): project credentials and custom Base URL.
-- [MCP](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md): allowlisted stdio tools and SSH operations.
+- [MCP](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md): stdio tools for coding agents (setup, YAML definitions, dry runs, logs, errors, records) with opt-in writes, plus a Claude Code plugin (`/plugin marketplace add sbox-cool/sbox-network-storage-server`).
 - [Hosted-name acceptable use](https://sboxcool.com/network-storage/hosted-names/acceptable-use): abuse reporting and service boundaries.
 - [Privacy](https://sboxcool.com/privacy): sboxcool-operated services.
