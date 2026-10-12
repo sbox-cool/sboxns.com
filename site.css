@@ -1,4 +1,4 @@
-:root { color-scheme: dark; --bg: #111217; --fg: #f1f1f4; --muted: #aaaab5; --accent: #7bd7ef; --primary: #0f6a86; --surface: #1d1e25; --border: #353640; }
+:root { color-scheme: dark; --bg: #111217; --fg: #f1f1f4; --muted: #aaaab5; --accent: #10b981; --primary: #10b981; --on-primary: #04120c; --surface: #1d1e25; --border: #353640; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 24px; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 system-ui, sans-serif; }
@@ -21,7 +21,7 @@ p { color: var(--muted); max-width: 800px; }
 .promise { color: var(--fg); font-weight: 650; }
 .small { font-size: .9rem; max-width: 680px; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0; }
-.button { background: var(--primary); color: #fff; padding: 11px 22px; border: 1px solid var(--primary); border-radius: 7px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.button { background: var(--primary); color: var(--on-primary); padding: 11px 22px; border: 1px solid var(--primary); border-radius: 7px; font-weight: 700; text-decoration: none; white-space: nowrap; }
 .button:hover { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .secondary { color: var(--fg); background: transparent; border-color: var(--border); }
 code { background: var(--surface); padding: 2px 5px; border-radius: 4px; font-size: .88em; overflow-wrap: anywhere; }
