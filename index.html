@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Self-host s&amp;box Network Storage | Free HTTPS with sboxns.com</title>
-  <meta name="description" content="Run the open source s&amp;box game backend on your VPS. No sboxcool signup, subscription or mandatory telemetry. Player saves, endpoints and a free HTTPS tunnel.">
+  <title>s&amp;box Network Storage | Open-Source Game Backend</title>
+  <meta name="description" content="Self-host an open-source s&amp;box game backend for player-hosted, P2P and dedicated games. Store saves, inventory and reward rules with server-side endpoints.">
   <link rel="canonical" href="https://sboxns.com/">
-  <meta property="og:title" content="Your s&amp;box backend. Your server. Your data.">
-  <meta property="og:description" content="Open source Network Storage with a one-command install and optional free HTTPS. No sboxcool account or subscription.">
+  <meta property="og:title" content="s&amp;box Network Storage | Your game. Any host.">
+  <meta property="og:description" content="Open-source game backend for s&amp;box. Player-hosted, P2P or dedicated: your server owns the saves, purchases and reward rules.">
   <meta property="og:url" content="https://sboxns.com/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://sboxns.com/images/demo-dashboard.png">
-  <meta property="og:image:width" content="1440">
-  <meta property="og:image:height" content="722">
-  <meta property="og:image:alt" content="Demo project dashboard of a self-hosted s&amp;box Network Storage server">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Network Storage: a self-hosted, open-source s&amp;box game backend for player-hosted, P2P and dedicated games.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://sboxns.com/images/demo-dashboard.png">
+  <meta name="twitter:title" content="s&amp;box Network Storage | Open-Source Game Backend">
+  <meta name="twitter:description" content="Open-source, self-hosted game backend for s&amp;box. Player-hosted, P2P or dedicated: your backend owns the economy.">
+  <meta name="twitter:image" content="https://sboxns.com/images/social-card.png">
+  <meta name="twitter:image:alt" content="Network Storage's blue ns icon and the message: Your game. Any host. Your backend.">
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
   <link rel="icon" href="images/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
@@ -24,6 +28,20 @@
   <script src="capacity.js" defer></script>
   <script src="code.js" defer></script>
   <script src="gallery.js" defer></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "s&box Network Storage",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Linux, Windows, macOS",
+      "description": "Open-source, self-hosted s&box game backend for player-hosted, P2P and dedicated games, with persistent saves, inventory and server-side endpoints.",
+      "url": "https://sboxns.com/",
+      "downloadUrl": "https://github.com/sbox-cool/sbox-network-storage-server/releases/latest",
+      "license": "https://github.com/sbox-cool/sbox-network-storage-server/blob/main/LICENSE",
+      "image": "https://sboxns.com/images/social-card.png"
+    }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -39,9 +57,9 @@
   </header>
   <main id="main">
     <section class="hero">
-      <h1>Your s&amp;box backend.<br>Your server. Your data.</h1>
-      <p class="lead">Open source Network Storage for player saves, leaderboards and server-side game logic. Install on your own machine or a cheap VPS, then connect your game through a free HTTPS name.</p>
-      <p class="promise">No sboxcool signup. No subscription. No mandatory telemetry.</p>
+      <h1>Your game. Any host.<br>Your backend.</h1>
+      <p class="lead">Open-source game backend for s&amp;box. Player-hosted, P2P or dedicated: your server owns the saves, purchases and reward rules.</p>
+      <p class="promise">Self-host it. No signup. No subscription.</p>
       <div class="actions">
         <a class="button" href="#install">Install Server</a>
         <a class="button secondary" href="#demo">Try the Live Demo</a>
@@ -139,10 +157,10 @@ sudo sbox-ns doctor</code></pre>
     </section>
 
     <section>
-      <h2>A backend built for s&amp;box</h2>
+      <h2>Network Storage, built for s&amp;box</h2>
       <div class="features">
         <article><h3>Player persistence</h3><p>Save data keyed by player, shared world records, queries and leaderboards.</p></article>
-        <article><h3>Server-side logic</h3><p>Endpoints and workflows keep authoritative game logic off the client.</p></article>
+        <article><h3>Server-side economy rules</h3><p>Check a player's balance before a vehicle purchase. Cap rewards in your endpoints, such as 100 stone per minute. Your backend stores inventory and enforces the rules.</p></article>
         <article><h3>Agent-friendly operations</h3><p>CLI commands, JSON output and an allowlisted stdio MCP server for local or SSH-based management.</p></article>
         <article><h3>Portable storage</h3><p>Start with SQLite. Use PostgreSQL when you need it. Export your configuration and data for backups or migration.</p></article>
       </div>
