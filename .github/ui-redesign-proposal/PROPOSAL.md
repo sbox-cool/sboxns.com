@@ -69,6 +69,6 @@ Four steps with a sticky step list. Each step is one line plus a command. Explan
 - **Collapse the long sections with `<details>` on one page.** Keeps one URL, but search engines and readers still get one long page, and the install command still competes with policy text.
 - **Single-page app with routed views.** Adds a build step and JavaScript dependency to a page that is static today.
 
-Mockups: `proposals/ui-redesign/mockup/` on this branch (open `home.html` or `install.html`). This folder is proposal material only and must not be merged into `main`, since GitHub Pages would publish it.
+Mockups: `.github/ui-redesign-proposal/mockup/` (open `home.html` or `install.html`). Kept under `.github/` so GitHub Pages does not publish it.
 
 Design rules: [`DESIGN.md`](https://github.com/sbox-cool/sbox-network-storage-server/blob/claude/sboxns-ui-redesign-6zy9hw/docs/proposals/ui-redesign/DESIGN.md) in the server repo proposal.

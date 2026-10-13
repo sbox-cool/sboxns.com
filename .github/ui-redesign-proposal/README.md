@@ -1,6 +1,6 @@
 # sboxns.com redesign proposal
 
-Assets for the site redesign feature request. Do not merge this folder into `main`: GitHub Pages would publish it.
+Assets for the site redesign feature request (#5). Kept under `.github/` so GitHub Pages does not publish it.
 
 - `before/`: the current `index.html` at 1440x900 and 390x844.
 - `after/`: the proposed home and install pages, rendered from `mockup/`.
