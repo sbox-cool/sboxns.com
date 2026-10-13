@@ -17,7 +17,7 @@ The site uses the same design system as the owner console: `DESIGN.md` in the se
 - **Near-black canvas** (`#08090a`) in Dark, white in Light, black in High contrast. The site follows the system theme and has a toggle in the nav.
 - **Outlined sections.** The install card, step cards and feature row have a 1px outline and no fill. Code blocks keep a faint fill so the copyable part stands out. Buttons, chips and tabs are filled; only modals are raised.
 - **Solid icons.** Heroicons 20 solid (MIT) and the Simple Icons GitHub mark (CC0), inline SVG. No external requests.
-- **Contrast:** text 18.29, secondary 7.22, accent 7.86 on the Dark canvas; every pair passes AA in Light too.
+- **Contrast:** text 18.29, secondary 7.22, accent 7.86 on the Dark canvas; Light passes AA as well.
 
 | Dark | Light |
 | --- | --- |
