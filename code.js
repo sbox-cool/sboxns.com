@@ -1,6 +1,6 @@
 "use strict";
 
-// Colors shell and C# snippets and adds a copy button to every code block.
+// Colors shell, YAML and C# snippets and adds a copy button to every code block.
 // Highlighting only wraps tokens in spans; the copied text is always the
 // original textContent, never the decorated HTML.
 (function () {
@@ -13,6 +13,13 @@
       ["command", /(?<![\w./-])(?:curl|sudo|env|sh|sbox-ns)(?![\w-])/y],
       ["url", /https?:\/\/[^\s"'\\|]+/y],
       ["operator", /\||\\(?=\n)/y]
+    ],
+    yaml: [
+      ["comment", /#[^\n]*/y],
+      ["key", /[A-Za-z_][\w.-]*(?=:(\s|$))/y],
+      ["string", /"(?:[^"\\]|\\.)*"|'[^']*'/y],
+      ["number", /\b\d+(?:\.\d+)?\b/y],
+      ["operator", /^\s*-(?=\s)/my]
     ],
     csharp: [
       ["comment", /\/\/[^\n]*/y],
@@ -87,20 +94,23 @@
     var button = document.createElement("button");
     button.type = "button";
     button.className = "copy-button";
-    button.textContent = "Copy";
-    var container = code.closest("article, li, section");
-    var heading = container && container.querySelector("h4, h3, h2");
-    var subject = heading ? heading.textContent.trim() : "code";
-    button.setAttribute("aria-label", "Copy code: " + subject);
+    var copyIcon = '<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-copy"></use></svg>';
+    var doneIcon = '<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check"></use></svg>';
+    button.innerHTML = copyIcon;
+    var container = code.closest("[data-copy-label], article, li, section");
+    var heading = container && (container.getAttribute("data-copy-label") ? null : container.querySelector("h4, h3, h2"));
+    var subject = container && container.getAttribute("data-copy-label") ? container.getAttribute("data-copy-label") : heading ? heading.textContent.trim() : "code";
+    button.setAttribute("aria-label", "Copy: " + subject);
+    button.title = "Copy";
     button.addEventListener("click", function () {
       copyText(source).then(function () {
-        button.textContent = "Copied";
-        announce("Copied code: " + subject);
+        button.innerHTML = doneIcon;
+        button.classList.add("done");
+        announce("Copied: " + subject);
       }, function () {
-        button.textContent = "Select and copy";
         announce("Could not copy automatically. Select the text and copy it.");
       }).then(function () {
-        setTimeout(function () { button.textContent = "Copy"; }, 1800);
+        setTimeout(function () { button.innerHTML = copyIcon; button.classList.remove("done"); }, 1800);
       });
     });
     code.parentElement.classList.add("has-copy");

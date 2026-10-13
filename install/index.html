@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Install s&amp;box Network Storage: Self-Hosted Game Backend</title>
+  <meta name="description" content="Install the s&amp;box Network Storage backend on Linux or Windows in one command: free HTTPS name, checksum-verified release, SQLite or PostgreSQL.">
+  <link rel="canonical" href="https://sboxns.com/install/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Install s&amp;box Network Storage">
+  <meta property="og:description" content="One command on a Linux VPS or Windows: project, API keys, free HTTPS name and a running service.">
+  <meta property="og:url" content="https://sboxns.com/install/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="s&amp;box plus Network Storage: Any host. Every transaction validated.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Install s&amp;box Network Storage">
+  <meta name="twitter:description" content="One command on a Linux VPS or Windows: project, API keys, free HTTPS name and a running service.">
+  <meta name="twitter:image" content="https://sboxns.com/images/social-card.png">
+  <meta name="twitter:image:alt" content="s&amp;box plus Network Storage: Any host. Every transaction validated.">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="stylesheet" href="/site.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Install s&box Network Storage",
+      "url": "https://sboxns.com/install/",
+      "about": {
+        "@id": "https://sboxns.com/#app"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "sboxcool",
+        "url": "https://sboxcool.com"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sboxns.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Install",
+          "item": "https://sboxns.com/install/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/" aria-current="page">Install</a><a href="https://sboxcool.com/wiki/network-storage-v3">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/" aria-current="page">Install</a><a href="https://sboxcool.com/wiki/network-storage-v3">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a><a href="https://demo.sboxns.com">Live demo</a></nav>
+<main id="main" class="wrap doc">
+<nav class="doc-nav" aria-label="On this page">
+  <a href="#step-install"><b>1</b>Install</a><a href="#step-credentials"><b>2</b>Credentials</a><a href="#step-dashboard"><b>3</b>Dashboard</a><a href="#step-editor"><b>4</b>Editor</a>
+  <hr><a class="x" href="#names">Free HTTPS names</a><a class="x" href="#own-domain">Your own domain</a><a class="x" href="#boundaries">Data boundaries</a>
+</nav>
+<div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Install</span></nav>
+  <h1>Install Network Storage</h1>
+  <p class="lead">A Linux VPS with sudo, about two minutes. Windows works too. You end with a running server, a project, API keys and an HTTPS address.</p>
+
+  <section class="card step" id="step-install" aria-labelledby="h-install">
+    <div class="step-h"><span class="n">1</span><h2 id="h-install">Install the server</h2></div>
+    <div class="seg tabs" role="tablist" aria-label="Guide"><button type="button" role="tab" id="tab-guide-public-ip" aria-controls="panel-guide-public-ip" aria-selected="true">Public IP</button><button type="button" role="tab" id="tab-guide-tunnel" aria-controls="panel-guide-tunnel" aria-selected="false">No open ports</button><button type="button" role="tab" id="tab-guide-windows" aria-controls="panel-guide-windows" aria-selected="false">Windows</button><button type="button" role="tab" id="tab-guide-domain" aria-controls="panel-guide-domain" aria-selected="false">Own domain</button></div><div class="tabpanel" role="tabpanel" id="panel-guide-public-ip" aria-labelledby="tab-guide-public-ip"><h3 class="sr-only">Public IP</h3><div class="code" data-copy-label="Install command, Public IP"><pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT=&quot;My Game&quot; SBOX_NS_DNS=1 \
+      SBOX_NS_ACME_EMAIL=&quot;you@example.com&quot; SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1 sh</code></pre></div><p>Most VPS hosts. Your name looks like <code>NAME.n1.sboxns.com</code> and players connect straight to your IP. Ports 443 and the HTTP check port must be reachable. <code>SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1</code> accepts the Let's Encrypt subscriber agreement; the email is the certificate contact.</p></div><div class="tabpanel" role="tabpanel" id="panel-guide-tunnel" aria-labelledby="tab-guide-tunnel" hidden><h3 class="sr-only">No open ports</h3><div class="code" data-copy-label="Install command, No open ports"><pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT=&quot;My Game&quot; SBOX_NS_TUNNEL=1 sh</code></pre></div><p>Home networks and hosts without open ports. A Cloudflare Tunnel connects out from your machine and your name is <code>NAME.sboxns.com</code>. DNS and tunnel are mutually exclusive.</p></div><div class="tabpanel" role="tabpanel" id="panel-guide-windows" aria-labelledby="tab-guide-windows" hidden><h3 class="sr-only">Windows</h3><div class="code" data-copy-label="Install command, Windows"><pre><code class="language-sh">irm https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.ps1 | iex</code></pre></div><p>In PowerShell. Without administrator rights it installs to <code>%LOCALAPPDATA%\Programs\sbox-ns</code> and adds it to <code>PATH</code>; as administrator it installs to Program Files for all users, then runs <code>sbox-ns setup</code>. The <code>SBOX_NS_*</code> variables need an elevated PowerShell.</p></div><div class="tabpanel" role="tabpanel" id="panel-guide-domain" aria-labelledby="tab-guide-domain" hidden><h3 class="sr-only">Own domain</h3><div class="code" data-copy-label="Install command, Own domain"><pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT=&quot;My Game&quot; SBOX_NS_PUBLIC_URL=&quot;https://ns.example.com&quot; sh</code></pre></div><p>Use your own domain, then add a certificate or an HTTPS reverse proxy. Docker and PostgreSQL are in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p></div>
+    <details class="more-info"><summary><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-shield"></use></svg>What the installer verifies<span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></summary><div class="prose"><p>The installer downloads the release <code>SHA256SUMS</code> and refuses to install if the archive does not match. To read the script first, download <code>install.sh</code> from the <a href="https://github.com/sbox-cool/sbox-network-storage-server/releases/latest">latest release</a>.</p></div></details>
+    <details class="more-info"><summary><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-globe"></use></svg>Public IP or tunnel?<span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></summary><div class="prose"><p>With a public IP, signed DNS gives you a name like <code>NAME.n1.sboxns.com</code> that points straight at your server, with its own Let's Encrypt certificate. Ports 443 and the HTTP verification port must be reachable.</p><p>Without open ports, a Cloudflare Tunnel connects out from your machine and your name is <code>NAME.sboxns.com</code>. The two are mutually exclusive. Check either with <code>sbox-ns dns status</code> or <code>sbox-ns doctor</code>.</p></div></details>
+  </section>
+
+  <section class="card step" id="step-credentials" aria-labelledby="h-cred">
+    <div class="step-h"><span class="n">2</span><h2 id="h-cred">Keep the printed credentials</h2></div>
+    <p>The installer prints your project ID, public key, secret key and HTTPS address. That is all the configuration a first game needs. Print them again, or add a project later:</p>
+    <div class="code" data-copy-label="Quickstart command"><pre><code class="language-sh">sudo sbox-ns quickstart &quot;My Game&quot;</code></pre></div>
+    <p><code>doctor</code> checks the database, ports, certificate and that your name points at this server.</p>
+    <div class="code" data-copy-label="Doctor command"><pre><code class="language-sh">sudo sbox-ns doctor</code></pre></div>
+  </section>
+
+  <section class="card step" id="step-dashboard" aria-labelledby="h-dash">
+    <div class="step-h"><span class="n">3</span><h2 id="h-dash">Open the dashboard</h2></div>
+    <p>Visit your HTTPS address and sign in at <code>/login</code>; manage the server at <code>/dashboard</code>. For the first sign-in, create a single-use link on the server:</p>
+    <div class="code" data-copy-label="Login link command"><pre><code class="language-sh">sudo sbox-ns admin login-link</code></pre></div>
+    <p>There is no <code>/admin/login</code> route.</p>
+  </section>
+
+  <section class="card step" id="step-editor" aria-labelledby="h-editor">
+    <div class="step-h"><span class="n">4</span><h2 id="h-editor">Connect the s&amp;box editor</h2></div>
+    <p>Install the official <a href="https://sbox.game/sboxcool/network-storage">Network Storage library</a> (version 1.0.309133 or newer; older versions do not start on s&amp;box editor 26.10). Open <strong>Editor &gt; Network Storage &gt; Setup</strong>, enter the project ID, public key, secret key and your HTTPS address as the Base URL, then push your collections, endpoints and workflows with <strong>Editor &gt; Network Storage &gt; Sync Tool</strong>. A successful sync confirms the editor can reach your server.</p>
+    <p>Game code uses only the public key:</p>
+    <div class="code" data-copy-label="Game configuration"><pre><code class="language-csharp">NetworkStorage.Configure(
+    &quot;YOUR_PROJECT_ID&quot;,
+    &quot;sbox_ns_YOUR_PUBLIC_KEY&quot;,
+    &quot;https://YOUR_HOSTNAME&quot; );</code></pre></div>
+    <p>Use the exact HTTPS address the installer printed. The secret key belongs only in editor tooling or trusted servers, never in a published game.</p>
+  </section>
+
+  <section class="doc-sec" id="names" aria-labelledby="h-names">
+    <h2 id="h-names">Free HTTPS, without buying a domain</h2>
+    <p class="lead">sboxns.com gives your server a stable name derived from its own key, so nobody else can claim or change it. Move the server and keep the name: players reconnect without a game update.</p>
+    <dl class="capacity" id="capacity" hidden>
+      <div data-tile="names"><dt>Names registered</dt><dd data-stat="names">-</dd></div>
+      <div><dt>Current capacity</dt><dd data-stat="capacity">-</dd></div>
+      <div data-tile="records"><dt>DNS records kept</dt><dd data-stat="records">-</dd></div>
+    </dl>
+    <details class="more-info"><summary><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-globe"></use></svg>Does my server depend on sboxns.com?<span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></summary><div class="prose"><p>Only to create your name and to update it when your IP changes. Once your name exists, players reach your server without going through sboxcool's servers: with a public IP they connect to you directly and Bunny DNS answers the lookup; with a tunnel, Cloudflare carries the traffic to you. If sboxcool.com goes down, your existing name keeps working.</p></div></details>
+  </section>
+
+  <section class="doc-sec" id="own-domain" aria-labelledby="h-domain">
+    <h2 id="h-domain">Your own domain</h2>
+    <p class="lead">Install without <code>SBOX_NS_TUNNEL=1</code>, set <code>SBOX_NS_PUBLIC_URL="https://ns.example.com"</code>, and configure a certificate or an HTTPS reverse proxy. Docker and PostgreSQL are covered in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
+  </section>
+
+  <section class="doc-sec prose" id="boundaries" aria-labelledby="h-bound">
+    <h2 id="h-bound">No lock-in. Clear boundaries.</h2>
+    <p>The server does not require a sboxcool account, payment, email registration or usage reports. Anonymous install statistics and security emails are separate opt-ins. Your database stays on your machine.</p>
+    <p>Creating a hosted name sends registration metadata (your name, public key and, for public-IP names, your IP address) to sboxcool. Public-IP names publish your server's IP in DNS. Tunnel names route requests through Cloudflare, whose connector has its own crash reporting. For an independent deployment, use your own HTTPS setup and leave optional services disabled.</p>
+    <p>Each subdomain belongs to an independently operated server. Contact that game's operator about its player data. For hosted-name abuse, <a href="https://sboxcool.com/support">contact support</a> with the hostname and evidence. Read the <a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">acceptable-use policy</a> and the <a href="https://sboxcool.com/privacy">privacy policy</a>.</p>
+  </section>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. Keep backups and read the release notes before updating. sboxns.com is run by sboxcool.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-guides"><h2 id="f-guides">Guides</h2><a href="https://sboxcool.com/wiki/network-storage-v3">Documentation</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">Self-hosting</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/hosting-models.md">Hosting models</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md">Coding agents (MCP)</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
+</div></footer>
+<script src="/capacity.js" defer></script>
+</body>
+</html>

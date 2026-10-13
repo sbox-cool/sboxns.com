@@ -1,207 +1,423 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>s&amp;box Network Storage | Open-Source Game Backend</title>
-  <meta name="description" content="Self-host an open-source s&amp;box game backend for player-hosted, P2P and dedicated games. Store saves, inventory and reward rules with server-side endpoints.">
+  <title>s&amp;box Network Storage: Server-Validated Game Backend</title>
+  <meta name="description" content="Open-source s&amp;box backend for player-hosted and dedicated games: Network Storage validates every purchase, reward and score server-side. Free to self-host.">
   <link rel="canonical" href="https://sboxns.com/">
-  <meta property="og:title" content="s&amp;box Network Storage | Your game. Any host.">
-  <meta property="og:description" content="Open-source game backend for s&amp;box. Player-hosted, P2P or dedicated: your server owns the saves, purchases and reward rules.">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Any host. Every transaction validated. | s&amp;box Network Storage">
+  <meta property="og:description" content="Let players host or run dedicated servers. Your Network Storage backend checks every purchase, reward and score before it is saved. Open source, free to self-host.">
   <meta property="og:url" content="https://sboxns.com/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://sboxns.com/images/social-card.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Network Storage: a self-hosted, open-source s&amp;box game backend for player-hosted, P2P and dedicated games.">
+  <meta property="og:image:alt" content="s&amp;box plus Network Storage: Any host. Every transaction validated.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="s&amp;box Network Storage | Open-Source Game Backend">
-  <meta name="twitter:description" content="Open-source, self-hosted game backend for s&amp;box. Player-hosted, P2P or dedicated: your backend owns the economy.">
+  <meta name="twitter:title" content="Any host. Every transaction validated. | s&amp;box Network Storage">
+  <meta name="twitter:description" content="Let players host or run dedicated servers. Your Network Storage backend checks every purchase, reward and score before it is saved. Open source, free to self-host.">
   <meta name="twitter:image" content="https://sboxns.com/images/social-card.png">
-  <meta name="twitter:image:alt" content="Network Storage's green ns icon and the message: Your game. Any host. Your backend.">
-  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-  <link rel="icon" href="images/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-  <link rel="stylesheet" href="site.css">
-  <script src="capacity.js" defer></script>
-  <script src="code.js" defer></script>
-  <script src="gallery.js" defer></script>
+  <meta name="twitter:image:alt" content="s&amp;box plus Network Storage: Any host. Every transaction validated.">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="stylesheet" href="/site.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
   <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://sboxns.com/#org",
+      "name": "sboxcool",
+      "url": "https://sboxcool.com",
+      "sameAs": [
+        "https://github.com/sbox-cool"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sboxns.com/#site",
+      "url": "https://sboxns.com/",
+      "name": "sboxns.com",
+      "publisher": {
+        "@id": "https://sboxns.com/#org"
+      }
+    },
+    {
       "@type": "SoftwareApplication",
+      "@id": "https://sboxns.com/#app",
       "name": "s&box Network Storage",
+      "description": "Open-source, self-hosted game backend for s&box. Player-hosted, P2P or dedicated: Network Storage validates purchases, rewards and scores on your server.",
       "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Game backend",
       "operatingSystem": "Linux, Windows, macOS",
-      "description": "Open-source, self-hosted s&box game backend for player-hosted, P2P and dedicated games, with persistent saves, inventory and server-side endpoints.",
       "url": "https://sboxns.com/",
       "downloadUrl": "https://github.com/sbox-cool/sbox-network-storage-server/releases/latest",
+      "softwareHelp": "https://sboxcool.com/wiki/network-storage-v3",
       "license": "https://github.com/sbox-cool/sbox-network-storage-server/blob/main/LICENSE",
-      "image": "https://sboxns.com/images/social-card.png"
+      "image": "https://sboxns.com/images/social-card.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Server-side endpoints for purchases, rewards and scores",
+        "Player-hosted, P2P and dedicated game support",
+        "Leaderboard queries",
+        "SQLite or PostgreSQL",
+        "Free HTTPS name",
+        "Owner dashboard",
+        "MCP server for coding agents"
+      ],
+      "publisher": {
+        "@id": "https://sboxns.com/#org"
+      },
+      "sameAs": [
+        "https://github.com/sbox-cool/sbox-network-storage-server"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://sboxns.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can players cheat their currency or items?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not through Network Storage, as long as game data stays behind endpoints. Collections set to accessMode: endpoint refuse direct writes from game clients with ENDPOINT_ONLY, and every change goes through endpoint steps that run on your server: balance checks, prices from game values, once-per-day conditions. A player host only ever holds the public key, so it cannot call dedicated-only endpoints either. The dashboard's authority check lists any data a client could still change directly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Player-hosted or dedicated: which should I use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start player-hosted: it costs nothing to run game sessions and is safe by default, because the rules live on your backend. Add a dedicated server when you want tournaments, seasons or other modes worth protecting; it holds a secret key for dedicated-only endpoints. One project can serve both at once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to change my game code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Games use the existing Network Storage library for s&box. Point NetworkStorage.Configure at your server's URL with your project ID and public key. Server updates keep older published game builds working, so you do not have to republish to update the backend."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does it cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The server is free and open source (AGPL-3.0). You pay your own VPS provider; a VPS around $5 a month can be a starting point for a small game, depending on your workload. There is no signup, subscription or required telemetry."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which databases does it support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SQLite by default, with no setup. Switch to PostgreSQL when you need it. Export your configuration and data at any time for backups or to move servers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does my server depend on sboxns.com?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only to create your free name and to update it when your IP changes. With a public IP, players connect to you directly and Bunny DNS answers the lookup; with a tunnel, Cloudflare carries the traffic to you. If sboxcool.com goes down, your existing name keeps working. You can also use your own domain and skip sboxns.com entirely."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is my admin panel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open https://YOUR_NAME/login to sign in and /dashboard to manage your server. For the first sign-in, run sbox-ns admin login-link on the server and open its single-use link. There is no /admin/login route."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can coding agents manage it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. sbox-ns mcp serves the Model Context Protocol over stdio, locally or through SSH, for Claude Code, Cursor and other agents. Agents can read everything; saving definitions, writing player data and deleting are each off until you turn them on."
+          }
+        }
+      ]
     }
+  ]
+}
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="navigation">
-    <a class="brand" href="/"><img src="images/logo-80.webp" alt="" width="32" height="32">sboxns.com</a>
-    <nav aria-label="Main navigation">
-      <a href="#demo">Live demo</a>
-      <a href="https://sboxcool.com/wiki/network-storage-v3">Documentation</a>
-      <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/client-setup.md">Self-hosting docs</a>
-      <a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>
-      <a href="https://sboxcool.com">sboxcool.com</a>
-    </nav>
-  </header>
-  <main id="main">
-    <section class="hero">
-      <h1>Your game. Any host.<br>Your backend.</h1>
-      <p class="lead">Open-source game backend for s&amp;box. Player-hosted, P2P or dedicated: your server owns the saves, purchases and reward rules.</p>
-      <p class="promise">Self-host it. No signup. No subscription.</p>
-      <div class="actions">
-        <a class="button" href="#install">Install Server</a>
-        <a class="button secondary" href="#demo">Try the Live Demo</a>
-        <a class="button secondary" href="https://github.com/sbox-cool/sbox-network-storage-server">View Source</a>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="https://sboxcool.com/wiki/network-storage-v3">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="https://sboxcool.com/wiki/network-storage-v3">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a><a href="https://demo.sboxns.com">Live demo</a></nav>
+<main id="main">
+<div class="wrap">
+<section class="hero" aria-labelledby="hero-title">
+  <div>
+    <p class="lockup"><span class="sbox">s&amp;box</span><span class="plus" aria-hidden="true">+</span><img src="/images/icon.svg" alt="" width="28" height="28"><span class="ns">Network Storage</span></p>
+    <h1 id="hero-title">Any host.<br><span class="accent">Every transaction validated.</span></h1>
+    <p class="lead">The open-source game backend for <strong>s&amp;box</strong>. Let players host or run dedicated servers: purchases, rewards, XP and scores are checked by <strong>your</strong> Network Storage server before anything is saved.</p>
+    <div class="actions">
+      <a class="btn primary" href="#install"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-terminal"></use></svg>Install the server</a>
+      <a class="btn" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Try the live demo</a>
+      <a class="btn" href="https://github.com/sbox-cool/sbox-network-storage-server"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg>GitHub</a>
+    </div>
+    <ul class="facts">
+      <li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg>Open source, AGPL-3.0</li>
+      <li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg>No signup or subscription</li>
+      <li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg>SQLite or PostgreSQL</li>
+      <li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg>Free HTTPS name</li>
+    </ul>
+  </div>
+  <section class="sim" id="sim" aria-labelledby="sim-title">
+    <div class="sim-h"><span class="live" aria-hidden="true"></span><h2 id="sim-title">Try it: who decides?</h2><span class="spacer"></span>
+      <div class="seg" role="group" aria-label="Who hosts the game"><button type="button" data-mode="player" aria-pressed="true">Player-hosted</button><button type="button" data-mode="dedicated" aria-pressed="false">Dedicated</button></div></div>
+    <div class="sim-flow" aria-hidden="true">
+      <svg class="wires" viewBox="0 0 100 196" preserveAspectRatio="none"><line x1="14" y1="34" x2="52" y2="84"/><line x1="14" y1="132" x2="52" y2="84"/><line x1="52" y1="84" x2="87" y2="84"/></svg>
+      <div class="node n-client"><span class="ico"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-user"></use></svg></span><span><b>Game client</b>public key</span></div>
+      <div class="node n-host"><span class="ico" data-host-icon><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-computer"></use></svg></span><span><b data-host-name>Player host</b><span data-host-note>public key</span></span></div>
+      <div class="node ns n-ns"><span class="ico"><img src="/images/icon.svg" alt=""></span><span><b>Network Storage</b>runs the rules</span></div>
+      <div class="node n-db"><span class="ico"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-database"></use></svg></span><span><b>Database</b>only valid writes</span></div>
+      <span class="packet"></span>
+    </div>
+    <div class="sim-state"><div><div class="who">Player <code>7656…7705</code></div><div class="bag">Inventory: <span data-bag>Potion</span></div></div><div class="gold"><strong data-gold>240</strong><span>gold</span></div></div>
+    <div class="sim-actions">
+      <button type="button" data-action="buy"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-cart"></use></svg><span>Buy a sword<small>purchase-item · 150 gold</small></span></button>
+      <button type="button" data-action="daily"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-gift"></use></svg><span>Daily reward<small>claim-daily · +50 gold</small></span></button>
+      <button type="button" data-action="prize"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-trophy"></use></svg><span>Tournament prize<small>dedicated only · +500 gold</small></span></button>
+      <button type="button" data-action="cheat" class="cheat"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-bug"></use></svg><span>Modded client<small>set gold to 999,999</small></span></button>
+    </div>
+    <ul class="sim-log" aria-live="polite"><li class="empty"><span class="st"></span><span class="what">Send a request to see what the server decides.</span></li></ul>
+    <p class="sim-foot">Runs in your browser with the same rules and error codes as the real endpoints.</p>
+  </section>
+</section>
+</div>
+
+<section class="section" id="install" aria-labelledby="install-title"><div class="wrap">
+  <div class="card install">
+    <div class="install-side">
+      <h2 id="install-title">Install in one command</h2>
+      <p>On a Linux VPS with sudo, the installer creates a project and API keys, gets a free HTTPS name and starts the service.</p>
+      <ul class="checks"><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Checks the download against the release <code>SHA256SUMS</code></span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Free name under sboxns.com, or your own domain</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Prints your project ID, keys and HTTPS address</span></li></ul>
+      <a class="more-link" href="/install/">Full install guide<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></a>
+    </div>
+    <div class="install-main">
+      <div class="seg tabs" role="tablist" aria-label="Install"><button type="button" role="tab" id="tab-install-public-ip" aria-controls="panel-install-public-ip" aria-selected="true">Public IP</button><button type="button" role="tab" id="tab-install-tunnel" aria-controls="panel-install-tunnel" aria-selected="false">No open ports</button><button type="button" role="tab" id="tab-install-windows" aria-controls="panel-install-windows" aria-selected="false">Windows</button><button type="button" role="tab" id="tab-install-domain" aria-controls="panel-install-domain" aria-selected="false">Own domain</button></div><div class="tabpanel" role="tabpanel" id="panel-install-public-ip" aria-labelledby="tab-install-public-ip"><h3 class="sr-only">Public IP</h3><div class="code" data-copy-label="Install command, Public IP"><pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT=&quot;My Game&quot; SBOX_NS_DNS=1 \
+      SBOX_NS_ACME_EMAIL=&quot;you@example.com&quot; SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1 sh</code></pre></div><p>Most VPS hosts. Your name looks like <code>NAME.n1.sboxns.com</code> and players connect straight to your IP. Ports 443 and the HTTP check port must be reachable. <code>SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1</code> accepts the Let's Encrypt subscriber agreement; the email is the certificate contact.</p></div><div class="tabpanel" role="tabpanel" id="panel-install-tunnel" aria-labelledby="tab-install-tunnel" hidden><h3 class="sr-only">No open ports</h3><div class="code" data-copy-label="Install command, No open ports"><pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT=&quot;My Game&quot; SBOX_NS_TUNNEL=1 sh</code></pre></div><p>Home networks and hosts without open ports. A Cloudflare Tunnel connects out from your machine and your name is <code>NAME.sboxns.com</code>. DNS and tunnel are mutually exclusive.</p></div><div class="tabpanel" role="tabpanel" id="panel-install-windows" aria-labelledby="tab-install-windows" hidden><h3 class="sr-only">Windows</h3><div class="code" data-copy-label="Install command, Windows"><pre><code class="language-sh">irm https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.ps1 | iex</code></pre></div><p>In PowerShell. Without administrator rights it installs to <code>%LOCALAPPDATA%\Programs\sbox-ns</code> and adds it to <code>PATH</code>; as administrator it installs to Program Files for all users, then runs <code>sbox-ns setup</code>. The <code>SBOX_NS_*</code> variables need an elevated PowerShell.</p></div><div class="tabpanel" role="tabpanel" id="panel-install-domain" aria-labelledby="tab-install-domain" hidden><h3 class="sr-only">Own domain</h3><div class="code" data-copy-label="Install command, Own domain"><pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT=&quot;My Game&quot; SBOX_NS_PUBLIC_URL=&quot;https://ns.example.com&quot; sh</code></pre></div><p>Use your own domain, then add a certificate or an HTTPS reverse proxy. Docker and PostgreSQL are in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p></div>
+      <div class="then">
+        <div><b>Sign in to the dashboard</b><div class="code" data-copy-label="Sign in command"><pre><code class="language-sh">sudo sbox-ns admin login-link</code></pre></div></div>
+        <div><b>Check the server</b><div class="code" data-copy-label="Doctor command"><pre><code class="language-sh">sudo sbox-ns doctor</code></pre></div></div>
+        <div><b>Print credentials again</b><div class="code" data-copy-label="Quickstart command"><pre><code class="language-sh">sudo sbox-ns quickstart &quot;My Game&quot;</code></pre></div></div>
       </div>
-      <p class="small">A VPS around $5/month can be a starting point for a small game. You pay your provider, not us. Capacity and prices depend on your workload and provider.</p>
-    </section>
+    </div>
+  </div>
+</div></section>
 
-    <section id="install">
-      <h2>From VPS to game</h2>
-      <ol class="steps">
-        <li>
-          <h3>Install your backend</h3>
-          <p>On a Linux VPS with sudo access, the tunnel command installs the server, creates a project and API keys, gives it a free HTTPS name and starts the service.</p>
-          <div class="methods">
-            <article>
-              <h4>Public IP (most VPS)</h4>
-              <p>Signed DNS names use addresses such as <code>NAME.n1.sboxns.com</code>. Players connect directly to your public IP. Ports 443 and the HTTP verification port must be reachable.</p>
-              <pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
-  | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_DNS=1 \
-      SBOX_NS_ACME_EMAIL="you@example.com" SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1 sh</code></pre>
-              <p>Setting <code>SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1</code> accepts the Let's Encrypt subscriber agreement; the email is the certificate contact. DNS and tunnel are mutually exclusive. Details and manual setup (<code>sbox-ns dns enable</code>, <code>dns status</code>) are in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
-            </article>
-            <article>
-              <h4>Home network or no open ports</h4>
-              <p>Cloudflare Tunnel connects out from your machine, so nothing needs to be opened. Your name is <code>NAME.sboxns.com</code>.</p>
-              <pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
-  | sudo env SBOX_NS_PROJECT="My Game" SBOX_NS_TUNNEL=1 sh</code></pre>
-            </article>
-          </div>
-          <p>The installer downloads the release's <code>SHA256SUMS</code> and refuses to install if the archive does not match. To inspect the script first, download <code>install.sh</code> from the <a href="https://github.com/sbox-cool/sbox-network-storage-server/releases/latest">latest release</a> and read it before running it.</p>
-          <div class="methods">
-            <article>
-              <h4>Windows</h4>
-              <p>In PowerShell. Without administrator rights it installs to <code>%LOCALAPPDATA%\Programs\sbox-ns</code> and adds that folder to your <code>PATH</code>; as administrator it installs to Program Files for all users. It then runs <code>sbox-ns setup</code>, and it also checks the archive against <code>SHA256SUMS</code> before installing.</p>
-              <pre><code>irm https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.ps1 | iex</code></pre>
-              <p>The <code>SBOX_NS_*</code> install variables above need an elevated PowerShell on Windows; the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a> has the Windows details.</p>
-            </article>
-          </div>
-          <p>Have your own domain? Install without <code>SBOX_NS_TUNNEL=1</code>, set <code>SBOX_NS_PUBLIC_URL="https://ns.example.com"</code>, and configure a certificate or HTTPS reverse proxy. Docker and PostgreSQL are covered in the <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">self-hosting guide</a>.</p>
-          <div class="notice">
-            <h4>Does my server depend on sboxns.com?</h4>
-            <p>Only to create your name and to update it when your IP changes. Once your name exists, players reach your server without going through sboxcool's servers: with a public IP they connect to you directly and Bunny DNS answers the lookup; with a tunnel, Cloudflare carries the traffic to you. If sboxcool.com goes down, your existing name keeps working.</p>
-          </div>
-        </li>
-        <li>
-          <h3>Keep the printed credentials</h3>
-          <p>The installer prints your project ID, public key, secret key and HTTPS address. That is all the configuration a first game needs. To see them again or add a project later:</p>
-          <pre><code class="language-sh">sudo sbox-ns quickstart "My Game"
-sudo sbox-ns doctor</code></pre>
-          <p><code>doctor</code> checks the database, ports, certificate and that your name points at this server.</p>
-        </li>
-        <li>
-          <h3>Open your dashboard</h3>
-          <p>Visit your HTTPS address and sign in at <code>/login</code>. For the first sign-in, create a single-use link on the server:</p>
-          <pre><code class="language-sh">sudo sbox-ns admin login-link</code></pre>
-        </li>
-        <li>
-          <h3>Connect the s&amp;box editor</h3>
-          <p>Install the official <a href="https://sbox.game/sboxcool/network-storage">Network Storage library</a> (version 1.0.309133 or newer; older versions do not start on s&amp;box editor 26.10), then open <strong>Editor &gt; Network Storage &gt; Setup</strong> and enter the project ID, public key, secret key and your HTTPS address as the Base URL. Save, then push your collections, endpoints and workflows with <strong>Editor &gt; Network Storage &gt; Sync Tool</strong>. A successful sync confirms the editor can reach your server.</p>
-          <p>In game code, only the public key is used:</p>
-          <pre><code class="language-csharp">NetworkStorage.Configure(
-    "YOUR_PROJECT_ID",
-    "sbox_ns_YOUR_PUBLIC_KEY",
-    "https://YOUR_HOSTNAME" );</code></pre>
-          <p>Use the exact HTTPS address the installer printed: <code>NAME.sboxns.com</code> for tunnel names, <code>NAME.n1.sboxns.com</code>-style for public-IP names.</p>
-          <p>The secret key belongs only in editor tooling or trusted servers, never in a published game. Runtime player records live in SQLite or PostgreSQL on your server.</p>
-        </li>
-      </ol>
-    </section>
+<section class="section" id="how" aria-labelledby="how-title"><div class="wrap">
+  <div class="sec-h"><div><h2 id="how-title">One backend. Any host.</h2><p>Your game servers stay thin. Whether a player hosts the session or you run a dedicated box, currency, XP, items and scores only change through endpoints that run on your Network Storage server.</p></div><a class="more" href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/hosting-models.md">Hosting models<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></a></div>
+  <div class="grid3">
+    <article class="card host"><span class="ico"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-users"></use></svg></span><h3>Player-hosted</h3><p>A player runs the listen server from their own game. It only holds the public key: it can call public endpoints but cannot rewrite anyone's data. The cheapest way to start, and safe by default.</p><span class="key"><span class="pill"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-key"></use></svg>Public key</span></span></article>
+    <article class="card host"><span class="ico"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg></span><h3>Dedicated</h3><p>Your own box runs the game server with a secret key. It can call dedicated-only endpoints and the management API. Use it for tournaments, seasons and anything worth protecting.</p><span class="key"><span class="pill"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-key"></use></svg>Secret key</span></span></article>
+    <article class="card host"><span class="ico"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-arrows"></use></svg></span><h3>Hybrid</h3><p>Players host day-to-day sessions while your dedicated box runs special modes. One project serves both: public endpoints for everyone, secret-key endpoints for your box.</p><span class="key"><span class="pill"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-key"></use></svg>Both</span></span></article>
+  </div>
+  <p class="note"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-shield"></use></svg><span>The dashboard's authority check lists any game data a client could still change directly, so you close the gaps before players find them.</span></p>
+</div></section>
 
-    <section id="demo">
-      <h2>Try the live demo</h2>
-      <p>Explore a real server running generated sample data: player progress, inventories, world state and backend definitions. The demo is read-only, so every button that would change anything is disabled server-side. No login needed.</p>
-      <div class="actions">
-        <a class="button" href="https://demo.sboxns.com">Open demo.sboxns.com</a>
-      </div>
-      <div class="gallery">
-        <figure>
-          <a href="images/demo-dashboard.png" data-lightbox="shot-dashboard"><img src="images/demo-dashboard-thumb.png" alt="Demo project overview for the Island survival demo: 3 collections, 1 endpoint and Enabled status. Enlarge." width="480" height="300" loading="lazy"></a>
-          <figcaption>Project overview with collections, endpoints and connect snippet</figcaption>
-        </figure>
-        <figure>
-          <a href="images/demo-data-browser.png" data-lightbox="shot-data"><img src="images/demo-data-browser-thumb.png" alt="Demo data browser listing Player inventory, Player progress and World state collections. Enlarge." width="480" height="300" loading="lazy"></a>
-          <figcaption>Data browser across player and world collections</figcaption>
-        </figure>
-        <figure>
-          <a href="images/demo-player-records.png" data-lightbox="shot-players"><img src="images/demo-player-records-thumb.png" alt="Demo player progress records: six demo players with levels, coins and quests. Enlarge." width="480" height="300" loading="lazy"></a>
-          <figcaption>Player records with levels, coins and quests</figcaption>
-        </figure>
-      </div>
-      <dialog class="lightbox" id="shot-dashboard" aria-label="Demo project overview for the Island survival demo"><form method="dialog"><button class="lightbox-close" autofocus>Close</button></form><img src="images/demo-dashboard.png" alt="Demo project overview for the Island survival demo: 3 collections, 1 endpoint and Enabled status" width="1440" height="900"></dialog>
-      <dialog class="lightbox" id="shot-data" aria-label="Demo data browser listing player, inventory and world collections"><form method="dialog"><button class="lightbox-close" autofocus>Close</button></form><img src="images/demo-data-browser.png" alt="Demo data browser listing player, inventory and world collections" width="1440" height="900"></dialog>
-      <dialog class="lightbox" id="shot-players" aria-label="Demo player progress records with levels, coins and quests"><form method="dialog"><button class="lightbox-close" autofocus>Close</button></form><img src="images/demo-player-records.png" alt="Demo player progress records with levels, coins and quests" width="1440" height="900"></dialog>
-    </section>
+<section class="section" id="use-cases" aria-labelledby="uc-title"><div class="wrap">
+  <div class="sec-h"><div><h2 id="uc-title">Build the economy once. Enforce it everywhere.</h2><p>Collections hold the data and endpoints hold the rules. Both are YAML you push from the s&amp;box editor or write in the dashboard.</p></div></div>
+  <div class="uc-tabs"><div class="seg tabs" role="tablist" aria-label="Use cases"><button type="button" role="tab" id="tab-use-cases-rpg" aria-controls="panel-use-cases-rpg" aria-selected="true">RPG economy</button><button type="button" role="tab" id="tab-use-cases-boards" aria-controls="panel-use-cases-boards" aria-selected="false">Leaderboards</button><button type="button" role="tab" id="tab-use-cases-daily" aria-controls="panel-use-cases-daily" aria-selected="false">Daily rewards</button><button type="button" role="tab" id="tab-use-cases-limits" aria-controls="panel-use-cases-limits" aria-selected="false">Data rules</button></div></div><div class="tabpanel" role="tabpanel" id="panel-use-cases-rpg" aria-labelledby="tab-use-cases-rpg"><div class="card uc"><div class="uc-copy"><h3>Shops, crafting and inventories</h3><p>Prices live on your server in game values. The endpoint looks up the price, checks the balance, then charges and adds the item in one write.</p><ul class="checks"><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>The game sends an item id, never a price</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Gold is a ledger field: every change records a reason</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span><code>INSUFFICIENT_GOLD</code> returns before anything is written</span></li></ul><a class="more-link" href="https://sboxcool.com/wiki/network-storage-v3">YAML Source reference<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></a></div>
+<div class="uc-code" data-copy-label="endpoints/purchase-item.endpoint.yml"><span class="file"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-doc"></use></svg>endpoints/purchase-item.endpoint.yml</span><div class="code" data-copy-label="endpoints/purchase-item.endpoint.yml"><pre><code class="language-yaml">kind: endpoint
+id: purchase-item
+method: POST
+input:
+  type: object
+  properties:
+    item_id:
+      type: string
+steps:
+  - id: player
+    type: read
+    collection: players
+    key: &quot;{{steamId}}&quot;
+  - id: item
+    type: lookup
+    source: values
+    table: shop_items
+    where:
+      field: item_id
+      op: &quot;==&quot;
+      value: &quot;{{input.item_id}}&quot;
+  - id: can_afford
+    type: condition
+    check:
+      field: player.gold|0
+      op: &quot;&gt;=&quot;
+      value: &quot;{{item.cost}}&quot;
+    onFail:
+      status: 400
+      error: INSUFFICIENT_GOLD
+  - id: pay_and_add
+    type: write
+    collection: players
+    key: &quot;{{steamId}}&quot;
+    ops:
+      - op: inc
+        path: gold
+        valueExpression: &quot;0 - {{item.cost}}&quot;
+        reason: &quot;Purchased {{item.name}}&quot;
+      - op: push
+        path: inventory
+        value:
+          item_id: &quot;{{input.item_id}}&quot;</code></pre></div></div></div></div><div class="tabpanel" role="tabpanel" id="panel-use-cases-boards" aria-labelledby="tab-use-cases-boards" hidden><div class="card uc"><div class="uc-copy"><h3>Leaderboards that rank real scores</h3><p>Scores only change through your endpoints, so the board ranks what the server accepted. A leaderboard query ranks players by any numeric field and caches the result.</p><ul class="checks"><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Rank by xp, kills, wins or any number</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Cached for 60 seconds: a busy board costs one query a minute</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Public, or restricted to your dedicated server</span></li></ul><a class="more-link" href="https://sboxcool.com/wiki/network-storage-v3">YAML Source reference<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></a></div>
+<div class="uc-code" data-copy-label="queries/top_xp.query.yml"><span class="file"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-doc"></use></svg>queries/top_xp.query.yml</span><div class="code" data-copy-label="queries/top_xp.query.yml"><pre><code class="language-yaml">kind: query
+id: top_xp
+name: Top XP
+type: leaderboard
+sources:
+  - collectionId: players
+    alias: player
+config:
+  field: xp
+  order: desc
+  limit: 10
+  fields:
+    - name
+    - xp
+    - level
+    - tier
+cache:
+  ttlSeconds: 60
+requiresSecretKey: false</code></pre></div></div></div></div><div class="tabpanel" role="tabpanel" id="panel-use-cases-daily" aria-labelledby="tab-use-cases-daily" hidden><div class="card uc"><div class="uc-copy"><h3>Daily rewards, quests and XP</h3><p>Dates come from the server clock and amounts from game values, so a changed device clock or an edited request earns nothing extra.</p><ul class="checks"><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>One claim per UTC day, enforced by a condition step</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Tune rewards in game values without a game update</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span><code>ALREADY_CLAIMED</code> (409) on a second claim</span></li></ul><a class="more-link" href="https://sboxcool.com/wiki/network-storage-v3">YAML Source reference<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></a></div>
+<div class="uc-code" data-copy-label="endpoints/claim-daily.endpoint.yml"><span class="file"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-doc"></use></svg>endpoints/claim-daily.endpoint.yml</span><div class="code" data-copy-label="endpoints/claim-daily.endpoint.yml"><pre><code class="language-yaml">kind: endpoint
+id: claim-daily
+method: POST
+steps:
+  - id: player
+    type: read
+    collection: players
+    key: &quot;{{steamId}}&quot;
+  - id: not_claimed
+    type: condition
+    check:
+      field: player.last_daily
+      op: &quot;!=&quot;
+      value: &quot;{{_dateUTC}}&quot;
+    onFail:
+      status: 409
+      error: ALREADY_CLAIMED
+  - id: claim
+    type: write
+    collection: players
+    key: &quot;{{steamId}}&quot;
+    ops:
+      - op: inc
+        path: gold
+        value: &quot;{{values.rewards.daily_gold}}&quot;
+        reason: Daily login
+      - op: set
+        path: last_daily
+        value: &quot;{{_dateUTC}}&quot;</code></pre></div></div></div></div><div class="tabpanel" role="tabpanel" id="panel-use-cases-limits" aria-labelledby="tab-use-cases-limits" hidden><div class="card uc"><div class="uc-copy"><h3>Rules on the data itself</h3><p>Collections carry their own guarantees, so a mistake in one endpoint cannot corrupt the data model.</p><ul class="checks"><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span><code>accessMode: endpoint</code> refuses direct client writes</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Schema checks on every save: required fields, <code>min: 0</code>, unique ids</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check-circle"></use></svg><span>Per-player save limits reject or clamp floods</span></li></ul><a class="more-link" href="https://sboxcool.com/wiki/network-storage-v3">YAML Source reference<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></a></div>
+<div class="uc-code" data-copy-label="collections/wallets.collection.yml"><span class="file"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-doc"></use></svg>collections/wallets.collection.yml</span><div class="code" data-copy-label="collections/wallets.collection.yml"><pre><code class="language-yaml">kind: collection
+id: wallets
+collectionType: per-steamid
+accessMode: endpoint        # game clients cannot write directly
+allowRecordDelete: false
+rateLimits:
+  mode: player
+  savesPerDay: 2000
+rateLimitAction: clamp
+schema:
+  type: object
+  required:
+    - wallet_id
+    - coins
+  properties:
+    wallet_id:
+      type: string
+      _unique: true
+    coins:
+      type: number
+      min: 0
+      default: 0
+      _ledger: true</code></pre></div></div></div></div>
+</div></section>
 
-    <section>
-      <h2>Network Storage, built for s&amp;box</h2>
-      <div class="features">
-        <article><h3>Player persistence</h3><p>Save data keyed by player, shared world records, queries and leaderboards.</p></article>
-        <article><h3>Server-side economy rules</h3><p>Check a player's balance before a vehicle purchase. Cap rewards in your endpoints, such as 100 stone per minute. Your backend stores inventory and enforces the rules.</p></article>
-        <article><h3>Agent-friendly operations</h3><p>CLI commands, JSON output and an allowlisted stdio MCP server for local or SSH-based management.</p></article>
-        <article><h3>Portable storage</h3><p>Start with SQLite. Use PostgreSQL when you need it. Export your configuration and data for backups or migration.</p></article>
-      </div>
-      <p>The server is AGPL-3.0 open source and pre-1.0 software. Keep backups and read release notes before updating.</p>
-    </section>
+<section class="section" id="agents" aria-labelledby="agents-title"><div class="wrap">
+  <div class="sec-h"><div><h2 id="agents-title">Built for agents. Safe for old builds.</h2><p>A modern backend that coding agents can operate, without breaking the games already in players' hands.</p></div></div>
+  <div class="duo">
+    <article class="card"><h3><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sparkles"></use></svg>Agent-driven development</h3>
+      <p><code>sbox-ns mcp</code> gives Claude Code, Cursor and other coding agents the tools you have: set up the server, write and dry-run endpoints, read request logs, errors and records.</p>
+      <ul><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check"></use></svg><span>Runs over SSH or locally on stdio. Nothing new listens on the network.</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check"></use></svg><span>Read-only by default. Definition writes, data writes and deletes are each opt-in.</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check"></use></svg><span>JSON output from every CLI command, and a Claude Code plugin with setup and debugging skills.</span></li></ul>
+      <div class="code" data-copy-label="Add the MCP server to Claude Code"><pre><code class="language-sh">claude mcp add sbox-ns -- ssh my-vps sudo sbox-ns mcp</code></pre></div>
+      <a class="more-link" href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md">Coding agents guide<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></a></article>
+    <article class="card"><h3><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-refresh"></use></svg>Modern backend, existing games</h3>
+      <p>One self-contained .NET binary with SQLite or PostgreSQL. Point the existing Network Storage library at your URL; game code does not change.</p>
+      <ul><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check"></use></svg><span>Updating the server never requires republishing a working game.</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check"></use></svg><span>Replaced API forms stay supported for at least six months, with 90 days' notice.</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check"></use></svg><span>Published revisions are kept, so older builds run their own definitions.</span></li></ul>
+      <div class="code" data-copy-label="Game configuration"><pre><code class="language-csharp">NetworkStorage.Configure(
+    &quot;YOUR_PROJECT_ID&quot;,
+    &quot;sbox_ns_YOUR_PUBLIC_KEY&quot;,
+    &quot;https://YOUR_HOSTNAME&quot; );</code></pre></div>
+      <a class="more-link" href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/compatibility.md">Compatibility policy<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></a></article>
+  </div>
+</div></section>
 
-    <section>
-      <h2>Free HTTPS, without buying a domain</h2>
-      <p>sboxns.com gives your server a stable name derived from its own key, so nobody else can claim or change it. With a public IP your name points straight at your server and it gets its own Let's Encrypt certificate. Without one, a Cloudflare Tunnel connects from the inside, so you do not need to expose any port.</p>
-      <p>Both are optional. You can use your own domain, certificate or reverse proxy instead. sboxns.com is a sister landing page of <a href="https://sboxcool.com">sboxcool.com</a>, not a shared database or a central admin panel.</p>
-      <div class="capacity" id="capacity" hidden>
-        <h3>Hosted name capacity</h3>
-        <dl class="capacity-grid">
-          <div data-tile="names"><dt>Names registered</dt><dd data-stat="names">-</dd></div>
-          <div><dt>Current capacity</dt><dd data-stat="capacity">-</dd></div>
-          <div data-tile="records"><dt>DNS records kept</dt><dd data-stat="records">-</dd></div>
-        </dl>
-        <p class="small">Live from the sboxns.com registry. Capacity grows as we add zones.</p>
-      </div>
-      <h3>Where is my admin panel?</h3>
-      <p>Visit <code>https://YOUR_NAME/login</code> to sign in and <code>/dashboard</code> to manage your server. There is no <code>/admin/login</code> route. For initial setup or passwordless access, run <code>sbox-ns admin login-link</code> on your server and open its single-use link.</p>
-    </section>
+<section class="section" id="dashboard" aria-labelledby="dash-title"><div class="wrap themes">
+  <div class="copy">
+    <h2 id="dash-title">A dashboard built around your data</h2>
+    <p>Collections open on their records. Settings, keys and deletes sit one click away instead of in your way. The theme follows your system, or pick one.</p>
+    <div class="theme-pick" role="group" aria-label="Preview theme">
+      <button type="button" data-preview-theme="dark" aria-pressed="true"><span class="swatch dark"></span><span>Dark<small>Near-black, the default</small></span></button>
+      <button type="button" data-preview-theme="light" aria-pressed="false"><span class="swatch light"></span><span>Light<small>White with outlined panels</small></span></button>
+      <button type="button" data-preview-theme="contrast" aria-pressed="false"><span class="swatch contrast"></span><span>High contrast<small>Pure black, strong lines</small></span></button>
+    </div>
+    <a class="more-link" href="https://demo.sboxns.com">Explore the live demo<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></a>
+  </div>
+  <div class="mc" id="console-preview" data-theme="dark" role="img" aria-label="Owner console preview showing the Player progress collection">
+<div class="mc-top"><img src="/images/icon.svg" alt=""><b>Network Storage</b><span class="crumb">Island survival demo / Data / <b>Player progress</b></span><span class="av"></span></div>
+<div class="mc-body"><div class="mc-side"><span class="on"><i></i>Data</span><span class="grp">Build</span><span><i></i>Collections</span><span><i></i>Endpoints</span><span><i></i>Queries</span><span class="grp">Observe</span><span><i></i>Requests</span><span><i></i>Errors</span><span class="grp">Manage</span><span><i></i>API keys</span><span><i></i>Settings</span></div>
+<div class="mc-main"><div class="mc-head"><h4>Player progress</h4><span class="new">New record</span></div>
+<div class="mc-meta"><code>players</code><span class="tag">Per-player</span><span>1,284 records · 247 KB</span></div>
+<div class="mc-table"><div class="mc-row"><span>Key</span><span>displayName</span><span class="n">level</span><span class="n">coins</span><span>Changed</span></div><div class="mc-row"><span class="k">76561198041327705</span><span>Scout</span><span class="n">7</span><span class="n">120</span><span class="m">2 min ago</span></div><div class="mc-row sel"><span class="k">76561198112094471</span><span>Builder</span><span class="n">10</span><span class="n">207</span><span class="m">5 min ago</span></div><div class="mc-row"><span class="k">76561198003318820</span><span>Miner</span><span class="n">13</span><span class="n">294</span><span class="m">11 min ago</span></div><div class="mc-row"><span class="k">76561198254871093</span><span>Ranger</span><span class="n">16</span><span class="n">381</span><span class="m">38 min ago</span></div><div class="mc-row"><span class="k">76561198090662318</span><span>Fisher</span><span class="n">19</span><span class="n">468</span><span class="m">1 h ago</span></div><div class="mc-row"><span class="k">76561198176503342</span><span>Captain</span><span class="n">22</span><span class="n">555</span><span class="m">3 h ago</span></div><div class="mc-row"><span class="k">76561198067213954</span><span>Trader</span><span class="n">27</span><span class="n">1,902</span><span class="m">Yesterday</span></div></div></div></div></div>
+</div></section>
 
-    <section>
-      <h2>No lock-in. Clear boundaries.</h2>
-      <p>The server does not require a sboxcool account, payment, email registration or usage reports. Anonymous install statistics and security emails are separate opt-ins. Your database stays on your machine.</p>
-      <p>Creating a hosted name sends registration metadata (your name, public key and, for public-IP names, your IP address) to sboxcool. Public-IP names publish your server's IP in DNS. Tunnel names route requests through Cloudflare, whose connector has its own crash reporting. For an independent deployment, use your own HTTPS setup and leave optional services disabled.</p>
-      <p>Each subdomain belongs to an independently operated server. Contact that game's operator about its player data. For hosted-name abuse, <a href="https://sboxcool.com/support">contact support</a> with the hostname and evidence. Read the <a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">acceptable-use policy</a> and <a href="https://sboxcool.com/privacy">privacy policy</a>.</p>
-    </section>
-
-    <section class="resources">
-      <h2>Build with the official documentation</h2>
-      <p><a href="https://sboxcool.com/wiki/network-storage-v3">Network Storage documentation</a> covers the library, YAML Source, endpoints, workflows and game integration.</p>
-      <p><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md">MCP and agent guide</a> covers operating your server with an AI assistant. Contributions and reproducible bug reports are welcome on GitHub.</p>
-    </section>
-  </main>
-  <footer>
-    <span>sboxns.com by sboxcool</span>
-    <a href="https://github.com/sbox-cool/sbox-network-storage-server">Source</a>
-    <a href="https://sboxcool.com/wiki/network-storage-v3">Official docs</a>
-    <a href="https://sboxcool.com">sboxcool.com</a>
-  </footer>
+<section class="section" id="faq" aria-labelledby="faq-title"><div class="wrap faq">
+  <div class="sec-h"><div><h2 id="faq-title">Questions</h2><p>More in the <a href="https://sboxcool.com/wiki/network-storage-v3">documentation</a> and on <a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>.</p></div></div>
+  <div class="faq-list"><details><summary>Can players cheat their currency or items?<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-plus"></use></svg></summary><div class="ans"><p>Not through Network Storage, as long as game data stays behind endpoints. Collections set to <code>accessMode: endpoint</code> refuse direct writes from game clients with <code>ENDPOINT_ONLY</code>, and every change goes through endpoint steps that run on your server: balance checks, prices from game values, once-per-day conditions.</p><p>A player host only ever holds the public key, so it cannot call dedicated-only endpoints either. The dashboard's authority check lists any data a client could still change directly.</p></div></details><details><summary>Player-hosted or dedicated: which should I use?<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-plus"></use></svg></summary><div class="ans"><p>Start player-hosted: it costs nothing to run game sessions and is safe by default, because the rules live on your backend. Add a dedicated server when you want tournaments, seasons or other modes worth protecting; it holds a secret key for dedicated-only endpoints. One project can serve both at once.</p></div></details><details><summary>Do I need to change my game code?<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-plus"></use></svg></summary><div class="ans"><p>No. Games use the existing Network Storage library for s&amp;box. Point <code>NetworkStorage.Configure</code> at your server's URL with your project ID and public key. Server updates keep older published game builds working, so you do not have to republish to update the backend.</p></div></details><details><summary>What does it cost?<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-plus"></use></svg></summary><div class="ans"><p>The server is free and open source (AGPL-3.0). You pay your own VPS provider; a VPS around $5 a month can be a starting point for a small game, depending on your workload. There is no signup, subscription or required telemetry.</p></div></details><details><summary>Which databases does it support?<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-plus"></use></svg></summary><div class="ans"><p>SQLite by default, with no setup. Switch to PostgreSQL when you need it. Export your configuration and data at any time for backups or to move servers.</p></div></details><details><summary>Does my server depend on sboxns.com?<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-plus"></use></svg></summary><div class="ans"><p>Only to create your free name and to update it when your IP changes. With a public IP, players connect to you directly and Bunny DNS answers the lookup; with a tunnel, Cloudflare carries the traffic to you. If sboxcool.com goes down, your existing name keeps working. You can also use your own domain and skip sboxns.com entirely.</p></div></details><details><summary>Where is my admin panel?<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-plus"></use></svg></summary><div class="ans"><p>Open <code>https://YOUR_NAME/login</code> to sign in and <code>/dashboard</code> to manage your server. For the first sign-in, run <code>sbox-ns admin login-link</code> on the server and open its single-use link. There is no <code>/admin/login</code> route.</p></div></details><details><summary>Can coding agents manage it?<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-plus"></use></svg></summary><div class="ans"><p>Yes. <code>sbox-ns mcp</code> serves the Model Context Protocol over stdio, locally or through SSH, for Claude Code, Cursor and other agents. Agents can read everything; saving definitions, writing player data and deleting are each off until you turn them on.</p></div></details></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. Keep backups and read the release notes before updating. sboxns.com is run by sboxcool.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-guides"><h2 id="f-guides">Guides</h2><a href="https://sboxcool.com/wiki/network-storage-v3">Documentation</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md">Self-hosting</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/hosting-models.md">Hosting models</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md">Coding agents (MCP)</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
+</div></footer>
 </body>
 </html>
