@@ -1,23 +1,13 @@
 """Generates the static sboxns.com redesign mockups."""
-import os, sys
+import json, os, sys
 
 OUT = sys.argv[1]
-P = {
-    "copy": '<rect x="5.5" y="5.5" width="8" height="8" rx="1.2"/><path d="M10.5 5.5V3.7c0-.7-.5-1.2-1.2-1.2H3.7c-.7 0-1.2.5-1.2 1.2v5.6c0 .7.5 1.2 1.2 1.2h1.8"/>',
-    "check": '<path d="m3 8.5 3 3 7-7"/>',
-    "chev": '<path d="m6 3.5 4.5 4.5L6 12.5"/>',
-    "menu": '<path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/>',
-    "gh": '<path d="M8 1.5a6.5 6.5 0 0 0-2 12.7c.3 0 .5-.2.5-.4v-1.3c-1.8.4-2.2-.8-2.2-.8-.3-.8-.7-1-.7-1-.6-.4 0-.4 0-.4.7 0 1 .7 1 .7.6 1 1.6.7 2 .5 0-.4.2-.7.4-.9-1.4-.2-3-.7-3-3.2 0-.7.3-1.3.7-1.7-.1-.2-.3-.8.1-1.7 0 0 .5-.2 1.8.7a6 6 0 0 1 3.2 0c1.2-.8 1.8-.7 1.8-.7.3.9.1 1.5.1 1.7.4.4.7 1 .7 1.7 0 2.5-1.5 3-3 3.2.3.2.5.6.5 1.2v1.8c0 .2.1.4.5.4A6.5 6.5 0 0 0 8 1.5z"/>',
-    "play": '<path d="M4.5 2.5v11l9-5.5z"/>',
-    "shield": '<path d="M8 1.5 13.5 3.5v4c0 3.5-2.5 5.8-5.5 7-3-1.2-5.5-3.5-5.5-7v-4z"/>',
-    "info": '<circle cx="8" cy="8" r="6"/><path d="M8 7.3v3.7M8 5h.01"/>',
-    "x": '<path d="m4 4 8 8M12 4l-8 8"/>',
-    "ext": '<path d="M9.5 2.5h4v4M13.5 2.5 7 9M11.5 9.5v4h-9v-9h4"/>',
-}
+ICONS = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "icons.json")))
 
 
-def i(name):
-    return f'<svg class="i" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{P[name]}</svg>'
+def i(name, cls="i"):
+    ic = ICONS[name]
+    return f'<svg class="{cls}" viewBox="{ic["viewBox"]}" fill="currentColor" aria-hidden="true">{ic["body"]}</svg>'
 
 
 def cmd(body):
@@ -45,11 +35,11 @@ home = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name
 <main class="wrap">
 <section class="hero"><div><h1>Your game. Any host.<br>Your backend.</h1>
 <p>Open-source backend for s&amp;box. Your server owns the saves, purchases and reward rules.</p>
-<div class="actions"><a class="btn primary" href="#">{i("play")}Open live demo</a><a class="btn" href="#">{i("gh")}Source</a></div>
-<div class="facts"><span>{i("check")}No signup</span><span>{i("check")}No subscription</span><span>{i("check")}SQLite or PostgreSQL</span></div></div>
+<div class="actions"><a class="btn primary" href="#">{i("play")}Open live demo</a><a class="btn" href="#">{i("github")}Source</a></div>
+<div class="facts"><span>{i("check-circle")}No signup</span><span>{i("check-circle")}No subscription</span><span>{i("check-circle")}SQLite or PostgreSQL</span></div></div>
 <div class="card install"><div class="card-h"><strong>Install</strong><span class="spacer"></span><span class="seg"><span class="on">Public IP</span><span>No open ports</span><span>Windows</span><span>Own domain</span></span></div>
 {cmd(INSTALL)}
-<div class="card-f"><span>{i("shield")}Verifies SHA256SUMS</span><span>{i("check")}Free HTTPS name</span><a href="#">Full guide{i("chev")}</a></div></div></section>
+<div class="card-f"><span>{i("shield")}Verifies SHA256SUMS</span><span>{i("lock")}Free HTTPS name</span><a href="#">Full guide{i("chev")}</a></div></div></section>
 
 <section class="section"><div class="sec-h"><h2>After install</h2><a href="#">Install guide{i("chev")}</a></div>
 <div class="next">

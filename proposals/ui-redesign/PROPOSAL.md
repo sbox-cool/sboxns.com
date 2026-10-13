@@ -8,7 +8,22 @@ The landing page is one long article. It is 6,542px tall at 1440x900 and about 9
 
 ## Proposal
 
-Same tokens and static HTML. The home page does three jobs, in this order: install, show what happens next, show the demo. Detail moves to pages and modals.
+Static HTML, same accent. The home page does three jobs, in this order: install, show what happens next, show the demo. Detail moves to pages and modals.
+
+### Visual style
+
+- **Near-black canvas, outlined sections.** The install card, step cards and feature row have a 1px outline and no fill. Only code blocks keep a faint fill so the copyable part stands out.
+- **Solid icons.** Heroicons 20 solid (MIT) and the Simple Icons GitHub mark (CC0), inline SVG. No external requests.
+
+| Token | Today | Proposed |
+| --- | --- | --- |
+| `--bg` | `#111217` | `#08090a` |
+| `--surface` (cards) | `#1d1e25` | none, outline only |
+| `--border` | `#353640` | `#232428` cards, `#303136` buttons |
+| `--muted` | `#aaaab5` | `#9b9ba3` |
+| Code blocks (`--surface` today) | `#1d1e25` | `#0e0f11` |
+
+Contrast on the new background: text 18.29, muted 7.22, accent 7.86.
 
 ### Home
 
