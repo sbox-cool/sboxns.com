@@ -1,15 +1,30 @@
 # sboxns.com
 
-> Network Storage is an open-source, self-hosted s&box game backend for player-hosted, P2P and dedicated games: saves, inventory and server-side endpoints. sboxns.com is the self-hosting landing site with optional free HTTPS names, not a shared database or central admin panel.
+> s&box Network Storage is an open-source (AGPL-3.0), self-hosted game backend for s&box. Games can be player-hosted, P2P or dedicated; either way, purchases, rewards, XP and scores change only through endpoints that run on the operator's Network Storage server, which validates them before anything is saved. sboxns.com is the landing site and optional free HTTPS name service, not a shared database or central admin panel.
 
-Self-hosting requires no sboxcool signup, subscription, email or telemetry. Operators pay their own VPS provider. The optional hosted tunnel shares operational registration metadata and carries requests through Cloudflare. Player databases stay on the operator's server. Owner login: https://YOUR_HOSTNAME/login (your tunnel or public-IP name). Owner dashboard: /dashboard. /admin/login is not a supported route.
+Key facts:
+
+- Player hosts and game clients hold only the public key (`sbox_ns_...`). Collections with `accessMode: endpoint` refuse direct client writes (`403 ENDPOINT_ONLY`). Dedicated servers hold a secret key (`sbox_sk_...`) for dedicated-only endpoints (`401 SECRET_KEY_REQUIRED` for the public key).
+- Endpoints, collections, queries (including leaderboards) and game values are YAML, pushed from the s&box editor Sync Tool or written in the owner dashboard.
+- Games use the existing Network Storage library unchanged: `NetworkStorage.Configure(projectId, publicKey, baseUrl)`. Server updates keep older published game builds working.
+- `sbox-ns mcp` serves an allowlisted Model Context Protocol server over stdio (locally or through SSH) for coding agents; writes are opt-in.
+- Self-hosting requires no sboxcool signup, subscription, email or telemetry. SQLite by default, PostgreSQL optional. Operators pay their own VPS provider.
+- Owner login: https://YOUR_HOSTNAME/login. Owner dashboard: /dashboard. First sign-in: `sbox-ns admin login-link`. /admin/login is not a supported route.
+- The optional hosted names share registration metadata with sboxcool; tunnel names carry requests through Cloudflare. Player databases stay on the operator's server.
+
+## Pages
+
+- [Home](https://sboxns.com/): what Network Storage does, hosting models, use cases, FAQ.
+- [Install guide](https://sboxns.com/install/): one-command install (public IP, tunnel, Windows, own domain), credentials, dashboard, editor setup, free HTTPS names, data boundaries.
 
 ## Official sources
 
 - [Server README](https://github.com/sbox-cool/sbox-network-storage-server): installation, client integration, features and preview limitations.
+- [Hosting models](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/hosting-models.md): player-hosted, dedicated and hybrid, and which key each caller uses.
 - [Self-hosting](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md): Linux, Windows, Docker, HTTPS, backups and optional services.
 - [Network Storage documentation](https://sboxcool.com/wiki/network-storage-v3): game library, YAML Source, endpoint and workflow reference.
 - [Client setup](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/client-setup.md): project credentials and custom Base URL.
+- [Compatibility policy](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/compatibility.md): how older game builds keep working.
 - [MCP](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md): allowlisted stdio tools and SSH operations.
 - [Hosted-name acceptable use](https://sboxcool.com/network-storage/hosted-names/acceptable-use): abuse reporting and service boundaries.
 - [Privacy](https://sboxcool.com/privacy): sboxcool-operated services.
