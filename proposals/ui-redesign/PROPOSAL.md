@@ -12,18 +12,16 @@ Static HTML, same accent. The home page does three jobs, in this order: install,
 
 ### Visual style
 
-- **Near-black canvas, outlined sections.** The install card, step cards and feature row have a 1px outline and no fill. Only code blocks keep a faint fill so the copyable part stands out.
+The site uses the same design system as the owner console: `DESIGN.md` in the server repo proposal (see the link at the end). In short:
+
+- **Near-black canvas** (`#08090a`) in Dark, white in Light, black in High contrast. The site follows the system theme and has a toggle in the nav.
+- **Outlined sections.** The install card, step cards and feature row have a 1px outline and no fill. Code blocks keep a faint fill so the copyable part stands out. Buttons, chips and tabs are filled; only modals are raised.
 - **Solid icons.** Heroicons 20 solid (MIT) and the Simple Icons GitHub mark (CC0), inline SVG. No external requests.
+- **Contrast:** text 18.29, secondary 7.22, accent 7.86 on the Dark canvas; every pair passes AA in Light too.
 
-| Token | Today | Proposed |
-| --- | --- | --- |
-| `--bg` | `#111217` | `#08090a` |
-| `--surface` (cards) | `#1d1e25` | none, outline only |
-| `--border` | `#353640` | `#232428` cards, `#303136` buttons |
-| `--muted` | `#aaaab5` | `#9b9ba3` |
-| Code blocks (`--surface` today) | `#1d1e25` | `#0e0f11` |
-
-Contrast on the new background: text 18.29, muted 7.22, accent 7.86.
+| Dark | Light |
+| --- | --- |
+| <img src="after/home-desktop.png" width="440"> | <img src="after/home-light-desktop.png" width="440"> |
 
 ### Home
 
@@ -35,9 +33,9 @@ Contrast on the new background: text 18.29, muted 7.22, accent 7.86.
 - Four features in one row, one sentence each.
 - Footer groups the links that replace today's inline prose: Install guide, Hosted names, MCP and agents, Data boundaries, Privacy, Acceptable use.
 
-| Full page | Mobile |
-| --- | --- |
-| <img src="after/home-desktop-full.png" width="440"> | <img src="after/home-mobile.png" width="200"> |
+| Full page | Full page, Light | Mobile | Mobile, Light |
+| --- | --- | --- | --- |
+| <img src="after/home-desktop-full.png" width="220"> | <img src="after/home-light-desktop-full.png" width="220"> | <img src="after/home-mobile.png" width="150"> | <img src="after/home-light-mobile.png" width="150"> |
 
 ### Install guide (`/install/`)
 
@@ -46,6 +44,7 @@ Four steps with a sticky step list. Each step is one line plus a command. Explan
 | Install page | Explanation modal | Mobile |
 | --- | --- | --- |
 | <img src="after/install-desktop.png" width="400"> | <img src="after/install-modal-desktop.png" width="400"> | <img src="after/install-mobile.png" width="170"> |
+| <img src="after/install-light-desktop.png" width="400"> | <img src="after/install-modal-light-desktop.png" width="400"> | |
 
 ### Where today's content goes
 
@@ -61,7 +60,7 @@ Four steps with a sticky step list. Each step is one line plus a command. Explan
 
 ### Implementation notes
 
-- Stays a static site: plain HTML and `site.css`, no framework, no new external requests. `code.js` already adds copy buttons and highlighting; it keeps doing that.
+- Stays a static site: plain HTML and `site.css`, no framework, no new external requests. Theme: `prefers-color-scheme` by default, the nav toggle stores an override in `localStorage`, applied before first paint. `code.js` already adds copy buttons and highlighting; it keeps doing that.
 - Tabs work without JavaScript: radio inputs and CSS, or every method's command stacked when JavaScript is off.
 - New pages (`/install/`, `/names/`, `/trust/`) each get their own title, description and canonical URL, and are added to `sitemap.xml` and `llms.txt`. The home page keeps the JSON-LD.
 - `capacity.js` moves to `/names/` with the capacity tiles.
@@ -73,3 +72,5 @@ Four steps with a sticky step list. Each step is one line plus a command. Explan
 - **Single-page app with routed views.** Adds a build step and JavaScript dependency to a page that is static today.
 
 Mockups: `proposals/ui-redesign/mockup/` on this branch (open `home.html` or `install.html`). This folder is proposal material only and must not be merged into `main`, since GitHub Pages would publish it.
+
+Design rules: [`DESIGN.md`](https://github.com/sbox-cool/sbox-network-storage-server/blob/claude/sboxns-ui-redesign-6zy9hw/docs/proposals/ui-redesign/DESIGN.md) in the server repo proposal.

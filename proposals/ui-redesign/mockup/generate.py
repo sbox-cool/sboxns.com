@@ -18,7 +18,7 @@ def nav(on=""):
     links = [("Demo", ""), ("Install", "install"), ("Docs", ""), ("Self-hosting", ""), ("GitHub", "")]
     l = "".join(f'<a class="{"on" if k and k == on else ""}" href="#">{n}</a>' for n, k in links)
     return f'''<header class="nav"><div class="wrap"><a class="brand" href="#"><img src="brand.svg" alt="">sboxns.com</a><nav class="links">{l}</nav><span class="spacer"></span>
-<a class="btn sm" href="#">{i("play")}Live demo</a><button class="icon-btn menu-btn" title="Menu">{i("menu")}</button></div></header>'''
+<button class="icon-btn" title="Theme">{i("theme")}</button><a class="btn sm" href="#">{i("play")}Live demo</a><button class="icon-btn menu-btn" title="Menu">{i("menu")}</button></div></header>'''
 
 
 FOOT = f'''<footer class="foot"><div class="wrap"><div><a class="brand" href="#"><img src="brand.svg" alt="">sboxns.com</a><p>AGPL-3.0, pre-1.0. Keep backups and read release notes before updating.</p></div>
@@ -86,4 +86,10 @@ with open(os.path.join(OUT, "install.html"), "w") as f:
     f.write(install_page())
 with open(os.path.join(OUT, "install-modal.html"), "w") as f:
     f.write(install_page(modal=True))
+for base in ("home", "install", "install-modal"):
+    src = open(os.path.join(OUT, base + ".html")).read()
+    out = src.replace('<html lang="en">', '<html lang="en" data-theme="light">', 1).replace(i("theme"), i("sun"))
+    for t in ("project", "collection", "record"):
+        out = out.replace(f"thumb-{t}.png", f"thumb-{t}-light.png")
+    open(os.path.join(OUT, base + "-light.html"), "w").write(out)
 print("ok")
