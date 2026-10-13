@@ -142,7 +142,7 @@ p { margin: 0; }
 .node .ico { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; border: 1px solid var(--line-strong); background: var(--bg); color: var(--text); }
 .node .ico svg.i { width: 20px; height: 20px; }
 .node b { display: block; color: var(--text); font-size: .78rem; font-weight: 650; }
-.node.ns .ico { width: 52px; height: 52px; margin-top: -5px; border-color: var(--accent); }
+.node.ns .ico { width: 52px; height: 52px; margin-top: -5px; background: transparent; border-color: transparent; }
 .node.ns .ico img { width: 40px; height: 40px; }
 .n-client { left: 14%; top: 34px; } .n-host { left: 14%; top: 132px; } .n-ns { left: 52%; top: 84px; } .n-db { left: 87%; top: 84px; }
 .packet { position: absolute; z-index: 2; left: 14%; top: 34px; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); opacity: 0; pointer-events: none; }
