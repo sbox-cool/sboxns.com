@@ -25,8 +25,6 @@ The site uses the same design system as the owner console: `DESIGN.md` in the se
 
 ### Home
 
-<img src="after/home-desktop.png" width="900">
-
 - Hero beside an install card. Tabs: Public IP, No open ports (tunnel), Windows, Own domain. One command each with a copy button. Two trust facts (checksum verified, free HTTPS name) and a Full guide link.
 - After install: three cards, each a single command to copy (`admin login-link`, the `Configure` line, `doctor`).
 - Live demo: three screenshots linking to demo.sboxns.com. (Thumbnails here are the proposed owner console screens from the server repo proposal.)
