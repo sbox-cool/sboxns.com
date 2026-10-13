@@ -71,4 +71,4 @@ Four steps with a sticky step list. Each step is one line plus a command. Explan
 
 Mockups: `.github/ui-redesign-proposal/mockup/` (open `home.html` or `install.html`). Kept under `.github/` so GitHub Pages does not publish it.
 
-Design rules: [`DESIGN.md`](https://github.com/sbox-cool/sbox-network-storage-server/blob/claude/sboxns-ui-redesign-6zy9hw/docs/proposals/ui-redesign/DESIGN.md) in the server repo proposal.
+Design rules: [`DESIGN.md`](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/proposals/ui-redesign/DESIGN.md) in the server repo proposal.
