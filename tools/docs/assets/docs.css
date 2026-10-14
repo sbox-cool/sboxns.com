@@ -1,0 +1,80 @@
+/* Generated docs pages. Builds on site.css tokens and the .doc layout of the install guide. */
+.docs { grid-template-columns: 230px minmax(0, 1fr); }
+.docs-nav { max-height: calc(100vh - 100px); overflow-y: auto; padding-bottom: 24px; }
+.docs-nav .doc-nav-h { margin: 14px 10px 4px; font-size: .78rem; font-weight: 650; color: var(--text-3); }
+.docs-nav a[aria-current="page"] { background: var(--fill); color: var(--text); font-weight: 600; }
+.docs-body { min-width: 0; }
+.docs-search { position: relative; margin-bottom: 18px; max-width: 520px; }
+.docs-search input { width: 100%; height: 38px; padding: 0 12px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: transparent; color: var(--text); font: inherit; font-size: .92rem; }
+.docs-search input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.docs-results { position: absolute; z-index: 30; top: 44px; left: 0; right: 0; display: grid; padding: 6px; border-radius: var(--r); background: var(--bg-raised); box-shadow: var(--shadow); }
+.docs-results a { display: flex; justify-content: space-between; gap: 12px; padding: 8px 10px; border-radius: var(--r-sm); font-size: .9rem; }
+.docs-results a:hover, .docs-results a:focus { background: var(--fill); }
+.docs-results span { color: var(--text-2); font-size: .8rem; white-space: nowrap; }
+.docs-results p { margin: 6px 10px; color: var(--text-2); font-size: .9rem; }
+
+.docs-prose { display: block; line-height: 1.7; }
+.docs-prose > * + * { margin-top: 14px; }
+.docs-prose h1 { margin-bottom: 8px; }
+.docs-prose h2 { font-size: 1.5rem; margin-top: 40px; scroll-margin-top: 80px; }
+.docs-prose h3 { font-size: 1.15rem; margin-top: 28px; scroll-margin-top: 80px; }
+.docs-prose h4 { font-size: 1rem; margin-top: 20px; }
+.docs-prose .anchor { margin-left: -1em; padding-right: .3em; color: var(--text-3); opacity: 0; text-decoration: none; }
+.docs-prose :is(h2, h3):hover .anchor { opacity: 1; }
+.docs-prose p, .docs-prose li { color: var(--text-2); }
+.docs-prose strong { color: var(--text); }
+.docs-prose ul, .docs-prose ol { padding-left: 22px; }
+.docs-prose li + li { margin-top: 4px; }
+.docs-prose img { max-width: 100%; height: auto; }
+.docs-prose table { width: 100%; border-collapse: collapse; font-size: .88rem; display: block; overflow-x: auto; }
+.docs-prose th, .docs-prose td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line-faint); }
+.docs-prose th { color: var(--text-2); font-weight: 600; }
+.docs-prose pre { white-space: pre; overflow: auto; overflow-wrap: normal; word-break: normal; }
+.docs-prose blockquote { margin: 0; padding: 4px 14px; border-left: 3px solid var(--line-strong); color: var(--text-2); }
+.docs-toc { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); font-size: .88rem; }
+.docs-toc p { width: 100%; margin: 0; color: var(--text-2); font-weight: 600; }
+.docs-toc a { color: var(--accent-fg); }
+.doc-source { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line-faint); color: var(--text-3); font-size: .82rem; }
+.doc-source a { color: var(--text-2); text-decoration: underline; }
+
+.docs-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.docs-card { display: grid; gap: 6px; padding: 16px; border: 1px solid var(--line); border-radius: var(--r); transition: border-color .12s; color: var(--text) !important; text-decoration: none !important; }
+.docs-card:hover { border-color: var(--accent); }
+.docs-card span { color: var(--text-2); font-size: .88rem; line-height: 1.5; }
+
+.api-index { display: flex; flex-wrap: wrap; gap: 8px; }
+.api-index a { padding: 4px 10px; border-radius: var(--pill); background: var(--fill); font-size: .84rem; color: var(--text) !important; text-decoration: none !important; }
+.docs-prose h2 code.group { font-size: .8rem; color: var(--text-2); }
+.api-route, .cs-type { padding: 16px 18px; margin-top: 12px; border: 1px solid var(--line); border-radius: var(--r); scroll-margin-top: 80px; display: grid; gap: 10px; }
+.api-route h3, .cs-type h3 { margin: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 1rem; }
+.api-route h3 code { font-size: .92rem; background: none; padding: 0; }
+.method { font: 700 .72rem ui-monospace, "SF Mono", Menlo, monospace; padding: 3px 8px; border-radius: 4px; color: var(--info); background: color-mix(in srgb, var(--info) 14%, transparent); }
+.method.m-post, .method.m-put, .method.m-patch { color: var(--accent-fg); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.method.m-delete { color: var(--danger); background: color-mix(in srgb, var(--danger) 14%, transparent); }
+.api-meta { display: grid; gap: 4px; margin: 0; font-size: .86rem; }
+.api-meta div { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 10px; }
+.api-meta dt { color: var(--text-3); }
+.api-meta dd { margin: 0; color: var(--text-2); }
+.cs-type .kind { font: 600 .74rem ui-monospace, "SF Mono", Menlo, monospace; color: var(--text-3); }
+.cs-member { display: grid; gap: 6px; }
+.cs-member pre { padding-right: 16px; font-size: .8rem; }
+.cs-doc, .cs-returns, .cs-params, .cs-values { color: var(--text-2); font-size: .9rem; }
+.cs-src { font-size: .8rem; }
+.cs-src a { color: var(--text-3); }
+
+.docs-menu { display: none; margin-bottom: 14px; border: 1px solid var(--line); border-radius: var(--r); }
+.docs-menu summary { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; font-weight: 600; list-style: none; }
+.docs-menu summary::-webkit-details-marker { display: none; }
+.docs-menu .chev { margin-left: auto; transition: transform .12s; }
+.docs-menu[open] .chev { transform: rotate(90deg); }
+.docs-menu nav { display: grid; gap: 2px; padding: 0 8px 10px; }
+.docs-menu nav a { padding: 9px 10px; border-radius: var(--r-sm); color: var(--text-2); }
+.docs-menu nav a[aria-current="page"] { background: var(--fill); color: var(--text); font-weight: 600; }
+.docs-menu .doc-nav-h { margin: 12px 10px 2px; font-size: .78rem; font-weight: 650; color: var(--text-3); }
+
+@media (max-width: 860px) {
+  .docs { grid-template-columns: minmax(0, 1fr); }
+  .docs-nav { display: none; }
+  .docs-menu { display: block; }
+  .api-meta div { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}

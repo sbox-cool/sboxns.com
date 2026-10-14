@@ -1,0 +1,17 @@
+{
+  "name": "sboxns-docs-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generates the sboxns.com /docs/ pages from the server and library repositories.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "check:links": "node check-links.mjs"
+  },
+  "dependencies": {
+    "marked": "18.1.1"
+  }
+}

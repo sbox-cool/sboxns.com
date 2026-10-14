@@ -2,4 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sboxns.com/</loc></url>
   <url><loc>https://sboxns.com/install/</loc></url>
+  <url><loc>https://sboxns.com/docs/</loc></url>
+  <url><loc>https://sboxns.com/docs/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/library/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/start/connect-a-game/</loc></url>
+  <url><loc>https://sboxns.com/docs/start/game-client/</loc></url>
+  <url><loc>https://sboxns.com/docs/library/overview/</loc></url>
+  <url><loc>https://sboxns.com/docs/library/source-authoring/</loc></url>
+  <url><loc>https://sboxns.com/docs/library/examples/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/hosting-models/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/configuration/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/export/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/modules/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/monitoring/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/alerting/</loc></url>
+  <url><loc>https://sboxns.com/docs/server/mcp/</loc></url>
+  <url><loc>https://sboxns.com/docs/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/compat/version-policy/</loc></url>
+  <url><loc>https://sboxns.com/docs/compat/certification/</loc></url>
 </urlset>
