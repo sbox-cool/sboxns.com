@@ -1,6 +1,7 @@
 /* Generated docs pages. Builds on site.css tokens and the .doc layout of the install guide. */
 .docs { grid-template-columns: 230px minmax(0, 1fr); }
-.docs-nav { max-height: calc(100vh - 100px); overflow-y: auto; padding-bottom: 24px; }
+.docs-side { position: sticky; top: 84px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; padding-bottom: 24px; }
+.docs-side .docs-nav { position: static; display: grid; overflow: visible; }
 .docs-nav .doc-nav-h { margin: 14px 10px 4px; font-size: .78rem; font-weight: 650; color: var(--text-3); }
 .docs-nav a[aria-current="page"] { background: var(--fill); color: var(--text); font-weight: 600; }
 .docs-body { min-width: 0; }
@@ -36,6 +37,10 @@
 .docs-toc a { color: var(--accent-fg); }
 .doc-source { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line-faint); color: var(--text-3); font-size: .82rem; }
 .doc-source a { color: var(--text-2); text-decoration: underline; }
+.docs-provenance { margin-top: 28px; padding-top: 12px; border-top: 1px solid var(--line-faint); color: var(--text-3); font-size: .82rem; }
+.docs-provenance summary { width: fit-content; cursor: pointer; color: var(--text-2); }
+.docs-provenance p { margin: 8px 0 0; line-height: 1.6; overflow-wrap: anywhere; }
+.docs-provenance a { color: var(--text-2); text-decoration: underline; }
 
 .docs-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
 .docs-card { display: grid; gap: 6px; padding: 16px; border: 1px solid var(--line); border-radius: var(--r); transition: border-color .12s; color: var(--text) !important; text-decoration: none !important; }
@@ -62,37 +67,36 @@
 .cs-src { font-size: .8rem; }
 .cs-src a { color: var(--text-3); }
 
-.docs-menu { display: none; margin-bottom: 14px; border: 1px solid var(--line); border-radius: var(--r); }
-.docs-menu summary { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; font-weight: 600; list-style: none; }
-.docs-menu summary::-webkit-details-marker { display: none; }
-.docs-menu .chev { margin-left: auto; transition: transform .12s; }
-.docs-menu[open] .chev { transform: rotate(90deg); }
-.docs-menu nav { display: grid; gap: 2px; padding: 0 8px 10px; }
-.docs-menu nav a { padding: 9px 10px; border-radius: var(--r-sm); color: var(--text-2); }
-.docs-menu nav a[aria-current="page"] { background: var(--fill); color: var(--text); font-weight: 600; }
-.docs-menu .doc-nav-h { margin: 12px 10px 2px; font-size: .78rem; font-weight: 650; color: var(--text-3); }
+.docs-menu-check, .docs-menu-toggle { display: none; }
+.docs-menu-panel { display: grid; gap: 14px; }
+.docs-menu-toggle { align-items: center; gap: 10px; min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); font-weight: 600; cursor: pointer; }
+.docs-menu-title { flex: none; }
+.docs-menu-current { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .84rem; font-weight: 500; color: var(--text-2); }
+.docs-menu-toggle .chev { flex: none; margin-left: auto; transition: transform .12s; }
+.docs-menu-check:checked ~ .docs-menu-toggle .chev { transform: rotate(90deg); }
+.docs-menu-check:focus-visible ~ .docs-menu-toggle { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
 
-/* Version selectors (versions.js). Without JS, .docs-version-field is hidden and the noscript links are the way to switch. */
-.docs-versions { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 16px; margin: 0 0 18px; padding: 12px 14px; max-width: 100%; border: 1px solid var(--line); border-radius: var(--r); }
-.docs-versions .docs-version-field { display: grid; gap: 4px; flex: 1 1 200px; min-width: 0; max-width: 100%; }
-.docs-versions .docs-version-field label { font-size: .78rem; font-weight: 650; color: var(--text-2); }
-.docs-versions .docs-version-field select { width: 100%; min-width: 0; max-width: 100%; height: 38px; padding: 0 10px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--bg); color: var(--text); font: inherit; font-size: .92rem; text-overflow: ellipsis; }
+/* Version selectors (versions.js), in the navigation. Without JS, .docs-version-field is hidden and the noscript links are the way to switch. */
+.docs-versions { display: grid; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: var(--r); }
+.docs-versions .docs-version-field { display: grid; gap: 3px; min-width: 0; }
+.docs-versions .docs-version-field label { font-size: .74rem; font-weight: 650; color: var(--text-3); }
+.docs-versions .docs-version-field select { width: 100%; min-width: 0; height: 34px; padding: 0 8px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--bg); color: var(--text); font: inherit; font-size: .84rem; text-overflow: ellipsis; }
 .docs-versions .docs-version-field select:focus { outline: none; }
 .docs-versions .docs-version-field select:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
 .docs-version-note { margin: 0 0 16px; padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--r); color: var(--text-2); font-size: .9rem; line-height: 1.5; overflow-wrap: anywhere; }
-.docs-versions .docs-version-note { flex: 1 1 100%; min-width: 0; margin: 0; padding: 0; border: 0; font-size: .84rem; }
-.docs-versions .docs-version-source { flex: 1 1 100%; min-width: 0; font-size: .82rem; color: var(--text-2); overflow-wrap: anywhere; }
-.docs-versions .docs-version-source summary { cursor: pointer; }
-.docs-versions .docs-version-source p { margin: 8px 0 0; }
-.docs-versions .docs-version-links { flex: 1 1 100%; display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; margin: 0; padding: 0; list-style: none; font-size: .86rem; }
+.docs-versions .docs-version-links { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: .8rem; }
 .docs-versions .docs-version-links li { margin: 0; }
-.docs-versions .docs-version-links a { display: inline-block; max-width: 100%; padding: 4px 10px; border-radius: var(--pill); background: var(--fill); color: var(--text); text-decoration: none; overflow-wrap: anywhere; }
+.docs-versions .docs-version-links a { display: inline-block; max-width: 100%; padding: 3px 9px; border-radius: var(--pill); background: var(--fill); color: var(--text); text-decoration: none; overflow-wrap: anywhere; }
 .docs-versions .docs-version-links a:hover, .docs-versions .docs-version-links a:focus-visible { background: var(--fill-strong); }
 html:not(.docs-js) .docs-versions .docs-version-field { display: none; }
 
 @media (max-width: 860px) {
   .docs { grid-template-columns: minmax(0, 1fr); }
-  .docs-nav { display: none; }
-  .docs-menu { display: block; }
+  .docs-side { position: relative; top: auto; max-height: none; overflow: visible; padding-bottom: 0; margin-bottom: 14px; }
+  .docs-menu-check { display: block; position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+  .docs-menu-toggle { display: flex; }
+  .docs-menu-panel { display: none; }
+  .docs-menu-check:checked ~ .docs-menu-panel { display: grid; margin-top: 10px; }
+  .docs-menu-panel .docs-nav a { padding: 9px 10px; }
   .api-meta div { grid-template-columns: minmax(0, 1fr); gap: 0; }
 }

@@ -60,6 +60,19 @@ const out = path.join(site, 'docs');
 writeFileSync(path.join(out, 'versions.json'), JSON.stringify({ defaults: manifest.defaults, versions }, null, 2) + '\n');
 writeFileSync(path.join(out, 'versions.js'), readFileSync(path.join(here, 'assets/versions.js')));
 
+const revisions = JSON.parse(readFileSync(path.join(here, 'sbox-revisions.json'), 'utf8'));
+writeFileSync(path.join(out, 'sbox-revisions.json'), JSON.stringify(revisions, null, 2) + '\n');
+const revisionRows = revisions.revisions.map(revision => {
+  const source = manifest.libraries.find(library => library.publication.status === 'verified' && String(library.publication.revision) === revision.revision);
+  const mapping = source
+    ? `<a href="/docs/versions/${manifest.defaults.server}/${source.id}/">${esc(source.label)}</a>`
+    : 'Not mapped to a verified source commit';
+  return `<tr><td>${esc(revision.revision)}${revision.revision === revisions.latestRevision ? ' (current)' : ''}</td><td>${esc(revision.createdAt ?? 'Not reported')}</td><td>${mapping}</td></tr>`;
+}).join('\n');
+const revisionHistory = `<h2 id="sbox-revisions">s&amp;box package revisions</h2>
+<p>Published revisions of <a href="https://sbox.game/sboxcool/network-storage"><code>sboxcool.network-storage</code></a>, tracked from the public package API. Current observed revision: <strong>${esc(revisions.latestRevision)}</strong>. <a href="${esc(revisions.sourceUrl)}">Package metadata</a> · <a href="/docs/sbox-revisions.json">Tracking records</a>.</p>
+<p>A published revision is a real package identity, not proof of a GitHub source match. Only revisions with verified publication mappings link to source documentation below. Tracking retains previously observed revisions when the current revision changes.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Package revision</th><th scope="col">Published</th><th scope="col">Source documentation</th></tr></thead><tbody>${revisionRows}</tbody></table></div>`;
 const rows = versions.map(v => `<tr><td>${esc(v.server.label)}</td><td>${esc(v.library.label)}</td><td>${v.library.publication.status === 'verified' ? `s&amp;box revision ${esc(v.library.publication.revision)} (<a href="${esc(v.library.publication.evidence)}">evidence</a>)` : 'GitHub source; s&amp;box publication unverified'}</td><td><a href="${v.basePath}/">Read docs</a></td></tr>`).join('\n');
 const article = `<h1>Documentation versions</h1>
 <p class="lead">Choose server and library source independently. Every guide, HTTP reference and C# reference in a snapshot is generated from its pinned commits.</p>
@@ -67,6 +80,8 @@ const article = `<h1>Documentation versions</h1>
 <h2>Finding your library build</h2>
 <p>A library SemVer, GitHub commit, s&amp;box package revision and game revision are different identities. The same reported library version can cover several source commits. A repository <code>.version</code> file alone does not prove which commit s&amp;box published.</p>
 <p>For a GitHub install, match the source commit. For a Library Manager install, find the installed <code>sboxcool.network-storage</code> package revision and use a mapping only when publication evidence records that exact revision and commit. If no mapping is listed here, the matching published-package docs are not verified; do not assume the newest source matches your game. Existing games retain their bundled library until republished.</p>
+${revisionHistory}
+<h2>Source documentation snapshots</h2>
 <div class="table-wrap"><table><thead><tr><th scope="col">Server</th><th scope="col">Library source</th><th scope="col">Publication</th><th scope="col">Documentation</th></tr></thead><tbody>${rows}</tbody></table></div>
 <h2>Historical content</h2><p>Pages absent from a historical source are omitted, never replaced with today's content. The selectors retain the page when it exists; unavailable pages are marked. Stable releases from 0.1.0 onward are included. Prerelease builds are not listed.</p>`;
 const home = readFileSync(path.join(out, 'index.html'), 'utf8');

@@ -25,7 +25,7 @@
   if (article && missing && /^\/docs\/versions\/(index\.html)?$/.test(location.pathname)) {
     const note = document.createElement('p');
     note.className = 'docs-version-note';
-    note.textContent = `The page ${missing} is not available for server ${params.get('server') || 'unknown'} and library ${params.get('library') || 'unknown'}. Choose a documentation snapshot below.`;
+    note.textContent = `The page ${missing} is not available for server ${params.get('server') || 'unknown'} and library ${params.get('library') || 'unknown'}. Choose a version in the documentation navigation.`;
     const heading = article.querySelector('h1');
     article.insertBefore(note, heading || article.firstChild);
   }

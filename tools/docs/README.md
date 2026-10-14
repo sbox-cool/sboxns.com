@@ -16,6 +16,7 @@ The page list and navigation live in `build.mjs` (`PAGE_DEFS`, `SECTIONS`).
 ```sh
 cd tools/docs
 npm ci
+npm run track:revisions # observe the real published s&box package revision
 npm run build           # node versions.mjs: all pair snapshots, default /docs/ pages, catalog
 npm run check:links     # node check-links.mjs: fails on any broken internal link or anchor
 npm test                # version isolation, historical public API and publication boundaries
@@ -25,7 +26,7 @@ npm test                # version isolation, historical public API and publicati
 
 The build fails when a request in the server's HTTP contract tests has no matching route, so the API reference cannot silently drift from the server. It also rewrites `sitemap.xml` and `llms.txt`.
 
-The **Regenerate docs** workflow (`.github/workflows/docs.yml`) builds, checks links and runs the version regressions daily, on demand, and for pull requests affecting the generator. Pull requests only verify; scheduled/manual runs commit changed output to `main` and request a GitHub Pages build. Commit the generated `docs/` folder when you build locally; GitHub Pages serves it as static files.
+The **Regenerate docs** workflow (`.github/workflows/docs.yml`) observes public s&box package revisions, builds, checks links and runs regressions daily, on demand, and for pull requests affecting the generator. Pull requests only verify; scheduled/manual runs commit changed output and revision history to `main` and request a GitHub Pages build. Commit the generated `docs/` folder and `tools/docs/sbox-revisions.json` when you refresh locally; GitHub Pages serves the output as static files.
 
 ## Versions
 
@@ -62,11 +63,23 @@ Both current library snapshots are `unverified`. The catalog shows that status a
 
 To verify a published package, record the exact source commit used for publishing and the package revision assigned by s&box after publishing, with a durable HTTPS evidence link (release notes or a publication record). Confirm the installed package matches that source, excluding publication-generated metadata. Only then change that source entry to `verified`. Neither a matching SemVer nor the repository's `.version` file is sufficient: a stale revision file can remain through later source changes. Keep engine/server compatibility test evidence in the server's compatibility matrix; publication evidence alone does not certify a pairing.
 
+### Tracking published revisions
+
+`npm run track:revisions` queries the public s&box package API for `sboxcool.network-storage` and persists observations in `tools/docs/sbox-revisions.json`. The docs build copies these records to `/docs/sbox-revisions.json` and renders published revision history on `/docs/versions/#sbox-revisions`.
+
+Endpoints are the ones used by the engine's `Package.FetchVersions` and `Package.FetchAsync`: `https://public.facepunch.com/sbox/package/versions/2/sboxcool.network-storage` returns revision history, and `https://public.facepunch.com/sbox/package/get/2/sboxcool.network-storage` reports the current `Version.Id`. Current must occur in history. Each recorded entry retains the API's `Id`, `Created`, `EngineVersion` and `ManifestUrl`; `AssetVersionId` must agree with `Id`. The API's `Hash` is not a source/content hash and can exceed JavaScript integer precision, so it is never used or persisted.
+
+The engine's Library Manager writes `.version` on installation as `1.0.<revision>`. It is an installed-package marker, not a publishing receipt. The live API is the publication identity source.
+
+The tracker retains old observations when the current package revision changes or rolls back. Re-observing the same metadata preserves the first-observed timestamp and does not rewrite history just to record another poll. API errors fail the refresh rather than recording an invented revision; the previous file remains intact.
+
+Published-package tracking is separate from source mapping. An observed revision without a verified `libraries[].publication` mapping is displayed as unmapped and cannot silently select unrelated GitHub documentation. A verified mapping enables a source-docs link and adds the package revision to its library dropdown label.
+
 ### Pages and selectors
 
 - Each server × library pair is archived at `/docs/versions/<server>/<library>/`. The unversioned `/docs/` pages are the default pair at their existing paths.
 - Shared assets stay at the root for every pair: `/docs/docs.css`, `/docs/search.js` and `/docs/versions.js`. Search reads the index URL from the `data-index` attribute on `.docs-search`, so each pair searches its own index.
-- The panel `section.docs-versions` has two selects: `select#docs-version-server[data-doc-version="server"]` and `select#docs-version-library[data-doc-version="library"]`. Each option is the same page slug in another pair. Changing one select navigates to that option and keeps the `#hash`; the other axis and the page slug are kept.
+- The top of the docs navigation has two compact selects: `select#docs-version-server[data-doc-version="server"]` and `select#docs-version-library[data-doc-version="library"]`. Each option is the same page slug in another pair. Changing one select navigates to that option and keeps the `#hash`; the other axis and the page slug are kept. The same navigation DOM is used for the desktop sidebar and mobile docs menu, avoiding duplicate selector IDs. Publication/source details live below the article, not in a panel above it.
 - If a selector's pair is built but lacks the slug, the option links to `/docs/versions/?missing=SLUG&server=SERVER_ID&library=LIBRARY_ID` (`SLUG` URL-encoded) and its label gets " (page unavailable)". The catalog then shows a text notice naming the page and pair. Another version's content is never shown in its place. The current pair always links to its own page, and the home page is never missing.
 - If a selector's pair was not built at all, its option is disabled with the label "(not built)" and has no link.
 - Without JS, `.docs-version-field` is hidden and the `<noscript>` list of `.docs-version-links` in the panel is the way to switch. Its links follow the same rule as the options: the same page where it exists, otherwise the catalog `?missing=` query. Every link is a plain static link.

@@ -172,11 +172,18 @@ function navHtml(current) {
     return `<p class="doc-nav-h">${esc(s.title)}</p>${links}`;
   }).join('');
   const links = `<a href="${urlOf('')}"${current === '' ? ' aria-current="page"' : ''}>Docs home</a>${groups}`;
-  // Desktop: sticky sidebar. Mobile: a collapsed "Docs menu" that lists every page vertically.
-  return {
-    sidebar: `<nav class="doc-nav docs-nav" aria-label="Documentation">${links}</nav>`,
-    menu: `<details class="docs-menu"><summary><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg>Docs menu<span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></summary><nav aria-label="Documentation">${links}</nav></details>`,
-  };
+  // One navigation block for every width. Desktop: a sticky sidebar with the version selectors above Docs home.
+  // Mobile: the same block collapses behind a "Docs menu" toggle (a CSS checkbox, so it works without JS) that shows
+  // the current selection; opened, it shows the selectors above the links.
+  const selection = `${esc(CONTEXT.server.label)} · ${libraryLabelHtml(CONTEXT.library)}`;
+  return `<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">${selection}</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    ${versionHtml(current)}
+    <nav class="doc-nav docs-nav" aria-label="Documentation">${links}</nav>
+  </div>
+</aside>`;
 }
 
 const MAIN_LINKS = (docsCurrent) => `<a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="${urlOf('')}"${docsCurrent ? ' aria-current="page"' : ''}>Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>`;
@@ -212,7 +219,15 @@ const targetFor = (pair, slug) => {
   return pageUrl(isCurrent(pair) ? BASE : pair.basePath, slug);
 };
 
-function versionControl(key, heading, slug, currentId, pairOf) {
+// Library option text: a verified publication shows its s&box revision; unverified source keeps the plain label.
+const libraryLabelHtml = (item) => {
+  const p = item.publication;
+  if (p?.status !== 'verified') return esc(item.label);
+  if (!p.revision) throw new Error(`verified library publication ${item.id} needs a revision`);
+  return `${esc(item.label)} · s&amp;box r${esc(p.revision)}`;
+};
+
+function versionControl(key, heading, slug, currentId, pairOf, labelHtml) {
   const options = [];
   const links = [];
   for (const item of uniqueBy(key)) {
@@ -224,8 +239,9 @@ function versionControl(key, heading, slug, currentId, pairOf) {
     }
     const target = targetFor(pair, slug);
     const unavailable = pagesOf(pair).has(slug) ? '' : ' (page unavailable)';
-    options.push(`<option value="${esc(target)}"${item.id === currentId ? ' selected' : ''}>${esc(item.label)}${unavailable}</option>`);
-    links.push(`<li><a href="${esc(target)}">${heading}: ${esc(item.label)}${unavailable}</a></li>`);
+    const text = `${labelHtml(item)}${unavailable}`;
+    options.push(`<option value="${esc(target)}"${item.id === currentId ? ' selected' : ''}>${text}</option>`);
+    links.push(`<li><a href="${esc(target)}">${heading}: ${text}</a></li>`);
   }
   return {
     select: `<div class="docs-version-field"><label for="docs-version-${key}">${heading}</label><select id="docs-version-${key}" data-doc-version="${key}">${options.join('')}</select></div>`,
@@ -233,17 +249,25 @@ function versionControl(key, heading, slug, currentId, pairOf) {
   };
 }
 
+// Server and library selectors, rendered once inside the navigation. Each option is the same page in another pair.
 function versionHtml(slug) {
-  const server = versionControl('server', 'Server', slug, CONTEXT.server.id, (id) => pairFor(id, CONTEXT.library.id));
-  const library = versionControl('library', 'Library', slug, CONTEXT.library.id, (id) => pairFor(CONTEXT.server.id, id));
+  const server = versionControl('server', 'Server', slug, CONTEXT.server.id, (id) => pairFor(id, CONTEXT.library.id), (item) => esc(item.label));
+  const library = versionControl('library', 'Library', slug, CONTEXT.library.id, (id) => pairFor(CONTEXT.server.id, id), libraryLabelHtml);
   const defaultHome = pageUrl(CONTEXT.defaultBasePath.replace(/\/+$/, ''), '');
   return `<section class="docs-versions" aria-label="Documentation versions">
-  ${server.select}
-  ${library.select}
-  <p class="docs-version-note docs-version-publication">${LIBRARY_PUBLICATION} <a href="/docs/versions/">All versions</a></p>
-  <details class="docs-version-source"><summary>Source details</summary><p>${sourceLine('Server', SERVER, CONTEXT.server)} ${sourceLine('Library', LIBRARY, CONTEXT.library)}</p></details>
-  <noscript><ul class="docs-version-links">${[...server.links, ...library.links, `<li><a href="${esc(defaultHome)}">Default version</a></li>`].join('')}</ul></noscript>
-</section>`;
+    ${server.select}
+    ${library.select}
+    <noscript><ul class="docs-version-links">${[...server.links, ...library.links, `<li><a href="${esc(defaultHome)}">Default version</a></li>`].join('')}</ul></noscript>
+  </section>`;
+}
+
+// Publication status and source commits: a footer below the article, outside the navigation.
+function provenanceHtml() {
+  return `<details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p>${LIBRARY_PUBLICATION} <a href="/docs/versions/">All versions</a></p>
+  <p>${sourceLine('Server', SERVER, CONTEXT.server)} ${sourceLine('Library', LIBRARY, CONTEXT.library)}</p>
+</details>`;
 }
 
 function layout({ slug, title, description, body, crumbs, source }) {
@@ -253,7 +277,6 @@ function layout({ slug, title, description, body, crumbs, source }) {
   const sourceHtml = source
     ? `<p class="doc-source">Generated from <a href="${source.url}">${esc(source.label)}</a> at <code>${esc(source.ref)}</code> (${esc(source.commit.slice(0, 7))}).</p>`
     : '';
-  const nav = navHtml(slug);
   return `<!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -297,16 +320,15 @@ function layout({ slug, title, description, body, crumbs, source }) {
 </div></header>
 <nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden>${MAIN_LINKS(true)}<a href="https://demo.sboxns.com">Live demo</a></nav>
 <main id="main" class="wrap doc docs">
-${nav.sidebar}
+${navHtml(slug)}
 <div class="docs-body">
-  ${nav.menu}
   <div class="docs-search" role="search" data-index="${BASE}/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
-  ${versionHtml(slug)}
   <nav class="crumbs" aria-label="Breadcrumb">${crumbHtml}<span aria-hidden="true">/</span><span aria-current="page">${esc(title)}</span></nav>
   <article class="prose docs-prose">
 ${body}
   </article>
   ${sourceHtml}
+  ${provenanceHtml()}
 </div>
 </main>
 <footer class="foot"><div class="wrap">

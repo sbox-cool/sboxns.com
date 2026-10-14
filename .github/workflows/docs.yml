@@ -28,6 +28,7 @@ jobs:
         working-directory: tools/docs
         run: |
           npm ci
+          npm run track:revisions
           node versions.mjs
           node check-links.mjs
           npm test
@@ -36,13 +37,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if git diff --quiet -- docs sitemap.xml llms.txt; then
+          if git diff --quiet -- docs sitemap.xml llms.txt tools/docs/sbox-revisions.json; then
             echo "Docs are up to date."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs sitemap.xml llms.txt
+          git add docs sitemap.xml llms.txt tools/docs/sbox-revisions.json
           git commit -m "Regenerate docs from $(jq -r '.server.ref + " / library " + .library.ref' docs/sources.json)"
           git push origin HEAD:main
           # Pushes made with GITHUB_TOKEN do not trigger the Pages build on their own.

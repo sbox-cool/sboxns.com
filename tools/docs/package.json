@@ -10,7 +10,8 @@
   "scripts": {
     "build": "node versions.mjs",
     "check:links": "node check-links.mjs",
-    "test": "node --test versions.test.mjs"
+    "track:revisions": "node track-revisions.mjs",
+    "test": "node --test *.test.mjs"
   },
   "dependencies": {
     "marked": "18.1.1"
