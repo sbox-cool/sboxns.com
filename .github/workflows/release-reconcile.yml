@@ -1,0 +1,63 @@
+name: Reconcile releases
+# Polls public GitHub state for the library main branch and the server's stable releases every 15 minutes.
+# New commits are pinned in tools/docs/versions.json and recorded in tools/docs/release-state.json.
+# Nothing is pushed unless the full docs gate passes on the reconciled catalog.
+# A GitHub push or release is never treated as s&box publication; publication stays pending or unmapped until verified.
+# repository_dispatch is accepted, but no sender is configured: this repository holds no cross-repo credentials.
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  repository_dispatch:
+    types: [network-storage-library-main, network-storage-server-release]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: regenerate-docs-publish
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Observe releases
+        working-directory: tools/docs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          npm ci
+          npm run track:revisions
+          npm run reconcile:releases
+      - name: Detect changes
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain -- tools/docs/versions.json tools/docs/release-state.json tools/docs/sbox-revisions.json)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Gate and publish
+        if: steps.changes.outputs.changed == 'true'
+        working-directory: tools/docs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node versions.mjs
+          node check-links.mjs
+          npm test
+          cd ../..
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/docs/versions.json tools/docs/release-state.json tools/docs/sbox-revisions.json docs sitemap.xml llms.txt
+          if git diff --cached --quiet; then
+            echo "Generated docs are unchanged."
+            exit 0
+          fi
+          git commit -m "Reconcile releases: $(jq -r '.server.ref + " / library " + .library.ref' docs/sources.json)"
+          git push origin HEAD:main
+          # Pushes made with GITHUB_TOKEN do not trigger the Pages build on their own.
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" > /dev/null

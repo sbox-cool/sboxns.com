@@ -17,6 +17,7 @@ The page list and navigation live in `build.mjs` (`PAGE_DEFS`, `SECTIONS`).
 cd tools/docs
 npm ci
 npm run track:revisions # observe the real published s&box package revision
+npm run reconcile:releases # pin new stable server releases and the library main commit in versions.json
 npm run build           # node versions.mjs: all pair snapshots, default /docs/ pages, catalog
 npm run check:links     # node check-links.mjs: fails on any broken internal link or anchor
 npm test                # version isolation, historical public API and publication boundaries
@@ -27,6 +28,32 @@ npm test                # version isolation, historical public API and publicati
 The build fails when a request in the server's HTTP contract tests has no matching route, so the API reference cannot silently drift from the server. It also rewrites `sitemap.xml` and `llms.txt`.
 
 The **Regenerate docs** workflow (`.github/workflows/docs.yml`) observes public s&box package revisions, builds, checks links and runs regressions daily, on demand, and for pull requests affecting the generator. Pull requests only verify; scheduled/manual runs commit changed output and revision history to `main` and request a GitHub Pages build. Commit the generated `docs/` folder and `tools/docs/sbox-revisions.json` when you refresh locally; GitHub Pages serves the output as static files.
+
+## Release reconciliation
+
+`npm run reconcile:releases` (`reconcile-releases.mjs`) reads public GitHub state and pins what it finds in `versions.json`:
+
+- **Server releases:** releases of `sbox-cool/sbox-network-storage-server` that are neither draft nor prerelease and whose tag is `vX.Y.Z`. Each tag is peeled to its commit. New releases are appended to `servers`, in ascending order. `defaults.server` moves up to the newest stable release and is never lowered by a backfilled older release. Tags such as `v0.1.0-alpha` are not releases and are ignored.
+- **Library `main`:** the head commit of `sbox-cool/sbox-network-storage`, pinned by full SHA. If that commit is not yet in `libraries`, an unverified snapshot is appended with id `source-<7 chars>`. If the short id already names a different commit, the id is `source-<40 chars>`. Its `ref` is the full SHA, not `main`, so the build never follows a moving branch.
+- **No re-pointing:** existing entries are never rewritten. If a pinned release tag now resolves to a different commit, the run fails and writes nothing, so a human must decide.
+
+`tools/docs/release-state.json` records what was observed: the library head and its candidate id, the stable releases with their commits and publish dates, a reference to the current s&box observation in `sbox-revisions.json`, and each library's publication status. It is rewritten only when its content changes, so polling does not churn history.
+
+**Publication status** is one of:
+
+- `verified`: `versions.json` carries evidence for the library entry; the revision is recorded.
+- `pending`: the newest `main` commit, awaiting publication evidence.
+- `unmapped`: any other unverified source snapshot.
+
+A GitHub push or release never sets a publication revision. `pending` and `unmapped` both leave `revision` null. Verifying publication still follows the Publication section below.
+
+**Triggers and credentials:** `.github/workflows/release-reconcile.yml` runs every 15 minutes and on `workflow_dispatch`. It also accepts `repository_dispatch` events `network-storage-library-main` and `network-storage-server-release`, but no sender exists. This repository and the library repository have no GitHub secrets, so nothing is dispatched on a push or release. Until a sender with a credential for this repository is configured, the schedule is the real trigger, with up to 15 minutes of latency plus any GitHub scheduled-run delay.
+
+**Rate limits:** each run makes 3 requests plus one per stable release (the branch head, its commit, the release list and one tag read per release). The workflow passes `GITHUB_TOKEN` so requests use the repository's authenticated limit. Unauthenticated local runs are limited to 60 requests per hour per IP. The token is sent only as an `Authorization` header and is never logged or echoed in errors.
+
+**Gate:** when the reconciled catalog or state changes, the workflow runs `versions.mjs`, `check-links.mjs` and `npm test`. It pushes to `main` only if all three pass, then requests a GitHub Pages build. A catalog the build rejects is never pushed.
+
+Run `npm run reconcile:releases` locally to see what would change. It writes only the files that changed.
 
 ## Versions
 
@@ -42,7 +69,7 @@ The generated `docs/versions.json` is output only. Edit the curated `tools/docs/
 
 ### Manifest
 
-- `servers`: the nine stable releases 0.1.0, 0.2.0, 0.3.0, 0.4.0, 0.5.0, 0.5.1, 0.5.2, 0.5.3 and 0.5.4. Each entry has `id` and `label` (the version), `ref` (its `vX.Y.Z` tag) and `commit` (full SHA). Prerelease builds are not listed.
+- `servers`: stable releases, pinned by `reconcile-releases.mjs` (currently 0.1.0 through 0.5.4). Each entry has `id` and `label` (the version), `ref` (its `vX.Y.Z` tag) and `commit` (full SHA). Draft and prerelease releases are not listed.
 - `libraries`: two source snapshots, `source-13f51a8` and `source-d369d1b`. Each has `ref` and `commit` set to the same full SHA.
 - `defaults`: `server` and `library` ids of the pair built at unversioned `/docs/`. Currently `0.5.4` and `source-13f51a8`.
 
@@ -50,7 +77,7 @@ Rules:
 
 - **IDs are immutable.** Never rename an id or repoint an existing id to another commit. The build compares against the previously generated catalog and rejects removed/repointed entries. Archive URLs are built from ids.
 - Every `commit` is a full 40-character SHA. `ref` is the name the commit was taken from; a moved ref fails the build.
-- **Adding a future release:** append a new server or library entry with a new id, its `ref`, and its full `commit`. Then update `defaults` if the new entry should become the default. Existing entries stay as they are.
+- **Adding a future release:** `npm run reconcile:releases` appends it automatically (see Release reconciliation). By hand, append a new server or library entry with a new id, its `ref`, and its full `commit`. Then update `defaults` if the new entry should become the default. Existing entries stay as they are.
 
 ### Publication
 
