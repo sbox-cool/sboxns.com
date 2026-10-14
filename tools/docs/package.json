@@ -8,8 +8,9 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "node build.mjs",
-    "check:links": "node check-links.mjs"
+    "build": "node versions.mjs",
+    "check:links": "node check-links.mjs",
+    "test": "node --test versions.test.mjs"
   },
   "dependencies": {
     "marked": "18.1.1"

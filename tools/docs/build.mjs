@@ -1,12 +1,22 @@
-// Builds sboxns.com/docs/ from the server and library repositories.
+// Builds one docs tree from the server and library repositories at pinned commits, with the site's own chrome.
 //
-//   node build.mjs [--server-ref latest|vX.Y.Z|branch] [--library-ref main|tag]
+//   node build.mjs --server-ref COMMIT --library-ref COMMIT --base-path /docs \
+//     --version-context FILE [--snapshot] [--cached]
 //
-// Reads both repositories at a pinned commit (bare clones under .cache/), renders their
-// Markdown guides with the site's own chrome, generates the HTTP API reference from the
-// server's route definitions (cross-checked against the parity corpus) and the C# reference
-// from the library's public API, and writes static HTML plus a search index under /docs/.
-import { mkdirSync, rmSync, writeFileSync, readFileSync } from 'node:fs';
+// --base-path         where this tree is served: /docs (default build) or /docs/versions/SERVER_ID/LIBRARY_ID
+//                     (--snapshot). Every local link, canonical URL and search entry is prefixed with it.
+// --version-context   JSON with the current pair and every server/library pair:
+//                     { server, library, versions, defaultBasePath }. Source refs and publication status
+//                     come from it; the commits must match the resolved --*-ref values.
+// --snapshot          writes only --base-path (clearing just that directory) and leaves the shared root
+//                     assets, sitemap.xml and llms.txt alone.
+// --cached            reuses the bare clones under .cache/ without fetching.
+//
+// Reads Markdown guides, generates the HTTP API reference from the server's route definitions (cross-checked
+// against the parity corpus) and the C# reference from the library's public API, and writes static HTML plus
+// a search index. A page exists for a version only when its source exists at that version's commits; pages
+// without source are omitted, never filled in from another version.
+import { existsSync, mkdirSync, rmSync, writeFileSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Marked } from 'marked';
@@ -16,7 +26,6 @@ import { parseCSharp } from './lib/csharp.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const site = path.resolve(here, '../..');
-const out = path.join(site, 'docs');
 const cacheDir = path.join(here, '.cache');
 
 const args = process.argv.slice(2);
@@ -24,12 +33,47 @@ const opt = (name, fallback) => {
   const i = args.indexOf(name);
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 };
+const SNAPSHOT = args.includes('--snapshot');
+const CACHED = args.includes('--cached');
 
+const BASE = opt('--base-path', '/docs').replace(/\/+$/, '');
+if (!/^\/docs(\/[A-Za-z0-9][A-Za-z0-9._-]*)*$/.test(BASE)) throw new Error(`--base-path must be /docs or below it, got "${BASE}"`);
+if (SNAPSHOT ? !BASE.startsWith('/docs/versions/') : BASE !== '/docs') {
+  throw new Error(SNAPSHOT ? `--snapshot needs --base-path /docs/versions/SERVER/LIBRARY, got ${BASE}` : `the default build needs --base-path /docs, got ${BASE}`);
+}
+const out = path.join(site, BASE);
+
+// ---------------------------------------------------------------------------------------------
+// Version context: every pair the selectors can switch to, and the pair this build renders.
+const contextPath = opt('--version-context', null);
+if (!contextPath) throw new Error('--version-context FILE is required');
+const CONTEXT = JSON.parse(readFileSync(contextPath, 'utf8'));
+const VERSIONS = CONTEXT.versions;
+const pairKey = (v) => `${v.server.id}|${v.library.id}`;
+const pairFor = (serverId, libraryId) => VERSIONS.find((v) => v.server.id === serverId && v.library.id === libraryId);
+const isCurrent = (pair) => pair.server.id === CONTEXT.server.id && pair.library.id === CONTEXT.library.id;
+const CURRENT_PAIR = pairFor(CONTEXT.server.id, CONTEXT.library.id);
+if (!CURRENT_PAIR) throw new Error(`context has no versions entry for ${CONTEXT.server.id} / ${CONTEXT.library.id}`);
+if (SNAPSHOT && CURRENT_PAIR.basePath !== BASE) throw new Error(`--base-path ${BASE} does not match the context basePath ${CURRENT_PAIR.basePath}`);
+const uniqueBy = (key) => [...new Map(VERSIONS.map((v) => [v[key].id, v[key]])).values()];
+
+// ---------------------------------------------------------------------------------------------
+// Source repositories at the pinned commits.
+const cachedDir = (name) => {
+  const dir = path.join(cacheDir, `${name}.git`);
+  if (!existsSync(dir)) throw new Error(`--cached: ${dir} is missing; run once without --cached`);
+  return dir;
+};
 const SERVER = { name: 'server', repo: 'sbox-cool/sbox-network-storage-server', ref: opt('--server-ref', 'latest') };
 const LIBRARY = { name: 'library', repo: 'sbox-cool/sbox-network-storage', ref: opt('--library-ref', 'main') };
 for (const r of [SERVER, LIBRARY]) {
-  r.dir = ensureBareClone({ name: r.name, url: `https://github.com/${r.repo}.git`, cacheDir });
+  const ctx = CONTEXT[r.name];
+  if (!ctx?.ref || !ctx?.commit) throw new Error(`context.${r.name} needs ref and commit`);
+  if (CURRENT_PAIR[r.name].commit !== ctx.commit) throw new Error(`context.versions entry for this pair pins ${CURRENT_PAIR[r.name].commit} for ${r.name}, context.${r.name} pins ${ctx.commit}`);
+  r.dir = CACHED ? cachedDir(r.name) : ensureBareClone({ name: r.name, url: `https://github.com/${r.repo}.git`, cacheDir });
   Object.assign(r, resolveRef(r.dir, r.ref));
+  if (r.commit !== ctx.commit) throw new Error(`${r.repo} ${r.ref} resolves to ${r.commit}, but the context pins ${ctx.commit}`);
+  r.ref = ctx.ref; // the descriptive ref from the context, not the flag value
   r.read = (file) => readFileAt(r.dir, r.commit, file);
   r.blob = (file) => `https://github.com/${r.repo}/blob/${r.commit}/${file}`;
   r.raw = (file) => `https://raw.githubusercontent.com/${r.repo}/${r.commit}/${file}`;
@@ -45,7 +89,7 @@ const SECTIONS = [
   { id: 'server', title: 'Self-hosting' },
   { id: 'compat', title: 'Compatibility' },
 ];
-const PAGES = [
+const PAGE_DEFS = [
   ['start/connect-a-game', SERVER, 'docs/client-setup.md', 'Connect a game', 'start', 'Point the game library at your server: project, public key and base URL.'],
   ['start/game-client', SERVER, 'docs/game-client.md', 'Game client startup', 'start', 'What the library sends at startup: revision init, heartbeats and compatibility headers.'],
   ['library/overview', LIBRARY, 'README.md', 'Library overview', 'library', 'Install the library, configure credentials and call endpoints from game code.'],
@@ -65,12 +109,48 @@ const PAGES = [
   ['compat/version-policy', SERVER, 'docs/version-policy.md', 'Version policy', 'compat', 'Library version reporting and opt-in minimums.'],
   ['compat/certification', LIBRARY, 'docs/compatibility-certification.md', 'Library certification', 'compat', 'How a library and server pairing is tested and recorded.'],
 ];
-const GENERATED = [
+const GENERATED_DEFS = [
   ['api', 'HTTP API reference', 'api', 'Every game-facing route: method, path, headers, bodies and status codes, checked against the HTTP contract tests.'],
   ['library/api', 'C# API reference', 'library', 'Public types and members of the game library, from its source and XML docs.'],
 ];
 
-const urlOf = (slug) => `/docs/${slug}/`;
+// ---------------------------------------------------------------------------------------------
+// Page availability per version. A page exists for a pair only when its source exists at that pair's commits.
+// Context `pages` (when given) is trusted; otherwise it is derived from the git trees here.
+const API_DIR = 'src/SboxNetworkStorage.Server/Endpoints';
+const CSHARP_DIR = 'Code';
+const treeCache = new Map();
+const treeAt = (repo, commit) => {
+  const key = `${repo.name}:${commit}`;
+  if (!treeCache.has(key)) treeCache.set(key, new Set(listFilesAt(repo.dir, commit)));
+  return treeCache.get(key);
+};
+const hasCsFiles = (files, dir) => [...files].some((f) => f.startsWith(`${dir}/`) && f.endsWith('.cs') && !f.includes('/obj/'));
+const pagesDerivedAt = (pair) => {
+  const trees = { server: treeAt(SERVER, pair.server.commit), library: treeAt(LIBRARY, pair.library.commit) };
+  const available = new Set(['']);
+  for (const [slug, repo, file] of PAGE_DEFS) if (trees[repo.name].has(file)) available.add(slug);
+  if (hasCsFiles(trees.server, API_DIR)) available.add('api');
+  if (hasCsFiles(trees.library, CSHARP_DIR)) available.add('library/api');
+  return available;
+};
+const pagesCache = new Map();
+const pagesOf = (pair) => {
+  const key = pairKey(pair);
+  if (!pagesCache.has(key)) pagesCache.set(key, Array.isArray(pair.pages) ? new Set(['', ...pair.pages]) : pagesDerivedAt(pair));
+  return pagesCache.get(key);
+};
+const AVAILABLE = pagesOf(CURRENT_PAIR);
+const PAGES = PAGE_DEFS.filter(([slug]) => AVAILABLE.has(slug));
+const GENERATED = GENERATED_DEFS.filter(([slug]) => AVAILABLE.has(slug));
+const omittedFiles = new Set(PAGE_DEFS.filter(([slug]) => !AVAILABLE.has(slug)).map(([, repo, file]) => `${repo.name}:${file}`));
+for (const slug of [...PAGE_DEFS, ...GENERATED_DEFS].map(([s]) => s).filter((s) => !AVAILABLE.has(s))) {
+  console.warn(`NOTE ${BASE}: omitted "${slug}", its source is not present at this version`);
+}
+
+const pageUrl = (base, slug) => (slug === '' ? `${base}/` : `${base}/${slug}/`);
+const urlOf = (slug) => pageUrl(BASE, slug);
+const docLink = (slug, text) => (AVAILABLE.has(slug) ? `<a href="${urlOf(slug)}">${text}</a>` : text);
 // Source file -> docs URL, for rewriting Markdown links between guides.
 const routedFiles = new Map(PAGES.map(([slug, repo, file]) => [`${repo.name}:${file}`, urlOf(slug)]));
 
@@ -79,14 +159,19 @@ const routedFiles = new Map(PAGES.map(([slug, repo, file]) => [`${repo.name}:${f
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slugify = (text) => text.toLowerCase().replace(/<[^>]+>/g, '').replace(/&[a-z]+;/g, '').replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-');
 
+const sectionItems = (id) => [
+  ...PAGES.filter((p) => p[4] === id).map(([slug, , , title, , summary]) => ({ slug, title, summary })),
+  ...GENERATED.filter((g) => g[2] === id).map(([slug, title, , summary]) => ({ slug, title, summary })),
+];
+
 function navHtml(current) {
   const groups = SECTIONS.map((s) => {
-    const items = [...PAGES.filter((p) => p[4] === s.id).map(([slug, , , title]) => [slug, title]),
-      ...GENERATED.filter((g) => g[2] === s.id).map(([slug, title]) => [slug, title])];
-    const links = items.map(([slug, title]) => `<a href="${urlOf(slug)}"${slug === current ? ' aria-current="page"' : ''}>${esc(title)}</a>`).join('');
+    const items = sectionItems(s.id);
+    if (!items.length) return '';
+    const links = items.map(({ slug, title }) => `<a href="${urlOf(slug)}"${slug === current ? ' aria-current="page"' : ''}>${esc(title)}</a>`).join('');
     return `<p class="doc-nav-h">${esc(s.title)}</p>${links}`;
-  });
-  const links = `<a href="/docs/"${current === '' ? ' aria-current="page"' : ''}>Docs home</a>${groups.join('')}`;
+  }).join('');
+  const links = `<a href="${urlOf('')}"${current === '' ? ' aria-current="page"' : ''}>Docs home</a>${groups}`;
   // Desktop: sticky sidebar. Mobile: a collapsed "Docs menu" that lists every page vertically.
   return {
     sidebar: `<nav class="doc-nav docs-nav" aria-label="Documentation">${links}</nav>`,
@@ -94,15 +179,81 @@ function navHtml(current) {
   };
 }
 
-const MAIN_LINKS = (docsCurrent) => `<a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/"${docsCurrent ? ' aria-current="page"' : ''}>Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>`;
+const MAIN_LINKS = (docsCurrent) => `<a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="${urlOf('')}"${docsCurrent ? ' aria-current="page"' : ''}>Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>`;
+
+const FOOT_DOCS = [['start/connect-a-game', 'Connect a game'], ['api', 'HTTP API'], ['library/api', 'C# API'], ['server/self-hosting', 'Self-hosting']]
+  .filter(([slug]) => AVAILABLE.has(slug))
+  .map(([slug, text]) => `<a href="${urlOf(slug)}">${text}</a>`)
+  .join('');
+
+// Publication state comes from the context. "Unverified" means GitHub source only, never a claimed s&box build.
+const LIBRARY_PUBLICATION = (() => {
+  const p = CONTEXT.library.publication;
+  const short = LIBRARY.commit.slice(0, 7);
+  if (p?.status === 'verified') {
+    if (!p.revision || !p.evidence) throw new Error('a verified library publication needs revision and evidence');
+    const evidence = /^https?:\/\//.test(p.evidence) ? `<a href="${esc(p.evidence)}">${esc(p.evidence)}</a>` : esc(p.evidence);
+    return `<strong>s&amp;box publication verified</strong> as revision <code>${esc(p.revision)}</code> (evidence: ${evidence}). Source: GitHub commit <code>${short}</code>.`;
+  }
+  if (p?.status === 'unverified') {
+    return `<strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision.`;
+  }
+  throw new Error(`library publication status must be verified or unverified, got ${p?.status}`);
+})();
+
+const sourceLine = (label, src, ctx) => `<strong>${label}:</strong> ${esc(ctx.label)} (<code>${esc(ctx.id)}</code>), GitHub source <a href="https://github.com/${src.repo}/tree/${src.commit}">${esc(src.repo)}</a> at <code>${esc(src.ref)}</code> (<code>${src.commit.slice(0, 7)}</code>).`;
+
+// Target for a selector choice: the same page in that pair. A pair that is built but lacks the page points to
+// the catalog with ?missing=SLUG&server=&library=, which explains the gap; nothing from another version is shown.
+const targetFor = (pair, slug) => {
+  if (!pagesOf(pair).has(slug)) {
+    return `/docs/versions/?missing=${encodeURIComponent(slug)}&server=${encodeURIComponent(pair.server.id)}&library=${encodeURIComponent(pair.library.id)}`;
+  }
+  return pageUrl(isCurrent(pair) ? BASE : pair.basePath, slug);
+};
+
+function versionControl(key, heading, slug, currentId, pairOf) {
+  const options = [];
+  const links = [];
+  for (const item of uniqueBy(key)) {
+    const pair = pairOf(item.id);
+    if (!pair) {
+      options.push(`<option disabled>${esc(item.label)} (not built)</option>`);
+      links.push(`<li>${heading}: ${esc(item.label)} (not built)</li>`);
+      continue;
+    }
+    const target = targetFor(pair, slug);
+    const unavailable = pagesOf(pair).has(slug) ? '' : ' (page unavailable)';
+    options.push(`<option value="${esc(target)}"${item.id === currentId ? ' selected' : ''}>${esc(item.label)}${unavailable}</option>`);
+    links.push(`<li><a href="${esc(target)}">${heading}: ${esc(item.label)}${unavailable}</a></li>`);
+  }
+  return {
+    select: `<div class="docs-version-field"><label for="docs-version-${key}">${heading}</label><select id="docs-version-${key}" data-doc-version="${key}">${options.join('')}</select></div>`,
+    links,
+  };
+}
+
+function versionHtml(slug) {
+  const server = versionControl('server', 'Server', slug, CONTEXT.server.id, (id) => pairFor(id, CONTEXT.library.id));
+  const library = versionControl('library', 'Library', slug, CONTEXT.library.id, (id) => pairFor(CONTEXT.server.id, id));
+  const defaultHome = pageUrl(CONTEXT.defaultBasePath.replace(/\/+$/, ''), '');
+  return `<section class="docs-versions" aria-label="Documentation versions">
+  ${server.select}
+  ${library.select}
+  <p class="docs-version-note docs-version-publication">${LIBRARY_PUBLICATION} <a href="/docs/versions/">All versions</a></p>
+  <details class="docs-version-source"><summary>Source details</summary><p>${sourceLine('Server', SERVER, CONTEXT.server)} ${sourceLine('Library', LIBRARY, CONTEXT.library)}</p></details>
+  <noscript><ul class="docs-version-links">${[...server.links, ...library.links, `<li><a href="${esc(defaultHome)}">Default version</a></li>`].join('')}</ul></noscript>
+</section>`;
+}
 
 function layout({ slug, title, description, body, crumbs, source }) {
-  const canonical = `https://sboxns.com${slug === '' ? '/docs/' : urlOf(slug)}`;
-  const crumbHtml = [`<a href="/">Home</a>`, `<a href="/docs/">Docs</a>`, ...crumbs]
-    .join('<span aria-hidden="true">/</span>');
+  const canonical = `https://sboxns.com${urlOf(slug)}`;
+  const trail = [`<a href="/">Home</a>`, ...(slug === '' ? [] : [`<a href="${urlOf('')}">Docs</a>`, ...crumbs])];
+  const crumbHtml = trail.join('<span aria-hidden="true">/</span>');
   const sourceHtml = source
     ? `<p class="doc-source">Generated from <a href="${source.url}">${esc(source.label)}</a> at <code>${esc(source.ref)}</code> (${esc(source.commit.slice(0, 7))}).</p>`
     : '';
+  const nav = navHtml(slug);
   return `<!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -130,6 +281,7 @@ function layout({ slug, title, description, body, crumbs, source }) {
   <script src="/code.js" defer></script>
   <script src="/site.js" defer></script>
   <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -145,10 +297,11 @@ function layout({ slug, title, description, body, crumbs, source }) {
 </div></header>
 <nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden>${MAIN_LINKS(true)}<a href="https://demo.sboxns.com">Live demo</a></nav>
 <main id="main" class="wrap doc docs">
-${navHtml(slug).sidebar}
+${nav.sidebar}
 <div class="docs-body">
-  ${navHtml(slug).menu}
-  <div class="docs-search" role="search"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  ${nav.menu}
+  <div class="docs-search" role="search" data-index="${BASE}/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  ${versionHtml(slug)}
   <nav class="crumbs" aria-label="Breadcrumb">${crumbHtml}<span aria-hidden="true">/</span><span aria-current="page">${esc(title)}</span></nav>
   <article class="prose docs-prose">
 ${body}
@@ -160,7 +313,7 @@ ${body}
   <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
   <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
   <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
-  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/start/connect-a-game/">Connect a game</a><a href="/docs/api/">HTTP API</a><a href="/docs/library/api/">C# API</a><a href="/docs/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2>${FOOT_DOCS}</nav>
   <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
 </div></footer>
 </body>
@@ -174,11 +327,15 @@ function markdown(repo, file) {
   const dir = path.posix.dirname(file);
   const used = new Map();
   const headings = [];
+  // Returns null for links to guides omitted from this version; those render as plain text.
   const resolveHref = (href) => {
     if (!href || /^(https?:|mailto:|#)/.test(href)) return href;
+    if (href.startsWith('/docs/')) return BASE + href.slice('/docs'.length);
     const [target, hash] = href.split('#');
     const abs = path.posix.normalize(path.posix.join(dir, target)).replace(/^\.\//, '');
-    const routed = routedFiles.get(`${repo.name}:${abs}`);
+    const key = `${repo.name}:${abs}`;
+    if (omittedFiles.has(key)) return null;
+    const routed = routedFiles.get(key);
     if (routed) return routed + (hash ? `#${hash}` : '');
     // Cross-repo links that point at the other repository's GitHub URL stay as written.
     return repo.blob(abs) + (hash ? `#${hash}` : '');
@@ -198,6 +355,7 @@ function markdown(repo, file) {
       link({ href, title, tokens }) {
         const text = this.parser.parseInline(tokens);
         const target = resolveHref(href);
+        if (target === null) return text;
         return `<a href="${esc(target)}"${title ? ` title="${esc(title)}"` : ''}>${text}</a>`;
       },
       image({ href, title, text }) {
@@ -210,8 +368,11 @@ function markdown(repo, file) {
       },
       html({ text }) {
         // Raw HTML in the sources (e.g. the README logo) keeps working with absolute asset URLs.
-        return text.replace(/(src|href)="(?!https?:|#|mailto:|\/)([^"]+)"/g, (_, attr, value) =>
-          `${attr}="${attr === 'src' ? repo.raw(path.posix.normalize(path.posix.join(dir, value))) : resolveHref(value)}"`);
+        return text.replace(/href="\/docs\//g, `href="${BASE}/`).replace(/(src|href)="(?!https?:|#|mailto:|\/)([^"]+)"/g, (_, attr, value) => {
+          if (attr === 'src') return `src="${repo.raw(path.posix.normalize(path.posix.join(dir, value)))}"`;
+          const target = resolveHref(value);
+          return target === null ? 'href="#"' : `href="${target}"`;
+        });
       },
     },
   });
@@ -231,10 +392,14 @@ function toc(headings) {
 // ---------------------------------------------------------------------------------------------
 // HTTP API reference.
 function buildApi() {
-  const files = listFilesAt(SERVER.dir, SERVER.commit, 'src/SboxNetworkStorage.Server/Endpoints')
+  const files = listFilesAt(SERVER.dir, SERVER.commit, API_DIR)
     .filter((f) => f.endsWith('.cs'))
     .map((f) => ({ path: f, text: SERVER.read(f) }));
   const { routes, skipped } = extractRoutes(files);
+  if (!routes.length) {
+    console.log(`HTTP API: no routes defined in ${API_DIR} at ${SERVER.commit.slice(0, 7)}`);
+    return { html: `<h1>HTTP API reference</h1>\n<p class="lead">No HTTP routes are defined in the pinned server source (<code>${API_DIR}</code>), so this server version has no HTTP API reference.</p>`, routes, stepCount: 0 };
+  }
   const corpusFiles = listFilesAt(SERVER.dir, SERVER.commit, 'tests/parity/corpus')
     .filter((f) => f.endsWith('.json'))
     .map((f) => ({ file: f, doc: JSON.parse(SERVER.read(f)) }));
@@ -309,7 +474,7 @@ ${ex}
 <li><strong>Public key</strong> (<code>sbox_ns_...</code>) in <code>x-public-key</code> or the <code>apiKey</code> query parameter: game clients. Ships inside your game.</li>
 <li><strong>Player identity</strong>: <code>x-steam-id</code> plus an s&amp;box auth token in <code>x-sbox-token</code> when the project requires player authentication.</li>
 <li><strong>Secret key</strong> (<code>sbox_sk_...</code>) in <code>x-api-key</code> or <code>x-secret-key</code>: editor sync, dedicated servers and management routes. Never ship it in a game build.</li>
-<li><strong>Client identity headers</strong> such as <code>x-ns-library-version</code> and <code>x-ns-client-type</code> are diagnostics, not authentication. See <a href="/docs/compat/compatibility/">compatibility</a>.</li>
+<li><strong>Client identity headers</strong> such as <code>x-ns-library-version</code> and <code>x-ns-client-type</code> are diagnostics, not authentication. See ${docLink('compat/compatibility', 'compatibility')}.</li>
 </ul>
 <p>Errors use one envelope: <code>{"ok": false, "error": {"code": "...", "message": "..."}}</code>. Paths below use <code>{projectId}</code>-style placeholders; examples use the test variables (<code>\${projectId}</code>, <code>\${publicKey}</code>).</p>
 <nav class="api-index" aria-label="Route groups">${order.map((g) => `<a href="#${slugify(g)}">${esc(GROUP_TITLES[g] ?? g)}</a>`).join('')}</nav>`;
@@ -319,7 +484,7 @@ ${ex}
 // ---------------------------------------------------------------------------------------------
 // C# API reference.
 function buildCSharp() {
-  const files = listFilesAt(LIBRARY.dir, LIBRARY.commit, 'Code').filter((f) => f.endsWith('.cs') && !f.includes('/obj/'));
+  const files = listFilesAt(LIBRARY.dir, LIBRARY.commit, CSHARP_DIR).filter((f) => f.endsWith('.cs') && !f.includes('/obj/'));
   const types = files.flatMap((f) => parseCSharp(LIBRARY.read(f), f)).filter((t) => t.isPublic);
   const byFolder = new Map();
   for (const t of types) {
@@ -349,17 +514,23 @@ function buildCSharp() {
   const start = `<p class="lead">Public types and members of the s&amp;box Network Storage library, generated from its source and XML documentation comments. Most games only need <a href="#networkstorage"><code>NetworkStorage</code></a>: <code>Configure</code> once, then call endpoints, documents and queries.</p>
 <nav class="api-index" aria-label="Namespaces">${folders.map((f) => `<a href="#${slugify(f)}">${esc(f)}</a>`).join('')}</nav>`;
   console.log(`C# API: ${types.length} public types from ${files.length} files`);
-  return { html: start + '\n' + body, typeCount: types.length };
+  const html = types.length
+    ? start + '\n' + body
+    : `<p class="lead">No public types are defined in the pinned library source (<code>${CSHARP_DIR}/</code>), so this library version has no C# API reference.</p>`;
+  return { html, typeCount: types.length };
 }
 
 // ---------------------------------------------------------------------------------------------
+// The default build owns /docs/ and rebuilds it; a snapshot clears only its own base path.
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 const search = [];
+let pageCount = 0;
 const write = (slug, html) => {
   const dir = slug === '' ? out : path.join(out, slug);
   mkdirSync(dir, { recursive: true });
   writeFileSync(path.join(dir, 'index.html'), html);
+  pageCount++;
 };
 const plain = (html) => html.replace(/<pre[\s\S]*?<\/pre>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/g, ' ').replace(/\s+/g, ' ').trim();
 const sectionTitle = (id) => SECTIONS.find((s) => s.id === id).title;
@@ -375,53 +546,61 @@ for (const [slug, repo, file, title, section, summary] of PAGES) {
   search.push({ t: title, u: urlOf(slug), s: sectionTitle(section), h: headings.map((h) => h.text).join(' | '), x: plain(html).slice(0, 1500) });
 }
 
-const api = buildApi();
-write('api', layout({
-  slug: 'api', title: 'HTTP API reference', description: GENERATED[0][3], crumbs: ['<span>HTTP API</span>'],
-  body: `<h1>HTTP API reference</h1>\n${api.html}`,
-  source: { url: SERVER.blob('src/SboxNetworkStorage.Server/Endpoints'), label: `${SERVER.repo} Endpoints + tests/parity/corpus`, ref: SERVER.ref, commit: SERVER.commit },
-}));
-search.push({ t: 'HTTP API reference', u: '/docs/api/', s: 'HTTP API', h: api.routes.map((r) => `${r.method} ${r.template}`).join(' | '), x: 'authentication public key secret key x-public-key x-api-key error envelope' });
-for (const r of api.routes) search.push({ t: `${r.method} ${r.template}`, u: `/docs/api/#${slugify(`${r.method} ${r.template}`)}`, s: 'HTTP API', h: '', x: '' });
+if (AVAILABLE.has('api')) {
+  const api = buildApi();
+  write('api', layout({
+    slug: 'api', title: 'HTTP API reference', description: GENERATED_DEFS[0][3], crumbs: ['<span>HTTP API</span>'],
+    body: `<h1>HTTP API reference</h1>\n${api.html}`,
+    source: { url: SERVER.blob(API_DIR), label: `${SERVER.repo} ${API_DIR} + tests/parity/corpus`, ref: SERVER.ref, commit: SERVER.commit },
+  }));
+  search.push({ t: 'HTTP API reference', u: urlOf('api'), s: 'HTTP API', h: api.routes.map((r) => `${r.method} ${r.template}`).join(' | '), x: 'authentication public key secret key x-public-key x-api-key error envelope' });
+  for (const r of api.routes) search.push({ t: `${r.method} ${r.template}`, u: `${urlOf('api')}#${slugify(`${r.method} ${r.template}`)}`, s: 'HTTP API', h: '', x: '' });
+}
 
-const cs = buildCSharp();
-write('library/api', layout({
-  slug: 'library/api', title: 'C# API reference', description: GENERATED[1][3], crumbs: ['<span>Game library</span>'],
-  body: `<h1>C# API reference</h1>\n${cs.html}`,
-  source: { url: LIBRARY.blob('Code'), label: `${LIBRARY.repo}/Code`, ref: LIBRARY.ref, commit: LIBRARY.commit },
-}));
-search.push({ t: 'C# API reference', u: '/docs/library/api/', s: 'Game library', h: '', x: plain(cs.html).slice(0, 3000) });
+if (AVAILABLE.has('library/api')) {
+  const cs = buildCSharp();
+  write('library/api', layout({
+    slug: 'library/api', title: 'C# API reference', description: GENERATED_DEFS[1][3], crumbs: ['<span>Game library</span>'],
+    body: `<h1>C# API reference</h1>\n${cs.html}`,
+    source: { url: LIBRARY.blob(CSHARP_DIR), label: `${LIBRARY.repo}/${CSHARP_DIR}`, ref: LIBRARY.ref, commit: LIBRARY.commit },
+  }));
+  search.push({ t: 'C# API reference', u: urlOf('library/api'), s: 'Game library', h: '', x: plain(cs.html).slice(0, 3000) });
+}
 
 // Docs home.
 const cards = SECTIONS.map((s) => {
-  const items = [...PAGES.filter((p) => p[4] === s.id).map(([slug, , , title, , d]) => [slug, title, d]),
-    ...GENERATED.filter((g) => g[2] === s.id).map(([slug, title, , d]) => [slug, title, d])];
-  return `<section class="doc-sec" id="${s.id}"><h2>${esc(s.title)}</h2><div class="docs-cards">${items.map(([slug, title, d]) => `<a class="card docs-card" href="${urlOf(slug)}"><strong>${esc(title)}</strong><span>${esc(d)}</span></a>`).join('')}</div></section>`;
-}).join('\n');
+  const items = sectionItems(s.id);
+  if (!items.length) return '';
+  return `<section class="doc-sec" id="${s.id}"><h2>${esc(s.title)}</h2><div class="docs-cards">${items.map(({ slug, title, summary }) => `<a class="card docs-card" href="${urlOf(slug)}"><strong>${esc(title)}</strong><span>${esc(summary)}</span></a>`).join('')}</div></section>`;
+}).filter(Boolean).join('\n');
 write('', layout({
   slug: '', title: 'Documentation', description: 'Network Storage documentation: connect a game, the C# library, the HTTP API and self-hosting, generated from the source repositories.',
   crumbs: [],
   body: `<h1>Documentation</h1>\n<p class="lead">Connect your s&amp;box game, call your backend from the C# library or plain HTTP, and run the server yourself. Generated from <a href="https://github.com/${SERVER.repo}">the server</a> at <code>${esc(SERVER.ref)}</code> and <a href="https://github.com/${LIBRARY.repo}">the library</a> at <code>${esc(LIBRARY.ref)}</code>.</p>\n${cards}`,
   source: null,
-}).replace('<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/">Docs</a><span aria-hidden="true">/</span>', '<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span>'));
+}));
 
 writeFileSync(path.join(out, 'search-index.json'), JSON.stringify(search));
-writeFileSync(path.join(out, 'search.js'), readFileSync(path.join(here, 'assets/search.js')));
-writeFileSync(path.join(out, 'docs.css'), readFileSync(path.join(here, 'assets/docs.css')));
 writeFileSync(path.join(out, 'sources.json'), JSON.stringify({
   server: { repo: SERVER.repo, ref: SERVER.ref, commit: SERVER.commit },
   library: { repo: LIBRARY.repo, ref: LIBRARY.ref, commit: LIBRARY.commit },
 }, null, 2) + '\n');
 
-// sitemap.xml and llms.txt list every doc page.
-const pageUrls = ['/docs/', ...GENERATED.map(([slug]) => urlOf(slug)), ...PAGES.map(([slug]) => urlOf(slug))];
-const sitemapPath = path.join(site, 'sitemap.xml');
-let sitemap = readFileSync(sitemapPath, 'utf8').replace(/\s*<url><loc>https:\/\/sboxns\.com\/docs\/[^<]*<\/loc><\/url>/g, '');
-sitemap = sitemap.replace('</urlset>', pageUrls.map((u) => `  <url><loc>https://sboxns.com${u}</loc></url>`).join('\n') + '\n</urlset>');
-writeFileSync(sitemapPath, sitemap);
-const llmsPath = path.join(site, 'llms.txt');
-const llms = readFileSync(llmsPath, 'utf8').replace(/\n## Docs\n[\s\S]*?(?=\n## |$)/, '');
-const docList = ['', '## Docs', '', ...[['', 'Documentation home'], ...GENERATED.map(([s, t]) => [s, t]), ...PAGES.map(([s, , , t]) => [s, t])]
-  .map(([s, t]) => `- [${t}](https://sboxns.com${s === '' ? '/docs/' : urlOf(s)})`)].join('\n');
-writeFileSync(llmsPath, llms.trimEnd() + '\n' + docList + '\n');
-console.log(`Wrote ${pageUrls.length} pages to ${path.relative(site, out)}/`);
+if (!SNAPSHOT) {
+  // Shared root assets, and the global sitemap and llms.txt. Snapshot builds leave these alone.
+  for (const file of ['search.js', 'docs.css', 'versions.js']) {
+    writeFileSync(path.join(out, file), readFileSync(path.join(here, 'assets', file)));
+  }
+  // sitemap.xml and llms.txt list every doc page; /docs/versions/ entries belong to the snapshot builds and stay.
+  const pageUrls = [urlOf(''), ...GENERATED.map(([slug]) => urlOf(slug)), ...PAGES.map(([slug]) => urlOf(slug))];
+  const sitemapPath = path.join(site, 'sitemap.xml');
+  let sitemap = readFileSync(sitemapPath, 'utf8').replace(/\s*<url><loc>https:\/\/sboxns\.com\/docs\/(?!versions\/)[^<]*<\/loc><\/url>/g, '');
+  sitemap = sitemap.replace('</urlset>', pageUrls.map((u) => `  <url><loc>https://sboxns.com${u}</loc></url>`).join('\n') + '\n</urlset>');
+  writeFileSync(sitemapPath, sitemap);
+  const llmsPath = path.join(site, 'llms.txt');
+  const llms = readFileSync(llmsPath, 'utf8').replace(/\n## Docs\n[\s\S]*?(?=\n## |$)/, '');
+  const docList = ['', '## Docs', '', ...[['', 'Documentation home'], ...GENERATED.map(([s, , , ]) => [s, GENERATED_DEFS.find(([g]) => g === s)[1]]), ...PAGES.map(([s, , , t]) => [s, t])]
+    .map(([s, t]) => `- [${t}](https://sboxns.com${urlOf(s)})`)].join('\n');
+  writeFileSync(llmsPath, llms.trimEnd() + '\n' + docList + '\n');
+}
+console.log(`Wrote ${pageCount} pages to ${path.relative(site, out)}/`);

@@ -4,7 +4,8 @@
   const box = document.getElementById('docs-results');
   if (!input || !box) return;
   let index = null;
-  const load = () => index || (index = fetch('/docs/search-index.json').then((r) => r.json()));
+  const indexUrl = input.closest('[data-index]').dataset.index;
+  const load = () => index || (index = fetch(indexUrl).then((r) => r.json()));
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   function score(entry, terms) {

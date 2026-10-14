@@ -1,23 +1,20 @@
 name: Regenerate docs
-# Rebuilds /docs/ from the server (latest release by default) and the library (main by default),
-# and commits the link-checked output to main when it changes. The organization does not allow
-# Actions to open pull requests, so the build commits directly and requests a Pages build.
+# Rebuilds every curated, commit-pinned server/library documentation snapshot.
+# Publication mappings are reviewed in tools/docs/versions.json, never inferred from .version.
+# Commits link-checked output directly and requests a Pages build.
 on:
   workflow_dispatch:
-    inputs:
-      server_ref:
-        description: Server ref (latest = newest vX.Y.Z tag)
-        default: latest
-      library_ref:
-        description: Library ref
-        default: main
+  pull_request:
+    paths:
+      - 'tools/docs/**'
+      - '.github/workflows/docs.yml'
   schedule:
     - cron: '23 5 * * *'
 permissions:
   contents: write
   pages: write
 concurrency:
-  group: regenerate-docs
+  group: regenerate-docs-${{ github.event.pull_request.number || 'publish' }}
   cancel-in-progress: false
 jobs:
   docs:
@@ -31,9 +28,11 @@ jobs:
         working-directory: tools/docs
         run: |
           npm ci
-          node build.mjs --server-ref "${{ inputs.server_ref || 'latest' }}" --library-ref "${{ inputs.library_ref || 'main' }}"
+          node versions.mjs
           node check-links.mjs
+          npm test
       - name: Commit and publish
+        if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

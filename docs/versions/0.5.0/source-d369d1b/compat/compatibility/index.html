@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Library and server compatibility | Network Storage docs</title>
+  <meta name="description" content="How server updates keep published games working.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.5.0/source-d369d1b/compat/compatibility/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Library and server compatibility | Network Storage docs">
+  <meta property="og:description" content="How server updates keep published games working.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.5.0/source-d369d1b/compat/compatibility/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.0/source-d369d1b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.0/source-d369d1b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a><a href="https://demo.sboxns.com">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.0/source-d369d1b/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.0/source-d369d1b/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.0/source-d369d1b/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.0/source-d369d1b/library/overview/">Library overview</a><a href="/docs/versions/0.5.0/source-d369d1b/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.0/source-d369d1b/library/examples/">Examples</a><a href="/docs/versions/0.5.0/source-d369d1b/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.0/source-d369d1b/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.0/source-d369d1b/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.0/source-d369d1b/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.0/source-d369d1b/server/configuration/">Configuration</a><a href="/docs/versions/0.5.0/source-d369d1b/server/database/">Databases</a><a href="/docs/versions/0.5.0/source-d369d1b/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.0/source-d369d1b/server/export/">Export and move projects</a><a href="/docs/versions/0.5.0/source-d369d1b/server/alerting/">Alerting</a><a href="/docs/versions/0.5.0/source-d369d1b/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.0/source-d369d1b/compat/compatibility/" aria-current="page">Library and server compatibility</a></nav>
+<div class="docs-body">
+  <details class="docs-menu"><summary><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg>Docs menu<span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></summary><nav aria-label="Documentation"><a href="/docs/versions/0.5.0/source-d369d1b/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.0/source-d369d1b/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.0/source-d369d1b/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.0/source-d369d1b/library/overview/">Library overview</a><a href="/docs/versions/0.5.0/source-d369d1b/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.0/source-d369d1b/library/examples/">Examples</a><a href="/docs/versions/0.5.0/source-d369d1b/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.0/source-d369d1b/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.0/source-d369d1b/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.0/source-d369d1b/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.0/source-d369d1b/server/configuration/">Configuration</a><a href="/docs/versions/0.5.0/source-d369d1b/server/database/">Databases</a><a href="/docs/versions/0.5.0/source-d369d1b/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.0/source-d369d1b/server/export/">Export and move projects</a><a href="/docs/versions/0.5.0/source-d369d1b/server/alerting/">Alerting</a><a href="/docs/versions/0.5.0/source-d369d1b/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.0/source-d369d1b/compat/compatibility/" aria-current="page">Library and server compatibility</a></nav></details>
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.0/source-d369d1b/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <section class="docs-versions" aria-label="Documentation versions">
+  <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/0.5.4/source-d369d1b/compat/compatibility/">0.5.4</option><option value="/docs/versions/0.5.3/source-d369d1b/compat/compatibility/">0.5.3</option><option value="/docs/versions/0.5.2/source-d369d1b/compat/compatibility/">0.5.2</option><option value="/docs/versions/0.5.1/source-d369d1b/compat/compatibility/">0.5.1</option><option value="/docs/versions/0.5.0/source-d369d1b/compat/compatibility/" selected>0.5.0</option><option value="/docs/versions/?missing=compat%2Fcompatibility&amp;server=0.4.0&amp;library=source-d369d1b">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=compat%2Fcompatibility&amp;server=0.3.0&amp;library=source-d369d1b">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=compat%2Fcompatibility&amp;server=0.2.0&amp;library=source-d369d1b">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=compat%2Fcompatibility&amp;server=0.1.0&amp;library=source-d369d1b">0.1.0 (page unavailable)</option></select></div>
+  <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.0/source-13f51a8/compat/compatibility/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.0/source-d369d1b/compat/compatibility/" selected>Legacy source (d369d1b)</option></select></div>
+  <p class="docs-version-note docs-version-publication"><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <details class="docs-version-source"><summary>Source details</summary><p><strong>Server:</strong> 0.5.0 (<code>0.5.0</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/af11ab6f76f3cb7ba620f06f4e564d6d8481695e">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.0</code> (<code>af11ab6</code>). <strong>Library:</strong> Legacy source (d369d1b) (<code>source-d369d1b</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/d369d1b0a43e30016fa919f260c696dc6aa255a6">sbox-cool/sbox-network-storage</a> at <code>d369d1b0a43e30016fa919f260c696dc6aa255a6</code> (<code>d369d1b</code>).</p></details>
+  <noscript><ul class="docs-version-links"><li><a href="/docs/versions/0.5.4/source-d369d1b/compat/compatibility/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-d369d1b/compat/compatibility/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-d369d1b/compat/compatibility/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-d369d1b/compat/compatibility/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-d369d1b/compat/compatibility/">Server: 0.5.0</a></li><li><a href="/docs/versions/?missing=compat%2Fcompatibility&amp;server=0.4.0&amp;library=source-d369d1b">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=compat%2Fcompatibility&amp;server=0.3.0&amp;library=source-d369d1b">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=compat%2Fcompatibility&amp;server=0.2.0&amp;library=source-d369d1b">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=compat%2Fcompatibility&amp;server=0.1.0&amp;library=source-d369d1b">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/0.5.0/source-13f51a8/compat/compatibility/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.0/source-d369d1b/compat/compatibility/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.4/source-13f51a8/">Default version</a></li></ul></noscript>
+</section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.0/source-d369d1b/">Docs</a><span aria-hidden="true">/</span><span>Compatibility</span><span aria-hidden="true">/</span><span aria-current="page">Library and server compatibility</span></nav>
+  <article class="prose docs-prose">
+<h1>Library and server compatibility</h1>
+<p class="lead">How server updates keep published games working.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#non-breaking-release-rules">Non-breaking release rules</a><a href="#certification-certify-once-re-test-on-fundamental-change">Certification: certify once, re-test on fundamental change</a><a href="#client-identity-and-response-contract">Client identity and response contract</a><a href="#test-evidence-not-guessed-compatibility">Test evidence, not guessed compatibility</a><a href="#operator-impact-and-opt-in-enforcement">Operator impact and opt-in enforcement</a><a href="#safe-binary-rollback-is-a-separate-guarantee">Safe binary rollback is a separate guarantee</a></nav>
+<p>Server releases and game-library releases are independent. Updating the backend must not require republishing an otherwise working game. Library version, package revision, game revision, API version (<code>v3</code>) and database schema version are different identifiers; never compare them as one version.</p>
+<p>Tracking: <a href="https://github.com/sbox-cool/sbox-network-storage-server/issues/57">server epic #57</a> and <a href="https://github.com/sbox-cool/sbox-network-storage/issues/6">library tracker #6</a>. Backend/client contracts link <a href="https://github.com/sbox-cool/sbox-network-storage-server/issues/58">S1 #58</a> ↔ <a href="https://github.com/sbox-cool/sbox-network-storage/issues/7">L1 #7</a>, <a href="https://github.com/sbox-cool/sbox-network-storage-server/issues/60">S3 #60</a> ↔ <a href="https://github.com/sbox-cool/sbox-network-storage/issues/8">L2 #8</a>, and <a href="https://github.com/sbox-cool/sbox-network-storage-server/issues/63">S6 #63</a> ↔ <a href="https://github.com/sbox-cool/sbox-network-storage/issues/9">L3 #9</a>. GitHub dependency links, not prose alone, define the implementation order.</p>
+<h2 id="non-breaking-release-rules"><a class="anchor" href="#non-breaking-release-rules" aria-hidden="true" tabindex="-1">#</a>Non-breaking release rules</h2>
+<ul>
+<li>Patch releases preserve existing request syntax, response meanings, error codes, authentication, save semantics and defaults. New fields/capabilities are additive. Follow the existing operator-version rules in <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/af11ab6f76f3cb7ba620f06f4e564d6d8481695e/docs/releasing.md">releasing.md</a>; a server version bump does not authorize breaking the game API.</li>
+<li>A rename introduces the replacement while continuing to accept the old form. Keep actual translation logic at the API boundary; do not scatter version checks through storage/endpoint execution. Record why the old form exists and its linked deprecation issue. Do not create empty compatibility abstractions ahead of a real rename.</li>
+<li>Deprecation is a warning, not a rejection. Support a replaced library version (or API form) for <strong>at least six calendar months after its successor ships</strong>, with <strong>at least 90 days of published removal notice</strong>. The later date wins. Announced sunsets cannot be shortened. An editor-constructor incident is not evidence that published games are incompatible.</li>
+<li>A removal needs a replacement already released in the library, matching issues in both repos, a migration guide, real old/new library test evidence, and an impact review including unidentified clients. Unknown clients are not proof that everyone upgraded. Prefer retaining <code>v3</code> and adding a new API generation over altering existing <code>v3</code> syntax. Any eventual removal is an explicitly migration-gated release, never a surprise patch or routine unattended update.</li>
+<li>Security/data-loss emergencies can use a narrow, advisory-linked block. Do not turn ordinary obsolescence into a security block. Player game-revision enforcement is separate from library compatibility; players cannot replace the library inside a published game.</li>
+</ul>
+<h3 id="every-compatibility-affecting-pr"><a class="anchor" href="#every-compatibility-affecting-pr" aria-hidden="true" tabindex="-1">#</a>Every compatibility-affecting PR</h3>
+<p>Link the parent server/client issues, counterpart PR, dependency and priority (<code>compat</code>, <code>priority: P0/P1/P2</code>). State whether the change is additive, deprecated or removal; which existing clients remain accepted; the replacement and sunset; and the request/response and database implications. A library counterpart must be merged/released before a backend removal depends on it. Include SQLite/PostgreSQL corpus results and update the tested matrix evidence. Run the unchanged legacy path, not only a newly versioned client. Reviewers must reject a shortened notice, a patch-only syntax change, or an untested removal.</p>
+<h2 id="certification-certify-once-re-test-on-fundamental-change"><a class="anchor" href="#certification-certify-once-re-test-on-fundamental-change" aria-hidden="true" tabindex="-1">#</a>Certification: certify once, re-test on fundamental change</h2>
+<p>Both sides are LTS: games embed the library for months and self-hosted servers
+update independently. A certified pairing is the unit of trust. Certify it once
+with real evidence, then hold that certification until a fundamental change
+forces re-testing. Do not re-certify the same pairing on every release, and do
+not extend a certification to a pairing that was not exercised.</p>
+<p>A certification is one <code>tested</code> row: exact server version and source commit,
+library version and package revision (or null when genuinely unassigned),
+library source, s&amp;box engine build, operating system, backend kind, database
+providers actually exercised, a <code>pass</code> result, and evidence URLs (run
+logs/artifacts, both-repo PRs/issues). <code>ci-only</code> (HTTP parity without the real
+s&amp;box editor/game run) never certifies a pairing. A certified request pattern
+(for example legacy revision-init shape, save/load round trip, endpoint
+success/error path) covers that pattern only; new patterns need new rows.</p>
+<p>Fundamental changes invalidate affected certifications and MUST be re-tested
+before release. Treat these as fundamental on either side:
+request/response shapes, error codes/envelopes, authentication/authorization
+behavior, save/endpoint/query/game-value semantics, defaults, rate-limit or
+revision behavior, added/removed/renamed endpoints or library public methods,
+identity parsing, capability advertisement, version-policy evaluation, migration
+assumptions, or supported-provider changes. Internal refactors with no wire,
+semantic or storage-contract change do not invalidate certification, but still
+require the unchanged parity corpus and SQLite/PostgreSQL suite.</p>
+<p>Library public methods and endpoint support are LTS surface. Do not rename,
+remove, narrow or change the meaning of a library method, endpoint, field,
+error code or auth requirement without a shipped replacement, both-repo
+<code>compat</code> issues/PRs, a migration guide, the six-month/90-day support window,
+real old-client and new-client evidence, and an impact review covering
+unidentified traffic. Reviewers MUST reject silent removals, narrowed support,
+renames without translation, shortened notice, patch-only syntax changes, and
+any fundamental change without new certification rows. When in doubt, keep the
+old form and add side-by-side.</p>
+<h2 id="client-identity-and-response-contract"><a class="anchor" href="#client-identity-and-response-contract" aria-hidden="true" tabindex="-1">#</a>Client identity and response contract</h2>
+<p>The wire headers are described in <a href="/docs/versions/0.5.0/source-d369d1b/start/game-client/#library-compatibility">game-client.md</a>:
+<code>x-ns-library-version</code>, <code>x-ns-library-revision</code>, <code>x-ns-client-type</code>,
+<code>x-ns-revision-id</code>, <code>x-ns-engine-version</code>. Missing/invalid versions are the
+<code>legacy</code> bucket and are advertised as <code>unknown</code>; this is accepted by default.
+Existing revision-init, heartbeat and analytics JSON already parsed by their
+handlers can supply the library version (<code>networkStorageVersion</code>,
+<code>libraryVersion</code>, <code>library_version</code>) and the published game revision
+(<code>revisionId</code> on a published bundle); a version header takes precedence. The
+body fallback enriches telemetry, not authentication or a pre-handler
+enforcement decision. No additional body buffering/parsing is needed. Existing
+response bodies are unchanged except the additive <code>compat</code> object in
+<code>/v3/server-info</code>.</p>
+<p>The project&#39;s Errors tab captures the same request identity (library/context,
+package revision and game revision). Errors raised outside an HTTP request have
+legacy/unknown context and no revision; no player IDs or API keys are added.</p>
+<p>Responses include <code>x-ns-server-version</code> and <code>x-ns-library-status</code>: <code>unknown</code>, <code>supported</code>, <code>outdated</code>, <code>deprecated</code>, <code>unsupported</code> or <code>blocked</code>. A known latest version and deprecation sunset are advertised in <code>x-ns-library-latest</code> and <code>x-ns-library-sunset</code> when relevant. The explicit project minimum can override the status of a refused request to <code>unsupported</code>.</p>
+<p><code>GET /v3/server-info</code> adds <code>compat.library</code> with nullable <code>minimum</code>, <code>recommended</code>, <code>latest</code>, supported <code>legacy</code>, <code>deprecated</code>, <code>blocked</code>, <code>knownBroken</code> and <code>tested</code>, plus <code>compat.matrixUrl</code>. Null means no released/tested version has been established; it does not mean an invented <code>1.0.0</code>. Recommendations and sunsets do not expire working games automatically.</p>
+<p>The shipped matrix is immutable and offline: no unsigned remote source can impose a library minimum or a remote kill switch. The release feed may carry a <code>libraryCompat</code> overlay, but the overlay only ever tightens the <em>reported</em> status on servers that have not been updated (for example to flag a library with a security problem). It never refuses a request: enforcement reads the embedded matrix only, and requests without a parseable library version are never refused by any rule. Header identities and player counts are self-reported, not a security boundary; a hostile caller can spoof versions. Keep all real authentication/authorization checks.</p>
+<h2 id="test-evidence-not-guessed-compatibility"><a class="anchor" href="#test-evidence-not-guessed-compatibility" aria-hidden="true" tabindex="-1">#</a>Test evidence, not guessed compatibility</h2>
+<p><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/af11ab6f76f3cb7ba620f06f4e564d6d8481695e/compat/library-matrix.json"><code>compat/library-matrix.json</code></a> is embedded in the server and validated against <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/af11ab6f76f3cb7ba620f06f4e564d6d8481695e/compat/library-matrix.schema.json"><code>library-matrix.schema.json</code></a>. It currently records supported legacy clients and the separate old-editor incident, not fictional library releases or editor passes.</p>
+<p>Each published <code>libraries</code> entry records <code>version</code>, <code>status</code>, numeric <code>revision</code>
+(when assigned by s&amp;box), <code>released</code> and <code>minServer</code>. The legacy entry instead
+uses the <code>revisions</code> range. Deprecation and blocked-version ranges use
+space-separated SemVer comparisons (<code>=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, or an exact
+version); all comparisons must match. Every token is validated by the release
+gate and when loading the embedded policy, even when an earlier comparison
+would not match the current client. Version values also respect the server
+parser&#39;s 64-character limit and non-negative 32-bit major/minor/patch
+components.</p>
+<p>A <code>tested</code> row records the exact server version/source commit, library
+version/package revision and source, s&amp;box engine build, operating system,
+backend kind, database providers, <code>pass</code>/<code>fail</code>/<code>ci-only</code>, and evidence URLs.
+Follow <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/af11ab6f76f3cb7ba620f06f4e564d6d8481695e/docs/editor-test-plan.md">editor-test-plan.md</a>. Evidence links should
+identify the run, logs/artifacts and related PRs/issues, with secrets removed.
+Automated HTTP parity is <code>ci-only</code>, not a real editor pass.</p>
+<pre><code class="language-sh">python3 scripts/compat-release.py
+python3 scripts/compat-release.py --matrix /path/to/release-evidence.json \
+  --server 0.x.y --commit TESTED_SOURCE_COMMIT \
+  --baseline /path/to/previous-release-matrix.json \
+  --policy-source compat/library-matrix.json</code></pre>
+<p>Release notes require a matching-commit <code>pass</code> for the recommended library. A maintainer can explicitly use <code>--allow-ci-only</code> only when a matching <code>ci-only</code> row exists; the output prominently says no editor pass is certified. <code>dotnet test</code> validates the committed matrix and exercises these gates; Python 3 is required. The PowerShell companion <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/af11ab6f76f3cb7ba620f06f4e564d6d8481695e/scripts/compat-tested-with.ps1"><code>scripts/compat-tested-with.ps1</code></a> renders the same rows as the &quot;Tested with&quot; release-notes table; it is a notes renderer only, not the gate. The authoritative release gate is <code>scripts/compat-release.py</code> (see <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/af11ab6f76f3cb7ba620f06f4e564d6d8481695e/docs/releasing.md#release-evidence">releasing.md</a>): it also enforces the support window above, requiring a superseded deprecated library entry to sunset no earlier than six months after its successor&#39;s recorded <code>released</code> date and, when an <code>announced</code> date is recorded, no earlier than 90 days after it.</p>
+<p>A source commit cannot contain its own hash in a newly committed evidence row. Keep the release evidence as a <strong>detached build/release artifact</strong> after testing the final source commit; record it in the repo subsequently. Never change the tested commit to the later bookkeeping commit. Use <code>--matrix</code> for that artifact, and attach the generated table and matrix to the release. A binary&#39;s <code>tested</code> advertisement only includes records actually embedded for its version; <code>matrixUrl</code> also points to the maintained evidence history, not an authenticated policy override. The maintainer owns release-workflow attachment and the real s&amp;box editor run.</p>
+<p>Validate a detached artifact with <code>--policy-source</code>: it may change <code>tested</code>
+evidence only, not the matrix policy that was exercised by the tests. Embed that
+validated artifact without changing the source commit:</p>
+<pre><code class="language-sh">dotnet publish src/SboxNetworkStorage.Server -c Release \
+  -p:Version=0.x.y \
+  -p:LibraryCompatibilityMatrix=/absolute/path/to/release-evidence.json</code></pre>
+<p>Without this build property, the committed matrix is embedded. The build
+property supplies a build input, not a runtime overlay or an unsigned policy
+refresh. Keep the artifact with the signed release outputs.</p>
+<h2 id="operator-impact-and-opt-in-enforcement"><a class="anchor" href="#operator-impact-and-opt-in-enforcement" aria-hidden="true" tabindex="-1">#</a>Operator impact and opt-in enforcement</h2>
+<p>Open <strong>Project → Clients</strong> (<code>/dashboard/projects/{id}/clients</code>) or run:</p>
+<pre><code class="language-sh">sbox-ns project clients PROJECT_ID --days 30
+sbox-ns project clients PROJECT_ID --days 30 --json</code></pre>
+<p>The read-only MCP tool is <code>project_clients</code>. Reports group library/package revision, client context and game revision, showing request count, approximate distinct players, last seen, status/sunset and affected share. The dashboard previews a proposed minimum without changing it. Saving a non-empty/new minimum requires owner authentication, an antiforgery token and explicit acknowledgement that older published games that report a library version will be blocked; the change is audited. Clear the minimum to restore default acceptance. A backend update never sets it. Clients that report no library version are never blocked by any rule. Updates through this dashboard invalidate the policy cache immediately; external project-setting changes can take up to 30 seconds.</p>
+<p>Project JSON stores <code>libraryMinimum</code> and optional <code>libraryAlertPercent</code>; both are absent by default. A refusal is HTTP 426 using the library&#39;s existing structured error envelope, and only ever for two reasons: the project&#39;s explicit minimum, or a <code>blocked</code> range in the embedded matrix (never the feed overlay):</p>
+<pre><code class="language-json">{&quot;ok&quot;:false,&quot;error&quot;:{&quot;code&quot;:&quot;LIBRARY_UNSUPPORTED&quot;,&quot;message&quot;:&quot;Update the library and republish the game.&quot;}}</code></pre>
+<p>Advisory blocks use <code>LIBRARY_BLOCKED</code> with the advisory in the message. Missing/invalid keys and unauthorized management keys retain their original 401/403 paths, and management diagnostics and recovery (Pull, Test Live, revision-init) stay reachable. The s&amp;box runtime can hide 4xx bodies; use response headers, server logs and the library-side update UI, not an assumption that every old game can display this message.</p>
+<p>Traffic is buffered in memory, flushed once per minute and at graceful shutdown, and retained locally for 90 UTC days. The collector accepts at most 2,000 identity groups per UTC day/process and 2,000 pending groups; flushing does not reset the daily budget. Overflow is best-effort telemetry loss, never a failed game request. Restarting resets the in-process cardinality/drop counters; the CLI counter belongs to its own process, while the live dashboard shows the running server&#39;s counter. Database queries do not silently truncate the report.</p>
+<p>Distinct-player sketches merge across requests, flushes and days with approximately 3.25% relative error. No raw player IDs or hashes are persisted in this compatibility table. Unidentified players are not counted. Percentages are <strong>by requests</strong>, not players; this traffic cannot prove every installed game upgraded. Setting the project&#39;s alert threshold enables rate-limited Discord/SMTP alerts through the existing alert sink when at least 100 requests in a flushed batch meet the affected percentage. Notifications remain opt-in; nothing is sent to a hosted analytics service.</p>
+<h2 id="safe-binary-rollback-is-a-separate-guarantee"><a class="anchor" href="#safe-binary-rollback-is-a-separate-guarantee" aria-hidden="true" tabindex="-1">#</a>Safe binary rollback is a separate guarantee</h2>
+<p>Schema rollback (preserved-data downgrades, schema floors, <code>rollback --keep-data</code>) is documented in <a href="/docs/versions/0.5.0/source-d369d1b/server/database/">database.md</a>. It certifies schema/config compatibility, not game behavior. For release notes, capture each prospective target&#39;s successful <code>compatibility --json</code> result against the release&#39;s schema/config and pass it as <code>--rollback-report /path/to/report.json</code> to <code>compat-release.py</code>; without reports, the generated notes explicitly certify no preserved-data target.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/af11ab6f76f3cb7ba620f06f4e564d6d8481695e/docs/compatibility.md">sbox-cool/sbox-network-storage-server/docs/compatibility.md</a> at <code>v0.5.0</code> (af11ab6).</p>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.0/source-d369d1b/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.0/source-d369d1b/api/">HTTP API</a><a href="/docs/versions/0.5.0/source-d369d1b/library/api/">C# API</a><a href="/docs/versions/0.5.0/source-d369d1b/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
+</div></footer>
+</body>
+</html>
