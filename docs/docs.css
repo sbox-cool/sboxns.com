@@ -62,10 +62,19 @@
 .cs-src { font-size: .8rem; }
 .cs-src a { color: var(--text-3); }
 
+.docs-menu { display: none; margin-bottom: 14px; border: 1px solid var(--line); border-radius: var(--r); }
+.docs-menu summary { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; font-weight: 600; list-style: none; }
+.docs-menu summary::-webkit-details-marker { display: none; }
+.docs-menu .chev { margin-left: auto; transition: transform .12s; }
+.docs-menu[open] .chev { transform: rotate(90deg); }
+.docs-menu nav { display: grid; gap: 2px; padding: 0 8px 10px; }
+.docs-menu nav a { padding: 9px 10px; border-radius: var(--r-sm); color: var(--text-2); }
+.docs-menu nav a[aria-current="page"] { background: var(--fill); color: var(--text); font-weight: 600; }
+.docs-menu .doc-nav-h { margin: 12px 10px 2px; font-size: .78rem; font-weight: 650; color: var(--text-3); }
+
 @media (max-width: 860px) {
   .docs { grid-template-columns: minmax(0, 1fr); }
-  .docs-nav { position: static; max-height: none; display: flex; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-  .docs-nav a { white-space: nowrap; }
-  .docs-nav .doc-nav-h { display: none; }
+  .docs-nav { display: none; }
+  .docs-menu { display: block; }
   .api-meta div { grid-template-columns: minmax(0, 1fr); gap: 0; }
 }

@@ -86,7 +86,12 @@ function navHtml(current) {
     const links = items.map(([slug, title]) => `<a href="${urlOf(slug)}"${slug === current ? ' aria-current="page"' : ''}>${esc(title)}</a>`).join('');
     return `<p class="doc-nav-h">${esc(s.title)}</p>${links}`;
   });
-  return `<nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/"${current === '' ? ' aria-current="page"' : ''}>Docs home</a>${groups.join('')}</nav>`;
+  const links = `<a href="/docs/"${current === '' ? ' aria-current="page"' : ''}>Docs home</a>${groups.join('')}`;
+  // Desktop: sticky sidebar. Mobile: a collapsed "Docs menu" that lists every page vertically.
+  return {
+    sidebar: `<nav class="doc-nav docs-nav" aria-label="Documentation">${links}</nav>`,
+    menu: `<details class="docs-menu"><summary><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg>Docs menu<span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></summary><nav aria-label="Documentation">${links}</nav></details>`,
+  };
 }
 
 const MAIN_LINKS = (docsCurrent) => `<a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/"${docsCurrent ? ' aria-current="page"' : ''}>Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>`;
@@ -140,8 +145,9 @@ function layout({ slug, title, description, body, crumbs, source }) {
 </div></header>
 <nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden>${MAIN_LINKS(true)}<a href="https://demo.sboxns.com">Live demo</a></nav>
 <main id="main" class="wrap doc docs">
-${navHtml(slug)}
+${navHtml(slug).sidebar}
 <div class="docs-body">
+  ${navHtml(slug).menu}
   <div class="docs-search" role="search"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
   <nav class="crumbs" aria-label="Breadcrumb">${crumbHtml}<span aria-hidden="true">/</span><span aria-current="page">${esc(title)}</span></nav>
   <article class="prose docs-prose">
