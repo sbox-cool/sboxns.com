@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Examples | Network Storage docs</title>
+  <meta name="description" content="Example sources you can copy into a project.">
+  <link rel="canonical" href="https://sboxns.com/docs/library/examples/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Examples | Network Storage docs">
+  <meta property="og:description" content="Example sources you can copy into a project.">
+  <meta property="og:url" content="https://sboxns.com/docs/library/examples/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a><a href="https://demo.sboxns.com">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/start/connect-a-game/">Connect a game</a><a href="/docs/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/library/overview/">Library overview</a><a href="/docs/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/library/examples/" aria-current="page">Examples</a><a href="/docs/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/server/self-hosting/">Self-hosting</a><a href="/docs/server/hosting-models/">Hosting models</a><a href="/docs/server/configuration/">Configuration</a><a href="/docs/server/database/">Databases</a><a href="/docs/server/admin-panel/">Owner console</a><a href="/docs/server/export/">Export and move projects</a><a href="/docs/server/modules/">Modules</a><a href="/docs/server/monitoring/">Monitoring</a><a href="/docs/server/alerting/">Alerting</a><a href="/docs/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/compat/compatibility/">Library and server compatibility</a><a href="/docs/compat/version-policy/">Version policy</a><a href="/docs/compat/certification/">Library certification</a></nav>
+<div class="docs-body">
+  <div class="docs-search" role="search"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/">Docs</a><span aria-hidden="true">/</span><span>Game library</span><span aria-hidden="true">/</span><span aria-current="page">Examples</span></nav>
+  <article class="prose docs-prose">
+<h1>Examples</h1>
+<p class="lead">Example sources you can copy into a project.</p>
+
+<p>These are <strong>reference code snippets</strong> — they are not compiled as part of the library.</p>
+<p>Copy what you need into your game project&#39;s <code>Code/</code> directory and adapt to your game.</p>
+<p>| File | What it shows |
+|———|———————|
+| <code>BasicSetup.cs</code> | Configure the library and call your first endpoint |
+| <code>GameValuesExample.cs</code> | Fetch and parse game config (constants + tables) |
+| <code>PlayerDataExample.cs</code> | Load player data, mine ore, sell ore pattern |
+| <code>SaveStateTrackerExample.cs</code> | Optimistic updates with automatic state tracking |</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Examples/README.md">sbox-cool/sbox-network-storage/Examples/README.md</a> at <code>main</code> (13f51a8).</p>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/start/connect-a-game/">Connect a game</a><a href="/docs/api/">HTTP API</a><a href="/docs/library/api/">C# API</a><a href="/docs/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
+</div></footer>
+</body>
+</html>

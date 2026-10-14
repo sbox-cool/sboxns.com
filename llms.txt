@@ -28,3 +28,27 @@ Key facts:
 - [MCP](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md): allowlisted stdio tools and SSH operations.
 - [Hosted-name acceptable use](https://sboxcool.com/network-storage/hosted-names/acceptable-use): abuse reporting and service boundaries.
 - [Privacy](https://sboxcool.com/privacy): sboxcool-operated services.
+
+## Docs
+
+- [Documentation home](https://sboxns.com/docs/)
+- [HTTP API reference](https://sboxns.com/docs/api/)
+- [C# API reference](https://sboxns.com/docs/library/api/)
+- [Connect a game](https://sboxns.com/docs/start/connect-a-game/)
+- [Game client startup](https://sboxns.com/docs/start/game-client/)
+- [Library overview](https://sboxns.com/docs/library/overview/)
+- [Authoring collections and endpoints](https://sboxns.com/docs/library/source-authoring/)
+- [Examples](https://sboxns.com/docs/library/examples/)
+- [Self-hosting](https://sboxns.com/docs/server/self-hosting/)
+- [Hosting models](https://sboxns.com/docs/server/hosting-models/)
+- [Configuration](https://sboxns.com/docs/server/configuration/)
+- [Databases](https://sboxns.com/docs/server/database/)
+- [Owner console](https://sboxns.com/docs/server/admin-panel/)
+- [Export and move projects](https://sboxns.com/docs/server/export/)
+- [Modules](https://sboxns.com/docs/server/modules/)
+- [Monitoring](https://sboxns.com/docs/server/monitoring/)
+- [Alerting](https://sboxns.com/docs/server/alerting/)
+- [Coding agents (MCP)](https://sboxns.com/docs/server/mcp/)
+- [Library and server compatibility](https://sboxns.com/docs/compat/compatibility/)
+- [Version policy](https://sboxns.com/docs/compat/version-policy/)
+- [Library certification](https://sboxns.com/docs/compat/certification/)
