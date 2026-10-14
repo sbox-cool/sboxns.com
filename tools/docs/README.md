@@ -24,5 +24,6 @@ node check-links.mjs                # fails on any broken internal link or ancho
 The build fails when a request in the server's HTTP contract tests has no matching route, so the
 API reference cannot silently drift from the server. It also rewrites `sitemap.xml` and `llms.txt`.
 
-The **Regenerate docs** workflow runs daily and on demand, and opens a pull request when the
-output changes. Commit the generated `docs/` folder; GitHub Pages serves it as static files.
+The **Regenerate docs** workflow runs daily and on demand (server and library refs as inputs). When
+the link-checked output changes it commits to `main` and requests a GitHub Pages build. Commit the
+generated `docs/` folder when you build locally; GitHub Pages serves it as static files.
