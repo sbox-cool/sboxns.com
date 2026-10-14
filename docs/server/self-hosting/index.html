@@ -164,7 +164,12 @@ prints the command to run. Linux setup and quickstart run as root because
 they write operator configuration; runtime state is created with the service
 identity. Tunnel, DNS and telemetry enablement run through <code>runuser -u sbox-ns</code>.
 No recursive config-to-service-user ownership transfer is performed.</li>
-<li>On Linux root installs with systemd, runs <code>sbox-ns service install</code> and <code>sbox-ns service start</code>.</li>
+<li>Installs and starts the OS service when setup has run: on Linux root installs
+with systemd, <code>sbox-ns service install</code> and <code>sbox-ns service start</code>; on macOS a
+launchd job (a LaunchDaemon in <code>/Library/LaunchDaemons</code> with <code>sudo</code>, otherwise a
+per-user LaunchAgent in <code>~/Library/LaunchAgents</code>). Re-running the installer
+restarts the existing service with the new binary. A per-user LaunchAgent needs
+a logged-in GUI session; over SSH-only, run the installer with <code>sudo</code>.</li>
 </ol>
 <p>Linux/macOS signature verification requires <code>openssl</code> on <code>PATH</code>; install it
 with <code>sudo apt-get install openssl</code>, <code>sudo dnf install openssl</code> or
@@ -211,7 +216,7 @@ the installer refuses it with <code>SBOX_NS_AUTO_UPDATE=1</code>, and <code>sbox
 also refuses it. Without that explicit override, missing pinned keys fail
 closed; the installer never downloads a key from the same release it verifies.
 Maintainers supply the actual current and next P-256 public keys in
-<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub"><code>Updates/release-signing-keys.pub</code></a>
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub"><code>Updates/release-signing-keys.pub</code></a>
 and run <code>sh scripts/pin-release-keys.sh</code> (Python 3 and OpenSSL required) before
 shipping installers. The script validates and synchronizes those keys; it
 does not generate replacement keys. Until the owner supplies the public keys,
@@ -293,7 +298,7 @@ tar -xzf sbox-ns-&lt;version&gt;-linux-x64.tar.gz &amp;&amp;
 <p>Every release ships <code>SHA256SUMS.p256.sig</code>, an ECDSA P-256 signature of
 <code>SHA256SUMS</code> made with a key whose public half is pinned in the binary and in
 the install scripts
-(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub"><code>release-signing-keys.pub</code></a>).
+(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub"><code>release-signing-keys.pub</code></a>).
 <code>sbox-ns update</code> and the install scripts refuse a release with a missing or
 invalid signature. The installer never treats a checksum downloaded alongside
 an archive as proof of authenticity.</p>
@@ -414,6 +419,10 @@ HTTP ownership proof). Open the public HTTP port and 443 first:</p>
 <pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
   | sudo env SBOX_NS_PROJECT=&quot;My Game&quot; SBOX_NS_DNS=1 \
     SBOX_NS_ACME_EMAIL=&quot;you@example.com&quot; SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1 sh</code></pre>
+<p>On a Mac the same command installs a LaunchDaemon and registers the name, but
+only when ports 80 and 443 are reachable from the internet (a server with a
+public IP, or port forwarding). A Mac on a home network without open ports should
+use the tunnel command (<code>SBOX_NS_TUNNEL=1</code>, no <code>sudo</code>) instead.</p>
 <p>On Windows the same environment variables require an elevated PowerShell
 installer. Without a supported service installation, start the server yourself
 and use <code>dns enable</code> below. DNS and tunnel opt-ins are mutually exclusive.</p>
@@ -595,7 +604,7 @@ sbox-ns service restart
 sbox-ns service stop
 sbox-ns logs                     # recent log lines; add -f to follow
 sudo sbox-ns service uninstall</code></pre>
-<p>On Linux the unit file is <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/install/sbox-ns.service"><code>install/sbox-ns.service</code></a>:
+<p>On Linux the unit file is <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/install/sbox-ns.service"><code>install/sbox-ns.service</code></a>:
 it runs as the <code>sbox-ns</code> user with systemd hardening, and only
 <code>/var/lib/sbox-ns</code> is writable: <code>/etc/sbox-ns</code> is read-only to the service once the
 layout is migrated (see <a href="#config-and-state-folders">Config and state folders</a>).
@@ -763,7 +772,7 @@ than the binary through additive migrations only is reported as usable, and the
 server starts on it. A database with a breaking migration beyond the binary is
 refused exactly as before (<code>doctor</code> fails, <code>start</code> exits).</p>
 <p>Each release&#39;s notes end with a line such as &quot;Rolls back without data loss to: 0.5.1,
-0.5.2&quot;, generated from the migration tags (see <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/docs/releasing.md">releasing.md</a>).</p>
+0.5.2&quot;, generated from the migration tags (see <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/docs/releasing.md">releasing.md</a>).</p>
 <p><strong>Limitation.</strong> Releases published before this feature neither know the floor rule nor
 answer <code>schema-info</code>. They only run on the exact schema they shipped with, so rolling
 back <em>to</em> one of them (or from a database it migrated) always needs the backup restore,
@@ -773,7 +782,7 @@ that contains the floor rule is the oldest one <code>--keep-data</code> can retu
 <p>Off by default. On Linux with systemd, opt in with:</p>
 <pre><code class="language-sh">sudo sbox-ns service install --auto-update     # or install.sh with SBOX_NS_AUTO_UPDATE=1</code></pre>
 <p>This sets <code>updates.auto_install = true</code> and installs <code>sbox-ns-update.timer</code>
-(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/install/sbox-ns-update.timer"><code>install/sbox-ns-update.timer</code></a>), which
+(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/install/sbox-ns-update.timer"><code>install/sbox-ns-update.timer</code></a>), which
 runs <code>sbox-ns update --auto --all-instances</code> as root every hour (spread
 by up to 15 minutes). A run installs nothing unless all of these hold:</p>
 <ul>
@@ -878,7 +887,7 @@ instance is unavailable while it updates (usually well under a minute).</li>
 </ul>
 <h3 id="several-instances-on-one-host"><a class="anchor" href="#several-instances-on-one-host" aria-hidden="true" tabindex="-1">#</a>Several instances on one host</h3>
 <p>Each instance has its own config folder, data folder and port, and runs as the
-systemd unit <code>sbox-ns@&lt;name&gt;</code> (<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/install/sbox-ns@.service"><code>install/sbox-ns@.service</code></a>):
+systemd unit <code>sbox-ns@&lt;name&gt;</code> (<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/install/sbox-ns@.service"><code>install/sbox-ns@.service</code></a>):
 Use <code>--all-instances</code> for automated updates and rollbacks when another
 registered instance shares the binary; selecting only one is refused.</p>
 <pre><code class="language-sh">sudo sbox-ns service install --instance alpha --port 8101 --auto-update
@@ -900,7 +909,7 @@ sudo rm -rf /etc/sbox-ns /var/lib/sbox-ns
 sudo userdel sbox-ns</code></pre>
 
   </article>
-  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/docs/self-hosting.md">sbox-cool/sbox-network-storage-server/docs/self-hosting.md</a> at <code>v0.5.3</code> (6bf5b2a).</p>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/docs/self-hosting.md">sbox-cool/sbox-network-storage-server/docs/self-hosting.md</a> at <code>v0.5.4</code> (d35738b).</p>
 </div>
 </main>
 <footer class="foot"><div class="wrap">

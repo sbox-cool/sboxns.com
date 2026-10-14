@@ -95,7 +95,7 @@ this structured envelope, but the engine may hide 4xx bodies. See
 <p>The server runs many library versions at once, and most are older than the
 server. Nothing here is required: a library that sends none of the request
 headers below keeps working exactly as before. The rules are in
-<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/compat/library-matrix.json">compat/library-matrix.json</a>, which is also
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/compat/library-matrix.json">compat/library-matrix.json</a>, which is also
 embedded in the binary, so everything on this page works offline.</p>
 <h3 id="request-headers-library-to-server"><a class="anchor" href="#request-headers-library-to-server" aria-hidden="true" tabindex="-1">#</a>Request headers (library to server)</h3>
 <p>The library sends these on runtime and Sync Tool requests. All are optional.</p>
@@ -231,7 +231,7 @@ matrix knows. <code>legacy</code> is the status the matrix gives the no-version 
 <code>deprecated</code> and <code>blocked</code> are version ranges (<code>1.2.1</code> exact, <code>&lt;1.2.0</code>,
 <code>&gt;=1.1.0 &lt;1.3.0</code>; all comparators must hold). <code>knownBroken</code> lists builds known to break on
 particular engine builds. <code>tested</code> lists the editor and CI runs recorded for
-releases (<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/docs/releasing.md#release-evidence">release evidence</a>). <code>deprecated</code>, <code>blocked</code>, <code>knownBroken</code> and
+releases (<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/docs/releasing.md#release-evidence">release evidence</a>). <code>deprecated</code>, <code>blocked</code>, <code>knownBroken</code> and
 <code>tested</code> are empty arrays when there is nothing to report.</p>
 <p>A library should decide features from <code>capabilities</code>, not from version
 numbers. Where the server must act on a library version anyway, it does so in
@@ -336,7 +336,7 @@ force a new run only together with a secret key (as <code>x-api-key</code> or
 result also carries <code>fromCache</code>, <code>cachedAt</code> and <code>expiresAt</code>.</p>
 
   </article>
-  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36/docs/game-client.md">sbox-cool/sbox-network-storage-server/docs/game-client.md</a> at <code>v0.5.3</code> (6bf5b2a).</p>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/d35738b514db9691aeab2b888133f7bb80bbaa0a/docs/game-client.md">sbox-cool/sbox-network-storage-server/docs/game-client.md</a> at <code>v0.5.4</code> (d35738b).</p>
 </div>
 </main>
 <footer class="foot"><div class="wrap">
