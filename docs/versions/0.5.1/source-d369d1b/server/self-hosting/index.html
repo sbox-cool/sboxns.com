@@ -31,15 +31,15 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
-  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.1/source-d369d1b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a></nav>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.1/source-d369d1b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">GitHub</a></nav>
   <span class="spacer"></span>
   <div class="nav-actions">
     <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
-    <a class="btn sm" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
     <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
   </div>
 </div></header>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.1/source-d369d1b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a><a href="https://demo.sboxns.com">Live demo</a></nav>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.1/source-d369d1b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">GitHub</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
 <main id="main" class="wrap doc docs">
 <aside class="docs-side" aria-label="Documentation navigation">
   <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
@@ -223,7 +223,7 @@ the installer refuses it with <code>SBOX_NS_AUTO_UPDATE=1</code>, and <code>sbox
 also refuses it. Without that explicit override, missing pinned keys fail
 closed; the installer never downloads a key from the same release it verifies.
 Maintainers supply the actual current and next P-256 public keys in
-<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub"><code>Updates/release-signing-keys.pub</code></a>
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub" target="_blank" rel="noopener"><code>Updates/release-signing-keys.pub</code></a>
 and run <code>sh scripts/pin-release-keys.sh</code> (Python 3 and OpenSSL required) before
 shipping installers. The script validates and synchronizes those keys; it
 does not generate replacement keys. Until the owner supplies the public keys,
@@ -291,7 +291,7 @@ volumes:
 <h3 id="manual-install"><a class="anchor" href="#manual-install" aria-hidden="true" tabindex="-1">#</a>Manual install</h3>
 <p>Download <code>sbox-ns-&lt;version&gt;-&lt;platform&gt;.tar.gz</code> (or <code>.zip</code> on Windows),
 <code>SHA256SUMS</code> and <code>SHA256SUMS.p256.sig</code> from the
-<a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">releases page</a>.
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">releases page</a>.
 Authenticate the manifest first, using a current or rotation public key
 obtained from a previously trusted checkout or installer—not from the archive
 being verified. Save one trusted PEM key block as <code>release-key.pub</code>; OpenSSL&#39;s
@@ -305,7 +305,7 @@ tar -xzf sbox-ns-&lt;version&gt;-linux-x64.tar.gz &amp;&amp;
 <p>Every release ships <code>SHA256SUMS.p256.sig</code>, an ECDSA P-256 signature of
 <code>SHA256SUMS</code> made with a key whose public half is pinned in the binary and in
 the install scripts
-(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub"><code>release-signing-keys.pub</code></a>).
+(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub" target="_blank" rel="noopener"><code>release-signing-keys.pub</code></a>).
 <code>sbox-ns update</code> and the install scripts refuse a release with a missing or
 invalid signature. The installer never treats a checksum downloaded alongside
 an archive as proof of authenticity.</p>
@@ -376,7 +376,7 @@ Example Caddyfile:</p>
 <h3 id="hosted-https-without-a-domain"><a class="anchor" href="#hosted-https-without-a-domain" aria-hidden="true" tabindex="-1">#</a>Hosted HTTPS without a domain</h3>
 <p>Hosted names are optional. They do not require a website account, payment or a
 domain purchase. Enabling a name accepts the
-<a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">hosted-name acceptable-use policy</a>.
+<a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">hosted-name acceptable-use policy</a>.
 Operators can disable names for abuse; this does not delete your local data.</p>
 <pre><code class="language-sh">sbox-ns tunnel enable
 sbox-ns service restart
@@ -437,7 +437,7 @@ the internet. The HTTP port must not be bound to <code>127.0.0.1</code>.</li>
 <li>The server running while you enable the name: the registry checks that the
 address really belongs to this server by fetching a signed proof from
 <code>http://&lt;your IP&gt;:&lt;HTTP port&gt;/.well-known/sbox-ns/dns-proof/...</code>.</li>
-<li>Accepting the <a href="https://letsencrypt.org/repository/">Let&#39;s Encrypt subscriber agreement</a>
+<li>Accepting the <a href="https://letsencrypt.org/repository/" target="_blank" rel="noopener">Let&#39;s Encrypt subscriber agreement</a>
 and giving a contact email for the certificate.</li>
 </ul>
 <p>Steps:</p>
@@ -607,7 +607,7 @@ sbox-ns service restart
 sbox-ns service stop
 sbox-ns logs                     # recent log lines; add -f to follow
 sudo sbox-ns service uninstall</code></pre>
-<p>On Linux the unit file is <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/install/sbox-ns.service"><code>install/sbox-ns.service</code></a>:
+<p>On Linux the unit file is <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/install/sbox-ns.service" target="_blank" rel="noopener"><code>install/sbox-ns.service</code></a>:
 it runs as the <code>sbox-ns</code> user with systemd hardening, and only
 <code>/var/lib/sbox-ns</code> is writable: <code>/etc/sbox-ns</code> is read-only to the service once the
 layout is migrated (see <a href="#config-and-state-folders">Config and state folders</a>).
@@ -775,7 +775,7 @@ than the binary through additive migrations only is reported as usable, and the
 server starts on it. A database with a breaking migration beyond the binary is
 refused exactly as before (<code>doctor</code> fails, <code>start</code> exits).</p>
 <p>Each release&#39;s notes end with a line such as &quot;Rolls back without data loss to: 0.5.1,
-0.5.2&quot;, generated from the migration tags (see <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/docs/releasing.md">releasing.md</a>).</p>
+0.5.2&quot;, generated from the migration tags (see <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/docs/releasing.md" target="_blank" rel="noopener">releasing.md</a>).</p>
 <p><strong>Limitation.</strong> Releases published before this feature neither know the floor rule nor
 answer <code>schema-info</code>. They only run on the exact schema they shipped with, so rolling
 back <em>to</em> one of them (or from a database it migrated) always needs the backup restore,
@@ -785,7 +785,7 @@ that contains the floor rule is the oldest one <code>--keep-data</code> can retu
 <p>Off by default. On Linux with systemd, opt in with:</p>
 <pre><code class="language-sh">sudo sbox-ns service install --auto-update     # or install.sh with SBOX_NS_AUTO_UPDATE=1</code></pre>
 <p>This sets <code>updates.auto_install = true</code> and installs <code>sbox-ns-update.timer</code>
-(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/install/sbox-ns-update.timer"><code>install/sbox-ns-update.timer</code></a>), which
+(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/install/sbox-ns-update.timer" target="_blank" rel="noopener"><code>install/sbox-ns-update.timer</code></a>), which
 runs <code>sbox-ns update --auto --all-instances</code> as root every hour (spread
 by up to 15 minutes). A run installs nothing unless all of these hold:</p>
 <ul>
@@ -890,7 +890,7 @@ instance is unavailable while it updates (usually well under a minute).</li>
 </ul>
 <h3 id="several-instances-on-one-host"><a class="anchor" href="#several-instances-on-one-host" aria-hidden="true" tabindex="-1">#</a>Several instances on one host</h3>
 <p>Each instance has its own config folder, data folder and port, and runs as the
-systemd unit <code>sbox-ns@&lt;name&gt;</code> (<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/install/sbox-ns@.service"><code>install/sbox-ns@.service</code></a>):
+systemd unit <code>sbox-ns@&lt;name&gt;</code> (<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/install/sbox-ns@.service" target="_blank" rel="noopener"><code>install/sbox-ns@.service</code></a>):
 Use <code>--all-instances</code> for automated updates and rollbacks when another
 registered instance shares the binary; selecting only one is refused.</p>
 <pre><code class="language-sh">sudo sbox-ns service install --instance alpha --port 8101 --auto-update
@@ -912,20 +912,20 @@ sudo rm -rf /etc/sbox-ns /var/lib/sbox-ns
 sudo userdel sbox-ns</code></pre>
 
   </article>
-  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/docs/self-hosting.md">sbox-cool/sbox-network-storage-server/docs/self-hosting.md</a> at <code>v0.5.1</code> (1b949e4).</p>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/docs/self-hosting.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/self-hosting.md</a> at <code>v0.5.1</code> (1b949e4).</p>
   <details class="docs-provenance">
   <summary>Publication and source</summary>
   <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
-  <p><strong>Server:</strong> 0.5.1 (<code>0.5.1</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/1b949e42f1ba2a2be7a0999bfad0ffeea873b540">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.1</code> (<code>1b949e4</code>). <strong>Library:</strong> Legacy source (d369d1b) (<code>source-d369d1b</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/d369d1b0a43e30016fa919f260c696dc6aa255a6">sbox-cool/sbox-network-storage</a> at <code>d369d1b0a43e30016fa919f260c696dc6aa255a6</code> (<code>d369d1b</code>).</p>
+  <p><strong>Server:</strong> 0.5.1 (<code>0.5.1</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/1b949e42f1ba2a2be7a0999bfad0ffeea873b540" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.1</code> (<code>1b949e4</code>). <strong>Library:</strong> Legacy source (d369d1b) (<code>source-d369d1b</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/d369d1b0a43e30016fa919f260c696dc6aa255a6" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>d369d1b0a43e30016fa919f260c696dc6aa255a6</code> (<code>d369d1b</code>).</p>
 </details>
 </div>
 </main>
 <footer class="foot"><div class="wrap">
   <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
   <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
-  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
   <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.1/source-d369d1b/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.1/source-d369d1b/api/">HTTP API</a><a href="/docs/versions/0.5.1/source-d369d1b/library/api/">C# API</a><a href="/docs/versions/0.5.1/source-d369d1b/server/self-hosting/">Self-hosting</a></nav>
-  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy" target="_blank" rel="noopener">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
 </div></footer>
 </body>
 </html>

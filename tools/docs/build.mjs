@@ -186,7 +186,10 @@ function navHtml(current) {
 </aside>`;
 }
 
-const MAIN_LINKS = (docsCurrent) => `<a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="${urlOf('')}"${docsCurrent ? ' aria-current="page"' : ''}>Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a>`;
+const GITHUB_URL = 'https://github.com/sbox-cool/sbox-network-storage-server';
+const GITHUB_LINK = `<a href="${GITHUB_URL}"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg>GitHub</a>`;
+const DISCORD_ICON_LINK = `<a class="nav-ico" href="/discord-invite/" aria-label="Join our Discord" title="Join our Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></a>`;
+const MAIN_LINKS = (docsCurrent, compact = true) => `<a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="${urlOf('')}"${docsCurrent ? ' aria-current="page"' : ''}>Docs</a>${GITHUB_LINK}${compact ? DISCORD_ICON_LINK : `<a href="/discord-invite/">Discord</a>`}`;
 
 const FOOT_DOCS = [['start/connect-a-game', 'Connect a game'], ['api', 'HTTP API'], ['library/api', 'C# API'], ['server/self-hosting', 'Self-hosting']]
   .filter(([slug]) => AVAILABLE.has(slug))
@@ -271,6 +274,14 @@ function provenanceHtml() {
 </details>`;
 }
 
+// External links leave the site in a new tab. Applied to the assembled page so
+// chrome, markdown and generated API tables all behave the same.
+const isExternalHref = (href) => /^https?:\/\//i.test(href) && !/^https:\/\/(?:www\.)?sboxns\.com(?=[/#?]|$)/i.test(href);
+const externalize = (html) => html.replace(/<a(\s[^<>]*)?href="(https?:\/\/[^"]+)"([^<>]*)>/gi, (tag, pre, href, post) => {
+  if (!isExternalHref(href) || /\btarget\s*=/i.test(tag)) return tag;
+  return `<a${pre ?? ''}href="${href}"${post} target="_blank" rel="noopener">`;
+});
+
 function layout({ slug, title, description, body, crumbs, source }) {
   const canonical = `https://sboxns.com${urlOf(slug)}`;
   const trail = [`<a href="/">Home</a>`, ...(slug === '' ? [] : [`<a href="${urlOf('')}">Docs</a>`, ...crumbs])];
@@ -278,7 +289,7 @@ function layout({ slug, title, description, body, crumbs, source }) {
   const sourceHtml = source
     ? `<p class="doc-source">Generated from <a href="${source.url}">${esc(source.label)}</a> at <code>${esc(source.ref)}</code> (${esc(source.commit.slice(0, 7))}).</p>`
     : '';
-  return `<!doctype html>
+  const html = `<!doctype html>
 <html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
@@ -319,7 +330,7 @@ function layout({ slug, title, description, body, crumbs, source }) {
     <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
   </div>
 </div></header>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden>${MAIN_LINKS(true)}<a href="https://demo.sboxns.com">Live demo</a></nav>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden>${MAIN_LINKS(true, false)}<a href="https://demo.sboxns.com">Live demo</a></nav>
 <main id="main" class="wrap doc docs">
 ${navHtml(slug)}
 <div class="docs-body">
@@ -340,8 +351,8 @@ ${body}
   <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
 </div></footer>
 </body>
-</html>
 `;
+  return externalize(html);
 }
 
 // ---------------------------------------------------------------------------------------------
