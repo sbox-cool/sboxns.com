@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Owner console | Network Storage docs</title>
+  <meta name="description" content="The web dashboard: login, projects, records, keys and security.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.5.2/source-13f51a8/server/admin-panel/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Owner console | Network Storage docs">
+  <meta property="og:description" content="The web dashboard: login, projects, records, keys and security.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.5.2/source-13f51a8/server/admin-panel/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.2/source-13f51a8/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.2/source-13f51a8/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a><a href="https://demo.sboxns.com">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.2 · 1.1.0 source (13f51a8)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/0.5.4/source-13f51a8/server/admin-panel/">0.5.4</option><option value="/docs/versions/0.5.3/source-13f51a8/server/admin-panel/">0.5.3</option><option value="/docs/versions/0.5.2/source-13f51a8/server/admin-panel/" selected>0.5.2</option><option value="/docs/versions/0.5.1/source-13f51a8/server/admin-panel/">0.5.1</option><option value="/docs/versions/0.5.0/source-13f51a8/server/admin-panel/">0.5.0</option><option value="/docs/versions/0.4.0/source-13f51a8/server/admin-panel/">0.4.0</option><option value="/docs/versions/0.3.0/source-13f51a8/server/admin-panel/">0.3.0</option><option value="/docs/versions/0.2.0/source-13f51a8/server/admin-panel/">0.2.0</option><option value="/docs/versions/0.1.0/source-13f51a8/server/admin-panel/">0.1.0</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.2/source-13f51a8/server/admin-panel/" selected>1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.2/source-d369d1b/server/admin-panel/">Legacy source (d369d1b)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/0.5.4/source-13f51a8/server/admin-panel/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-13f51a8/server/admin-panel/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-13f51a8/server/admin-panel/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-13f51a8/server/admin-panel/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-13f51a8/server/admin-panel/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-13f51a8/server/admin-panel/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-13f51a8/server/admin-panel/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-13f51a8/server/admin-panel/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-13f51a8/server/admin-panel/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.2/source-13f51a8/server/admin-panel/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.2/source-d369d1b/server/admin-panel/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.4/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.2/source-13f51a8/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.2/source-13f51a8/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.2/source-13f51a8/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.2/source-13f51a8/library/overview/">Library overview</a><a href="/docs/versions/0.5.2/source-13f51a8/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.2/source-13f51a8/library/examples/">Examples</a><a href="/docs/versions/0.5.2/source-13f51a8/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.2/source-13f51a8/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.2/source-13f51a8/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.2/source-13f51a8/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.2/source-13f51a8/server/configuration/">Configuration</a><a href="/docs/versions/0.5.2/source-13f51a8/server/database/">Databases</a><a href="/docs/versions/0.5.2/source-13f51a8/server/admin-panel/" aria-current="page">Owner console</a><a href="/docs/versions/0.5.2/source-13f51a8/server/export/">Export and move projects</a><a href="/docs/versions/0.5.2/source-13f51a8/server/modules/">Modules</a><a href="/docs/versions/0.5.2/source-13f51a8/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.2/source-13f51a8/server/alerting/">Alerting</a><a href="/docs/versions/0.5.2/source-13f51a8/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.2/source-13f51a8/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.2/source-13f51a8/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.2/source-13f51a8/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.2/source-13f51a8/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.2/source-13f51a8/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Owner console</span></nav>
+  <article class="prose docs-prose">
+<h1>Owner console</h1>
+<p class="lead">The web dashboard: login, projects, records, keys and security.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#first-login-sbox-ns-admin-login-link">First login: sbox-ns admin login-link</a><a href="#http-vs-https">HTTP vs HTTPS</a><a href="#ssh-tunnel-alternative">SSH tunnel alternative</a><a href="#connect-a-game">Connect a game</a><a href="#project-settings">Project settings</a><a href="#data-browser">Data browser</a><a href="#authoring-and-runtime-diagnostics">Authoring and runtime diagnostics</a><a href="#move-one-project">Move one project</a><a href="#themes-and-visual-editing">Themes and visual editing</a><a href="#optional-admin-security">Optional admin security</a><a href="#public-read-only-demo">Public read-only demo</a></nav>
+<p>Every server includes a web admin panel for its single local owner: projects,
+API keys, project settings and a schema-validated record editor. No website account,
+signup or SSH tunnel is needed.</p>
+<ul>
+<li><code>/login</code>: password login</li>
+<li><code>/login/link</code>: single-use login links (see below)</li>
+<li><code>/dashboard</code>: projects, keys and settings</li>
+<li><code>/dashboard/projects/{projectId}/data</code>: data browser</li>
+<li><code>/dashboard/server</code>: live host and process stats (<a href="/docs/versions/0.5.2/source-13f51a8/server/monitoring/">monitoring</a>)</li>
+<li><code>/dashboard/server/alerts</code>: alert rules, notification channels and history (<a href="/docs/versions/0.5.2/source-13f51a8/server/monitoring/">monitoring</a>, <a href="/docs/versions/0.5.2/source-13f51a8/server/alerting/">alerting</a>)</li>
+</ul>
+<h2 id="first-login-sbox-ns-admin-login-link"><a class="anchor" href="#first-login-sbox-ns-admin-login-link" aria-hidden="true" tabindex="-1">#</a>First login: <code>sbox-ns admin login-link</code></h2>
+<p>Run this on the server, for example over SSH or through an agent with shell access:</p>
+<pre><code class="language-sh">sbox-ns admin login-link              # valid for 15 minutes
+sbox-ns admin login-link --minutes 5  # 1–60 minutes</code></pre>
+<p>It prints a link like this:</p>
+<pre><code class="language-text">https://ns.example.com/login/link?token=3f9c…
+Signs in as owner 'owner'.
+Single use; expires 2026-10-08 12:15:00 UTC (15 min). Opening the page does not use it up; confirming does.</code></pre>
+<p>Open the link and confirm. If no owner exists yet, the page asks you to choose
+the owner username and password (at least 12 characters). Being able to run
+commands on the server proves you control it, so this works from any address.
+The loopback-only <code>/setup?token=…</code> URL in the server log still works as well.
+Until an owner exists, <code>/login</code> shows these steps instead of a password form.</p>
+<p>How the link works:</p>
+<ul>
+<li><strong>Base URL.</strong> The link uses <code>server.public_url</code> when it is set. Otherwise it
+is built from the active listener: HTTPS with the ACME domain when TLS is on,
+or the bound address. For wildcard binds like <code>0.0.0.0</code> it uses the first
+routable IPv4 address of the machine. Set <code>server.public_url</code> if that guess
+is wrong, for example behind NAT or a proxy. <code>sbox-ns setup</code> and
+<code>sbox-ns quickstart</code> use the same rule, but print <code>&lt;this-host&gt;</code> for wildcard
+binds instead of guessing.</li>
+<li><strong>Token.</strong> Each token is 256 bits of randomness. Only its SHA-256 hash and
+expiry time are stored, as workspace object
+<code>server/identity/login-links/&lt;sha256&gt;.json</code> in the configured
+SQLite/PostgreSQL database. The raw token is printed once and never saved.
+Minting a new link deletes expired ones.</li>
+<li><strong>Opening (GET).</strong> Opening the link only shows a confirmation page and does
+not use the token. Chat apps and link previewers can fetch the URL without
+using it up. The page is sent with <code>Cache-Control: no-store</code> and
+<code>Referrer-Policy: no-referrer</code>.</li>
+<li><strong>Confirming (POST).</strong> Confirming needs an antiforgery token. The server
+deletes the token and signs you in in one atomic step, so a second attempt
+gets a 404. Expired, wrong or malformed tokens also get a 404. Each
+sign-in through a link is logged as a warning with the client address.</li>
+<li><strong>Rate limit.</strong> <code>/login</code>, <code>/login/link</code> and <code>/setup</code> share a limit of 10
+requests per minute per client IP and 60 per minute across all addresses,
+and at most 2 passwords are checked at a time. Requests over the limit get
+HTTP 429.</li>
+</ul>
+<p>Forgot your password? Run <code>sbox-ns admin login-link</code> to sign in, or
+<code>sbox-ns admin reset-password</code> to set a new password. A reset ends all
+existing sessions.</p>
+<h2 id="http-vs-https"><a class="anchor" href="#http-vs-https" aria-hidden="true" tabindex="-1">#</a>HTTP vs HTTPS</h2>
+<p>From another machine, the server refuses your password, login links and the
+setup form over plain HTTP, because anyone on the network path could read them.
+The refusal page lists the ways in: an SSH port forward
+(<code>ssh -L 8080:127.0.0.1:8080 you@your-server</code>, then open
+<code>http://localhost:8080/login</code>), <code>sbox-ns tunnel enable</code>, or HTTPS. Loopback
+connections are always accepted. On a network you trust you can turn the check
+off with <code>sbox-ns config set adminpanel.allow_insecure_http true</code>; the panel then
+shows a warning banner, and your password and session cookie travel
+unencrypted. To use HTTPS, pick one of these:</p>
+<ul>
+<li><strong>Built-in Let&#39;s Encrypt:</strong> <code>sbox-ns config set tls.mode acme</code>, then set
+<code>tls.acme_domain</code>, <code>tls.acme_email</code> and <code>tls.acme_accept_terms = true</code>
+(see <a href="/docs/versions/0.5.2/source-13f51a8/server/configuration/">configuration</a>).</li>
+<li><strong>Your own certificate:</strong> set <code>tls.mode = &quot;certificate&quot;</code> with
+<code>tls.certificate_path</code> and <code>tls.key_path</code>.</li>
+<li><strong>TLS-terminating reverse proxy or tunnel</strong> on the same machine, such as
+Caddy, nginx or Cloudflare Tunnel. The server trusts <code>X-Forwarded-Proto</code> and
+<code>X-Forwarded-For</code> only from loopback proxies. Set <code>server.public_url</code> to the
+HTTPS URL.</li>
+</ul>
+<p>Cookie protection:</p>
+<ul>
+<li>Both cookies are always <code>HttpOnly</code>. The session cookie is <code>SameSite=Lax</code>, so a
+link to the panel from Discord, an alert email or a bookmark keeps you signed
+in; cross-site form posts never carry it, and every change is a POST that also
+needs an antiforgery token. The antiforgery cookie is <code>SameSite=Strict</code>.</li>
+<li>Over HTTPS they are sent as <code>__Host-sbox-ns-owner</code> and <code>__Host-sbox-ns-csrf</code>.
+That means <code>Secure</code>, <code>Path=/</code> and never a <code>Domain</code> attribute. Another
+subdomain of a shared parent domain therefore cannot plant or overwrite
+them. Over HTTPS the server ignores unprefixed copies of these cookies.</li>
+<li>Plain HTTP cannot carry <code>__Host-</code> cookies, so plain-HTTP access uses the
+unprefixed names.</li>
+<li>Sessions last eight hours and do not slide. Changing the password ends them.</li>
+</ul>
+<h2 id="ssh-tunnel-alternative"><a class="anchor" href="#ssh-tunnel-alternative" aria-hidden="true" tabindex="-1">#</a>SSH tunnel alternative</h2>
+<p>If you would rather not expose the panel at all, bind the server to loopback
+or firewall its port. Then tunnel to it:</p>
+<pre><code class="language-sh">ssh -L 8080:127.0.0.1:8080 user@server</code></pre>
+<p>Open <code>http://localhost:8080/login</code> locally. Loopback HTTP does not show the
+warning banner. <code>sbox-ns admin login-link</code> still works this way: replace the
+printed host with <code>localhost:8080</code>.</p>
+<h2 id="connect-a-game"><a class="anchor" href="#connect-a-game" aria-hidden="true" tabindex="-1">#</a>Connect a game</h2>
+<p><strong>All projects</strong> is the project hub. Each project card is a single link into
+that project and shows its status (<strong>Enabled</strong> or <strong>Disabled</strong>), hosting
+profile (<strong>Player-hosted</strong>, <strong>Dedicated</strong>, <strong>Hybrid</strong> or <strong>Not set</strong>), live revision (<strong>Not synced</strong> before the
+first sync) and last game request (<strong>No requests yet</strong> until the game calls).
+Above 8 projects a filter matches name or project ID; without JavaScript it
+works as a <code>GET ?q=</code> query. With no projects at all the page shows one empty
+state pointing at <strong>Create project</strong> and <strong>Import</strong>.</p>
+<p><strong>Create project</strong>, <strong>Import</strong> and <strong>Export server</strong> live in the page header
+and open modal dialogs. Each dialog form is a plain form POST, so everything
+works with JavaScript disabled (the header links then render the same form on
+the page, and a failed validation re-opens the dialog with the entered values
+and the error). <strong>Create project</strong> also creates a public key labeled
+<code>Game client</code> unless you clear <strong>Create a public game key</strong>, then lands on the
+new project page. <strong>Import</strong> takes a portable <code>.tar.gz</code> archive (64 MiB
+limit); an error is shown inside the dialog. <strong>Export server</strong> downloads every
+project, record, key and setting as one <code>.tar.gz</code>; including secrets needs
+your password (and authenticator code when enabled), exactly as before.</p>
+<p>The project overview then opens with a <strong>Connect your game</strong> card:</p>
+<ul>
+<li>The exact <code>NetworkStorage.Configure( &quot;&lt;projectId&gt;&quot;, &quot;&lt;public key&gt;&quot;, &quot;&lt;base URL&gt;&quot; );</code>
+line, filled with the project ID, the oldest enabled public key and the base
+URL. Without an enabled public key the line shows <code>&lt;public-api-key&gt;</code>.</li>
+<li>The same values as fields for <strong>Editor &gt; Network Storage &gt; Setup</strong> in the
+s&amp;box editor. The secret key is only shown once, when you create it under
+<strong>API keys</strong>.</li>
+<li>The base URL is <code>server.public_url</code> when set, otherwise the address you
+opened the dashboard with. The card warns when that address is <code>localhost</code>
+(players on other machines cannot use it) or plain HTTP.</li>
+<li>A checklist: a public key exists, a collection or endpoint is defined, the
+game reached the server (with the last request from the request log), and
+401/403 responses in the last 24 hours with what each status usually means.</li>
+</ul>
+<p>Copy buttons use the browser clipboard. Browsers only allow that over HTTPS
+or on <code>localhost</code>; elsewhere the button selects the text and asks you to
+press Ctrl+C.</p>
+<p>Every change that redirects (saving settings, keys, records, definitions,
+rules, webhooks, pages, tests, imports, deletes) shows a one-shot toast
+naming what changed. It appears once and never reappears on refresh; without
+JavaScript the same message sits as an inline notice.</p>
+<p>Creating a key redirects back to the overview and shows the new raw key
+there once. Reloading the page does not create another key or show the raw
+key again. Revoking a key and deleting saved tests, rate limit rules, webhook
+profiles and pages ask for confirmation in a dialog first; deleting a project
+or a record still needs its ID or key typed, checked by the server.</p>
+<p><strong>All projects</strong> keeps a <strong>Use with a coding agent</strong> card with copyable
+commands for connecting Claude Code or another MCP client to <code>sbox-ns mcp</code>
+over SSH, a local <code>.mcp.json</code>, the Claude Code plugin, and the three
+<code>mcp.allow_*</code> switches with what each allows (<a href="/docs/versions/0.5.2/source-13f51a8/server/mcp/">coding agents</a>). Each
+project overview has a copyable first prompt that names the project ID.</p>
+<h2 id="project-settings"><a class="anchor" href="#project-settings" aria-hidden="true" tabindex="-1">#</a>Project settings</h2>
+<p>The overview keeps name, description, <strong>Enabled</strong> and <strong>Require s&amp;box
+authentication</strong> open. The other settings are folded and closed by default.
+Project settings also has an optional colour. It tints the project tile on All projects and defaults to Automatic, which keeps the generated colour. Every project gets a generated tile with its initials, using the chosen colour or a generated one when Automatic is set.</p>
+<h3 id="hosting-profile"><a class="anchor" href="#hosting-profile" aria-hidden="true" tabindex="-1">#</a>Hosting profile</h3>
+<p><strong>How the game is hosted</strong> is <strong>Player-hosted</strong> (a player&#39;s listen server holds
+only the public key), <strong>Dedicated</strong> (your own box holds a secret key) or
+<strong>Hybrid</strong> (both). <strong>Create project</strong> in the dashboard defaults to
+Player-hosted; <code>sbox-ns project create</code> and MCP create projects as <strong>Not set</strong>
+unless you pass <code>--hosting</code>. The profile changes no request behavior. It only
+tells the authority check which findings apply (<a href="/docs/versions/0.5.2/source-13f51a8/server/hosting-models/">hosting models</a>).</p>
+<h3 id="authority-check"><a class="anchor" href="#authority-check" aria-hidden="true" tabindex="-1">#</a>Authority check</h3>
+<p>The project overview has an <strong>Authority check</strong> card listing game data a
+client or untrusted host could still change. It is advisory, runs only when
+you open the page, and never touches the request path:</p>
+<ul>
+<li>a collection with <code>accessMode: public</code> (clients read and write it directly);</li>
+<li>an enabled endpoint that writes or deletes with no <code>condition</code> or <code>assert</code>
+step (this heuristic can flag valid endpoints that validate some other way);</li>
+<li>an endpoint with <code>requiresSecretKey</code> in a Player-hosted project (no trusted
+caller exists to use it);</li>
+<li>a secret API key seen on game routes in the last 200 logged requests of a
+Player-hosted project (a secret cannot be held safely there).</li>
+</ul>
+<p>The same check runs as <code>sbox-ns project authority &lt;projectId&gt; [--json]</code>,
+<code>sbox-ns doctor --project &lt;projectId&gt;</code> and the read-only MCP tool
+<code>project_authority</code>.</p>
+<p>The CLI and MCP output also runs a data check that the dashboard card does not:
+it scans the live records of every defined collection for documents whose only
+field is <code>ops</code>, a list of operation objects. sbox-ns 0.4.0 stored an
+<code>update-ops</code> request as the whole document instead of applying it, which
+replaced the player&#39;s data. Releases after 0.4.0 apply the operations. The
+scan reports each affected collection with a count and sample keys
+(<code>legacy-ops-record</code> in text, <code>legacyOpsRecords</code> in JSON). The replaced data
+is not recoverable from the database: restore a backup taken before the bad
+write, or let the player save again. Records in collections that have no
+definition are not scanned.</p>
+<h3 id="auth-sessions"><a class="anchor" href="#auth-sessions" aria-hidden="true" tabindex="-1">#</a>Auth sessions</h3>
+<p>With <strong>Enable auth sessions</strong>, the game can trade its s&amp;box token for a signed
+session token (<code>/v3/auth-sessions/{projectId}/create</code>). Later calls send the
+session token and skip the s&amp;box check until it expires after <strong>Session TTL</strong>
+seconds. Off by default.</p>
+<h3 id="encrypted-requests"><a class="anchor" href="#encrypted-requests" aria-hidden="true" tabindex="-1">#</a>Encrypted requests</h3>
+<p><strong>Enable encrypted requests</strong> is reported to the client library in the signed
+security config, and the library then encrypts endpoint calls (AES-256-GCM
+with a key derived from the public key, signed with HMAC-SHA256). This server
+decrypts such calls and rejects replays, but still accepts plain calls, so it
+does not make encryption mandatory. It accepts request IDs up to 120 seconds
+old whatever the window setting says; the window value is passed to the client
+library.</p>
+<h3 id="player-key-mode"><a class="anchor" href="#player-key-mode" aria-hidden="true" tabindex="-1">#</a>Player key mode</h3>
+<p>Sets the record key endpoint steps use for the calling player (<code>playerKey</code>).
+<strong>Player</strong> uses the Steam ID. <strong>Player save</strong> uses <code>{steamId}_{saveId}</code> when
+the call input has a <code>saveId</code>, for games with save slots, and the Steam ID
+otherwise.</p>
+<h3 id="legacy-player-projections"><a class="anchor" href="#legacy-player-projections" aria-hidden="true" tabindex="-1">#</a>Legacy player projections</h3>
+<p>A built-in repair and leaderboard projection for endpoint saves into the
+<code>players</code>, <code>skills</code>, <code>kills</code> and <code>leaderboard_global</code> collections. Projects
+that existed before the setting was introduced keep it on; new projects start
+with it off. Leave it off unless your game was built on those collections.</p>
+<h3 id="revision-policy"><a class="anchor" href="#revision-policy" aria-hidden="true" tabindex="-1">#</a>Revision policy</h3>
+<p>These settings are stored with the project and returned to the client library
+and the editor Sync Tool. This server never blocks a request because of them.
+It only answers revision-init with whether the client&#39;s game revision is
+outdated (<a href="/docs/versions/0.5.2/source-13f51a8/start/game-client/#revision-init-handshake">revision handshake</a>). Any
+blocking, banner or popup happens in the client library.</p>
+<h3 id="library-compatibility"><a class="anchor" href="#library-compatibility" aria-hidden="true" tabindex="-1">#</a>Library compatibility</h3>
+<p>Choose <strong>Clients</strong> from the project overview. The local, 90-day client-version
+report shows self-reported library/package and game revisions, requests,
+approximate distinct players and compatibility status. Preview a minimum
+before changing it; saving an explicit minimum requires acknowledgement,
+owner authentication and an antiforgery token, and is audited. Older runtime
+clients that report a library version are blocked only after that opt-in (or a
+narrow advisory-linked block); clients that report none are never blocked, and
+a server update never enables the minimum. Clear the minimum to restore default
+acceptance. Players need a republished game, not a backend update, to receive a
+new library. Pull/Test Live remain available.</p>
+<p>The optional affected-traffic alert threshold uses the existing Discord/SMTP
+channels. Reports are batched once per minute and player counts are approximate,
+not security attestation. See <a href="/docs/versions/0.5.2/source-13f51a8/compat/compatibility/">compatibility.md</a> for the
+limits, statuses, release evidence and deprecation guarantees.</p>
+<h2 id="data-browser"><a class="anchor" href="#data-browser" aria-hidden="true" tabindex="-1">#</a>Data browser</h2>
+<p>On a project page, choose <strong>Browse data</strong>, or open
+<code>/dashboard/projects/{projectId}/data</code>.</p>
+<ul>
+<li><strong>Collections:</strong> every synced collection with its type (per-player or
+global) and live record count. Deleted (tombstoned) player records are not
+counted. Without collections, the page links to the Collections editor and
+to the <a href="/docs/versions/0.5.2/source-13f51a8/start/connect-a-game/#3-configure-the-editor">Sync Tool setup</a>.</li>
+<li><strong>Find player:</strong> enter a Steam ID to list that player&#39;s records in every
+per-player collection: the record whose key is the Steam ID and save slots
+whose key starts with <code>{steamId}_</code> (up to 50 per collection; open the
+collection to see more). <code>?player=</code> takes the same value.</li>
+<li><strong>Records:</strong> sorted by key, 50 per page by default (<code>?size=</code> accepts 1–200).
+Each row shows version, last change, size and a short preview. <strong>Key starts
+with</strong> (<code>?q=</code>, up to 256 characters) lists keys that begin with the text;
+keys are case-sensitive. An empty collection offers <strong>Create record</strong> and a
+link to endpoint tests.</li>
+<li><strong>Record detail:</strong> pretty-printed JSON in an editable payload form. Records
+of a player (key is a Steam ID, or starts with <code>{steamId}_</code>) link to
+<strong>Test an endpoint as this player</strong>, which opens Endpoint tests with that
+Steam ID filled in (<code>/tests?steamId=</code>), and to all records of that player.</li>
+<li><strong>Create:</strong> choose <strong>Create record</strong> on a collection. Player keys accept
+1–256 letters, numbers, underscores, hyphens or colons; global record IDs
+accept 1–128 letters, numbers, underscores or hyphens. Global records are
+shared entries, not player records.</li>
+<li><strong>Save:</strong> payloads must be JSON objects within the configured store byte
+limit and match the collection schema (including required fields, types,
+enums, nested objects/arrays and supported size/range constraints). Unsupported
+schema modifiers fail closed with an explicit error rather than being ignored.</li>
+<li><strong>Download:</strong> <code>…/data/{collectionId}/export</code> returns the whole collection as
+JSON. The file contains <code>format = &quot;sbox-ns.collection-export&quot;</code>, the
+collection type, and each record&#39;s key, version, change time and payload.</li>
+</ul>
+<p>The browser reads through the storage contract, so it behaves the same on
+SQLite and PostgreSQL. Counts and pages are queried from the database, so
+large collections are not loaded into memory; only <strong>Download</strong> reads the
+whole collection.</p>
+<p>All mutations require the owner session and an antiforgery token. Edit and
+delete forms carry the version and a protected snapshot of the original payload
+and change time. The database compares this state and changes the record
+atomically, including when game writers reuse a version number. A stale form
+receives HTTP 409 and cannot overwrite or delete changed content. Create uses
+an atomic missing-record check, so two create forms cannot overwrite one
+another. Player tombstones can be recreated; owner saves increment the row&#39;s
+version without changing the existing game API&#39;s version behavior.</p>
+<p>Validation errors (HTTP 400) and conflicts preserve the entered JSON and key.
+Use <strong>Reload current record</strong> to compare the latest stored value, then reconcile
+your changes before submitting again.</p>
+<p>Deletion additionally needs the exact record key typed as confirmation:</p>
+<ul>
+<li>Per-player records get a deletion tombstone, just like a delete through the
+storage API.</li>
+<li>Global records are removed from the global record table.</li>
+</ul>
+<p>Creates, edits and deletions are written to the project audit log as
+<code>record.create</code>, <code>record.update</code> and <code>record.delete</code>, with the collection, key,
+collection type and expected version.</p>
+<h2 id="authoring-and-runtime-diagnostics"><a class="anchor" href="#authoring-and-runtime-diagnostics" aria-hidden="true" tabindex="-1">#</a>Authoring and runtime diagnostics</h2>
+<p>The project overview links to collection, endpoint, workflow and query
+lists and game values. Each list is a sortable table with one row per
+resource: the name opens a detail page, and <strong>Quick preview</strong> opens the same
+summary in a dialog (or the detail page without JavaScript). The detail page
+has <strong>Overview</strong>, <strong>Edit</strong> and <strong>Code</strong> tabs as server links (<code>?tab=</code>), so
+each tab works without JavaScript. <strong>Overview</strong> shows stored stats and a
+read-only outline with the full source. <strong>Edit</strong> keeps the definition editor
+full width. <strong>Code</strong> keeps the <code>Use from the game</code> guide full width. Game
+values render the detail layout directly, with no list. Old
+<code>.../resources/&lt;kind&gt;?id=&lt;id&gt;</code> links redirect to the detail page, and
+<code>?draft=&lt;id&gt;</code> redirects to <code>.../resources/&lt;kind&gt;/new?draft=&lt;id&gt;</code>.
+Author definitions in YAML; the dashboard stores
+your source text and compiles it with the same compiler as editor sync.
+Raw JSON is still accepted for older edits but is deprecated. Saving preserves
+source metadata and updates only the selected resource, not other definitions.
+Saving redirects to the detail page <strong>Edit</strong> tab of the saved id.
+Saved definitions are available to the runtime immediately. Editor sync can
+overwrite dashboard edits, so reconcile changes with your checked-in YAML
+source. Endpoint expressions use double braces, such as <code>{{steamId}}</code> and
+<code>{{player.level}}</code>.</p>
+<p>The <strong>Edit</strong> tab keeps the definition editor with <strong>Guided editor</strong>, <strong>Raw source</strong> and
+<strong>Examples</strong>. Collections, endpoints, workflows, queries and game values all
+open in <strong>Guided editor</strong>. <strong>Check definition</strong> and <strong>Save live definition</strong>
+stay beside the editor. Changes stay local until you save.</p>
+<p>Guided editor shows the definition as collapsed blocks. Open a block to edit
+its options. Fields use typed controls: dropdowns for fixed choices, on/off
+switches for booleans, and text fields for the rest. Maps and lists nest
+inside blocks. <strong>Expand all</strong> opens every block; <strong>Collapse all</strong> closes them.</p>
+<p>Add buttons open a dialog. Pipeline steps come from a searchable palette
+grouped by purpose: Data, Logic, Values, Random, Flow and Integrations (22
+step types). New steps get a unique id based on the step type. Blocks offer
+<strong>Duplicate</strong> and <strong>Remove</strong>, and fields can be renamed. Reorder with the
+handle: drag it, use the up and down buttons, or press Alt+Up and Alt+Down
+on the handle.</p>
+<p>Guided edits write small targeted changes into the source text. Comments,
+unknown fields, quoting and formatting survive, and large integers keep
+their exact digits. Switching tabs never rewrites the source. <strong>Raw source</strong>
+is the same authoritative text with highlighting. Without JavaScript the raw
+textarea still edits and saves the full source.</p>
+<p>Saving parses the YAML on the server. A value that reads as a number or
+<code>true</code>/<code>false</code> is stored as that type even when it is quoted, so a string value
+such as <code>&quot;200&quot;</code> comes back as the number <code>200</code>. Game values are stored without
+their source text: after a save the editor shows the server&#39;s rendering of the
+stored values, without comments or the original formatting.</p>
+<p>Some sources need Raw. Invalid YAML, several documents, a top-level list or
+scalar, and definitions that carry authoritative <code>sourceText</code> show a notice
+in Guided and leave the source untouched. YAML aliases and anchors also
+route to Raw: alias blocks show an <strong>Edit in Raw</strong> button, and structural
+edits through a shared reference are rejected with a message. Failed edits
+never half-apply.</p>
+<p>The list and detail pages have a <strong>New</strong> button. It asks for an id (letters, numbers,
+underscore or hyphen, 1-128 characters) and opens a pristine
+<code>.../resources/&lt;kind&gt;/new?draft=&lt;id&gt;</code> template with that id. Nothing is published until you save. Leaving with
+unsaved changes still triggers the navigation warning.</p>
+<p>YAML, JSON and C# have local syntax highlighting. Click a source line number
+to select that line, or use <strong>Go to line</strong>. The line-number gutter also
+supports arrow keys, Home and End. <strong>Copy source</strong> copies the full textarea,
+not the highlighted markup. Tab inserts two spaces; Shift+Tab leaves the
+textarea. Ctrl+S / Command+S saves the definition. Unsaved source and
+unapplied block inputs trigger a navigation warning. Review inserted fields
+and expressions before saving.</p>
+<p>Open the <strong>Examples</strong> tab to browse complete definitions grouped by
+category. Each card shows a <strong>Preview source</strong> view and a <strong>Use example</strong>
+button. Replacement asks for confirmation in the shared confirm dialog when
+the editor is not empty. Saving stays a separate action. Review the
+replacement before saving.</p>
+<p>A new collection starts as <code>accessMode: endpoint</code>: game clients reach it only
+through endpoints and queries, and direct document calls answer
+<code>403 ENDPOINT_ONLY</code>. <strong>Game client access</strong> (<code>accessMode: endpoint</code> or
+<code>public</code>) and <strong>Deletes from game clients</strong> (<code>allowRecordDelete</code>) sit with
+the storage kind. See
+<a href="/docs/versions/0.5.2/source-13f51a8/start/connect-a-game/#collection-access-from-game-clients">collection access from game clients</a>.</p>
+<p>A save that fails validation keeps your text and lists each diagnostic as
+<code>Error CODE at path: message</code>, the same wording <strong>Check definition</strong> uses.</p>
+<p><strong>Check definition</strong> validates the current text without saving or executing it.
+It reports server diagnostics, not a guarantee of runtime success. If the text
+changes during a check, check again. A failed request never counts as successful
+validation. Catalog failures offer <strong>Retry examples</strong> while direct editing stays
+available. <strong>Create needed definitions</strong> reports created, existing and failed
+dependencies separately; retrying keeps definitions that already exist.</p>
+<p>Analytics, audit/request logs, errors and usage tabs read stored runtime data.
+Empty panels mean no matching data has been recorded, not synthetic activity.
+The console does not replace every screen or workflow in the managed dashboard:
+it covers project settings and keys, records, collection, endpoint, workflow and
+query definitions, game values, endpoint tests, version history, rate limit
+rules, webhooks and pages.</p>
+<h3 id="use-from-the-game"><a class="anchor" href="#use-from-the-game" aria-hidden="true" tabindex="-1">#</a>Use from the game</h3>
+<p>The detail page <strong>Code</strong> tab shows how to use the open collection, endpoint, workflow, query or game values,
+with a <strong>Copy</strong> button on every block. The card has tabs for copyable C# and a prepared agent prompt.
+Workflows add an endpoint-step tab with the YAML step that runs them.
+Internal endpoints show an endpoint-step tab and an agent prompt instead of
+game code. New drafts get the same card with skeleton values: it says to
+save first and shows no <strong>Test this endpoint</strong> link. The prompt includes the
+current editor source, with unsaved changes. Every block names the live
+project and resource. No block ever contains a secret key.</p>
+<ul>
+<li>Setup: the exact <code>NetworkStorage.Configure( &quot;&lt;projectId&gt;&quot;, &quot;&lt;public key&gt;&quot;, &quot;&lt;base URL&gt;&quot; );</code>
+line, with the oldest enabled public key and the dashboard base URL
+(<code>server.public_url</code>, otherwise the dashboard address). Without an enabled
+public key the card says to create one under API keys. It warns when the
+base URL is loopback-only or plain HTTP.</li>
+<li>Endpoints: <code>await NetworkStorage.CallEndpoint( &quot;&lt;slug&gt;&quot;, new { ... } );</code>
+with the input filled from the endpoint&#39;s <code>input</code> schema (declared defaults,
+otherwise a value of the declared type), followed by the
+<code>TryGetLastEndpointError</code> check. The <code>endpoint_snippet</code> MCP tool returns the
+same code. Links open <strong>Endpoint tests</strong> with the endpoint selected and its
+<strong>Version history</strong>. Secret endpoints say to call them from a dedicated
+server, never from the game client. Internal endpoints never run over HTTP:
+the card shows the calling route (<code>action: run</code>, <code>flow: &lt;slug&gt;</code>) instead of
+game code.</li>
+<li>Collections with <code>accessMode: public</code>: <code>GetDocument</code> and <code>SaveDocument</code> for
+the player&#39;s own document (per-player) or a named record (global), with the
+saved object built from the schema. The card also says when deletes from
+game clients are off. Other collections name an endpoint that reads or
+writes them and show its call, because direct calls answer
+<code>403 ENDPOINT_ONLY</code>. A link opens the collection in the data browser.</li>
+<li>Workflows: game code can never run a workflow directly. The card shows the
+endpoint step that runs it (<code>type: workflow</code>, <code>workflow: &lt;id&gt;</code>, params from
+the workflow&#39;s <code>params</code>), names the endpoints that run it when any do, and
+shows the C# that calls the first one. Links open its <strong>Version history</strong>.</li>
+<li>Queries: <code>await NetworkStorage.RunQuery( &quot;&lt;queryId&gt;&quot; );</code>. The card says
+results are shared between callers for the cache TTL, and that forced fresh
+runs need a secret key. Secret queries say to run them from a dedicated
+server only.</li>
+<li>Game values: <code>await NetworkStorage.GetGameValues();</code>, which reads every
+group and table in one call. The card lists the saved groups and tables and
+says values are read-only from game code.</li>
+<li>Agent prompt: a prepared prompt that names the project ID and resource, and
+tells the agent which <code>sbox-ns</code> MCP tools to use (<code>definition_get</code>,
+<code>endpoint_test</code>, <code>logs_requests</code>, <code>errors_recent</code>, <code>data_records</code>,
+<code>definition_check</code>) before changing anything. Paste it into a session after
+connecting the agent (see <a href="/docs/versions/0.5.2/source-13f51a8/server/mcp/">coding agents</a>).</li>
+</ul>
+<h3 id="pages"><a class="anchor" href="#pages" aria-hidden="true" tabindex="-1">#</a>Pages</h3>
+<p><strong>Pages</strong> publishes markdown or key/value pages that games read without a
+key. An open page shows its absolute public URL, built like the Connect card&#39;s
+base URL (<code>server.public_url</code>, otherwise the dashboard address), and a
+<strong>Fetch it from the game</strong> example. The response is JSON with <code>title</code>,
+<code>updatedAt</code> and <code>markdown</code> (markdown pages) or <code>data</code> (key/value pages).</p>
+<h3 id="request-log-and-errors"><a class="anchor" href="#request-log-and-errors" aria-hidden="true" tabindex="-1">#</a>Request log and errors</h3>
+<p><strong>Logs</strong> lists recent data-plane requests (<code>/v3</code>, <code>/v1</code>, <code>/api/storage</code>,
+<code>/api/network-storage</code>, <code>/pages</code>, <code>/api/pages</code>) with time, method, path,
+status and duration:</p>
+<ul>
+<li>Authenticated requests are listed under their project.</li>
+<li>Rejected requests that never authenticated (status 400 or more, such as a
+wrong API key or failed s&amp;box authentication) are listed under the project
+ID in the URL, but only when that project exists.</li>
+<li>Successful unauthenticated requests (for example <code>/v3/server-info</code>) and
+OPTIONS preflights are not listed.</li>
+</ul>
+<p><strong>Errors</strong> lists errors the server reported for the project: unhandled
+exceptions on a project route, endpoint failures and conflicts, storage
+failures and unconfirmed client saves. Each row shows the error code, message
+and source, plus up to 4,000 characters of the stack trace when there is one.
+Messages and stack traces can contain player data.
+Request-backed errors also show the library version, client context, package
+revision and game revision. Background errors have legacy/unknown context and
+blank revisions; identity is self-reported, not an authentication claim.</p>
+<p>Both tabs explain common statuses and codes (<code>UNAUTHORIZED</code>,
+<code>SBOX_AUTH_FAILED</code>, <code>ENDPOINT_ONLY</code>, <code>RECORD_DELETE_DISABLED</code>, <code>FORBIDDEN</code>
+and others) in a <strong>What it means</strong> column; see
+<a href="/docs/versions/0.5.2/source-13f51a8/start/connect-a-game/#error-codes">error codes</a>.</p>
+<p>To keep the database small, each project records at most 20 successful
+requests, 20 rejected or failed requests and 20 errors per minute. Rows are
+written within a few seconds and deleted after 7 days. For more detail, read
+the server log with <code>sbox-ns logs -f</code>.</p>
+<h2 id="move-one-project"><a class="anchor" href="#move-one-project" aria-hidden="true" tabindex="-1">#</a>Move one project</h2>
+<p>On the project overview, <strong>Download project archive</strong> exports that project&#39;s
+metadata, definitions, records, runtime data and stored API-key material as a
+private <code>.tar.gz</code>. It excludes instance configuration and private secrets,
+including signing keys. On the destination dashboard, upload it under
+<strong>Import a portable project</strong>.</p>
+<p>Import retains the original project ID and assigns its owner membership to the
+destination instance&#39;s owner. An existing project ID is refused rather than
+overwritten. Limits are 64 MiB compressed and 256 MiB expanded. This is
+self-hosted SQLite/PostgreSQL portability, not a managed-host export contract.</p>
+<p>After moving to an independently configured instance:</p>
+<ul>
+<li>Create a new <strong>secret key</strong> for editor sync and dedicated servers. Secret-key
+lookup identifiers depend on the instance&#39;s encryption secret; copied hashes
+alone do not make the old secret key usable on a new instance.</li>
+<li>Point the game client and editor at the destination&#39;s base URL.</li>
+<li>Authenticate player sessions again; instance signing/session secrets are not
+part of the project archive.</li>
+</ul>
+<p>Keep the archive private: it contains player data and public runtime credentials.
+For whole-instance disaster recovery, use <a href="/docs/versions/0.5.2/source-13f51a8/server/export/">server export/import</a>
+with the required configuration/secrets, not a portable project archive.</p>
+<h2 id="themes-and-visual-editing"><a class="anchor" href="#themes-and-visual-editing" aria-hidden="true" tabindex="-1">#</a>Themes and visual editing</h2>
+<p>The theme selector offers System, Dark, Light, Cool dark, Cool light, Mint, Slate
+and Warm. Dark (green) is the default; Light is also green, and the Cool themes are
+the blue Sky palette. System follows your operating system. Your choice is stored
+in this browser only; it does not change other operators&#39; dashboards. All themes
+work without external assets.
+The shared design rules live in <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ee60d4f401034724ee45934d8e6a1acc498e0fc6/docs/ui-guidelines.md">UI guidelines</a>.</p>
+<p>Record payloads and endpoint-test inputs open in <strong>Visual</strong> when they can be
+represented without loss. Edit strings, numbers, booleans, objects and arrays
+without writing JSON, add or remove nested fields, then switch to <strong>Raw JSON</strong>
+or save directly. Unknown fields are kept. Duplicate keys, precision-sensitive
+numbers and definitions with authoritative <code>sourceText</code> stay in raw mode.</p>
+<p>Both modes use the same server-side schema validation, permission checks
+and conflict detection.</p>
+<p>Collection, record, key, activity, client-version, rate-limit and saved-test
+tables have clickable column labels. Click once for ascending order and again
+for descending; the arrow and <code>aria-sort</code> state show the current direction.
+Sorting only reorders displayed rows. Record pagination, database ordering and
+server-side filters remain unchanged. Action/preview columns and ordered
+execution steps are not sortable.</p>
+<h2 id="optional-admin-security"><a class="anchor" href="#optional-admin-security" aria-hidden="true" tabindex="-1">#</a>Optional admin security</h2>
+<p>Open <strong>Admin security</strong> to add a time-based authenticator. On a phone, open
+<strong>Add to authenticator app</strong>: it is an <code>otpauth://totp/</code> link (issuer
+<code>sbox-ns</code>, your owner name, SHA-1, six digits, 30 seconds) that authenticator
+apps open directly. Elsewhere, add the displayed secret manually. Then confirm
+your current password and a six-digit code. Enrollment expires after ten
+minutes. The server does not activate 2FA until confirmation succeeds.</p>
+<p>Save the ten recovery codes offline. Each works once. Enrollment and local
+reset invalidate existing owner sessions. Password reset does not remove 2FA.
+With local server access, recover using <code>sbox-ns admin reset-2fa</code>.
+The authenticator is encrypted with a key kept in the data folder, which an
+export does not include. After a restore on another machine, sign-in says the
+server cannot read your authenticator: use a recovery code, or run
+<code>sbox-ns admin reset-2fa</code> and sign in with your password.
+Shell-issued login links remain a local-operator recovery capability, so
+protect SSH access and the configuration/data directories too.</p>
+<p>Disable the web admin surface with:</p>
+<pre><code class="language-sh">sbox-ns adminpanel disable
+sbox-ns service restart</code></pre>
+<p>This denies login, setup, login links and dashboard requests at the server
+boundary. It does not disable game APIs. Configuration changes take effect
+after restart; <code>sbox-ns adminpanel enable</code> restores access after another restart.
+If running in the foreground, stop and start the process instead.</p>
+<p>Allow only specific admin IPs or CIDR networks:</p>
+<pre><code class="language-sh">sbox-ns config set adminpanel.allowed_ips &quot;192.0.2.10,2001:db8:1234::/48&quot;
+sbox-ns service restart</code></pre>
+<p>Replace those documentation addresses with yours. An empty list allows all
+addresses. The policy uses the trusted connection address, not arbitrary
+forwarding headers. The built-in proxy trust is loopback, one hop. Confirm the
+observed address and your reverse proxy configuration before restricting access,
+especially with a Cloudflare tunnel; keep local recovery access available.</p>
+<p>Turnstile is optional. Create a widget for your exact public admin hostname
+(including your <code>sboxns.com</code> tunnel name when applicable), then configure
+<code>adminpanel.turnstile.enabled</code>, <code>adminpanel.turnstile.sitekey</code>, <code>adminpanel.turnstile.secret</code> and <code>adminpanel.turnstile.hostname</code> as described
+in <a href="/docs/versions/0.5.2/source-13f51a8/server/configuration/">configuration</a>. Keep the secret in a private config file
+or a protected environment variable, not shell history. The server checks
+success, action and hostname with Cloudflare before login/setup/link consumption,
+and denies requests when verification fails or Cloudflare is unavailable.
+Turnstile does not replace 2FA, passwords, rate limits or IP restrictions.</p>
+<h2 id="public-read-only-demo"><a class="anchor" href="#public-read-only-demo" aria-hidden="true" tabindex="-1">#</a>Public read-only demo</h2>
+<p><code>adminpanel.demo_read_only=true</code> is for a dedicated demonstration instance,
+not for making a production database public. It requires SQLite and refuses
+an existing project database without its demo marker. Start with a new, private
+configuration and data directory.</p>
+<p>The instance seeds clearly labeled generated player progress, inventory,
+world state, definitions and diagnostic rows into its real database. Visitors
+can browse anonymously and explore local editor changes. Every HTTP mutation,
+owner login/setup/security/export operation and game execution route is denied
+server-side. Health and server-info remain available. No production credentials
+or player data should ever be copied into this instance.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ee60d4f401034724ee45934d8e6a1acc498e0fc6/docs/admin-panel.md">sbox-cool/sbox-network-storage-server/docs/admin-panel.md</a> at <code>v0.5.2</code> (ee60d4f).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.2 (<code>0.5.2</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/ee60d4f401034724ee45934d8e6a1acc498e0fc6">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.2</code> (<code>ee60d4f</code>). <strong>Library:</strong> 1.1.0 source (13f51a8) (<code>source-13f51a8</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/13f51a81f046b1722a6b747712afebccaa9559b3">sbox-cool/sbox-network-storage</a> at <code>13f51a81f046b1722a6b747712afebccaa9559b3</code> (<code>13f51a8</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.2/source-13f51a8/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.2/source-13f51a8/api/">HTTP API</a><a href="/docs/versions/0.5.2/source-13f51a8/library/api/">C# API</a><a href="/docs/versions/0.5.2/source-13f51a8/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
+</div></footer>
+</body>
+</html>

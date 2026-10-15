@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Library overview | Network Storage docs</title>
+  <meta name="description" content="Install the library, configure credentials and call endpoints from game code.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.2.0/source-13f51a8/library/overview/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Library overview | Network Storage docs">
+  <meta property="og:description" content="Install the library, configure credentials and call endpoints from game code.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.2.0/source-13f51a8/library/overview/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.2.0/source-13f51a8/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.2.0/source-13f51a8/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a><a href="https://demo.sboxns.com">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.2.0 · 1.1.0 source (13f51a8)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/0.5.4/source-13f51a8/library/overview/">0.5.4</option><option value="/docs/versions/0.5.3/source-13f51a8/library/overview/">0.5.3</option><option value="/docs/versions/0.5.2/source-13f51a8/library/overview/">0.5.2</option><option value="/docs/versions/0.5.1/source-13f51a8/library/overview/">0.5.1</option><option value="/docs/versions/0.5.0/source-13f51a8/library/overview/">0.5.0</option><option value="/docs/versions/0.4.0/source-13f51a8/library/overview/">0.4.0</option><option value="/docs/versions/0.3.0/source-13f51a8/library/overview/">0.3.0</option><option value="/docs/versions/0.2.0/source-13f51a8/library/overview/" selected>0.2.0</option><option value="/docs/versions/0.1.0/source-13f51a8/library/overview/">0.1.0</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.2.0/source-13f51a8/library/overview/" selected>1.1.0 source (13f51a8)</option><option value="/docs/versions/0.2.0/source-d369d1b/library/overview/">Legacy source (d369d1b)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/0.5.4/source-13f51a8/library/overview/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-13f51a8/library/overview/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-13f51a8/library/overview/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-13f51a8/library/overview/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-13f51a8/library/overview/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-13f51a8/library/overview/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-13f51a8/library/overview/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-13f51a8/library/overview/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-13f51a8/library/overview/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.2.0/source-13f51a8/library/overview/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.2.0/source-d369d1b/library/overview/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.4/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.2.0/source-13f51a8/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.2.0/source-13f51a8/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.2.0/source-13f51a8/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.2.0/source-13f51a8/library/overview/" aria-current="page">Library overview</a><a href="/docs/versions/0.2.0/source-13f51a8/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.2.0/source-13f51a8/library/examples/">Examples</a><a href="/docs/versions/0.2.0/source-13f51a8/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.2.0/source-13f51a8/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.2.0/source-13f51a8/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.2.0/source-13f51a8/server/configuration/">Configuration</a><a href="/docs/versions/0.2.0/source-13f51a8/server/database/">Databases</a><a href="/docs/versions/0.2.0/source-13f51a8/server/admin-panel/">Owner console</a><a href="/docs/versions/0.2.0/source-13f51a8/server/export/">Export and move projects</a><a href="/docs/versions/0.2.0/source-13f51a8/server/alerting/">Alerting</a><a href="/docs/versions/0.2.0/source-13f51a8/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.2.0/source-13f51a8/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.2.0/source-13f51a8/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.2.0/source-13f51a8/">Docs</a><span aria-hidden="true">/</span><span>Game library</span><span aria-hidden="true">/</span><span aria-current="page">Library overview</span></nav>
+  <article class="prose docs-prose">
+<h1>Library overview</h1>
+<p class="lead">Install the library, configure credentials and call endpoints from game code.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#useful-links">Useful Links</a><a href="#features">Features</a><a href="#installation">Installation</a><a href="#setup">Setup</a><a href="#quick-start">Quick Start</a><a href="#runtime-api-reference">Runtime API Reference</a><a href="#editor-sync-tool">Editor Sync Tool</a><a href="#security">Security</a><a href="#data-source-mode">Data Source Mode</a><a href="#mcp-server-for-ai-agents">MCP Server (for AI Agents)</a><a href="#compatibility-lts">Compatibility (LTS)</a><a href="#license">License</a></nav>
+<p>Client library and editor tools for an open-source s&amp;box game backend.</p>
+<p><strong>Open-source, self-hosted game backend for s&amp;box</strong>: player saves, inventory, purchases, reward logic, and server-side endpoints — for player-hosted/P2P sessions <strong>and</strong> dedicated servers.</p>
+<p>This repo is the <strong>client library + editor Sync Tool</strong> — install via the s&amp;box editor at <a href="https://sbox.game/sboxcool/network-storage">https://sbox.game/sboxcool/network-storage</a>. The backend API is open-source and self-hostable: <a href="https://github.com/sbox-cool/sbox-network-storage-server">https://github.com/sbox-cool/sbox-network-storage-server</a> — start at <a href="https://sboxns.com">sboxns.com</a>, the self-hosting landing site.</p>
+<h2 id="useful-links"><a class="anchor" href="#useful-links" aria-hidden="true" tabindex="-1">#</a>Useful Links</h2>
+<ul>
+<li>Network Storage: <a href="https://sbox.cool/tools/network-storage">https://sbox.cool/tools/network-storage</a></li>
+<li>Documentation &amp; Tutorials: <a href="http://sbox.cool/wiki/network-storage-v3">http://sbox.cool/wiki/network-storage-v3</a></li>
+<li>s&amp;box editor Library: <a href="https://sbox.game/sboxcool/network-storage">https://sbox.game/sboxcool/network-storage</a><ul>
+<li>Search <code>Network Storage by sbox.cool</code> with author name: <code>sboxcool</code></li>
+</ul>
+</li>
+<li>sbox.cool and sboxcool.com are both operated the same group. <code>SboxCool.com</code> is our LTS url, e.g. <code>api.sboxcool.com</code>.</li>
+</ul>
+<h2 id="features"><a class="anchor" href="#features" aria-hidden="true" tabindex="-1">#</a>Features</h2>
+<ul>
+<li><strong>Runtime Client</strong> — Call server endpoints, fetch game values, read/write documents from your game code</li>
+<li><strong>Editor Sync Tool</strong> — Push and pull collections and endpoints between local YAML source files and the sboxcool.com dashboard</li>
+<li><strong>Setup Wizard</strong> — Editor window for entering and validating your API credentials</li>
+<li><strong>Diff Viewer</strong> — Side-by-side comparison of local vs remote data before syncing</li>
+<li><strong>Network Logger</strong> — Ring buffer that captures all API traffic for in-game debug panels</li>
+<li><strong>JSON Helpers</strong> — Extension methods for reading API response payloads</li>
+</ul>
+<h2 id="installation"><a class="anchor" href="#installation" aria-hidden="true" tabindex="-1">#</a>Installation</h2>
+<h3 id="from-sbox-recommended"><a class="anchor" href="#from-sbox-recommended" aria-hidden="true" tabindex="-1">#</a>From s&amp;box (recommended)</h3>
+<p>Install directly from the s&amp;box asset browser:</p>
+<p><strong><a href="https://sbox.game/sboxcool/network-storage">https://sbox.game/sboxcool/network-storage</a></strong></p>
+<p>Or find it in the editor:</p>
+<ol>
+<li>Open the s&amp;box editor</li>
+<li>Go to <strong>Editor &gt; Library Manager</strong></li>
+<li>Search for <strong>&quot;Network Storage&quot;</strong></li>
+<li>Look for the one published by <strong>sboxcool</strong> — do not install from other authors</li>
+<li>Click <strong>Add to Project</strong></li>
+</ol>
+<p>The library appears in your project&#39;s <code>Libraries/</code> folder automatically.</p>
+<h3 id="manual-git-clone"><a class="anchor" href="#manual-git-clone" aria-hidden="true" tabindex="-1">#</a>Manual (git clone)</h3>
+<p>Clone this repo into your project&#39;s <code>Libraries/</code> directory:</p>
+<pre><code>cd &quot;YourProject/Libraries&quot;
+git clone https://github.com/sbox-cool/sbox-network-storage &quot;Network Storage by sboxcool&quot;</code></pre>
+<p>Or add it as a git submodule:</p>
+<pre><code>git submodule add https://github.com/sbox-cool/sbox-network-storage &quot;Libraries/Network Storage by sboxcool&quot;</code></pre>
+<h3 id="updating"><a class="anchor" href="#updating" aria-hidden="true" tabindex="-1">#</a>Updating</h3>
+<p>Use <strong>Library Manager</strong> to update; it replaces the library folder. For a manual install, <code>git pull</code> inside the library folder, or delete the old <code>Libraries/&lt;library folder&gt;</code> completely and install again. <strong>Do not copy new files over an old install</strong>: files moved between versions (for example <code>JsonHelpers.cs</code>, <code>NetLog.cs</code>, <code>NetworkStorageClient.cs</code> now live under <code>Code/Core/</code>) would exist twice and the project fails to compile with duplicate-type errors (CS0121).</p>
+<h3 id="requirements"><a class="anchor" href="#requirements" aria-hidden="true" tabindex="-1">#</a>Requirements</h3>
+<p>Library versions before <code>1.0.309133</code> do not start on s&amp;box editor 26.10 or later (<code>Constructor on type &#39;SyncToolWindow&#39; not found</code>). Update the library.</p>
+<h3 id="library-identity-and-release-process"><a class="anchor" href="#library-identity-and-release-process" aria-hidden="true" tabindex="-1">#</a>Library identity and release process</h3>
+<p><code>NetworkStorage.LibraryVersion</code> is the library SemVer (<code>1.1.0</code>), not the
+s&amp;box package revision in <code>.version</code> or a game&#39;s published revision.
+<code>NetworkStorage.MinServerVersion</code> is <code>0.4.0</code>, the self-hosted baseline;
+it is metadata, not a runtime rejection or a claim of editor certification.
+The existing public <code>PackageVersion</code> property reports the same SemVer.</p>
+<p>Runtime, Sync Tool and Python sync requests send <code>x-ns-library-version</code>.
+Sync Tool and Python additionally send <code>x-ns-client-type: editor</code> and
+<code>x-ns-library-revision</code> when the installed package&#39;s <code>.version</code> contains a
+positive 64-bit revision (<code>1.0.&lt;revision&gt;</code>). A missing/unreadable/malformed
+revision is omitted. The editor reads the standard
+<code>Libraries/sboxcool.network-storage/.version</code> path; a differently named manual
+checkout omits that optional header. Python reads its own library directory.
+Restart the editor after replacing a library, because its package metadata is
+cached for the session.</p>
+<p>Runtime does <strong>not</strong> read the library checkout&#39;s <code>.version</code>: game filesystem
+mounts expose assets, not a reliable library source-directory path. Its
+availability in published bundles has not been verified, so runtime omits the
+package-revision header rather than guessing or reporting the game&#39;s revision.
+No credential, authentication, publish-target or game-revision behavior changes.
+Servers without compatibility metadata continue to work; these headers are
+self-reported diagnostics, not authentication.</p>
+<p>Maintainer release sequence:</p>
+<ol>
+<li>Bump <code>LibraryVersion</code> in <code>Code/Core/NetworkStorageClient.cs</code>; Python reads
+that constant, so there is no second SemVer to update.</li>
+<li>Record exact-source editor/game evidence against both the current server and
+<code>0.4.0</code>, including public/authenticated requests and Sync Tool connect/push.
+Follow <a href="/docs/versions/0.2.0/source-13f51a8/compat/certification/">compatibility certification</a>.</li>
+<li>Tag the tested source <code>vX.Y.Z</code>, then publish on sbox.game.</li>
+<li>Create GitHub Release <code>vX.Y.Z</code> recording the assigned s&amp;box package revision,
+<code>MinServerVersion</code>, included PRs/issues and tested server/engine/provider
+pairings with evidence links.</li>
+<li>Submit the published-library entry and tested evidence to the server&#39;s
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/compat/library-matrix.json"><code>compat/library-matrix.json</code></a>
+(<a href="https://github.com/sbox-cool/sbox-network-storage-server/issues/59">server #59</a>).</li>
+</ol>
+<p>Before releasing <code>1.1.0</code>, retain the last legacy source <code>0532c00</code>
+(package <code>1.0.309133</code>) with a maintainer-created <code>v1.0.309133</code> tag. No tag or
+package publication is implied by this source change. For rollback, replace the
+<strong>whole library folder</strong> with a supported tagged release, then republish the game.</p>
+<p>Tracking: <a href="https://github.com/sbox-cool/sbox-network-storage/issues/7">L1 #7</a>
+↔ <a href="https://github.com/sbox-cool/sbox-network-storage-server/issues/58">server #58</a>.
+<code>pending-sbox-editor-test</code>: interactive Play mode and Sync Tool against the
+version-aware server and released <code>0.4.0</code>; record library source commit/SemVer,
+assigned package revision, server commit/version, engine build, database and
+evidence URLs. Headless-engine/dedicated-server smoke checks alone do not certify
+this pairing or close that gate.</p>
+<h2 id="setup"><a class="anchor" href="#setup" aria-hidden="true" tabindex="-1">#</a>Setup</h2>
+<h3 id="1-create-a-project-on-sboxcoolcom"><a class="anchor" href="#1-create-a-project-on-sboxcoolcom" aria-hidden="true" tabindex="-1">#</a>1. Create a project on sboxcool.com</h3>
+<ol>
+<li>Go to <a href="https://sboxcool.com">sboxcool.com</a> and create a new project</li>
+<li>Note your <strong>Project ID</strong> from the dashboard</li>
+<li>Create API keys:<ul>
+<li><strong>Public key</strong> (<code>sbox_ns_</code> prefix) — used by the game client at runtime</li>
+<li><strong>Secret key</strong> (<code>sbox_sk_</code> prefix) — used by the editor sync tool only, never ships with your game</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-configure-in-the-sbox-editor"><a class="anchor" href="#2-configure-in-the-sbox-editor" aria-hidden="true" tabindex="-1">#</a>2. Configure in the s&amp;box editor</h3>
+<ol>
+<li>Open <strong>Editor &gt; Network Storage &gt; Setup</strong></li>
+<li>Enter your <strong>Project ID</strong>, <strong>Public API Key</strong>, and <strong>Secret Key</strong></li>
+<li>Click <strong>Save Configuration</strong></li>
+<li>Click <strong>Test Connection</strong> to verify</li>
+</ol>
+<p>Your credentials are saved to <code>Editor/Network Storage/.env</code> — this file is in the <code>Editor/</code> directory which s&amp;box excludes from publishing. Your secret key never ships with your game.</p>
+<p>To use a self-hosted server instead of <code>api.sboxcool.com</code>, set <code>baseUrl</code> in <code>Editor/Network Storage/config/public/projectConfig.json</code> (or <code>NetworkStorage.Configure( projectId, publicKey, &quot;https://your-server&quot; )</code> in game code). The Sync Tool window shows the active server (highlighted when it is not <code>api.sboxcool.com</code>) and the last request it sent.</p>
+<h3 id="generated-code"><a class="anchor" href="#generated-code" aria-hidden="true" tabindex="-1">#</a>Generated code</h3>
+<p>After a sync or pull the Sync Tool writes into <strong>your project</strong>: <code>Code/Data/NetworkStorage/</code> (<code>Readme.txt</code> plus <code>autoGenerated_Config.cs</code>, <code>_Collections.cs</code>, <code>_Endpoints.cs</code>, <code>_Workflows.cs</code>) and <code>Assets/network-storage.credentials.json</code> (project ID, <strong>public</strong> key, base URL, API version, auth/encryption flags; never the secret key). The <code>autoGenerated_*.cs</code> files are deleted and regenerated every time: do not edit them. Because <code>credentials.json</code> ships with the game, point <code>baseUrl</code> at the server you want players to use before publishing.</p>
+<h3 id="dedicated-server-endpoint-secret-optional"><a class="anchor" href="#dedicated-server-endpoint-secret-optional" aria-hidden="true" tabindex="-1">#</a>Dedicated server endpoint secret (optional)</h3>
+<p>Dedicated servers can supply a runtime endpoint secret without putting it in the published bundle:</p>
+<pre><code class="language-bash">sbox-server.exe +game your.org.game your.map +hostname &quot;My Server&quot; +network_storage_secret_key sbox_sk_your_secret_key</code></pre>
+<p>The primary dedicated launch key is <code>+network_storage_secret_key</code>. The library also accepts aliases (<code>+network-storage-secret-key</code>, <code>+sboxcool_secret_key</code>, <code>+networkStorageSecretKey</code>, <code>+sboxcoolSecretKey</code>, <code>+nsSecretKey</code>, <code>+ns_secret_key</code>) on <code>Application.IsDedicatedServer</code> hosts, and validates the supplied key at game startup. Generic names such as <code>+secret-key</code>, <code>+secret_key</code>, and <code>+secretKey</code> are intentionally not supported. When the dedicated key is used, the library does not request or send s&amp;box auth tokens. Endpoint requests use an internal backend flag while the actual launch secret travels in the <code>x-secret-key</code> HTTPS header. Storage document row reads/writes/deletes use the secret as the HTTPS <code>x-api-key</code> header without a URL secret flag so secret keys with <code>collections:execute</code> can access endpoint-only collections. Do not put <code>sbox_sk_</code> values in code, public credentials, or client-callable URLs. Collection schema deletion remains website-only.</p>
+<h2 id="quick-start"><a class="anchor" href="#quick-start" aria-hidden="true" tabindex="-1">#</a>Quick Start</h2>
+<p>Create a config class in your game project:</p>
+<pre><code class="language-csharp">namespace Sandbox;
+
+public static class MyNetStorageConfig
+{
+    public const string ProjectId = &quot;your_project_id&quot;;
+    public const string ApiKey = &quot;sbox_ns_your_public_key&quot;;
+
+    public static void Initialize()
+    {
+        NetworkStorage.Configure( ProjectId, ApiKey );
+    }
+}</code></pre>
+<p>Then call endpoints from your game code:</p>
+<pre><code class="language-csharp">// Configure once at startup
+if ( !NetworkStorage.IsConfigured )
+    MyNetStorageConfig.Initialize();
+
+// Call a server endpoint (GET)
+var player = await NetworkStorage.CallEndpoint( &quot;load-player&quot; );
+
+// Call with input (POST)
+var result = await NetworkStorage.CallEndpoint( &quot;mine-ore&quot;, new
+{
+    ore_id = &quot;iron&quot;,
+    kg = 5.0f
+} );
+
+// Endpoint URLs from the dashboard are also accepted; the slug is extracted.
+var sameResult = await NetworkStorage.CallEndpoint(
+    &quot;https://api.sboxcool.com/v3/endpoints/your_project_id/mine-ore?apiKey=sbox_ns_your_public_key&quot;,
+    new { ore_id = &quot;iron&quot;, kg = 5.0f } );
+
+// Update collection documents directly (dedicated servers attach +network_storage_secret_key automatically)
+await NetworkStorage.SaveDocument( &quot;player-data&quot;, Game.SteamId.ToString(), new { level = 2, xp = 100 } );
+await NetworkStorage.UpdateDocument( &quot;player-data&quot;, Game.SteamId.ToString(),
+    NetworkStorageOperation.Increment( &quot;xp&quot;, 50, source: &quot;server&quot;, reason: &quot;quest&quot; ),
+    NetworkStorageOperation.Set( &quot;lastSeen&quot;, DateTimeOffset.UtcNow.ToUnixTimeSeconds() ) );
+await NetworkStorage.DeleteDocument( &quot;player-data&quot;, Game.SteamId.ToString() );
+
+// Read the response
+if ( result.HasValue )
+{
+    var currency = JsonHelpers.GetInt( result.Value, &quot;currency&quot;, 0 );
+    var level = JsonHelpers.GetInt( result.Value, &quot;level&quot;, 1 );
+}</code></pre>
+<p>See the <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Examples/">Examples/</a> folder for complete working patterns.</p>
+<h2 id="runtime-api-reference"><a class="anchor" href="#runtime-api-reference" aria-hidden="true" tabindex="-1">#</a>Runtime API Reference</h2>
+<h3 id="networkstorage-static"><a class="anchor" href="#networkstorage-static" aria-hidden="true" tabindex="-1">#</a>NetworkStorage (static)</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Configure(projectId, apiKey)</code></td>
+<td>Set credentials. Call once at startup.</td>
+</tr>
+<tr>
+<td><code>CallEndpoint(slugOrUrl, input?)</code></td>
+<td>Call a server endpoint by slug or endpoint URL. Returns <code>JsonElement?</code>.</td>
+</tr>
+<tr>
+<td><code>GetGameValues()</code></td>
+<td>Fetch all game values (constants + tables). Returns <code>JsonElement?</code>.</td>
+</tr>
+<tr>
+<td><code>GetDocument(collectionId, documentId?)</code></td>
+<td>Read a document from a collection. Defaults to current player&#39;s Steam ID.</td>
+</tr>
+<tr>
+<td><code>SaveDocument(collectionId, documentId, data)</code></td>
+<td>Save/replace a collection document. Dedicated servers attach the configured secret key automatically.</td>
+</tr>
+<tr>
+<td><code>UpdateDocument(collectionId, documentId, ops)</code></td>
+<td>Apply server-side operations (<code>set</code>, <code>inc</code>, <code>push</code>, <code>pull</code>, <code>remove</code>) to a document.</td>
+</tr>
+<tr>
+<td><code>DeleteDocument(collectionId, documentId?)</code></td>
+<td>Delete one collection document/row. Public calls require record deletes to be enabled; dedicated secret keys with collection execute permission can delete rows for diagnostics/backoffice cleanup. Does not delete collection schemas.</td>
+</tr>
+<tr>
+<td><code>ListRecords/CreateRecord/RenameRecord/DeleteRecord</code></td>
+<td>Manage multi-record save slots.</td>
+</tr>
+<tr>
+<td><code>NetworkStorageAnalytics.TrackEvent(eventType, payload?)</code></td>
+<td>Report an allowlisted custom Player Analytics event.</td>
+</tr>
+<tr>
+<td><code>NetworkStorageAnalytics.Warning(code, message?, context?)</code></td>
+<td>Report a recoverable warning/pain point to the player timeline.</td>
+</tr>
+<tr>
+<td><code>NetworkStorageAnalytics.Error(exception, code?, context?)</code></td>
+<td>Report an exception/error to the player timeline without breaking gameplay.</td>
+</tr>
+<tr>
+<td><code>NetworkStorageAnalytics.SessionStart/SessionEnd</code></td>
+<td>Report managed session boundaries when analytics is enabled.</td>
+</tr>
+<tr>
+<td><code>IsConfigured</code></td>
+<td><code>true</code> after <code>Configure()</code> has been called.</td>
+</tr>
+<tr>
+<td><code>ApiRoot</code></td>
+<td>The full versioned API URL (e.g. <code>https://api.sboxcool.com/v3</code>).</td>
+</tr>
+</tbody></table>
+<p>See <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/analytics.md">analytics.md</a> for Player Analytics setup, custom events, warnings, and error reporting examples.</p>
+<h3 id="jsonhelpers-static"><a class="anchor" href="#jsonhelpers-static" aria-hidden="true" tabindex="-1">#</a>JsonHelpers (static)</h3>
+<p>Safe extraction from API <code>JsonElement</code> payloads with caller-provided defaults. Handles missing keys and string-to-number coercion.</p>
+<pre><code class="language-csharp">var name = JsonHelpers.GetString( data, &quot;playerName&quot;, &quot;Unknown&quot; );
+var level = JsonHelpers.GetInt( data, &quot;level&quot;, 1 );
+var speed = JsonHelpers.GetFloat( data, &quot;speed&quot;, 1.0f );
+var active = JsonHelpers.GetBool( data, &quot;active&quot;, true );</code></pre>
+<h3 id="extension-methods-on-jsonelement"><a class="anchor" href="#extension-methods-on-jsonelement" aria-hidden="true" tabindex="-1">#</a>Extension Methods (on JsonElement)</h3>
+<p>Shorthand wrappers around JsonHelpers, plus collection parsers:</p>
+<pre><code class="language-csharp">// Shorthand
+var name = data.Str( &quot;playerName&quot;, &quot;Unknown&quot; );
+var level = data.Int( &quot;level&quot;, 1 );
+var speed = data.Float( &quot;speed&quot;, 1.0f );
+
+// Parse arrays
+var upgrades = data.ReadStringList( &quot;purchasedUpgrades&quot; );
+
+// Parse objects
+var ores = data.ReadDictionary( &quot;ores&quot;, v =&gt; (float)v.GetDouble() );
+
+// Parse table rows
+var items = data.ReadList( &quot;rows&quot;, row =&gt; new ItemInfo(
+    row.Str( &quot;id&quot; ), row.Str( &quot;name&quot; ), row.Int( &quot;tier&quot; )
+) );</code></pre>
+<h3 id="savestatetracker"><a class="anchor" href="#savestatetracker" aria-hidden="true" tabindex="-1">#</a>SaveStateTracker</h3>
+<p>Wraps endpoint calls with automatic state management for HUD feedback:</p>
+<pre><code class="language-csharp">var tracker = new SaveStateTracker();
+
+// Simple tracked call
+var result = await tracker.Call( &quot;mine-ore&quot;, new { ore_id = &quot;iron&quot;, kg = 5 } );
+// tracker.State is now Saved or Error
+// tracker.IsBusy is true while any call is in flight
+
+// Optimistic update with auto-revert
+await tracker.CallAndApply( &quot;sell-ore&quot;, input,
+    applyOptimistic: () =&gt; { /* update local state */ },
+    applyServer: (data) =&gt; { /* apply authoritative response */ },
+    revert: () =&gt; { /* undo on failure */ }
+);</code></pre>
+<h3 id="netlog"><a class="anchor" href="#netlog" aria-hidden="true" tabindex="-1">#</a>NetLog</h3>
+<p>Static ring buffer capturing all Network Storage events. Use it for debug panels:</p>
+<pre><code class="language-csharp">// Entries are added automatically by NetworkStorage
+foreach ( var entry in NetLog.Entries )
+{
+    // entry.Time, entry.Kind (Request/Response/Error/Info),
+    // entry.Tag, entry.Message
+}
+
+// Add custom entries
+NetLog.Info( &quot;my-system&quot;, &quot;Custom log message&quot; );
+
+// Track changes (for UI refresh)
+var version = NetLog.Version; // increments on every add/clear</code></pre>
+<h2 id="editor-sync-tool"><a class="anchor" href="#editor-sync-tool" aria-hidden="true" tabindex="-1">#</a>Editor Sync Tool</h2>
+<p>The Sync Tool lets you manage your sboxcool.com project data as local YAML source files, then push/pull changes through the API.
+YAML is the preferred authoring format. Existing legacy JSON resources remain readable and pushable for compatibility; newly created and pulled resources are written as YAML.</p>
+<h3 id="open-the-sync-tool"><a class="anchor" href="#open-the-sync-tool" aria-hidden="true" tabindex="-1">#</a>Open the Sync Tool</h3>
+<p><strong>Editor &gt; Network Storage &gt; Sync Tool</strong></p>
+<h3 id="workflow"><a class="anchor" href="#workflow" aria-hidden="true" tabindex="-1">#</a>Workflow</h3>
+<ol>
+<li><strong>Define new collections, endpoints, workflows, tests, and libraries</strong> as YAML source files in <code>Editor/Network Storage/</code></li>
+<li>Existing JSON resources can still be pushed; migrate them to YAML when convenient to use the current authoring format</li>
+<li>Click <strong>Check for Updates</strong> to compare local files against the remote server</li>
+<li><strong>Push</strong> sends your local changes to sboxcool.com</li>
+<li><strong>Pull</strong> downloads the latest from sboxcool.com to your local files</li>
+<li><strong>View Diff</strong> shows a side-by-side comparison before overwriting</li>
+</ol>
+<h3 id="source-authoring"><a class="anchor" href="#source-authoring" aria-hidden="true" tabindex="-1">#</a>Source Authoring</h3>
+<p>YAML source files use kind-specific names:</p>
+<pre><code class="language-text">collections/&lt;id&gt;.collection.yml
+endpoints/&lt;slug&gt;.endpoint.yml
+workflows/&lt;id&gt;.workflow.yml
+tests/&lt;id&gt;.test.yml
+libraries/&lt;id&gt;.library.yml</code></pre>
+<p><code>.yaml</code> is also accepted, but project documentation and generated examples should prefer <code>.yml</code>. Legacy JSON files are unsupported and are not automatically reverse-converted into YAML.</p>
+<p>Each source file starts with:</p>
+<pre><code class="language-yaml">sourceVersion: 1
+kind: endpoint
+id: mine-ore
+definition:
+  method: POST
+  steps: []</code></pre>
+<p>See <code>source-authoring.md</code>, <code>source-authoring.schema.json</code>, and <code>Examples/SourceAuthoring/</code> for the current source model and examples.</p>
+<p>Validate and preview source files locally:</p>
+<pre><code class="language-powershell">python Libraries/sboxcool.network-storage/Editor/source_compiler.py --project-root .
+python Libraries/sboxcool.network-storage/Editor/sync.py --project-root . --sources --dry-run</code></pre>
+<h3 id="status-indicators"><a class="anchor" href="#status-indicators" aria-hidden="true" tabindex="-1">#</a>Status Indicators</h3>
+<table>
+<thead>
+<tr>
+<th>Icon</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✓</td>
+<td>In sync — local matches remote</td>
+</tr>
+<tr>
+<td>▲</td>
+<td>Local only — exists locally but not on server</td>
+</tr>
+<tr>
+<td>▼</td>
+<td>Remote only — exists on server but not locally</td>
+</tr>
+<tr>
+<td>●</td>
+<td>Differs — local and remote have different content</td>
+</tr>
+</tbody></table>
+<h3 id="data-folder-structure"><a class="anchor" href="#data-folder-structure" aria-hidden="true" tabindex="-1">#</a>Data Folder Structure</h3>
+<pre><code>Editor/
+  Network Storage/              # Configurable in Setup
+    .env                        # Credentials (gitignored, never published)
+    collections/                # YAML source collections
+      player_data.collection.yml
+      game_values.collection.yml
+    endpoints/                  # YAML source endpoints
+      load-player.endpoint.yml
+      mine-ore.endpoint.yml
+      sell-ore.endpoint.yml
+    workflows/
+      check-currency.workflow.yml
+    libraries/
+      economy.library.yml</code></pre>
+<h2 id="security"><a class="anchor" href="#security" aria-hidden="true" tabindex="-1">#</a>Security</h2>
+<ul>
+<li><strong>Secret key</strong> (<code>sbox_sk_</code>) is stored in <code>Editor/Network Storage/.env</code> — the <code>Editor/</code> directory is excluded from s&amp;box publishing, so your secret key never ships with your game</li>
+<li><strong>Public key</strong> (<code>sbox_ns_</code>) is safe to include in your game code — it can only be used with Steam authentication</li>
+<li>The <code>.env</code> file is gitignored by default — never commit it to version control</li>
+<li>See <code>.env.example</code> for the expected format</li>
+</ul>
+<h2 id="data-source-mode"><a class="anchor" href="#data-source-mode" aria-hidden="true" tabindex="-1">#</a>Data Source Mode</h2>
+<p>Network Storage runs in <strong>API Only</strong> mode. Runtime reads and editor sync operations use the API; local JSON files and API fallback modes are unsupported.</p>
+<h2 id="mcp-server-for-ai-agents"><a class="anchor" href="#mcp-server-for-ai-agents" aria-hidden="true" tabindex="-1">#</a>MCP Server (for AI Agents)</h2>
+<p>This repo includes an MCP (Model Context Protocol) server that gives AI coding agents like Claude deep knowledge of the Network Storage system — collections, endpoints, workflows, template syntax, error diagnosis, and more.</p>
+<h3 id="what-it-provides"><a class="anchor" href="#what-it-provides" aria-hidden="true" tabindex="-1">#</a>What It Provides</h3>
+<ul>
+<li><strong>10 tools</strong> — validate source files, scaffold new collections/endpoints/workflows, get documentation, diagnose errors</li>
+<li><strong>8 resources</strong> — all documentation files exposed for contextual reading</li>
+</ul>
+<h3 id="setup-1"><a class="anchor" href="#setup-1" aria-hidden="true" tabindex="-1">#</a>Setup</h3>
+<p>The MCP server requires <a href="https://bun.sh">Bun</a> to be installed.</p>
+<ol>
+<li>The <code>.mcp.json</code> file at the repo root auto-configures Claude Code to use the MCP server</li>
+<li>Dependencies are installed automatically on first launch (<code>bun install</code>)</li>
+<li>Open Claude Code in this repo and the MCP will be available</li>
+</ol>
+<p>To verify it&#39;s working, run <code>/mcp</code> in Claude Code — you should see <code>sbox-network-storage</code> listed.</p>
+<h3 id="manual-setup-other-mcp-clients"><a class="anchor" href="#manual-setup-other-mcp-clients" aria-hidden="true" tabindex="-1">#</a>Manual Setup (other MCP clients)</h3>
+<p>If your MCP client doesn&#39;t auto-discover <code>.mcp.json</code>, add this to your MCP configuration:</p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;sbox-network-storage&quot;: {
+      &quot;command&quot;: &quot;bash&quot;,
+      &quot;args&quot;: [&quot;-c&quot;, &quot;cd mcp &amp;&amp; bun install —silent &amp;&amp; cd .. &amp;&amp; bun run mcp/index.ts&quot;]
+    }
+  }
+}</code></pre>
+<p>Set the working directory to this repository root.</p>
+<h3 id="available-tools"><a class="anchor" href="#available-tools" aria-hidden="true" tabindex="-1">#</a>Available Tools</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>get_documentation</code></td>
+<td>Retrieve docs by topic (collections, endpoints, workflows, setup, errors, etc.)</td>
+</tr>
+<tr>
+<td><code>validate_collection</code></td>
+<td>Validate a collection definition for correct schema and naming</td>
+</tr>
+<tr>
+<td><code>validate_endpoint</code></td>
+<td>Validate an endpoint definition — steps, operators, templates, constraints</td>
+</tr>
+<tr>
+<td><code>validate_workflow</code></td>
+<td>Validate a workflow definition — conditions, onFail config</td>
+</tr>
+<tr>
+<td><code>scaffold_collection</code></td>
+<td>Generate a collection YAML source template</td>
+</tr>
+<tr>
+<td><code>scaffold_endpoint</code></td>
+<td>Generate an endpoint YAML source template</td>
+</tr>
+<tr>
+<td><code>scaffold_workflow</code></td>
+<td>Generate a workflow YAML source template</td>
+</tr>
+<tr>
+<td><code>get_examples</code></td>
+<td>Get examples for common game scenarios (inventory, currency, leaderboard, etc.)</td>
+</tr>
+<tr>
+<td><code>validate_env_config</code></td>
+<td>Validate <code>.env</code> credential file format</td>
+</tr>
+<tr>
+<td><code>diagnose_error</code></td>
+<td>Diagnose s&amp;box console errors and suggest fixes</td>
+</tr>
+</tbody></table>
+<h2 id="compatibility-lts"><a class="anchor" href="#compatibility-lts" aria-hidden="true" tabindex="-1">#</a>Compatibility (LTS)</h2>
+<p>The library and server release independently and both are LTS. Certify each
+library/server/engine/provider pairing once with real evidence; a fundamental
+wire/semantic change invalidates affected certifications and must be re-tested
+before release. Public methods and endpoints are LTS surface: no silent
+rename, removal or narrowing. See
+<a href="/docs/versions/0.2.0/source-13f51a8/compat/certification/">docs/compatibility-certification.md</a>.</p>
+<h2 id="license"><a class="anchor" href="#license" aria-hidden="true" tabindex="-1">#</a>License</h2>
+<p>MIT — see <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/LICENSE">LICENSE</a>.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/README.md">sbox-cool/sbox-network-storage/README.md</a> at <code>13f51a81f046b1722a6b747712afebccaa9559b3</code> (13f51a8).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.2.0 (<code>0.2.0</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/60c23c8260e6e84abf2364b575f4b29deb534a1d">sbox-cool/sbox-network-storage-server</a> at <code>v0.2.0</code> (<code>60c23c8</code>). <strong>Library:</strong> 1.1.0 source (13f51a8) (<code>source-13f51a8</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/13f51a81f046b1722a6b747712afebccaa9559b3">sbox-cool/sbox-network-storage</a> at <code>13f51a81f046b1722a6b747712afebccaa9559b3</code> (<code>13f51a8</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.2.0/source-13f51a8/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.2.0/source-13f51a8/api/">HTTP API</a><a href="/docs/versions/0.2.0/source-13f51a8/library/api/">C# API</a><a href="/docs/versions/0.2.0/source-13f51a8/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
+</div></footer>
+</body>
+</html>

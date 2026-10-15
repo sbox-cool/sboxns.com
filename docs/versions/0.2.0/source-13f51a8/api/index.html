@@ -1,0 +1,2204 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTTP API reference | Network Storage docs</title>
+  <meta name="description" content="Every game-facing route: method, path, headers, bodies and status codes, checked against the HTTP contract tests.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.2.0/source-13f51a8/api/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="HTTP API reference | Network Storage docs">
+  <meta property="og:description" content="Every game-facing route: method, path, headers, bodies and status codes, checked against the HTTP contract tests.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.2.0/source-13f51a8/api/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.2.0/source-13f51a8/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.2.0/source-13f51a8/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a><a href="https://demo.sboxns.com">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.2.0 · 1.1.0 source (13f51a8)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/0.5.4/source-13f51a8/api/">0.5.4</option><option value="/docs/versions/0.5.3/source-13f51a8/api/">0.5.3</option><option value="/docs/versions/0.5.2/source-13f51a8/api/">0.5.2</option><option value="/docs/versions/0.5.1/source-13f51a8/api/">0.5.1</option><option value="/docs/versions/0.5.0/source-13f51a8/api/">0.5.0</option><option value="/docs/versions/0.4.0/source-13f51a8/api/">0.4.0</option><option value="/docs/versions/0.3.0/source-13f51a8/api/">0.3.0</option><option value="/docs/versions/0.2.0/source-13f51a8/api/" selected>0.2.0</option><option value="/docs/versions/0.1.0/source-13f51a8/api/">0.1.0</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.2.0/source-13f51a8/api/" selected>1.1.0 source (13f51a8)</option><option value="/docs/versions/0.2.0/source-d369d1b/api/">Legacy source (d369d1b)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/0.5.4/source-13f51a8/api/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-13f51a8/api/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-13f51a8/api/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-13f51a8/api/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-13f51a8/api/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-13f51a8/api/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-13f51a8/api/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-13f51a8/api/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-13f51a8/api/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.2.0/source-13f51a8/api/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.2.0/source-d369d1b/api/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.4/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.2.0/source-13f51a8/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.2.0/source-13f51a8/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.2.0/source-13f51a8/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.2.0/source-13f51a8/library/overview/">Library overview</a><a href="/docs/versions/0.2.0/source-13f51a8/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.2.0/source-13f51a8/library/examples/">Examples</a><a href="/docs/versions/0.2.0/source-13f51a8/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.2.0/source-13f51a8/api/" aria-current="page">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.2.0/source-13f51a8/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.2.0/source-13f51a8/server/configuration/">Configuration</a><a href="/docs/versions/0.2.0/source-13f51a8/server/database/">Databases</a><a href="/docs/versions/0.2.0/source-13f51a8/server/admin-panel/">Owner console</a><a href="/docs/versions/0.2.0/source-13f51a8/server/export/">Export and move projects</a><a href="/docs/versions/0.2.0/source-13f51a8/server/alerting/">Alerting</a><a href="/docs/versions/0.2.0/source-13f51a8/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.2.0/source-13f51a8/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.2.0/source-13f51a8/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.2.0/source-13f51a8/">Docs</a><span aria-hidden="true">/</span><span>HTTP API</span><span aria-hidden="true">/</span><span aria-current="page">HTTP API reference</span></nav>
+  <article class="prose docs-prose">
+<h1>HTTP API reference</h1>
+<p class="lead">Every game-facing route the server answers, generated from its route definitions and checked against the HTTP contract tests (163 recorded requests). The game library calls these for you; use this page when you write tools, debug traffic or build a client in another language.</p>
+<h2 id="authentication">Authentication</h2>
+<ul>
+<li><strong>Public key</strong> (<code>sbox_ns_...</code>) in <code>x-public-key</code> or the <code>apiKey</code> query parameter: game clients. Ships inside your game.</li>
+<li><strong>Player identity</strong>: <code>x-steam-id</code> plus an s&amp;box auth token in <code>x-sbox-token</code> when the project requires player authentication.</li>
+<li><strong>Secret key</strong> (<code>sbox_sk_...</code>) in <code>x-api-key</code> or <code>x-secret-key</code>: editor sync, dedicated servers and management routes. Never ship it in a game build.</li>
+<li><strong>Client identity headers</strong> such as <code>x-ns-library-version</code> and <code>x-ns-client-type</code> are diagnostics, not authentication. See compatibility.</li>
+</ul>
+<p>Errors use one envelope: <code>{"ok": false, "error": {"code": "...", "message": "..."}}</code>. Paths below use <code>{projectId}</code>-style placeholders; examples use the test variables (<code>${projectId}</code>, <code>${publicKey}</code>).</p>
+<nav class="api-index" aria-label="Route groups"><a href="#v3auth-sessions">Auth sessions</a><a href="#v3endpoints">Server endpoints</a><a href="#v3manage">Management (secret key)</a><a href="#v3queries">Queries</a><a href="#v3security-config">Security config</a><a href="#v3server-info">Server info</a><a href="#v3sessions">Auth sessions (alias)</a><a href="#v3storage">Documents, records and stats</a><a href="#v3values">Game values</a><a href="#health">Health</a><a href="#pages">/pages</a><a href="#apinetwork-storage">/api/network-storage</a><a href="#apipages">/api/pages</a><a href="#apistorage">Legacy storage alias</a><a href="#v1auth-sessions">/v1/auth-sessions</a><a href="#v1endpoints">Legacy v1 endpoints</a><a href="#v1queries">Legacy v1 queries</a><a href="#v1sessions">/v1/sessions</a><a href="#v1storage">Legacy v1 storage</a><a href="#v1values">Legacy v1 game values</a></nav>
+<h2 id="v3auth-sessions">Auth sessions <code class="group">/v3/auth-sessions</code></h2>
+<section class="api-route" id="post-v3auth-sessionsprojectidcreate">
+<h3><span class="method m-post">POST</span><code>/v3/auth-sessions/{projectId}/create</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpointSecurity.cs"><code>Code/Endpoints/NetworkStorageEndpointSecurity.cs EnsureRuntimeAuthSessionAsync</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L55"><code>AuthSessionEndpoints.cs:55</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (auth-sessions / create)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/auth-sessions/${projectId}/create&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;
+  },
+  &quot;body&quot;: {
+    &quot;steamId&quot;: &quot;${steamId}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3auth-sessionsprojectidreauth">
+<h3><span class="method m-post">POST</span><code>/v3/auth-sessions/{projectId}/reauth</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpointSecurity.cs"><code>Code/Endpoints/NetworkStorageEndpointSecurity.cs EnsureRuntimeAuthSessionAsync</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L61"><code>AuthSessionEndpoints.cs:61</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (auth-sessions / reauth)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/auth-sessions/${projectId}/reauth&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-auth-session&quot;: &quot;not-a-session-token&quot;
+  },
+  &quot;body&quot;: {}
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3auth-sessionsprojectidrefresh">
+<h3><span class="method m-post">POST</span><code>/v3/auth-sessions/{projectId}/refresh</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpointSecurity.cs"><code>Code/Endpoints/NetworkStorageEndpointSecurity.cs EnsureRuntimeAuthSessionAsync</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L58"><code>AuthSessionEndpoints.cs:58</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (auth-sessions / refresh-no-token)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/auth-sessions/${projectId}/refresh&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;body&quot;: {}
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3auth-sessionsprojectidrevoke">
+<h3><span class="method m-post">POST</span><code>/v3/auth-sessions/{projectId}/revoke</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpointSecurity.cs"><code>Code/Endpoints/NetworkStorageEndpointSecurity.cs EnsureRuntimeAuthSessionAsync</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L64"><code>AuthSessionEndpoints.cs:64</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (auth-sessions / revoke)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/auth-sessions/${projectId}/revoke&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;body&quot;: {
+    &quot;sessionToken&quot;: &quot;not-a-session-token&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="v3endpoints">Server endpoints <code class="group">/v3/endpoints</code></h2>
+<section class="api-route" id="post-v3endpointsprojectid">
+<h3><span class="method m-post">POST</span><code>/v3/endpoints/{projectId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>400</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpoints.cs"><code>Code/Endpoints/NetworkStorageEndpoints.cs (GET when input is null)</code></a>, <code>docs 18-rest-api-reference</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/EndpointExecutionEndpoints.cs#L40"><code>EndpointExecutionEndpoints.cs:40</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (endpoints-get-and-routing / post-body-slug)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/endpoints/${projectId}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  },
+  &quot;body&quot;: {
+    &quot;endpoint&quot;: &quot;load-profile&quot;,
+    &quot;security&quot;: {
+      &quot;configVersion&quot;: &quot;&quot;,
+      &quot;clientMode&quot;: &quot;legacy&quot;,
+      &quot;authSessions&quot;: &quot;disabled&quot;,
+      &quot;encryptedRequests&quot;: &quot;disabled&quot;,
+      &quot;revisionId&quot;: 0,
+      &quot;revisionOutdated&quot;: false
+    }
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-v3endpointsprojectidendpointslug">
+<h3><span class="method m-get">GET</span><code>/v3/endpoints/{projectId}/{endpointSlug}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>404</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpoints.cs"><code>Code/Endpoints/NetworkStorageEndpoints.cs (GET when input is null)</code></a>, <code>docs 18-rest-api-reference</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L104"><code>NetworkStorageGatewayEndpoints.cs:104</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (endpoints-get-and-routing / get-market)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/endpoints/${projectId}/market-listings&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3endpointsprojectidendpointslug">
+<h3><span class="method m-post">POST</span><code>/v3/endpoints/{projectId}/{endpointSlug}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>400</code> <code>401</code> <code>404</code> <code>409</code> <code>413</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpoints.cs"><code>Code/Endpoints/NetworkStorageEndpoints.cs CallEndpoint</code></a>, <code>NetworkStorageEndpointSecurity.cs body/headers</code><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpoints.cs"><code>Code/Endpoints/NetworkStorageEndpoints.cs (GET when input is null)</code></a>, <code>docs 18-rest-api-reference</code><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Auth/NetworkStorageDedicatedServerSecret.cs"><code>Code/Auth/NetworkStorageDedicatedServerSecret.cs TryAddDedicatedServerSecretHeaders</code></a><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Proxy/NetworkStorageHostProxyClient.cs"><code>Code/Proxy/NetworkStorageHostProxyClient.cs</code></a><br><code>Editor/SyncToolApi.cs</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Core/NetworkStorageHttp.cs"><code>Code/Core/NetworkStorageHttp.cs</code></a><br><code>docs 09-error-codes</code><br><code>docs 13-quotas-and-usage</code><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs EscapeRouteSegment</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/EndpointExecutionEndpoints.cs#L32"><code>EndpointExecutionEndpoints.cs:32</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (endpoints-player-flow / load-empty)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/endpoints/${projectId}/load-profile&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  },
+  &quot;body&quot;: {
+    &quot;security&quot;: {
+      &quot;configVersion&quot;: &quot;&quot;,
+      &quot;clientMode&quot;: &quot;legacy&quot;,
+      &quot;authSessions&quot;: &quot;disabled&quot;,
+      &quot;encryptedRequests&quot;: &quot;disabled&quot;,
+      &quot;revisionId&quot;: 0,
+      &quot;revisionOutdated&quot;: false
+    },
+    &quot;_endpointSlug&quot;: &quot;load-profile&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="v3manage">Management (secret key) <code class="group">/v3/manage</code></h2>
+<section class="api-route" id="get-v3manageprojectidpath">
+<h3><span class="method m-get">GET</span><code>/v3/manage/{projectId}/{**path}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>401</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/SyncToolApi.cs ValidateCredentials</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Auth/NetworkStorageDedicatedServerSecretValidation.cs"><code>Code/Auth/NetworkStorageDedicatedServerSecretValidation.cs</code></a><br><code>dashboard/CI management API (docs 18-rest-api-reference)</code><br><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) PreflightSync/PushSync</code>, <code>Editor/SyncToolSourceFiles.cs payload shape</code><br><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code><br><code>management API (docs 06-rate-limits)</code><br><code>management API (Code/Storage/NetworkStorageQueries.cs consumes them)</code><br><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) SyncPackageInfo/GetGamePackage</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Core/NetworkStorageRevisionInit.cs"><code>Code/Core/NetworkStorageRevisionInit.cs</code></a><br><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) AutoTest/RunTest/GetTests/UpgradeSource/GetSyncJobStatus</code><br><code>Editor/SyncToolApi.cs</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Core/NetworkStorageHttp.cs"><code>Code/Core/NetworkStorageHttp.cs</code></a><br><code>docs 09-error-codes</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L114"><code>NetworkStorageGatewayEndpoints.cs:114</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-validate / validate-both-keys)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/validate&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidpath">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/{**path}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>404</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs EscapeRouteSegment</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L179"><code>NetworkStorageGatewayEndpoints.cs:179</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (errors-invalid-input / manage-unknown-mutation)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/does-not-exist&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {}
+}</code></pre><p>Expected response status <code>404</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidauto-test">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/auto-test</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) AutoTest/RunTest/GetTests/UpgradeSource/GetSyncJobStatus</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L169"><code>NetworkStorageGatewayEndpoints.cs:169</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-tests-and-tools / auto-test-one)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/auto-test&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;,
+    &quot;x-ns-publish-target&quot;: &quot;live&quot;
+  },
+  &quot;body&quot;: {
+    &quot;slug&quot;: &quot;mine-ore&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="patch-v3manageprojectidcollections">
+<h3><span class="method m-patch">PATCH</span><code>/v3/manage/{projectId}/collections</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L125"><code>NetworkStorageGatewayEndpoints.cs:125</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-resource-crud / patch-collection)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PATCH&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/collections&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;id&quot;: &quot;inventory&quot;,
+    &quot;name&quot;: &quot;inventory&quot;,
+    &quot;description&quot;: &quot;Per-player item stacks.&quot;,
+    &quot;collectionType&quot;: &quot;per-steamid&quot;,
+    &quot;accessMode&quot;: &quot;public&quot;,
+    &quot;maxRecords&quot;: 1,
+    &quot;allowRecordDelete&quot;: false,
+    &quot;requireSaveVersion&quot;: false,
+    &quot;rateLimitAction&quot;: &quot;reject&quot;,
+    &quot;rateLimits&quot;: {
+      &quot;mode&quot;: &quot;none&quot;
+    },
+    &quot;schema&quot;: {
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;array&quot;,
+        &quot;default&quot;: [],
+        &quot;items&quot;: {
+          &quot;type&quot;: &quot;object&quot;
+        }
+      }
+    }
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidcollections">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/collections</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L123"><code>NetworkStorageGatewayEndpoints.cs:123</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="put-v3manageprojectidcollections">
+<h3><span class="method m-put">PUT</span><code>/v3/manage/{projectId}/collections</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>400</code> <code>401</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code><br><code>Editor/SyncToolApi.cs</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Core/NetworkStorageHttp.cs"><code>Code/Core/NetworkStorageHttp.cs</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L124"><code>NetworkStorageGatewayEndpoints.cs:124</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-resource-crud / put-collections)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PUT&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/collections&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: [
+    {
+      &quot;id&quot;: &quot;inventory&quot;,
+      &quot;name&quot;: &quot;inventory&quot;,
+      &quot;description&quot;: &quot;Per-player item stacks.&quot;,
+      &quot;collectionType&quot;: &quot;per-steamid&quot;,
+      &quot;accessMode&quot;: &quot;public&quot;,
+      &quot;maxRecords&quot;: 1,
+      &quot;allowRecordDelete&quot;: false,
+      &quot;requireSaveVersion&quot;: false,
+      &quot;rateLimitAction&quot;: &quot;reject&quot;,
+      &quot;rateLimits&quot;: {
+        &quot;mode&quot;: &quot;none&quot;
+      },
+      &quot;schema&quot;: {
+        &quot;items&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;default&quot;: [],
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;object&quot;
+          }
+        }
+      }
+    }
+  ]
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3manageprojectidcollectionscollectionid">
+<h3><span class="method m-delete">DELETE</span><code>/v3/manage/{projectId}/collections/{collectionId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L126"><code>NetworkStorageGatewayEndpoints.cs:126</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-resource-crud / delete-collection)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;DELETE&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/collections/inventory&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="patch-v3manageprojectidendpoints">
+<h3><span class="method m-patch">PATCH</span><code>/v3/manage/{projectId}/endpoints</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L121"><code>NetworkStorageGatewayEndpoints.cs:121</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-resource-crud / patch-endpoint)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PATCH&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/endpoints&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;id&quot;: &quot;ping&quot;,
+    &quot;slug&quot;: &quot;ping&quot;,
+    &quot;name&quot;: &quot;ping&quot;,
+    &quot;description&quot;: &quot;Health ping endpoint.&quot;,
+    &quot;enabled&quot;: true,
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;input&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {}
+    },
+    &quot;steps&quot;: [],
+    &quot;response&quot;: {
+      &quot;status&quot;: 200,
+      &quot;body&quot;: {
+        &quot;ok&quot;: true,
+        &quot;pong&quot;: true
+      }
+    }
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidendpoints">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/endpoints</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L119"><code>NetworkStorageGatewayEndpoints.cs:119</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="put-v3manageprojectidendpoints">
+<h3><span class="method m-put">PUT</span><code>/v3/manage/{projectId}/endpoints</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>400</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L120"><code>NetworkStorageGatewayEndpoints.cs:120</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-resource-crud / put-endpoints)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PUT&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/endpoints&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: [
+    {
+      &quot;id&quot;: &quot;ping&quot;,
+      &quot;slug&quot;: &quot;ping&quot;,
+      &quot;name&quot;: &quot;ping&quot;,
+      &quot;description&quot;: &quot;Health ping endpoint.&quot;,
+      &quot;enabled&quot;: true,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;input&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {}
+      },
+      &quot;steps&quot;: [],
+      &quot;response&quot;: {
+        &quot;status&quot;: 200,
+        &quot;body&quot;: {
+          &quot;ok&quot;: true,
+          &quot;pong&quot;: true
+        }
+      }
+    }
+  ]
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3manageprojectidendpointsendpointid">
+<h3><span class="method m-delete">DELETE</span><code>/v3/manage/{projectId}/endpoints/{endpointId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L122"><code>NetworkStorageGatewayEndpoints.cs:122</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-resource-crud / delete-endpoint)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;DELETE&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/endpoints/ping&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3manageprojectidgame-values">
+<h3><span class="method m-delete">DELETE</span><code>/v3/manage/{projectId}/game-values</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L133"><code>NetworkStorageGatewayEndpoints.cs:133</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v3manageprojectidgame-values">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/game-values</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L131"><code>NetworkStorageGatewayEndpoints.cs:131</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="put-v3manageprojectidgame-values">
+<h3><span class="method m-put">PUT</span><code>/v3/manage/{projectId}/game-values</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>dashboard/CI management API (docs 18-rest-api-reference)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L132"><code>NetworkStorageGatewayEndpoints.cs:132</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-game-values / put)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PUT&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/game-values&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;items&quot;: [
+      {
+        &quot;id&quot;: &quot;economy&quot;,
+        &quot;type&quot;: &quot;group&quot;,
+        &quot;name&quot;: &quot;Economy&quot;,
+        &quot;description&quot;: &quot;Economy tuning&quot;,
+        &quot;entries&quot;: {
+          &quot;startingGold&quot;: 100,
+          &quot;oreValue&quot;: 3
+        }
+      },
+      {
+        &quot;id&quot;: &quot;upgrades&quot;,
+        &quot;type&quot;: &quot;table&quot;,
+        &quot;name&quot;: &quot;Upgrades&quot;,
+        &quot;columns&quot;: [
+          {
+            &quot;key&quot;: &quot;id&quot;,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;key&quot;: &quot;baseCost&quot;,
+            &quot;type&quot;: &quot;number&quot;
+          },
+          {
+            &quot;key&quot;: &quot;costGrowth&quot;,
+            &quot;type&quot;: &quot;number&quot;
+          }
+        ],
+        &quot;rows&quot;: [
+          {
+            &quot;id&quot;: &quot;pickaxe&quot;,
+            &quot;baseCost&quot;: 10,
+            &quot;costGrowth&quot;: 1.5
+          },
+          {
+            &quot;id&quot;: &quot;drill&quot;,
+            &quot;baseCost&quot;: 250,
+            &quot;costGrowth&quot;: 2
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3manageprojectidkeys">
+<h3><span class="method m-delete">DELETE</span><code>/v3/manage/{projectId}/keys</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L145"><code>NetworkStorageGatewayEndpoints.cs:145</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v3manageprojectidpackage-sync">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/package-sync</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) SyncPackageInfo/GetGamePackage</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Core/NetworkStorageRevisionInit.cs"><code>Code/Core/NetworkStorageRevisionInit.cs</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L154"><code>NetworkStorageGatewayEndpoints.cs:154</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-package-and-revision / package-sync)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/package-sync&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;packageId&quot;: &quot;parity.testgame&quot;,
+    &quot;packageIdent&quot;: &quot;parity.testgame&quot;,
+    &quot;packageTitle&quot;: &quot;Parity Test Game&quot;,
+    &quot;orgIdent&quot;: &quot;parity&quot;,
+    &quot;packageType&quot;: &quot;game&quot;,
+    &quot;runtimeClientType&quot;: &quot;editor&quot;,
+    &quot;isEditorContext&quot;: true,
+    &quot;isPublishedGameBundle&quot;: false,
+    &quot;currentRevisionId&quot;: 41,
+    &quot;latestRevisionId&quot;: 42,
+    &quot;publishStatus&quot;: &quot;published&quot;,
+    &quot;rawPackage&quot;: {},
+    &quot;rawRevision&quot;: {},
+    &quot;rawBundle&quot;: {}
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidqueries">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/queries</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>management API (Code/Storage/NetworkStorageQueries.cs consumes them)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L137"><code>NetworkStorageGatewayEndpoints.cs:137</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-queries / create-leaderboard)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/queries&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: [
+    {
+      &quot;id&quot;: &quot;top_miners&quot;,
+      &quot;name&quot;: &quot;top_miners&quot;,
+      &quot;type&quot;: &quot;leaderboard&quot;,
+      &quot;requiresSecretKey&quot;: false,
+      &quot;sources&quot;: [
+        {
+          &quot;collectionId&quot;: &quot;players&quot;
+        }
+      ],
+      &quot;config&quot;: {
+        &quot;field&quot;: &quot;ores.stone&quot;,
+        &quot;order&quot;: &quot;desc&quot;,
+        &quot;limit&quot;: 10
+      }
+    }
+  ]
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3manageprojectidqueriesqueryid">
+<h3><span class="method m-delete">DELETE</span><code>/v3/manage/{projectId}/queries/{queryId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>management API (Code/Storage/NetworkStorageQueries.cs consumes them)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L138"><code>NetworkStorageGatewayEndpoints.cs:138</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-queries / delete-scratch)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;DELETE&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/queries/scratch_query&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3manageprojectidrate-limit-rules">
+<h3><span class="method m-delete">DELETE</span><code>/v3/manage/{projectId}/rate-limit-rules</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L136"><code>NetworkStorageGatewayEndpoints.cs:136</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v3manageprojectidrate-limit-rules">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/rate-limit-rules</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L134"><code>NetworkStorageGatewayEndpoints.cs:134</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="put-v3manageprojectidrate-limit-rules">
+<h3><span class="method m-put">PUT</span><code>/v3/manage/{projectId}/rate-limit-rules</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>management API (docs 06-rate-limits)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L135"><code>NetworkStorageGatewayEndpoints.cs:135</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-rate-limit-rules / put)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PUT&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/rate-limit-rules&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;rules&quot;: [
+      {
+        &quot;name&quot;: &quot;ore_minute_cap&quot;,
+        &quot;collection&quot;: &quot;players&quot;,
+        &quot;field&quot;: &quot;ores.stone&quot;,
+        &quot;scope&quot;: &quot;per_player&quot;,
+        &quot;window&quot;: &quot;perMinute&quot;,
+        &quot;limit&quot;: 1000,
+        &quot;action&quot;: &quot;reject&quot;
+      },
+      {
+        &quot;name&quot;: &quot;gold_daily_flag&quot;,
+        &quot;collection&quot;: &quot;players&quot;,
+        &quot;field&quot;: &quot;gold&quot;,
+        &quot;scope&quot;: &quot;per_player&quot;,
+        &quot;window&quot;: &quot;perDay&quot;,
+        &quot;limit&quot;: 1000000,
+        &quot;action&quot;: &quot;flag&quot;
+      }
+    ]
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidrevision-init">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/revision-init</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) SyncPackageInfo/GetGamePackage</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Core/NetworkStorageRevisionInit.cs"><code>Code/Core/NetworkStorageRevisionInit.cs</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L173"><code>NetworkStorageGatewayEndpoints.cs:173</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-package-and-revision / revision-init)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/revision-init&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-ns-revision-id&quot;: &quot;42&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  },
+  &quot;body&quot;: {
+    &quot;projectId&quot;: &quot;${projectId}&quot;,
+    &quot;clientType&quot;: &quot;game&quot;,
+    &quot;networkStorageVersion&quot;: &quot;1.0&quot;,
+    &quot;isPublishedGameBundle&quot;: true,
+    &quot;packageIdent&quot;: &quot;parity.testgame&quot;,
+    &quot;revisionId&quot;: 42
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidrun-tests">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/run-tests</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L147"><code>NetworkStorageGatewayEndpoints.cs:147</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="put-v3manageprojectidsettings">
+<h3><span class="method m-put">PUT</span><code>/v3/manage/{projectId}/settings</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L143"><code>NetworkStorageGatewayEndpoints.cs:143</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v3manageprojectidsource-upgrade">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/source-upgrade</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) AutoTest/RunTest/GetTests/UpgradeSource/GetSyncJobStatus</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L146"><code>NetworkStorageGatewayEndpoints.cs:146</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-tests-and-tools / source-upgrade)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/source-upgrade&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;kind&quot;: &quot;endpoint&quot;,
+    &quot;id&quot;: &quot;mine-ore&quot;,
+    &quot;sourceFormat&quot;: &quot;yaml&quot;,
+    &quot;sourcePath&quot;: &quot;mine-ore.endpoint.yml&quot;,
+    &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: mine-ore\nname: Mine Ore\ndescription: Adds ore after validating the amount.\nexposure: public\nmethod: POST\ninput:\n  type: object\n  properties:\n    amount:\n      type: number\n  required: [ amount ]\nsteps:\n  - id: player\n    type: read\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n  - id: positive_amount\n    type: condition\n    check:\n      field: \&quot;{{input.amount}}\&quot;\n      op: \&quot;&gt;\&quot;\n      value: 0\n    routes:\n      false:\n        action: reject\n        status: 400\n        error: INVALID_AMOUNT\n        message: Amount must be positive.\n  - id: apply\n    type: write\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n    ops:\n      - op: inc\n        path: ores.stone\n        value: \&quot;{{input.amount}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n    mined: \&quot;{{input.amount}}\&quot;\n&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidsuggest-tests">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/suggest-tests</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L149"><code>NetworkStorageGatewayEndpoints.cs:149</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="put-v3manageprojectidsync">
+<h3><span class="method m-put">PUT</span><code>/v3/manage/{projectId}/sync</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>400</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) PreflightSync/PushSync</code>, <code>Editor/SyncToolSourceFiles.cs payload shape</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L165"><code>NetworkStorageGatewayEndpoints.cs:165</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-push-all / push)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PUT&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/sync&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;endpoints&quot;: [
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;load-profile&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;load-profile.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: load-profile\nname: Load Profile\ndescription: Return the caller's players record.\nexposure: public\nmethod: POST\ninput:\n  type: object\n  properties: {}\nsteps:\n  - id: profile\n    type: read\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n    profile: \&quot;{{profile}}\&quot;\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;save-profile&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;save-profile.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: save-profile\nname: Save Profile\ndescription: Save non-economic profile state.\nexposure: public\nmethod: POST\ninput:\n  type: object\n  properties:\n    playerName:\n      type: string\n  required: [ playerName ]\nsteps:\n  - id: save\n    type: write\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n    ops:\n      - op: set\n        path: playerName\n        value: \&quot;{{input.playerName}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;mine-ore&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;mine-ore.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: mine-ore\nname: Mine Ore\ndescription: Adds ore after validating the amount.\nexposure: public\nmethod: POST\ninput:\n  type: object\n  properties:\n    amount:\n      type: number\n  required: [ amount ]\nsteps:\n  - id: player\n    type: read\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n  - id: positive_amount\n    type: condition\n    check:\n      field: \&quot;{{input.amount}}\&quot;\n      op: \&quot;&gt;\&quot;\n      value: 0\n    routes:\n      false:\n        action: reject\n        status: 400\n        error: INVALID_AMOUNT\n        message: Amount must be positive.\n  - id: apply\n    type: write\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n    ops:\n      - op: inc\n        path: ores.stone\n        value: \&quot;{{input.amount}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n    mined: \&quot;{{input.amount}}\&quot;\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;buy-upgrade&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;buy-upgrade.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: buy-upgrade\nname: Buy Upgrade\ndescription: Workflow-backed purchase priced from the upgrades game-values table.\nexposure: public\nmethod: POST\ninput:\n  type: object\n  properties:\n    upgradeId:\n      type: string\n  required: [ upgradeId ]\nsteps:\n  - id: player\n    type: read\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n  - id: upgrade\n    type: lookup\n    source: values\n    table: upgrades\n    required: true\n    onMissing:\n      status: 400\n      errorCode: UNKNOWN_UPGRADE\n      message: Unknown upgrade.\n    where:\n      field: id\n      op: ==\n      value: \&quot;{{input.upgradeId}}\&quot;\n  - id: pricing\n    type: workflow\n    workflow: scaled-cost\n    params:\n      baseCost: \&quot;{{upgrade.baseCost}}\&quot;\n      costGrowth: \&quot;{{upgrade.costGrowth}}\&quot;\n      currentValue: \&quot;{{player.level}}\&quot;\n  - id: afford\n    type: workflow\n    workflow: check-currency\n    params:\n      balance: \&quot;{{player.gold}}\&quot;\n      cost: \&quot;{{pricing.cost}}\&quot;\n  - id: charge\n    type: write\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n    ops:\n      - op: inc\n        path: gold\n        value: \&quot;{{pricing.negCost}}\&quot;\n      - op: set\n        path: level\n        value: \&quot;{{pricing.nextValue}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n    cost: \&quot;{{pricing.cost}}\&quot;\n    level: \&quot;{{pricing.nextValue}}\&quot;\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;market-listings&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;market-listings.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: market-listings\nname: Market Listings\ndescription: Static read-only listing endpoint (callable by GET).\nexposure: public\nmethod: GET\nsteps: []\nresponse:\n  status: 200\n  body:\n    ok: true\n    listings: []\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;grant-gold&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;grant-gold.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: grant-gold\nname: Grant Gold\ndescription: Dedicated-server-only reward grant.\nexposure: public\nrequiresSecretKey: true\nmethod: POST\ninput:\n  type: object\n  properties:\n    amount:\n      type: number\n  required: [ amount ]\nsteps:\n  - id: grant\n    type: write\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n    ops:\n      - op: inc\n        path: gold\n        value: \&quot;{{input.amount}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n    granted: \&quot;{{input.amount}}\&quot;\n&quot;
+      }
+    ],
+    &quot;collections&quot;: [
+      {
+        &quot;kind&quot;: &quot;collection&quot;,
+        &quot;id&quot;: &quot;players&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;players.collection.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: collection\nid: players\nname: players\ndescription: Per-player profile and economy state.\ndefinition:\n  collectionType: per-steamid\n  accessMode: public\n  maxRecords: 1\n  allowRecordDelete: true\n  requireSaveVersion: false\n  rateLimitAction: reject\n  rateLimits:\n    mode: none\n  schema:\n    playerName:\n      type: string\n      default: \&quot;\&quot;\n    gold:\n      type: number\n      default: 100\n      _ledger: true\n    level:\n      type: number\n      default: 0\n    ores:\n      type: object\n      default:\n        stone: 0\n      properties:\n        stone:\n          type: number\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;collection&quot;,
+        &quot;id&quot;: &quot;save_slots&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;save_slots.collection.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: collection\nid: save_slots\nname: save_slots\ndescription: Up to three save files per player.\ndefinition:\n  collectionType: per-steamid\n  accessMode: public\n  maxRecords: 3\n  allowRecordDelete: true\n  schema:\n    slotName:\n      type: string\n      default: \&quot;\&quot;\n    playtimeSeconds:\n      type: number\n      default: 0\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;collection&quot;,
+        &quot;id&quot;: &quot;leaderboard_global&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;leaderboard_global.collection.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: collection\nid: leaderboard_global\nname: leaderboard_global\ndescription: Shared append-only run log.\ndefinition:\n  collectionType: global\n  accessMode: public\n  allowRecordDelete: false\n  schema:\n    score:\n      type: number\n    playerName:\n      type: string\n&quot;
+      }
+    ],
+    &quot;workflows&quot;: [
+      {
+        &quot;kind&quot;: &quot;workflow&quot;,
+        &quot;id&quot;: &quot;scaled-cost&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;scaled-cost.workflow.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: workflow\nid: scaled-cost\nname: Scaled Cost\ndescription: Compute an exponential purchase cost for the next level.\ndefinition:\n  params:\n    baseCost:\n      type: number\n    costGrowth:\n      type: number\n    currentValue:\n      type: number\n  steps:\n    - id: current_value\n      type: transform\n      expression: \&quot;max(0, {{currentValue}})\&quot;\n    - id: cost\n      type: transform\n      expression: \&quot;ceil({{baseCost}} * pow({{costGrowth}}, {{current_value}}))\&quot;\n    - id: neg_cost\n      type: transform\n      expression: \&quot;0 - {{cost}}\&quot;\n    - id: next_value\n      type: transform\n      expression: \&quot;{{current_value}} + 1\&quot;\n  returns:\n    cost: \&quot;{{cost}}\&quot;\n    negCost: \&quot;{{neg_cost}}\&quot;\n    nextValue: \&quot;{{next_value}}\&quot;\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;workflow&quot;,
+        &quot;id&quot;: &quot;check-currency&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;check-currency.workflow.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: workflow\nid: check-currency\nname: Check Currency\ndescription: Validate that a player has enough currency for a cost.\ndefinition:\n  params:\n    balance:\n      type: number\n    cost:\n      type: number\n  steps:\n    - id: has_currency\n      type: condition\n      check:\n        field: \&quot;{{balance}}\&quot;\n        op: \&quot;&gt;=\&quot;\n        value: \&quot;{{cost}}\&quot;\n      onFail:\n        status: 409\n        error: INSUFFICIENT_CURRENCY\n        message: Not enough currency.\n  returns:\n    ok: true\n&quot;
+      }
+    ]
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidsyncpreflight">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/sync/preflight</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>400</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) PreflightSync/PushSync</code>, <code>Editor/SyncToolSourceFiles.cs payload shape</code><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs EscapeRouteSegment</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L164"><code>NetworkStorageGatewayEndpoints.cs:164</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-push-all / preflight)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/sync/preflight&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;endpoints&quot;: [
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;load-profile&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;load-profile.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: load-profile\nname: Load Profile\ndescription: Return the caller's players record.\nexposure: public\nmethod: POST\ninput:\n  type: object\n  properties: {}\nsteps:\n  - id: profile\n    type: read\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n    profile: \&quot;{{profile}}\&quot;\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;save-profile&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;save-profile.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: save-profile\nname: Save Profile\ndescription: Save non-economic profile state.\nexposure: public\nmethod: POST\ninput:\n  type: object\n  properties:\n    playerName:\n      type: string\n  required: [ playerName ]\nsteps:\n  - id: save\n    type: write\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n    ops:\n      - op: set\n        path: playerName\n        value: \&quot;{{input.playerName}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;mine-ore&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;mine-ore.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: mine-ore\nname: Mine Ore\ndescription: Adds ore after validating the amount.\nexposure: public\nmethod: POST\ninput:\n  type: object\n  properties:\n    amount:\n      type: number\n  required: [ amount ]\nsteps:\n  - id: player\n    type: read\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n  - id: positive_amount\n    type: condition\n    check:\n      field: \&quot;{{input.amount}}\&quot;\n      op: \&quot;&gt;\&quot;\n      value: 0\n    routes:\n      false:\n        action: reject\n        status: 400\n        error: INVALID_AMOUNT\n        message: Amount must be positive.\n  - id: apply\n    type: write\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n    ops:\n      - op: inc\n        path: ores.stone\n        value: \&quot;{{input.amount}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n    mined: \&quot;{{input.amount}}\&quot;\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;buy-upgrade&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;buy-upgrade.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: buy-upgrade\nname: Buy Upgrade\ndescription: Workflow-backed purchase priced from the upgrades game-values table.\nexposure: public\nmethod: POST\ninput:\n  type: object\n  properties:\n    upgradeId:\n      type: string\n  required: [ upgradeId ]\nsteps:\n  - id: player\n    type: read\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n  - id: upgrade\n    type: lookup\n    source: values\n    table: upgrades\n    required: true\n    onMissing:\n      status: 400\n      errorCode: UNKNOWN_UPGRADE\n      message: Unknown upgrade.\n    where:\n      field: id\n      op: ==\n      value: \&quot;{{input.upgradeId}}\&quot;\n  - id: pricing\n    type: workflow\n    workflow: scaled-cost\n    params:\n      baseCost: \&quot;{{upgrade.baseCost}}\&quot;\n      costGrowth: \&quot;{{upgrade.costGrowth}}\&quot;\n      currentValue: \&quot;{{player.level}}\&quot;\n  - id: afford\n    type: workflow\n    workflow: check-currency\n    params:\n      balance: \&quot;{{player.gold}}\&quot;\n      cost: \&quot;{{pricing.cost}}\&quot;\n  - id: charge\n    type: write\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n    ops:\n      - op: inc\n        path: gold\n        value: \&quot;{{pricing.negCost}}\&quot;\n      - op: set\n        path: level\n        value: \&quot;{{pricing.nextValue}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n    cost: \&quot;{{pricing.cost}}\&quot;\n    level: \&quot;{{pricing.nextValue}}\&quot;\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;market-listings&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;market-listings.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: market-listings\nname: Market Listings\ndescription: Static read-only listing endpoint (callable by GET).\nexposure: public\nmethod: GET\nsteps: []\nresponse:\n  status: 200\n  body:\n    ok: true\n    listings: []\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;endpoint&quot;,
+        &quot;id&quot;: &quot;grant-gold&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;grant-gold.endpoint.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: endpoint\nid: grant-gold\nname: Grant Gold\ndescription: Dedicated-server-only reward grant.\nexposure: public\nrequiresSecretKey: true\nmethod: POST\ninput:\n  type: object\n  properties:\n    amount:\n      type: number\n  required: [ amount ]\nsteps:\n  - id: grant\n    type: write\n    collection: players\n    key: \&quot;{{steamId}}\&quot;\n    ops:\n      - op: inc\n        path: gold\n        value: \&quot;{{input.amount}}\&quot;\nresponse:\n  status: 200\n  body:\n    ok: true\n    granted: \&quot;{{input.amount}}\&quot;\n&quot;
+      }
+    ],
+    &quot;collections&quot;: [
+      {
+        &quot;kind&quot;: &quot;collection&quot;,
+        &quot;id&quot;: &quot;players&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;players.collection.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: collection\nid: players\nname: players\ndescription: Per-player profile and economy state.\ndefinition:\n  collectionType: per-steamid\n  accessMode: public\n  maxRecords: 1\n  allowRecordDelete: true\n  requireSaveVersion: false\n  rateLimitAction: reject\n  rateLimits:\n    mode: none\n  schema:\n    playerName:\n      type: string\n      default: \&quot;\&quot;\n    gold:\n      type: number\n      default: 100\n      _ledger: true\n    level:\n      type: number\n      default: 0\n    ores:\n      type: object\n      default:\n        stone: 0\n      properties:\n        stone:\n          type: number\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;collection&quot;,
+        &quot;id&quot;: &quot;save_slots&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;save_slots.collection.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: collection\nid: save_slots\nname: save_slots\ndescription: Up to three save files per player.\ndefinition:\n  collectionType: per-steamid\n  accessMode: public\n  maxRecords: 3\n  allowRecordDelete: true\n  schema:\n    slotName:\n      type: string\n      default: \&quot;\&quot;\n    playtimeSeconds:\n      type: number\n      default: 0\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;collection&quot;,
+        &quot;id&quot;: &quot;leaderboard_global&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;leaderboard_global.collection.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: collection\nid: leaderboard_global\nname: leaderboard_global\ndescription: Shared append-only run log.\ndefinition:\n  collectionType: global\n  accessMode: public\n  allowRecordDelete: false\n  schema:\n    score:\n      type: number\n    playerName:\n      type: string\n&quot;
+      }
+    ],
+    &quot;workflows&quot;: [
+      {
+        &quot;kind&quot;: &quot;workflow&quot;,
+        &quot;id&quot;: &quot;scaled-cost&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;scaled-cost.workflow.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: workflow\nid: scaled-cost\nname: Scaled Cost\ndescription: Compute an exponential purchase cost for the next level.\ndefinition:\n  params:\n    baseCost:\n      type: number\n    costGrowth:\n      type: number\n    currentValue:\n      type: number\n  steps:\n    - id: current_value\n      type: transform\n      expression: \&quot;max(0, {{currentValue}})\&quot;\n    - id: cost\n      type: transform\n      expression: \&quot;ceil({{baseCost}} * pow({{costGrowth}}, {{current_value}}))\&quot;\n    - id: neg_cost\n      type: transform\n      expression: \&quot;0 - {{cost}}\&quot;\n    - id: next_value\n      type: transform\n      expression: \&quot;{{current_value}} + 1\&quot;\n  returns:\n    cost: \&quot;{{cost}}\&quot;\n    negCost: \&quot;{{neg_cost}}\&quot;\n    nextValue: \&quot;{{next_value}}\&quot;\n&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;workflow&quot;,
+        &quot;id&quot;: &quot;check-currency&quot;,
+        &quot;authoringMode&quot;: &quot;source&quot;,
+        &quot;sourceFormat&quot;: &quot;yaml&quot;,
+        &quot;sourcePath&quot;: &quot;check-currency.workflow.yml&quot;,
+        &quot;sourceText&quot;: &quot;sourceVersion: 1\nkind: workflow\nid: check-currency\nname: Check Currency\ndescription: Validate that a player has enough currency for a cost.\ndefinition:\n  params:\n    balance:\n      type: number\n    cost:\n      type: number\n  steps:\n    - id: has_currency\n      type: condition\n      check:\n        field: \&quot;{{balance}}\&quot;\n        op: \&quot;&gt;=\&quot;\n        value: \&quot;{{cost}}\&quot;\n      onFail:\n        status: 409\n        error: INSUFFICIENT_CURRENCY\n        message: Not enough currency.\n  returns:\n    ok: true\n&quot;
+      }
+    ]
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidtest-endpoint">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/test-endpoint</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L148"><code>NetworkStorageGatewayEndpoints.cs:148</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="put-v3manageprojectidtests">
+<h3><span class="method m-put">PUT</span><code>/v3/manage/{projectId}/tests</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/SyncToolApi.cs (Request: x-api-key secret + x-public-key) AutoTest/RunTest/GetTests/UpgradeSource/GetSyncJobStatus</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L144"><code>NetworkStorageGatewayEndpoints.cs:144</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-tests-and-tools / put-tests)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PUT&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/tests&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: [
+    {
+      &quot;id&quot;: &quot;mine-ore-success&quot;,
+      &quot;endpoint&quot;: &quot;mine-ore&quot;,
+      &quot;input&quot;: {
+        &quot;amount&quot;: 3
+      },
+      &quot;expect&quot;: {
+        &quot;status&quot;: 200
+      }
+    }
+  ]
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="patch-v3manageprojectidworkflows">
+<h3><span class="method m-patch">PATCH</span><code>/v3/manage/{projectId}/workflows</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L129"><code>NetworkStorageGatewayEndpoints.cs:129</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-resource-crud / patch-workflow)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PATCH&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/workflows&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;id&quot;: &quot;is-positive&quot;,
+    &quot;name&quot;: &quot;Is Positive&quot;,
+    &quot;builtIn&quot;: false,
+    &quot;description&quot;: &quot;Reject when a computed value is zero or negative.&quot;,
+    &quot;condition&quot;: {
+      &quot;field&quot;: &quot;{{value}}&quot;,
+      &quot;op&quot;: &quot;&gt;&quot;,
+      &quot;value&quot;: 0
+    },
+    &quot;onFail&quot;: {
+      &quot;errorCode&quot;: &quot;NO_VALUE&quot;,
+      &quot;errorMessage&quot;: &quot;Value must be positive.&quot;,
+      &quot;status&quot;: 400
+    },
+    &quot;params&quot;: {},
+    &quot;requires&quot;: {
+      &quot;value&quot;: {
+        &quot;description&quot;: &quot;Value to validate.&quot;
+      }
+    },
+    &quot;returns&quot;: {},
+    &quot;steps&quot;: []
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3manageprojectidworkflows">
+<h3><span class="method m-post">POST</span><code>/v3/manage/{projectId}/workflows</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L127"><code>NetworkStorageGatewayEndpoints.cs:127</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="put-v3manageprojectidworkflows">
+<h3><span class="method m-put">PUT</span><code>/v3/manage/{projectId}/workflows</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L128"><code>NetworkStorageGatewayEndpoints.cs:128</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-resource-crud / put-workflows)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PUT&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/workflows&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: [
+    {
+      &quot;id&quot;: &quot;is-positive&quot;,
+      &quot;name&quot;: &quot;Is Positive&quot;,
+      &quot;builtIn&quot;: false,
+      &quot;description&quot;: &quot;Reject when a computed value is zero or negative.&quot;,
+      &quot;condition&quot;: {
+        &quot;field&quot;: &quot;{{value}}&quot;,
+        &quot;op&quot;: &quot;&gt;&quot;,
+        &quot;value&quot;: 0
+      },
+      &quot;onFail&quot;: {
+        &quot;errorCode&quot;: &quot;NO_VALUE&quot;,
+        &quot;errorMessage&quot;: &quot;Value must be positive.&quot;,
+        &quot;status&quot;: 400
+      },
+      &quot;params&quot;: {},
+      &quot;requires&quot;: {
+        &quot;value&quot;: {
+          &quot;description&quot;: &quot;Value to validate.&quot;
+        }
+      },
+      &quot;returns&quot;: {},
+      &quot;steps&quot;: []
+    }
+  ]
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3manageprojectidworkflowsworkflowid">
+<h3><span class="method m-delete">DELETE</span><code>/v3/manage/{projectId}/workflows/{workflowId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>Editor/sync.py (api_request: x-api-key secret + x-public-key, JSON body)</code>, <code>Editor/SyncToolApi.cs PatchEndpoint/PatchCollection/PatchWorkflow</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L130"><code>NetworkStorageGatewayEndpoints.cs:130</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (manage-resource-crud / delete-workflow)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;DELETE&quot;,
+  &quot;path&quot;: &quot;/v3/manage/${projectId}/workflows/is-positive&quot;,
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="v3queries">Queries <code class="group">/v3/queries</code></h2>
+<section class="api-route" id="get-v3queriesprojectidqueryid">
+<h3><span class="method m-get">GET</span><code>/v3/queries/{projectId}/{queryId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>401</code> <code>404</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageQueries.cs"><code>Code/Storage/NetworkStorageQueries.cs GetQuery</code></a><br><code>Editor/SyncToolApi.cs</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Core/NetworkStorageHttp.cs"><code>Code/Core/NetworkStorageHttp.cs</code></a><br><code>docs 09-error-codes</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/QueryEndpoints.cs#L44"><code>QueryEndpoints.cs:44</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (queries-run / leaderboard)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/queries/${projectId}/top_miners&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="v3security-config">Security config <code class="group">/v3/security-config</code></h2>
+<section class="api-route" id="get-v3security-configprojectid">
+<h3><span class="method m-get">GET</span><code>/v3/security-config/{projectId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>404</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageRuntimeSecurityConfigLoad.cs"><code>Code/Endpoints/NetworkStorageRuntimeSecurityConfigLoad.cs</code></a><br><code>docs 09-error-codes</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L44"><code>NetworkStorageGatewayEndpoints.cs:44</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (runtime-security-config / security-config)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/security-config/${projectId}&quot;
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="v3server-info">Server info <code class="group">/v3/server-info</code></h2>
+<section class="api-route" id="get-v3server-info">
+<h3><span class="method m-get">GET</span><code>/v3/server-info</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/ServerInfoEndpoints.cs#L17"><code>ServerInfoEndpoints.cs:17</code></a></dd></div>
+</dl>
+
+</section>
+<h2 id="v3sessions">Auth sessions (alias) <code class="group">/v3/sessions</code></h2>
+<section class="api-route" id="post-v3sessionsprojectidcreate">
+<h3><span class="method m-post">POST</span><code>/v3/sessions/{projectId}/create</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L55"><code>AuthSessionEndpoints.cs:55</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v3sessionsprojectidreauth">
+<h3><span class="method m-post">POST</span><code>/v3/sessions/{projectId}/reauth</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L61"><code>AuthSessionEndpoints.cs:61</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v3sessionsprojectidrefresh">
+<h3><span class="method m-post">POST</span><code>/v3/sessions/{projectId}/refresh</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpointSecurity.cs"><code>Code/Endpoints/NetworkStorageEndpointSecurity.cs EnsureRuntimeAuthSessionAsync</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L58"><code>AuthSessionEndpoints.cs:58</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (auth-sessions / sessions-alias)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/sessions/${projectId}/refresh&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-api-key&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;body&quot;: {}
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3sessionsprojectidrevoke">
+<h3><span class="method m-post">POST</span><code>/v3/sessions/{projectId}/revoke</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L64"><code>AuthSessionEndpoints.cs:64</code></a></dd></div>
+</dl>
+
+</section>
+<h2 id="v3storage">Documents, records and stats <code class="group">/v3/storage</code></h2>
+<section class="api-route" id="get-v3storage">
+<h3><span class="method m-get">GET</span><code>/v3/storage</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>404</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs EscapeRouteSegment</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L33"><code>NetworkStorageGatewayEndpoints.cs:33</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (errors-invalid-input / storage-root)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage&quot;
+}</code></pre><p>Expected response status <code>404</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3storageprojectidcollectionidkey">
+<h3><span class="method m-delete">DELETE</span><code>/v3/storage/{projectId}/{collectionId}/{key}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageDocuments.cs"><code>Code/Storage/NetworkStorageDocuments.cs</code></a>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs SendStorageRequest</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L216"><code>NetworkStorageGatewayEndpoints.cs:216</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (documents-player-crud / delete)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;DELETE&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/players/${steamId}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-v3storageprojectidcollectionidkey">
+<h3><span class="method m-get">GET</span><code>/v3/storage/{projectId}/{collectionId}/{key}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>401</code> <code>404</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageDocuments.cs"><code>Code/Storage/NetworkStorageDocuments.cs</code></a>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs SendStorageRequest</code></a><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Auth/NetworkStorageDedicatedServerSecret.cs"><code>Code/Auth/NetworkStorageDedicatedServerSecret.cs TryBuildDedicatedStorageHeaders</code></a><br><code>Editor/SyncToolApi.cs</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Core/NetworkStorageHttp.cs"><code>Code/Core/NetworkStorageHttp.cs</code></a><br><code>docs 09-error-codes</code><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs EscapeRouteSegment</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L210"><code>NetworkStorageGatewayEndpoints.cs:210</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (documents-player-crud / get-existing)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/players/${steamId}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3storageprojectidcollectionidkey">
+<h3><span class="method m-post">POST</span><code>/v3/storage/{projectId}/{collectionId}/{key}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>400</code> <code>413</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpoints.cs"><code>Code/Endpoints/NetworkStorageEndpoints.cs CallEndpoint</code></a>, <code>NetworkStorageEndpointSecurity.cs body/headers</code><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageDocuments.cs"><code>Code/Storage/NetworkStorageDocuments.cs</code></a>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs SendStorageRequest</code></a><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Auth/NetworkStorageDedicatedServerSecret.cs"><code>Code/Auth/NetworkStorageDedicatedServerSecret.cs TryBuildDedicatedStorageHeaders</code></a><br><code>docs 13-quotas-and-usage</code><br><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs EscapeRouteSegment</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L213"><code>NetworkStorageGatewayEndpoints.cs:213</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (endpoints-player-flow / seed-economy)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/players/${steamId}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;,
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  &quot;body&quot;: {
+    &quot;playerName&quot;: &quot;Parity Tester&quot;,
+    &quot;gold&quot;: 100,
+    &quot;level&quot;: 0,
+    &quot;ores&quot;: {
+      &quot;stone&quot;: 0
+    }
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-v3storageprojectidcollectionidkeyprobe">
+<h3><span class="method m-get">GET</span><code>/v3/storage/{projectId}/{collectionId}/{key}/probe</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageDocuments.cs"><code>Code/Storage/NetworkStorageDocuments.cs</code></a>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs SendStorageRequest</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L90"><code>NetworkStorageGatewayEndpoints.cs:90</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (documents-player-crud / probe)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/players/${steamId}/probe&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-v3storageprojectidcollectionidsteamidledger">
+<h3><span class="method m-get">GET</span><code>/v3/storage/{projectId}/{collectionId}/{steamId}/ledger</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (Ledger)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L92"><code>NetworkStorageGatewayEndpoints.cs:92</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (ledger-read / ledger)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/players/${steamId}/ledger&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-v3storageprojectidcollectionidsteamidrecords">
+<h3><span class="method m-get">GET</span><code>/v3/storage/{projectId}/{collectionId}/{steamId}/records</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs ListRecords/CreateRecord/RenameRecord/DeleteRecord</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L67"><code>RecordsEndpoints.cs:67</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (records-save-slots / list-empty)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/save_slots/${steamId}/records&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;,
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3storageprojectidcollectionidsteamidrecords">
+<h3><span class="method m-post">POST</span><code>/v3/storage/{projectId}/{collectionId}/{steamId}/records</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs ListRecords/CreateRecord/RenameRecord/DeleteRecord</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L70"><code>RecordsEndpoints.cs:70</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (records-save-slots / create-named)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/save_slots/${steamId}/records&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;,
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;
+  },
+  &quot;body&quot;: {
+    &quot;recordName&quot;: &quot;Main Save&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3storageprojectidcollectionidsteamidrecordsrecordid">
+<h3><span class="method m-delete">DELETE</span><code>/v3/storage/{projectId}/{collectionId}/{steamId}/records/{recordId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>404</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs ListRecords/CreateRecord/RenameRecord/DeleteRecord</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L73"><code>RecordsEndpoints.cs:73</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (records-save-slots / delete)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;DELETE&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/save_slots/${steamId}/records/${capture.slotB}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;,
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="patch-v3storageprojectidcollectionidsteamidrecordsrecordid">
+<h3><span class="method m-patch">PATCH</span><code>/v3/storage/{projectId}/{collectionId}/{steamId}/records/{recordId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>404</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs ListRecords/CreateRecord/RenameRecord/DeleteRecord</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L76"><code>RecordsEndpoints.cs:76</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (records-save-slots / rename)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;PATCH&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/save_slots/${steamId}/records/${capture.slotA}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;,
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;
+  },
+  &quot;body&quot;: {
+    &quot;recordName&quot;: &quot;Renamed Save&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3storageprojectidcollectionidappend">
+<h3><span class="method m-post">POST</span><code>/v3/storage/{projectId}/{collectionId}/append</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>400</code> <code>403</code> <code>413</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (Global Collections)</code>, <code>02a-collections-http-api</code><br><code>docs 13-quotas-and-usage</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L197"><code>NetworkStorageGatewayEndpoints.cs:197</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (global-append-list / append-first)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/leaderboard_global/append&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-api-key&quot;: &quot;${secretKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;Idempotency-Key&quot;: &quot;parity-run-1&quot;
+  },
+  &quot;body&quot;: {
+    &quot;score&quot;: 1200,
+    &quot;playerName&quot;: &quot;Parity Tester&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-v3storageprojectidcollectionidlist">
+<h3><span class="method m-get">GET</span><code>/v3/storage/{projectId}/{collectionId}/list</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (Global Collections)</code>, <code>02a-collections-http-api</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L94"><code>NetworkStorageGatewayEndpoints.cs:94</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (global-append-list / list)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/leaderboard_global/list&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-v3storageprojectidcollectionidrecordrecordid">
+<h3><span class="method m-get">GET</span><code>/v3/storage/{projectId}/{collectionId}/record/{recordId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>404</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (Global Collections)</code>, <code>02a-collections-http-api</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L97"><code>NetworkStorageGatewayEndpoints.cs:97</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (global-append-list / record)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/leaderboard_global/record/${capture.firstRecord}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3storageprojectidanalyticsevents">
+<h3><span class="method m-post">POST</span><code>/v3/storage/{projectId}/analytics/events</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>400</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Analytics/NetworkStorageAnalytics.cs"><code>Code/Analytics/NetworkStorageAnalytics.cs SendAnalyticsEvent/SendSessionSignal</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L203"><code>NetworkStorageGatewayEndpoints.cs:203</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (analytics-and-heartbeat / analytics-event)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/analytics/events&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  },
+  &quot;body&quot;: {
+    &quot;steamId&quot;: &quot;${steamId}&quot;,
+    &quot;type&quot;: &quot;level_complete&quot;,
+    &quot;severity&quot;: null,
+    &quot;label&quot;: &quot;level_complete&quot;,
+    &quot;message&quot;: null,
+    &quot;stack&quot;: null,
+    &quot;context&quot;: {
+      &quot;level&quot;: 3,
+      &quot;durationSeconds&quot;: 42
+    },
+    &quot;playerName&quot;: &quot;Parity Tester&quot;,
+    &quot;sessionId&quot;: &quot;parity-session-1&quot;,
+    &quot;source&quot;: &quot;network-storage-library&quot;,
+    &quot;libraryVersion&quot;: &quot;1.0.0&quot;,
+    &quot;packageIdent&quot;: &quot;parity.testgame&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-v3storageprojectidrate-limits">
+<h3><span class="method m-get">GET</span><code>/v3/storage/{projectId}/rate-limits</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (GET /v3/storage/{projectId}/rate-limits)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L60"><code>NetworkStorageGatewayEndpoints.cs:60</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (runtime-rate-limits / rate-limits)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/rate-limits&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-v3storageprojectidstatssteamid">
+<h3><span class="method m-get">GET</span><code>/v3/storage/{projectId}/stats/{steamId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Analytics/NetworkStorageAnalytics.cs"><code>Code/Analytics/NetworkStorageAnalytics.cs SendAnalyticsEvent/SendSessionSignal</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L78"><code>NetworkStorageGatewayEndpoints.cs:78</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (analytics-and-heartbeat / stats-read)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/stats/${steamId}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-v3storageprojectidstatsheartbeat">
+<h3><span class="method m-post">POST</span><code>/v3/storage/{projectId}/stats/heartbeat</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Analytics/NetworkStorageAnalytics.cs"><code>Code/Analytics/NetworkStorageAnalytics.cs SendAnalyticsEvent/SendSessionSignal</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L84"><code>NetworkStorageGatewayEndpoints.cs:84</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (analytics-and-heartbeat / heartbeat)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v3/storage/${projectId}/stats/heartbeat&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  },
+  &quot;body&quot;: {
+    &quot;steamId&quot;: &quot;${steamId}&quot;,
+    &quot;sessionId&quot;: &quot;parity-session-1&quot;,
+    &quot;sessionSeconds&quot;: 120,
+    &quot;event&quot;: &quot;heartbeat&quot;,
+    &quot;playerName&quot;: &quot;Parity Tester&quot;,
+    &quot;source&quot;: &quot;network-storage-library&quot;,
+    &quot;libraryVersion&quot;: &quot;1.0.0&quot;,
+    &quot;packageIdent&quot;: &quot;parity.testgame&quot;,
+    &quot;context&quot;: {
+      &quot;map&quot;: &quot;quarry&quot;
+    },
+    &quot;fps&quot;: {
+      &quot;avg&quot;: 60
+    }
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="delete-v3storagedeploy-canarypath">
+<h3><span class="method m-delete">DELETE</span><code>/v3/storage/deploy-canary/{**path}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L24"><code>NetworkStorageGatewayEndpoints.cs:24</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="get-v3storagedeploy-canarypath">
+<h3><span class="method m-get">GET</span><code>/v3/storage/deploy-canary/{**path}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageCollections.cs"><code>Code/Storage/NetworkStorageCollections.cs EscapeRouteSegment</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L24"><code>NetworkStorageGatewayEndpoints.cs:24</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (errors-invalid-input / deploy-canary)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/storage/deploy-canary/ping&quot;
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="head-v3storagedeploy-canarypath">
+<h3><span class="method m-head">HEAD</span><code>/v3/storage/deploy-canary/{**path}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L24"><code>NetworkStorageGatewayEndpoints.cs:24</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="options-v3storagedeploy-canarypath">
+<h3><span class="method m-options">OPTIONS</span><code>/v3/storage/deploy-canary/{**path}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L24"><code>NetworkStorageGatewayEndpoints.cs:24</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="patch-v3storagedeploy-canarypath">
+<h3><span class="method m-patch">PATCH</span><code>/v3/storage/deploy-canary/{**path}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L24"><code>NetworkStorageGatewayEndpoints.cs:24</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v3storagedeploy-canarypath">
+<h3><span class="method m-post">POST</span><code>/v3/storage/deploy-canary/{**path}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L24"><code>NetworkStorageGatewayEndpoints.cs:24</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="put-v3storagedeploy-canarypath">
+<h3><span class="method m-put">PUT</span><code>/v3/storage/deploy-canary/{**path}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L24"><code>NetworkStorageGatewayEndpoints.cs:24</code></a></dd></div>
+</dl>
+
+</section>
+<h2 id="v3values">Game values <code class="group">/v3/values</code></h2>
+<section class="api-route" id="get-v3valuesprojectid">
+<h3><span class="method m-get">GET</span><code>/v3/values/{projectId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>401</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageGameValues.cs"><code>Code/Endpoints/NetworkStorageGameValues.cs GetGameValues</code></a><br><code>Editor/SyncToolApi.cs</code>, <a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Core/NetworkStorageHttp.cs"><code>Code/Core/NetworkStorageHttp.cs</code></a><br><code>docs 09-error-codes</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L51"><code>NetworkStorageGatewayEndpoints.cs:51</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (runtime-values / values)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v3/values/${projectId}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="health">Health <code class="group">/health</code></h2>
+<section class="api-route" id="get-health">
+<h3><span class="method m-get">GET</span><code>/health</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/ServerInfoEndpoints.cs#L43"><code>ServerInfoEndpoints.cs:43</code></a></dd></div>
+</dl>
+
+</section>
+<h2 id="pages">/pages <code class="group">/pages</code></h2>
+<section class="api-route" id="get-pagesprojectidpageslug">
+<h3><span class="method m-get">GET</span><code>/pages/{projectId}/{pageSlug}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>404</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (Pages API)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L70"><code>NetworkStorageGatewayEndpoints.cs:70</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (runtime-pages / page-missing-short)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/pages/${projectId}/news&quot;
+}</code></pre><p>Expected response status <code>404</code>.</p></div></details>
+</section>
+<h2 id="apinetwork-storage">/api/network-storage <code class="group">/api/network-storage</code></h2>
+<section class="api-route" id="post-apinetwork-storageprojectidsave-failure">
+<h3><span class="method m-post">POST</span><code>/api/network-storage/{projectId}/save-failure</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/StorageApiEndpoints.cs#L51"><code>StorageApiEndpoints.cs:51</code></a></dd></div>
+</dl>
+
+</section>
+<h2 id="apipages">/api/pages <code class="group">/api/pages</code></h2>
+<section class="api-route" id="get-apipagesprojectidpageslug">
+<h3><span class="method m-get">GET</span><code>/api/pages/{projectId}/{pageSlug}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>404</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (Pages API)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L73"><code>NetworkStorageGatewayEndpoints.cs:73</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (runtime-pages / page-missing)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/api/pages/${projectId}/news&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>404</code>.</p></div></details>
+</section>
+<h2 id="apistorage">Legacy storage alias <code class="group">/api/storage</code></h2>
+<section class="api-route" id="get-apistorage">
+<h3><span class="method m-get">GET</span><code>/api/storage</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L36"><code>NetworkStorageGatewayEndpoints.cs:36</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="delete-apistorageprojectidcollectionidkey">
+<h3><span class="method m-delete">DELETE</span><code>/api/storage/{projectId}/{collectionId}/{key}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (Deprecated Routes)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/StorageApiEndpoints.cs#L42"><code>StorageApiEndpoints.cs:42</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (documents-v0-alias / delete)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;DELETE&quot;,
+  &quot;path&quot;: &quot;/api/storage/${projectId}/players/v0-key&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-apistorageprojectidcollectionidkey">
+<h3><span class="method m-get">GET</span><code>/api/storage/{projectId}/{collectionId}/{key}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code> <code>404</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (Deprecated Routes)</code><br><code>docs 18-rest-api-reference (Global Collections)</code>, <code>02a-collections-http-api</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/StorageApiEndpoints.cs#L34"><code>StorageApiEndpoints.cs:34</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (documents-v0-alias / get)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/api/storage/${projectId}/players/v0-key&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-apistorageprojectidcollectionidkey">
+<h3><span class="method m-post">POST</span><code>/api/storage/{projectId}/{collectionId}/{key}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (Deprecated Routes)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/StorageApiEndpoints.cs#L38"><code>StorageApiEndpoints.cs:38</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (documents-v0-alias / save)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/api/storage/${projectId}/players/v0-key&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;body&quot;: {
+    &quot;playerName&quot;: &quot;Legacy&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="get-apistorageprojectidcollectionidsteamidrecords">
+<h3><span class="method m-get">GET</span><code>/api/storage/{projectId}/{collectionId}/{steamId}/records</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L82"><code>RecordsEndpoints.cs:82</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-apistorageprojectidcollectionidsteamidrecords">
+<h3><span class="method m-post">POST</span><code>/api/storage/{projectId}/{collectionId}/{steamId}/records</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L85"><code>RecordsEndpoints.cs:85</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="delete-apistorageprojectidcollectionidsteamidrecordsrecordid">
+<h3><span class="method m-delete">DELETE</span><code>/api/storage/{projectId}/{collectionId}/{steamId}/records/{recordId}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L88"><code>RecordsEndpoints.cs:88</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="patch-apistorageprojectidcollectionidsteamidrecordsrecordid">
+<h3><span class="method m-patch">PATCH</span><code>/api/storage/{projectId}/{collectionId}/{steamId}/records/{recordId}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L91"><code>RecordsEndpoints.cs:91</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-apistorageprojectidcollectionidappend">
+<h3><span class="method m-post">POST</span><code>/api/storage/{projectId}/{collectionId}/append</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L200"><code>NetworkStorageGatewayEndpoints.cs:200</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-apistorageprojectidanalyticsevents">
+<h3><span class="method m-post">POST</span><code>/api/storage/{projectId}/analytics/events</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L206"><code>NetworkStorageGatewayEndpoints.cs:206</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="get-apistorageprojectidqueriesqueryid">
+<h3><span class="method m-get">GET</span><code>/api/storage/{projectId}/queries/{queryId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageQueries.cs"><code>Code/Storage/NetworkStorageQueries.cs GetQuery</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/QueryEndpoints.cs#L50"><code>QueryEndpoints.cs:50</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (queries-run / api-storage-alias)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/api/storage/${projectId}/queries/top_miners&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<section class="api-route" id="post-apistorageprojectidstatsheartbeat">
+<h3><span class="method m-post">POST</span><code>/api/storage/{projectId}/stats/heartbeat</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Analytics/NetworkStorageAnalytics.cs"><code>Code/Analytics/NetworkStorageAnalytics.cs SendAnalyticsEvent/SendSessionSignal</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L87"><code>NetworkStorageGatewayEndpoints.cs:87</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (analytics-and-heartbeat / heartbeat-api-alias)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/api/storage/${projectId}/stats/heartbeat&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  },
+  &quot;body&quot;: {
+    &quot;steamId&quot;: &quot;${steamId}&quot;,
+    &quot;sessionId&quot;: &quot;parity-session-1&quot;,
+    &quot;sessionSeconds&quot;: 120,
+    &quot;event&quot;: &quot;heartbeat&quot;,
+    &quot;playerName&quot;: &quot;Parity Tester&quot;,
+    &quot;source&quot;: &quot;network-storage-library&quot;,
+    &quot;libraryVersion&quot;: &quot;1.0.0&quot;,
+    &quot;packageIdent&quot;: &quot;parity.testgame&quot;,
+    &quot;context&quot;: {
+      &quot;map&quot;: &quot;quarry&quot;
+    },
+    &quot;fps&quot;: {
+      &quot;avg&quot;: 60
+    }
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="v1auth-sessions">/v1/auth-sessions <code class="group">/v1/auth-sessions</code></h2>
+<section class="api-route" id="post-v1auth-sessionsprojectidcreate">
+<h3><span class="method m-post">POST</span><code>/v1/auth-sessions/{projectId}/create</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L55"><code>AuthSessionEndpoints.cs:55</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v1auth-sessionsprojectidreauth">
+<h3><span class="method m-post">POST</span><code>/v1/auth-sessions/{projectId}/reauth</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L61"><code>AuthSessionEndpoints.cs:61</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v1auth-sessionsprojectidrefresh">
+<h3><span class="method m-post">POST</span><code>/v1/auth-sessions/{projectId}/refresh</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L58"><code>AuthSessionEndpoints.cs:58</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v1auth-sessionsprojectidrevoke">
+<h3><span class="method m-post">POST</span><code>/v1/auth-sessions/{projectId}/revoke</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L64"><code>AuthSessionEndpoints.cs:64</code></a></dd></div>
+</dl>
+
+</section>
+<h2 id="v1endpoints">Legacy v1 endpoints <code class="group">/v1/endpoints</code></h2>
+<section class="api-route" id="post-v1endpointsprojectid">
+<h3><span class="method m-post">POST</span><code>/v1/endpoints/{projectId}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/EndpointExecutionEndpoints.cs#L43"><code>EndpointExecutionEndpoints.cs:43</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="get-v1endpointsprojectidendpointslug">
+<h3><span class="method m-get">GET</span><code>/v1/endpoints/{projectId}/{endpointSlug}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L107"><code>NetworkStorageGatewayEndpoints.cs:107</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v1endpointsprojectidendpointslug">
+<h3><span class="method m-post">POST</span><code>/v1/endpoints/{projectId}/{endpointSlug}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageEndpoints.cs"><code>Code/Endpoints/NetworkStorageEndpoints.cs (GET when input is null)</code></a>, <code>docs 18-rest-api-reference</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/EndpointExecutionEndpoints.cs#L35"><code>EndpointExecutionEndpoints.cs:35</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (endpoints-get-and-routing / post-v1-alias)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;path&quot;: &quot;/v1/endpoints/${projectId}/load-profile&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;,
+    &quot;x-steam-id&quot;: &quot;${steamId}&quot;,
+    &quot;x-sbox-token&quot;: &quot;parity-placeholder-token&quot;,
+    &quot;x-ns-client-type&quot;: &quot;game&quot;
+  },
+  &quot;body&quot;: {
+    &quot;security&quot;: {
+      &quot;configVersion&quot;: &quot;&quot;,
+      &quot;clientMode&quot;: &quot;legacy&quot;,
+      &quot;authSessions&quot;: &quot;disabled&quot;,
+      &quot;encryptedRequests&quot;: &quot;disabled&quot;,
+      &quot;revisionId&quot;: 0,
+      &quot;revisionOutdated&quot;: false
+    },
+    &quot;_endpointSlug&quot;: &quot;load-profile&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="v1queries">Legacy v1 queries <code class="group">/v1/queries</code></h2>
+<section class="api-route" id="get-v1queriesprojectidqueryid">
+<h3><span class="method m-get">GET</span><code>/v1/queries/{projectId}/{queryId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Storage/NetworkStorageQueries.cs"><code>Code/Storage/NetworkStorageQueries.cs GetQuery</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/QueryEndpoints.cs#L44"><code>QueryEndpoints.cs:44</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (queries-run / leaderboard-v1)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v1/queries/${projectId}/top_miners&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="v1sessions">/v1/sessions <code class="group">/v1/sessions</code></h2>
+<section class="api-route" id="post-v1sessionsprojectidcreate">
+<h3><span class="method m-post">POST</span><code>/v1/sessions/{projectId}/create</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L55"><code>AuthSessionEndpoints.cs:55</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v1sessionsprojectidreauth">
+<h3><span class="method m-post">POST</span><code>/v1/sessions/{projectId}/reauth</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L61"><code>AuthSessionEndpoints.cs:61</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v1sessionsprojectidrefresh">
+<h3><span class="method m-post">POST</span><code>/v1/sessions/{projectId}/refresh</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L58"><code>AuthSessionEndpoints.cs:58</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v1sessionsprojectidrevoke">
+<h3><span class="method m-post">POST</span><code>/v1/sessions/{projectId}/revoke</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/AuthSessionEndpoints.cs#L64"><code>AuthSessionEndpoints.cs:64</code></a></dd></div>
+</dl>
+
+</section>
+<h2 id="v1storage">Legacy v1 storage <code class="group">/v1/storage</code></h2>
+<section class="api-route" id="get-v1storageprojectidcollectionidsteamidrecords">
+<h3><span class="method m-get">GET</span><code>/v1/storage/{projectId}/{collectionId}/{steamId}/records</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L67"><code>RecordsEndpoints.cs:67</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="post-v1storageprojectidcollectionidsteamidrecords">
+<h3><span class="method m-post">POST</span><code>/v1/storage/{projectId}/{collectionId}/{steamId}/records</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L70"><code>RecordsEndpoints.cs:70</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="delete-v1storageprojectidcollectionidsteamidrecordsrecordid">
+<h3><span class="method m-delete">DELETE</span><code>/v1/storage/{projectId}/{collectionId}/{steamId}/records/{recordId}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L73"><code>RecordsEndpoints.cs:73</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="patch-v1storageprojectidcollectionidsteamidrecordsrecordid">
+<h3><span class="method m-patch">PATCH</span><code>/v1/storage/{projectId}/{collectionId}/{steamId}/records/{recordId}</code></h3>
+<dl class="api-meta">
+<div><dt>Contract tests</dt><dd>Not covered by the HTTP contract tests yet.</dd></div>
+
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/RecordsEndpoints.cs#L76"><code>RecordsEndpoints.cs:76</code></a></dd></div>
+</dl>
+
+</section>
+<section class="api-route" id="get-v1storageprojectidrate-limits">
+<h3><span class="method m-get">GET</span><code>/v1/storage/{projectId}/rate-limits</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><code>docs 18-rest-api-reference (GET /v3/storage/{projectId}/rate-limits)</code></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L63"><code>NetworkStorageGatewayEndpoints.cs:63</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (runtime-rate-limits / rate-limits-v1)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v1/storage/${projectId}/rate-limits&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+<h2 id="v1values">Legacy v1 game values <code class="group">/v1/values</code></h2>
+<section class="api-route" id="get-v1valuesprojectid">
+<h3><span class="method m-get">GET</span><code>/v1/values/{projectId}</code></h3>
+<dl class="api-meta">
+<div><dt>Status codes in tests</dt><dd><code>200</code></dd></div>
+<div><dt>Library call</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage/blob/13f51a81f046b1722a6b747712afebccaa9559b3/Code/Endpoints/NetworkStorageGameValues.cs"><code>Code/Endpoints/NetworkStorageGameValues.cs GetGameValues</code></a></dd></div>
+<div><dt>Defined in</dt><dd><a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints/NetworkStorageGatewayEndpoints.cs#L54"><code>NetworkStorageGatewayEndpoints.cs:54</code></a></dd></div>
+</dl>
+<details class="more-info"><summary>Example from the contract tests (runtime-values / values-v1-alias)</summary><div class="prose"><pre><code class="language-json">{
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;path&quot;: &quot;/v1/values/${projectId}&quot;,
+  &quot;query&quot;: {
+    &quot;apiKey&quot;: &quot;${publicKey}&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;x-public-key&quot;: &quot;${publicKey}&quot;
+  }
+}</code></pre><p>Expected response status <code>200</code>.</p></div></details>
+</section>
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/60c23c8260e6e84abf2364b575f4b29deb534a1d/src/SboxNetworkStorage.Server/Endpoints">sbox-cool/sbox-network-storage-server src/SboxNetworkStorage.Server/Endpoints + tests/parity/corpus</a> at <code>v0.2.0</code> (60c23c8).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.2.0 (<code>0.2.0</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/60c23c8260e6e84abf2364b575f4b29deb534a1d">sbox-cool/sbox-network-storage-server</a> at <code>v0.2.0</code> (<code>60c23c8</code>). <strong>Library:</strong> 1.1.0 source (13f51a8) (<code>source-13f51a8</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/13f51a81f046b1722a6b747712afebccaa9559b3">sbox-cool/sbox-network-storage</a> at <code>13f51a81f046b1722a6b747712afebccaa9559b3</code> (<code>13f51a8</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.2.0/source-13f51a8/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.2.0/source-13f51a8/api/">HTTP API</a><a href="/docs/versions/0.2.0/source-13f51a8/library/api/">C# API</a><a href="/docs/versions/0.2.0/source-13f51a8/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
+</div></footer>
+</body>
+</html>

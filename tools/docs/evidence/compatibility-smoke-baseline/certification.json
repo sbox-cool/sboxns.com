@@ -1,0 +1,622 @@
+{
+  "schemaVersion": 1,
+  "key": "bc4919e7bac79cd8f5ed57d420c6536e7fe8496962cbb7e07306a94826f5f98a",
+  "identity": {
+    "server": {
+      "version": "0.5.4",
+      "kind": "self-hosted",
+      "commit": "d35738b514db9691aeab2b888133f7bb80bbaa0a",
+      "artifactSha256": "55f40fd70d9fe8ce48e586a87cd0f150a1a6c2adc4ca9121b571922ab03c7eab"
+    },
+    "library": {
+      "commit": null,
+      "revision": "422519",
+      "manifestSha256": "f1d350947c07ae9710a41758bf5e7ee8dfb216c1a23736c80728a2b257105ec5",
+      "compilation": "published-source-recompiled",
+      "artifactSha256": "5ba11981f7deb924cd717de4d9719e310114266c0ab948fe33d91f91a502f20e"
+    },
+    "engineBuild": "git:0de6fc3eb7e206745dff516f17790f71f46dc4f8;managed:9b8d6505c48ab5434a25bd99220d544595c12c7863896f2a19c7e946328ba721;native:1dac59aee476e4bc3a1203497223c585a839c2f4c41313775b00c9c09bffecfb",
+    "database": "sqlite",
+    "clientMode": "game",
+    "securityMode": "no-player-auth",
+    "suite": {
+      "commit": "94614f3cbfa0661d0b191bdd8861d96e857e980b",
+      "inventorySha256": "ede3e56bb3653ee4cac5b7d53e337a57d3c05691fea1d32d7002f24d1aa1545c"
+    },
+    "os": "macOS 26.5.1"
+  },
+  "result": "incomplete",
+  "methods": [
+    {
+      "method": "Sandbox.JsonHelpers::Boolean GetBool(System.Text.Json.JsonElement, System.String, Boolean)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.JsonHelpers::Int32 GetInt(System.Text.Json.JsonElement, System.String, Int32)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.JsonHelpers::Single GetFloat(System.Text.Json.JsonElement, System.String, Single)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.JsonHelpers::System.String GetString(System.Text.Json.JsonElement, System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog+Entry::Boolean Equals(Entry)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog+Entry::Boolean Equals(System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog+Entry::Entry <Clone>$()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog+Entry::Int32 GetHashCode()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog+Entry::System.String ToString()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog+Entry::Void Deconstruct(System.DateTime ByRef, EntryKind ByRef, System.String ByRef, System.String ByRef)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog::Void Add(EntryKind, System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog::Void Clear()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog::Void Error(System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog::Void Info(System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog::Void Request(System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog::Void Response(System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetLog::Void Warning(System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Boolean IsLobbyOnCurrentRevision(System.Collections.Generic.Dictionary`2[System.String,System.String])",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Boolean IsLobbyStale(System.Collections.Generic.Dictionary`2[System.String,System.String])",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Boolean IsSecurityConfigMismatchCode(System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Boolean TryGetLastEndpointError(System.String, System.String ByRef, System.String ByRef)",
+      "scenarios": [
+        {
+          "scenario": "EndpointFailurePreservesTheHttpStatus",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Boolean TryParseEncryptedRequestId(System.String, Int64 ByRef, System.String ByRef)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Collections.Generic.Dictionary`2[System.String,System.String] BuildLobbyMetadata(System.Nullable`1[System.Int64], System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.String CreateEncryptedRequestId()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task RefreshRevisionLobbyListAsync()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task TrackAnalyticsError(System.Exception, System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task TrackAnalyticsError(System.String, System.String, System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task TrackAnalyticsEvent(System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task TrackAnalyticsWarning(System.String, System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task TrackSessionEnd(Double, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task TrackSessionHeartbeat(Double, System.Object, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task TrackSessionStart(System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Boolean] EnsureDedicatedServerSecretValidatedAsync(System.String, Boolean)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Boolean] EnsureEndpointAuthAsync(System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Boolean] EnsureRuntimeSecurityConfigAsync(System.String, Boolean)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] CallEndpoint(System.String, System.Object)",
+      "scenarios": [
+        {
+          "scenario": "EndpointWritesAreVisibleThroughTheClient",
+          "result": "pass"
+        },
+        {
+          "scenario": "EndpointFailurePreservesTheHttpStatus",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] CallEndpointAs(System.String, System.String, System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] CreateRecord(System.String, System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] DeleteDocument(System.String, System.String)",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] DeleteRecord(System.String, System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] GetDocument(System.String, System.String)",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] GetDocumentAs(System.String, System.String, System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] GetGameValues()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] GetQuery(System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] ListRecords(System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] PatchDocument(System.String, System.String, Sandbox.NetworkStorageOperation[])",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] RenameRecord(System.String, System.String, System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] RunQuery(System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] SaveDocument(System.String, System.String, System.Object)",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] SetDocument(System.String, System.String, System.Object)",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] UpdateDocument(System.String, System.String, Sandbox.NetworkStorageOperation[])",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] UpdateDocument(System.String, System.String, System.Collections.Generic.IEnumerable`1[Sandbox.NetworkStorageOperation])",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void ApplyServerExpectedSecurityConfig(System.String, System.Text.Json.JsonElement, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void AutoConfigure()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void CloseRevisionOutdatedMessage()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void Configure(System.String, System.String, System.String, System.String, System.String, System.String)",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        },
+        {
+          "scenario": "EndpointWritesAreVisibleThroughTheClient",
+          "result": "pass"
+        },
+        {
+          "scenario": "EndpointFailurePreservesTheHttpStatus",
+          "result": "pass"
+        },
+        {
+          "scenario": "UnsyncedProjectInitializesWithoutForcingAnUpgrade",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void ConfigureDedicatedServerSecretKey(System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void EnsureConfigured()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void MarkRuntimeSecurityMismatch(System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void OpenRevisionOutdatedMessage(Sandbox.UI.Panel)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void ResetAutoConfigureFlag()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void SetPublishTarget(System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void TestFireRevisionOutdated()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void TestShowRevisionOutdatedMessage(Sandbox.UI.Panel)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorage::Void ToggleRevisionOutdatedMessage(Sandbox.UI.Panel)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageAnalytics::System.Threading.Tasks.Task Error(System.Exception, System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageAnalytics::System.Threading.Tasks.Task Error(System.String, System.String, System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageAnalytics::System.Threading.Tasks.Task SessionEnd(Double, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageAnalytics::System.Threading.Tasks.Task SessionHeartbeat(Double, System.Object, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageAnalytics::System.Threading.Tasks.Task SessionStart(System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageAnalytics::System.Threading.Tasks.Task TrackEvent(System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageAnalytics::System.Threading.Tasks.Task Warning(System.String, System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageExtensions::Boolean Bool(System.Text.Json.JsonElement, System.String, Boolean)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageExtensions::Int32 Int(System.Text.Json.JsonElement, System.String, Int32)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageExtensions::Single Float(System.Text.Json.JsonElement, System.String, Single)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageExtensions::System.Collections.Generic.Dictionary`2[System.String,T] ReadDictionary[T](System.Text.Json.JsonElement, System.String, System.Func`2[System.Text.Json.JsonElement,T])",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageExtensions::System.Collections.Generic.List`1[System.String] FindMismatches(System.Text.Json.JsonElement, System.Collections.Generic.Dictionary`2[System.String,System.ValueTuple`2[System.Object,System.Func`2[System.Text.Json.JsonElement,System.Object]]])",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageExtensions::System.Collections.Generic.List`1[System.String] ReadStringList(System.Text.Json.JsonElement, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageExtensions::System.Collections.Generic.List`1[T] ReadList[T](System.Text.Json.JsonElement, System.String, System.Func`2[System.Text.Json.JsonElement,T])",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageExtensions::System.String Str(System.Text.Json.JsonElement, System.String, System.String)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageLogConfig::Void DisableAll()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageLogConfig::Void EnableAll()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOperation::Sandbox.NetworkStorageOperation Increment(System.String, Double, System.String, System.String)",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOperation::Sandbox.NetworkStorageOperation Pull(System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOperation::Sandbox.NetworkStorageOperation Push(System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOperation::Sandbox.NetworkStorageOperation Remove(System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOperation::Sandbox.NetworkStorageOperation Set(System.String, System.Object, System.String, System.String)",
+      "scenarios": [
+        {
+          "scenario": "DocumentsPersistEveryOperationAndDelete",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOutdatedUI::Void Close()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOutdatedUI::Void OnDeleted()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOutdatedUI::Void Open(Sandbox.UI.Panel)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOutdatedUI::Void ResetState()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageOutdatedUI::Void Tick()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStoragePackageInfo::System.Text.Json.JsonElement BuildSyncPayload()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStoragePackageInfo::System.Threading.Tasks.Task DetectAsync()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStoragePackageInfo::Void Reset()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStoragePackageInfo::Void UpdateFromServerResponse(System.Text.Json.JsonElement)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageRevisionHandler::Void Initialize()",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.NetworkStorageRevisionInit::System.Threading.Tasks.Task`1[Sandbox.RevisionInitResult] SendInitAsync()",
+      "scenarios": [
+        {
+          "scenario": "UnsyncedProjectInitializesWithoutForcingAnUpgrade",
+          "result": "pass"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "method": "Sandbox.SaveStateTracker::System.Threading.Tasks.Task`1[System.Boolean] CallAndApply(System.String, System.Object, System.Action, System.Action`1[System.Text.Json.JsonElement], System.Action)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.SaveStateTracker::System.Threading.Tasks.Task`1[System.Nullable`1[System.Text.Json.JsonElement]] Call(System.String, System.Object)",
+      "scenarios": [],
+      "result": "not-validated"
+    },
+    {
+      "method": "Sandbox.SaveStateTracker::Void Reset()",
+      "scenarios": [],
+      "result": "not-validated"
+    }
+  ],
+  "evidence": [
+    "https://github.com/sbox-cool/sboxns.com/pull/12#issuecomment-6183841651"
+  ],
+  "startedAt": "2026-10-15T03:35:58.328093+00:00",
+  "finishedAt": "2026-10-15T03:36:09.71678+00:00"
+}

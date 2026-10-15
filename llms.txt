@@ -52,3 +52,4 @@ Key facts:
 - [Library and server compatibility](https://sboxns.com/docs/compat/compatibility/)
 - [Version policy](https://sboxns.com/docs/compat/version-policy/)
 - [Library certification](https://sboxns.com/docs/compat/certification/)
+- [Documentation versions](https://sboxns.com/docs/versions/): independent pinned server/library snapshots; package publication evidence is separate.

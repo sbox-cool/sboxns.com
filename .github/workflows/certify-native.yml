@@ -1,0 +1,64 @@
+name: Certify exact native pairing
+on:
+  workflow_dispatch:
+    inputs:
+      server_ref:
+        description: Exact stable server tag
+        required: true
+        default: v0.5.4
+      library_revision:
+        description: Exact published sboxcool.network-storage revision
+        required: true
+        default: '422519'
+permissions:
+  contents: read
+jobs:
+  prerequisites:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require approved engine runner
+        env:
+          ENABLED: ${{ vars.SBOX_CERTIFICATION_RUNNER_ENABLED }}
+          ENGINE: ${{ vars.SBOX_GAME }}
+        run: |
+          if [ "$ENABLED" != true ] || [ -z "$ENGINE" ]; then
+            echo '::error::Native certification is not configured. Register an approved self-hosted runner labelled sbox-native, set SBOX_GAME to its built engine game directory, and set SBOX_CERTIFICATION_RUNNER_ENABLED=true. No pairing is certified.'
+            exit 1
+          fi
+  native:
+    needs: prerequisites
+    runs-on: [self-hosted, sbox-native]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.100
+      - name: Run pinned native client and server
+        env:
+          SBOX_GAME: ${{ vars.SBOX_GAME }}
+          SERVER_REF: ${{ inputs.server_ref }}
+          LIBRARY_REVISION: ${{ inputs.library_revision }}
+        shell: bash
+        run: |
+          node tools/docs/run-native.mjs --engine "$SBOX_GAME" --server-ref "$SERVER_REF" --revision "$LIBRARY_REVISION" --output "$RUNNER_TEMP/native-certification-$GITHUB_RUN_ID"
+      - name: Gate exact identity and complete method coverage
+        env:
+          EVIDENCE: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        shell: bash
+        run: |
+          export REPORT_DIR="$RUNNER_TEMP/native-certification-$GITHUB_RUN_ID"
+          node --input-type=module -e 'import fs from "node:fs"; const file=process.env.REPORT_DIR+"/native-report.json"; const report=JSON.parse(fs.readFileSync(file)); report.evidence=[process.env.EVIDENCE]; fs.writeFileSync(file,JSON.stringify(report,null,2));'
+          node tools/docs/certify.mjs --expected "$REPORT_DIR/expected.json" --report "$REPORT_DIR/native-report.json" --inventory "$REPORT_DIR/inventory.json" --output "$REPORT_DIR/certification.json"
+      - name: Preserve native evidence even when incomplete or failed
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-certification-${{ github.run_id }}
+          path: ${{ runner.temp }}/native-certification-${{ github.run_id }}/
+          if-no-files-found: warn

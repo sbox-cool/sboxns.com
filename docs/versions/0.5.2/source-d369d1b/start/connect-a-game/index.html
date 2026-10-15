@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connect a game | Network Storage docs</title>
+  <meta name="description" content="Point the game library at your server: project, public key and base URL.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.5.2/source-d369d1b/start/connect-a-game/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Connect a game | Network Storage docs">
+  <meta property="og:description" content="Point the game library at your server: project, public key and base URL.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.5.2/source-d369d1b/start/connect-a-game/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.2/source-d369d1b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.2/source-d369d1b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">GitHub</a><a href="https://demo.sboxns.com">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.2 · Legacy source (d369d1b)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/0.5.4/source-d369d1b/start/connect-a-game/">0.5.4</option><option value="/docs/versions/0.5.3/source-d369d1b/start/connect-a-game/">0.5.3</option><option value="/docs/versions/0.5.2/source-d369d1b/start/connect-a-game/" selected>0.5.2</option><option value="/docs/versions/0.5.1/source-d369d1b/start/connect-a-game/">0.5.1</option><option value="/docs/versions/0.5.0/source-d369d1b/start/connect-a-game/">0.5.0</option><option value="/docs/versions/0.4.0/source-d369d1b/start/connect-a-game/">0.4.0</option><option value="/docs/versions/0.3.0/source-d369d1b/start/connect-a-game/">0.3.0</option><option value="/docs/versions/0.2.0/source-d369d1b/start/connect-a-game/">0.2.0</option><option value="/docs/versions/0.1.0/source-d369d1b/start/connect-a-game/">0.1.0</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.2/source-13f51a8/start/connect-a-game/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.2/source-d369d1b/start/connect-a-game/" selected>Legacy source (d369d1b)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/0.5.4/source-d369d1b/start/connect-a-game/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-d369d1b/start/connect-a-game/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-d369d1b/start/connect-a-game/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-d369d1b/start/connect-a-game/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-d369d1b/start/connect-a-game/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-d369d1b/start/connect-a-game/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-d369d1b/start/connect-a-game/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-d369d1b/start/connect-a-game/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-d369d1b/start/connect-a-game/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.2/source-13f51a8/start/connect-a-game/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.2/source-d369d1b/start/connect-a-game/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.4/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.2/source-d369d1b/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.2/source-d369d1b/start/connect-a-game/" aria-current="page">Connect a game</a><a href="/docs/versions/0.5.2/source-d369d1b/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.2/source-d369d1b/library/overview/">Library overview</a><a href="/docs/versions/0.5.2/source-d369d1b/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.2/source-d369d1b/library/examples/">Examples</a><a href="/docs/versions/0.5.2/source-d369d1b/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.2/source-d369d1b/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.2/source-d369d1b/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.2/source-d369d1b/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.2/source-d369d1b/server/configuration/">Configuration</a><a href="/docs/versions/0.5.2/source-d369d1b/server/database/">Databases</a><a href="/docs/versions/0.5.2/source-d369d1b/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.2/source-d369d1b/server/export/">Export and move projects</a><a href="/docs/versions/0.5.2/source-d369d1b/server/modules/">Modules</a><a href="/docs/versions/0.5.2/source-d369d1b/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.2/source-d369d1b/server/alerting/">Alerting</a><a href="/docs/versions/0.5.2/source-d369d1b/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.2/source-d369d1b/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.2/source-d369d1b/compat/version-policy/">Version policy</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.2/source-d369d1b/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.2/source-d369d1b/">Docs</a><span aria-hidden="true">/</span><span>Get started</span><span aria-hidden="true">/</span><span aria-current="page">Connect a game</span></nav>
+  <article class="prose docs-prose">
+<h1>Connect a game</h1>
+<p class="lead">Point the game library at your server: project, public key and base URL.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#1-find-your-server-url">1. Find your server URL</a><a href="#2-create-a-project-and-api-keys">2. Create a project and API keys</a><a href="#3-configure-the-editor">3. Configure the editor</a><a href="#4-or-configure-in-code">4. Or configure in code</a><a href="#collection-access-from-game-clients">Collection access from game clients</a><a href="#error-codes">Error codes</a><a href="#client-reachability">Client reachability</a><a href="#moving-an-existing-project-from-the-managed-service">Moving an existing project from the managed service</a></nav>
+<p>sbox Network Storage Server speaks the same HTTP API as the managed service at
+<a href="https://sbox.cool/tools/network-storage">sbox.cool</a>. The published s&amp;box
+client library works without changes: you only change its base URL.</p>
+<ul>
+<li>s&amp;box library: <a href="https://sbox.game/sboxcool/network-storage">https://sbox.game/sboxcool/network-storage</a></li>
+<li>Client source: <a href="https://github.com/sbox-cool/sbox-network-storage">https://github.com/sbox-cool/sbox-network-storage</a></li>
+<li>API and library docs: <a href="https://sbox.cool/wiki/network-storage-v3">https://sbox.cool/wiki/network-storage-v3</a></li>
+</ul>
+<p>The client appends the API version itself (<code>/v3/...</code>), so the base URL is just
+the scheme, host and port of your server, with no path and no trailing slash.</p>
+<h2 id="1-find-your-server-url"><a class="anchor" href="#1-find-your-server-url" aria-hidden="true" tabindex="-1">#</a>1. Find your server URL</h2>
+<table>
+<thead>
+<tr>
+<th>How players reach the server</th>
+<th>Base URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Domain with HTTPS (<code>tls.mode</code> = <code>acme</code> or <code>certificate</code>, or a reverse proxy)</td>
+<td><code>https://ns.example.com</code></td>
+</tr>
+<tr>
+<td>Domain over plain HTTP</td>
+<td><code>http://ns.example.com:8080</code></td>
+</tr>
+<tr>
+<td>Public IP and port</td>
+<td><code>http://203.0.113.10:8080</code></td>
+</tr>
+<tr>
+<td>Same machine as the game (development)</td>
+<td><code>http://localhost:8080</code></td>
+</tr>
+</tbody></table>
+<p>Check the server responds from the machine running s&amp;box:</p>
+<pre><code class="language-sh">curl -i http://your-server:8080/health
+curl http://your-server:8080/v3/server-info</code></pre>
+<p>Make sure the port is open in your firewall and forwarded on your router if the
+server is behind NAT.</p>
+<h2 id="2-create-a-project-and-api-keys"><a class="anchor" href="#2-create-a-project-and-api-keys" aria-hidden="true" tabindex="-1">#</a>2. Create a project and API keys</h2>
+<p>Use the local-owner <a href="/docs/versions/0.5.2/source-d369d1b/server/admin-panel/#connect-a-game">dashboard</a>, or run the CLI
+on the server. A project created in the dashboard gets a public key, and its
+overview shows the filled-in <code>NetworkStorage.Configure</code> line and Setup window
+values to copy.</p>
+<p>On the CLI:</p>
+<pre><code class="language-sh">sbox-ns project create &quot;My Game&quot;                          # prints the project ID
+sbox-ns key create &lt;projectId&gt; --type public --label game
+sbox-ns key create &lt;projectId&gt; --type secret --label editor</code></pre>
+<h2 id="3-configure-the-editor"><a class="anchor" href="#3-configure-the-editor" aria-hidden="true" tabindex="-1">#</a>3. Configure the editor</h2>
+<ol>
+<li>Open your game in the s&amp;box editor.</li>
+<li>Open <strong>Editor &gt; Network Storage &gt; Setup</strong>.</li>
+<li>Enter the <strong>Project ID</strong>, <strong>Public API Key</strong> and <strong>Secret Key</strong> from step 2.</li>
+<li>Set <strong>Base URL</strong> to your server URL from step 1.</li>
+<li>Leave <strong>CDN URL</strong> empty unless you serve a CDN in front of your server.</li>
+<li>Save, then use <strong>Editor &gt; Network Storage &gt; Sync Tool</strong> to push YAML Source
+definitions for collections, endpoints and workflows (<code>.yml</code> preferred;
+<code>.yaml</code> also accepted).</li>
+</ol>
+<p>The Setup window stores the base URL in your project&#39;s Network Storage
+credentials, and the generated config is picked up automatically by
+<code>NetworkStorage.AutoConfigure()</code> at runtime.</p>
+<h3 id="staged-pushes-and-editor-play-sessions"><a class="anchor" href="#staged-pushes-and-editor-play-sessions" aria-hidden="true" tabindex="-1">#</a>Staged pushes and editor play sessions</h3>
+<p>The Sync Tool&#39;s <strong>Push Staged</strong> sends <code>x-ns-publish-target: next</code>. Endpoint and
+collection definitions go into <code>revision-overrides.json</code>, leaving live game
+definitions unchanged. Workflows and saved tests remain live. Staging requires
+a synced game package with a numeric current revision; without one, the push
+goes live and reports <code>publishTarget: live</code> and <code>stagedFallback</code> in its response.</p>
+<p>Management lists with <code>includeStaged=true</code> include live definitions and staged
+copies marked <code>revisionTarget: next</code>. Explicit <code>revisionTarget=live</code> returns
+only live definitions. Editor play sessions and management endpoint tests
+targeting <code>next</code> use staged endpoint and collection definitions, falling back
+to live definitions for anything not staged. Player records are shared, not a
+separate staging database: a next-targeted runtime call can change real data.
+Dry-run management tests do not persist those writes.</p>
+<p>Syncing a new game package revision promotes staged definitions into live and
+clears the overrides. Use the normal live target for changes that should take
+effect immediately.</p>
+<p>The command-line sync tool&#39;s <code>PUT endpoints?replaceAll=true</code> replaces the live
+endpoint set after a successful push: omitted endpoints are deleted. Without
+that query parameter, pushes only upsert the supplied endpoints. Staged pushes
+never delete live definitions.</p>
+<h2 id="4-or-configure-in-code"><a class="anchor" href="#4-or-configure-in-code" aria-hidden="true" tabindex="-1">#</a>4. Or configure in code</h2>
+<pre><code class="language-csharp">NetworkStorage.Configure( projectId, publicKey, &quot;https://ns.example.com&quot; );</code></pre>
+<p><code>Configure</code> also accepts an optional API version and CDN URL, exactly as with the
+managed service. Only pass the public API key in game code; the secret key
+belongs in the editor only.</p>
+<h2 id="collection-access-from-game-clients"><a class="anchor" href="#collection-access-from-game-clients" aria-hidden="true" tabindex="-1">#</a>Collection access from game clients</h2>
+<p>The public key ships inside every game build, so anyone can extract it. The
+direct document API (<code>GET</code>, <code>POST</code> and <code>DELETE /v3/storage/{projectId}/{collection}/{key}</code>,
+the <code>/api/storage</code> alias and <code>/probe</code>) therefore treats public-key calls as
+untrusted:</p>
+<ul>
+<li>The collection must declare <code>accessMode: public</code>. Any other value, or no
+<code>accessMode</code> at all, is endpoint-only and answers <code>403 ENDPOINT_ONLY</code>. Route
+those reads and writes through endpoints or queries. Collections created in
+the dashboard start as endpoint-only.</li>
+<li>Deleting needs <code>allowRecordDelete: true</code>, otherwise <code>403 RECORD_DELETE_DISABLED</code>.</li>
+<li>Writing or deleting in a collection that is not declared at all answers <code>404</code>.</li>
+<li>When the project requires s&amp;box authentication, the call must carry a valid
+s&amp;box token (<code>x-sbox-token</code> with <code>x-steam-id</code>) or auth session, otherwise
+<code>401 SBOX_AUTH_FAILED</code>. Writes and deletes in a per-player collection must then
+target the player&#39;s own document: the key is the verified Steam ID, or starts
+with <code>{steamId}_</code> for save slots. Anything else answers <code>403 FORBIDDEN</code>. Reads of
+public collections are not limited to the player&#39;s own documents.</li>
+<li>With s&amp;box authentication turned off (development), the Steam ID the client
+sends is trusted as is, but the <code>accessMode</code> and <code>allowRecordDelete</code> rules
+still apply.</li>
+</ul>
+<p>Secret keys (dedicated servers, tools) count as trusted backend calls: they need
+<code>collections</code> execute permission and may read, write and delete in any
+collection without s&amp;box tokens.</p>
+<h2 id="error-codes"><a class="anchor" href="#error-codes" aria-hidden="true" tabindex="-1">#</a>Error codes</h2>
+<p>The project&#39;s <strong>Logs</strong> and <strong>Errors</strong> tabs in the <a href="/docs/versions/0.5.2/source-d369d1b/server/admin-panel/#request-log-and-errors">dashboard</a>
+list rejected requests and explain them. The common ones:</p>
+<table>
+<thead>
+<tr>
+<th>Status and code</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>401 UNAUTHORIZED</code></td>
+<td>The API key is missing, wrong or disabled.</td>
+<td>Check the public key passed to <code>NetworkStorage.Configure</code>.</td>
+</tr>
+<tr>
+<td><code>401 SBOX_AUTH_FAILED</code></td>
+<td>The project requires s&amp;box authentication and the player&#39;s token was missing or did not verify.</td>
+<td>Run the game through s&amp;box, or turn off <strong>Require s&amp;box authentication</strong> for development.</td>
+</tr>
+<tr>
+<td><code>403 ENDPOINT_ONLY</code></td>
+<td>The collection is not <code>accessMode: public</code>.</td>
+<td>Call it through an endpoint, or set <code>accessMode: public</code>.</td>
+</tr>
+<tr>
+<td><code>403 RECORD_DELETE_DISABLED</code></td>
+<td>The collection does not allow deletes from game clients.</td>
+<td>Set <code>allowRecordDelete: true</code>, or delete through an endpoint.</td>
+</tr>
+<tr>
+<td><code>403 FORBIDDEN</code></td>
+<td>A player wrote another player&#39;s record, or a secret key lacks the permission.</td>
+<td>Use the player&#39;s own key, or grant the permission on the secret key.</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td>The project, collection, endpoint or record does not exist.</td>
+<td>Save or sync the definition and check the ID in the game code.</td>
+</tr>
+<tr>
+<td><code>409 STALE_SAVE</code></td>
+<td>A save was based on older data than the stored record.</td>
+<td>Reload the record and retry.</td>
+</tr>
+<tr>
+<td><code>SAVE_NOT_CONFIRMED</code></td>
+<td>The client could not confirm a save reached the server.</td>
+<td>Check the player&#39;s connection and the request log around that time.</td>
+</tr>
+</tbody></table>
+<p>In the game, read the last error of an endpoint call by its slug:</p>
+<pre><code class="language-csharp">var result = await NetworkStorage.CallEndpoint( &quot;grant-coins&quot;, new { } );
+if ( !result.HasValue )
+{
+    NetworkStorage.TryGetLastEndpointError( &quot;grant-coins&quot;, out var code, out var message );
+    Log.Warning( $&quot;{code}: {message}&quot; );
+}</code></pre>
+<p>s&amp;box hides the body of 4xx responses from game code, so the code there can be
+<code>HTTP_ERROR</code> with the status in the message. The dashboard&#39;s <strong>Logs</strong> tab shows
+the status for the same request.</p>
+<p>On the server, <code>sbox-ns logs -f</code> follows the server log.</p>
+<h2 id="client-reachability"><a class="anchor" href="#client-reachability" aria-hidden="true" tabindex="-1">#</a>Client reachability</h2>
+<p>Whether s&amp;box allows game clients to call a given kind of URL has <strong>not been
+tested yet</strong> against a self-hosted server. Every row below is untested. Please
+report what works for you in an issue so this table can be filled in.</p>
+<table>
+<thead>
+<tr>
+<th>Server URL type</th>
+<th>Example</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HTTPS domain</td>
+<td><code>https://ns.example.com</code></td>
+<td><strong>untested</strong></td>
+</tr>
+<tr>
+<td>HTTP domain</td>
+<td><code>http://ns.example.com:8080</code></td>
+<td><strong>untested</strong></td>
+</tr>
+<tr>
+<td>IP address and port</td>
+<td><code>http://203.0.113.10:8080</code></td>
+<td><strong>untested</strong></td>
+</tr>
+<tr>
+<td>localhost</td>
+<td><code>http://localhost:8080</code></td>
+<td><strong>untested</strong></td>
+</tr>
+</tbody></table>
+<p>If plain HTTP or bare IP addresses turn out to be blocked by the s&amp;box sandbox,
+put the server behind a reverse proxy with a real domain and a TLS certificate
+(see <a href="/docs/versions/0.5.2/source-d369d1b/server/self-hosting/#https">self-hosting.md</a>).</p>
+<h2 id="moving-an-existing-project-from-the-managed-service"><a class="anchor" href="#moving-an-existing-project-from-the-managed-service" aria-hidden="true" tabindex="-1">#</a>Moving an existing project from the managed service</h2>
+<ol>
+<li>Create the project and keys on your server with <code>sbox-ns project create</code> and <code>sbox-ns key create</code>.</li>
+<li>Point the editor Setup window at your server (above) and sync your
+<code>Editor/Network Storage/</code> source files with the Sync Tool to recreate
+collections, endpoints and workflows.</li>
+<li>Publish a new build of your game.</li>
+</ol>
+<p>Player data stored on the managed service is not copied by syncing. Moving
+existing player records is not covered by this guide yet.
+The synced sources describe schemas and server-side logic, not player save
+files. Runtime records live in your server&#39;s SQLite or PostgreSQL database.</p>
+<p>Players running an older build keep talking to whichever server that build was
+configured for.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ee60d4f401034724ee45934d8e6a1acc498e0fc6/docs/client-setup.md">sbox-cool/sbox-network-storage-server/docs/client-setup.md</a> at <code>v0.5.2</code> (ee60d4f).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.2 (<code>0.5.2</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/ee60d4f401034724ee45934d8e6a1acc498e0fc6">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.2</code> (<code>ee60d4f</code>). <strong>Library:</strong> Legacy source (d369d1b) (<code>source-d369d1b</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/d369d1b0a43e30016fa919f260c696dc6aa255a6">sbox-cool/sbox-network-storage</a> at <code>d369d1b0a43e30016fa919f260c696dc6aa255a6</code> (<code>d369d1b</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.2/source-d369d1b/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.2/source-d369d1b/api/">HTTP API</a><a href="/docs/versions/0.5.2/source-d369d1b/library/api/">C# API</a><a href="/docs/versions/0.5.2/source-d369d1b/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use">Acceptable use</a><a href="https://sboxcool.com/support">Support</a></nav>
+</div></footer>
+</body>
+</html>
