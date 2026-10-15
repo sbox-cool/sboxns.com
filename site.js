@@ -36,6 +36,36 @@
     });
   }
 
+  // GitHub repo picker: the nav icon toggles a dropdown with the server
+  // and frontend library repositories. Closes on outside click or Escape.
+  document.querySelectorAll(".nav-drop").forEach(function (drop) {
+    var button = drop.querySelector("button");
+    var menu = drop.querySelector(".nav-drop-menu");
+    if (!button || !menu) return;
+    function close(refocus) {
+      if (menu.hidden) return;
+      menu.hidden = true;
+      button.setAttribute("aria-expanded", "false");
+      if (refocus) button.focus();
+    }
+    button.addEventListener("click", function (event) {
+      event.stopPropagation();
+      var open = menu.hidden;
+      document.querySelectorAll(".nav-drop").forEach(function (other) {
+        other.querySelector(".nav-drop-menu").hidden = true;
+        other.querySelector("button").setAttribute("aria-expanded", "false");
+      });
+      menu.hidden = !open;
+      button.setAttribute("aria-expanded", String(open));
+    });
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest(".nav-drop")) close(false);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") close(true);
+    });
+  });
+
   // Tabs: role="tablist" with role="tab" buttons pointing at panels via aria-controls.
   document.querySelectorAll('[role="tablist"]').forEach(function (list) {
     var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));

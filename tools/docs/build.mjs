@@ -187,9 +187,11 @@ function navHtml(current) {
 }
 
 const GITHUB_URL = 'https://github.com/sbox-cool/sbox-network-storage-server';
-const GITHUB_LINK = `<a href="${GITHUB_URL}"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg>GitHub</a>`;
+const LIBRARY_URL = 'https://github.com/sbox-cool/sbox-network-storage';
+const GITHUB_DROP = `<span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="${GITHUB_URL}"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="${LIBRARY_URL}"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span>`;
+const GITHUB_MOBILE = `<a href="${GITHUB_URL}">Server source</a><a href="${LIBRARY_URL}">Frontend library source</a>`;
 const DISCORD_ICON_LINK = `<a class="nav-ico" href="/discord-invite/" aria-label="Join our Discord" title="Join our Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></a>`;
-const MAIN_LINKS = (docsCurrent, compact = true) => `<a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="${urlOf('')}"${docsCurrent ? ' aria-current="page"' : ''}>Docs</a>${GITHUB_LINK}${compact ? DISCORD_ICON_LINK : `<a href="/discord-invite/">Discord</a>`}`;
+const MAIN_LINKS = (docsCurrent, compact = true) => `<a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="${urlOf('')}"${docsCurrent ? ' aria-current="page"' : ''}>Docs</a>${compact ? GITHUB_DROP + DISCORD_ICON_LINK : GITHUB_MOBILE + `<a href="/discord-invite/">Discord</a>`}`;
 
 const FOOT_DOCS = [['start/connect-a-game', 'Connect a game'], ['api', 'HTTP API'], ['library/api', 'C# API'], ['server/self-hosting', 'Self-hosting']]
   .filter(([slug]) => AVAILABLE.has(slug))
