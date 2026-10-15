@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ensureBareClone, resolveRef } from './lib/git.mjs';
+import { certify } from './lib/certification.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const site = path.resolve(here, '../..');
@@ -73,6 +74,23 @@ const revisionHistory = `<h2 id="sbox-revisions">s&amp;box package revisions</h2
 <p>Published revisions of <a href="https://sbox.game/sboxcool/network-storage"><code>sboxcool.network-storage</code></a>, tracked from the public package API. Current observed revision: <strong>${esc(revisions.latestRevision)}</strong>. <a href="${esc(revisions.sourceUrl)}">Package metadata</a> · <a href="/docs/sbox-revisions.json">Tracking records</a>.</p>
 <p>A published revision is a real package identity, not proof of a GitHub source match. Only revisions with verified publication mappings link to source documentation below. Tracking retains previously observed revisions when the current revision changes.</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">Package revision</th><th scope="col">Published</th><th scope="col">Source documentation</th></tr></thead><tbody>${revisionRows}</tbody></table></div>`;
+const evidenceRoot = path.join(here, 'evidence');
+const certificates = existsSync(evidenceRoot) ? readdirSync(evidenceRoot).filter(name => statSync(path.join(evidenceRoot, name)).isDirectory()).map(name => {
+  const readEvidence = file => JSON.parse(readFileSync(path.join(evidenceRoot, name, file), 'utf8'));
+  return certify(readEvidence('expected.json'), readEvidence('report.json'), readEvidence('inventory.json'));
+}) : [];
+mkdirSync(path.join(out, 'validation'), { recursive: true });
+writeFileSync(path.join(out, 'validation/index.json'), JSON.stringify(certificates, null, 2) + '\n');
+const validation = `<h2 id="validation">Exact-build validation</h2>
+<p>Native test evidence applies only to its exact client, server artifacts, engine, database and security mode. Incomplete means some methods remain unvalidated, even when every executed scenario passed. <a href="/docs/validation/index.json">Machine-readable results</a>.</p>` + (certificates.length ? certificates.map(certificate => {
+  const identity = certificate.identity;
+  const passed = certificate.methods.filter(method => method.result === 'pass').length;
+  return `<details class="validation-details" id="validation-${certificate.key}"><summary>Server ${esc(identity.server.version)} + package revision ${esc(identity.library.revision)}: ${esc(certificate.result)} (${passed}/${certificate.methods.length} methods)</summary>
+<p>${esc(identity.os)}; ${esc(identity.database)}; ${esc(identity.clientMode)}; ${esc(identity.securityMode)}. Library compilation: <code>${esc(identity.library.compilation)}</code>. Source-recompiled results do not certify published code-archive loading. Source-built server artifacts do not certify a separately built release binary.</p>
+<p>Server commit <code>${esc(identity.server.commit)}</code>; suite commit <code>${esc(identity.suite.commit)}</code>. Engine build: <code>${esc(identity.engineBuild)}</code>.</p>
+<p>${certificate.evidence.map((url, index) => `<a href="${esc(url)}">Run evidence ${index + 1}</a>`).join(' · ')}</p>
+<table><thead><tr><th scope="col">Runtime method</th><th scope="col">Result</th><th scope="col">Scenarios</th></tr></thead><tbody>${certificate.methods.map(method => `<tr><td><code>${esc(method.method)}</code></td><td>${esc(method.result)}</td><td>${method.scenarios.map(scenario => `${esc(scenario.scenario)}: ${esc(scenario.result)}`).join('<br>') || 'Not exercised'}</td></tr>`).join('')}</tbody></table></details>`;
+}).join('\n') : '<p>No native pair validation has been recorded.</p>');
 const rows = versions.map(v => `<tr><td>${esc(v.server.label)}</td><td>${esc(v.library.label)}</td><td>${v.library.publication.status === 'verified' ? `s&amp;box revision ${esc(v.library.publication.revision)} (<a href="${esc(v.library.publication.evidence)}">evidence</a>)` : 'GitHub source; s&amp;box publication unverified'}</td><td><a href="${v.basePath}/">Read docs</a></td></tr>`).join('\n');
 const article = `<h1>Documentation versions</h1>
 <p class="lead">Choose server and library source independently. Every guide, HTTP reference and C# reference in a snapshot is generated from its pinned commits.</p>
@@ -81,6 +99,7 @@ const article = `<h1>Documentation versions</h1>
 <p>A library SemVer, GitHub commit, s&amp;box package revision and game revision are different identities. The same reported library version can cover several source commits. A repository <code>.version</code> file alone does not prove which commit s&amp;box published.</p>
 <p>For a GitHub install, match the source commit. For a Library Manager install, find the installed <code>sboxcool.network-storage</code> package revision and use a mapping only when publication evidence records that exact revision and commit. If no mapping is listed here, the matching published-package docs are not verified; do not assume the newest source matches your game. Existing games retain their bundled library until republished.</p>
 ${revisionHistory}
+${validation}
 <h2>Source documentation snapshots</h2>
 <div class="table-wrap"><table><thead><tr><th scope="col">Server</th><th scope="col">Library source</th><th scope="col">Publication</th><th scope="col">Documentation</th></tr></thead><tbody>${rows}</tbody></table></div>
 <h2>Historical content</h2><p>Pages absent from a historical source are omitted, never replaced with today's content. The selectors retain the page when it exists; unavailable pages are marked. Stable releases from 0.1.0 onward are included. Prerelease builds are not listed.</p>`;

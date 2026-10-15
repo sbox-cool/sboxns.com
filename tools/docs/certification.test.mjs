@@ -21,9 +21,12 @@ test('only a complete, exact pairing receives a pass', () => {
     id => id.library.revision = '900000002',
     id => id.library.manifestSha256 = 'f'.repeat(64),
     id => id.library.commit = 'f'.repeat(40),
+    id => id.library.artifactSha256 = '2'.repeat(64),
+    id => id.library.compilation = 'published-source-recompiled',
     id => id.engineBuild = 'another-engine',
     id => id.database = 'postgres',
     id => id.clientMode = 'dedicated',
+    id => id.securityMode = 'player-auth',
     id => id.suite.commit = 'f'.repeat(40),
   ]) {
     const other = report();

@@ -53,6 +53,8 @@ A GitHub push or release never sets a publication revision. `pending` and `unmap
 
 **Gate:** when the reconciled catalog or state changes, the workflow runs `versions.mjs`, `check-links.mjs` and `npm test`. It pushes to `main` only if all three pass, then requests a GitHub Pages build. A catalog the build rejects is never pushed.
 
+The state also contains a `validationRequest` for the newest released server commit and current published package revision. A library-only source push does not change that pairing. A new server release or published package revision changes the request; when `SBOX_CERTIFICATION_RUNNER_ENABLED=true`, reconciliation dispatches `certify-native.yml` with those exact identifiers using the same repository's token. Until an approved runner is configured, the request remains `pending-native-validation`, never `pass`. Dispatch credentials are not needed between workflows in this repository; they are still needed for immediate notifications from the two source repositories.
+
 Run `npm run reconcile:releases` locally to see what would change. It writes only the files that changed.
 
 ## Versions
@@ -112,3 +114,53 @@ Published-package tracking is separate from source mapping. An observed revision
 - Without JS, `.docs-version-field` is hidden and the `<noscript>` list of `.docs-version-links` in the panel is the way to switch. Its links follow the same rule as the options: the same page where it exists, otherwise the catalog `?missing=` query. Every link is a plain static link.
 - Historical content: pages absent from a historical snapshot are omitted, never replaced with today's content.
 - `/docs/versions/` is the catalog. It lists every pair with its publication status and links to its `Read docs` page.
+
+## Exact-build native evidence
+
+`tools/docs/run-native.mjs` provisions a fresh SQLite project and builds an exact server release tag, downloads the selected published package's runtime C# sources, verifies every source against the package manifest's byte count and engine CRC64, and runs `tools/native-certification` with the real native s&box `TestAppSystem`. It never substitutes GitHub main for the selected published revision.
+
+Prerequisites: Git, Python-free Node 22+, the exact .NET SDK requested by the server's `global.json` (currently 10.0.100) on `PATH`, and an already built s&box engine. Port 8443 must be free; this is one of the engine's supported local HTTP ports. Tests use isolated fixture keys and disable player authentication because headless engine runs have no real Steam player token.
+
+```sh
+node tools/docs/run-native.mjs \
+  --engine "$SBOX_GAME" \
+  --server-ref v0.5.4 \
+  --revision 422519 \
+  --output /absolute/new/report-directory
+```
+
+The suite source must be committed before recording a run. Output includes server/build/bootstrap/native logs, TRX, the requested identity, the reflected runtime method inventory, the measured expected identity and a native report. The temporary server, database, keys and downloaded source tree are stopped/removed on exit. A failed run leaves its output logs for diagnosis.
+
+**Provenance boundaries:** this path builds server source at a release tag; it does not execute the signed downloadable release binary. It recompiles the package's exact runtime sources with the real SDK; it does not exercise the engine's published `.cll` installation/access-control path. `library.compilation: published-source-recompiled` and the compiled assembly digest distinguish this result from `published-package` evidence. Neither can be transferred to the other. An unknown GitHub source mapping stays `library.commit: null`.
+
+The exact-pair key includes server version/commit/artifact tree digest, library package revision/manifest digest/compiled artifact digest/compilation provenance/source commit when known, engine source/artifact fingerprints, OS, database, client mode, security mode, suite commit and method-inventory digest.
+
+### Coverage gate
+
+Each native scenario declares the exact reflected methods it exercises. Ambiguous overloads are rejected rather than credited together. The inventory comes from the actual compiled runtime library, includes declared public methods on its exported `Sandbox` types, and excludes generated property accessors. A new or unexercised method, a skipped scenario, or a failed scenario prevents a complete `pass`.
+
+The current behavioral scenarios exercise document persistence/operations/deletion, endpoint state round trips, HTTP error propagation and unsynced revision initialization. All other runtime methods remain explicitly unvalidated. Editor/Sync Tool, networked host proxy, real player authentication, encrypted requests, PostgreSQL and dedicated-server certification are not covered by this headless SQLite suite. A green test invocation is not full-library certification.
+
+After attaching the native logs/TRX/report to a trusted run, set `native-report.json`'s `evidence` array to its actual HTTPS run/artifact URL. Then gate it:
+
+```sh
+node tools/docs/certify.mjs \
+  --expected /absolute/report-directory/expected.json \
+  --report /absolute/report-directory/native-report.json \
+  --inventory /absolute/report-directory/inventory.json \
+  --output /absolute/report-directory/certification.json
+```
+
+Exit codes: `0` all inventoried methods passed; `2` a scenario failed; `3` coverage incomplete; validation errors exit nonzero. The certificate records per-method scenarios and results. Do not hand-label a server-only, stub or managed-only report as native. JSON validation checks identity/coverage consistency, not the authenticity of arbitrary user-authored claims; only reports from the trusted runner and linked artifacts are evidence.
+
+The server's `compat/library-matrix.json` remains the canonical compatibility policy/evidence history. A native coverage report is not automatically promoted into a matrix `pass`, a package source mapping, a support recommendation or a published docs certification.
+
+### CI runner configuration
+
+`.github/workflows/certify-native.yml` accepts an exact server tag and package revision. It requires an approved self-hosted runner labelled `sbox-native`, `SBOX_GAME` set to that runner's built engine game directory, and `SBOX_CERTIFICATION_RUNNER_ENABLED=true`. Without these, preflight fails explicitly before queuing a native job. No such runner is currently configured for the library repository, and no runner or cross-repo credential is installed by this change.
+
+The workflow preserves artifacts on failed/incomplete runs and runs the exact-identity/full-method gate. It does not automatically certify a new release merely because release reconciliation discovered it. Full unattended client/server certification requires configuring the trusted native runner and extending the behavioral suite through the explicitly unvalidated methods and environments.
+
+
+Reviewed machine-readable runs under `tools/docs/evidence/` are revalidated during the docs build and rendered at `/docs/versions/#validation`, with every inventoried method and its scenario/result. The build publishes the recomputed records at `/docs/validation/index.json`; it does not trust an edited certificate's `result` label. The included real native run is deliberately `incomplete`, not a full compatibility pass.
+

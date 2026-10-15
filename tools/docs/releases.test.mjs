@@ -153,3 +153,18 @@ test('the s&box observation reference points at the current revision and fails c
   assert.deepEqual(sboxObservationRef(history, 'sbox-revisions.json'), { file: 'sbox-revisions.json', latestRevision: '422519', firstObservedAt: 'now' });
   assert.throws(() => sboxObservationRef({ latestRevision: '1', revisions: [] }, 'f'), /absent/);
 });
+
+test('native requests follow published package and released server identities, not unshipped library pushes', () => {
+  const first = buildReconciliationState(null, { manifest: manifest(), head: head(OLD_LIB), releases: releaseFacts, ...observed });
+  const pushed = reconcileManifest(manifest(), { releases: [], head: head(NEW_LIB) }).manifest;
+  const afterPush = buildReconciliationState(first, { manifest: pushed, head: head(NEW_LIB), releases: releaseFacts, ...observed });
+  assert.deepEqual(afterPush.validationRequest, first.validationRequest);
+  const published = buildReconciliationState(afterPush, { manifest: pushed, head: head(NEW_LIB), releases: releaseFacts, ...observed, sbox: { ...observed.sbox, latestRevision: '900000002' } });
+  assert.equal(published.validationRequest.libraryRevision, '900000002');
+  assert.equal(published.validationRequest.serverCommit, OLD_SERVER);
+  const released = buildReconciliationState(first, { manifest: manifest(), head: head(OLD_LIB), releases: [...releaseFacts, resolved('v0.5.5', NEW_SERVER)], ...observed });
+  assert.equal(released.validationRequest.serverRef, 'v0.5.5');
+  assert.equal(released.validationRequest.serverCommit, NEW_SERVER);
+  assert.equal(released.validationRequest.libraryRevision, observed.sbox.latestRevision);
+  assert.equal(released.validationRequest.status, 'pending-native-validation');
+});

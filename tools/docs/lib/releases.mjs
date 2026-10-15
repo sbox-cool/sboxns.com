@@ -88,8 +88,12 @@ export function sboxObservationRef(history, file) {
 export function buildReconciliationState(previous, { manifest, head, releases, sbox, observedAt }) {
   const candidate = manifest.libraries.find(l => l.commit === head.commit);
   if (!candidate) throw new Error('Library head is not in the manifest');
+  const newest = newestVersion(releases.map(release => release.id));
+  const server = releases.find(release => release.id === newest);
+  if (!server) throw new Error('No stable release is available for a native validation request');
   const headObservedAt = previous?.library?.head?.commit === head.commit ? previous.library.head.observedAt : observedAt;
   const content = {
+    validationRequest: { serverRef: server.tag, serverCommit: server.commit, libraryRevision: sbox.latestRevision, status: 'pending-native-validation' },
     library: {
       repo: LIBRARY_REPO,
       branch: LIBRARY_BRANCH,

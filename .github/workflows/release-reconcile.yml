@@ -13,6 +13,7 @@ on:
 permissions:
   contents: write
   pages: write
+  actions: write
 concurrency:
   group: regenerate-docs-publish
   cancel-in-progress: false
@@ -40,6 +41,10 @@ jobs:
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
+          previous="$(git show HEAD:tools/docs/release-state.json 2>/dev/null || printf '{}')"
+          if [ "$(printf '%s' "$previous" | jq -c '.validationRequest')" != "$(jq -c '.validationRequest' tools/docs/release-state.json)" ]; then
+            echo "validate=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Gate and publish
         if: steps.changes.outputs.changed == 'true'
         working-directory: tools/docs
@@ -61,3 +66,11 @@ jobs:
           git push origin HEAD:main
           # Pushes made with GITHUB_TOKEN do not trigger the Pages build on their own.
           gh api -X POST "repos/${{ github.repository }}/pages/builds" > /dev/null
+      - name: Request exact native pairing when an approved runner is enabled
+        if: steps.changes.outputs.validate == 'true' && vars.SBOX_CERTIFICATION_RUNNER_ENABLED == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run certify-native.yml --ref main \
+            -f "server_ref=$(jq -r '.validationRequest.serverRef' tools/docs/release-state.json)" \
+            -f "library_revision=$(jq -r '.validationRequest.libraryRevision' tools/docs/release-state.json)"

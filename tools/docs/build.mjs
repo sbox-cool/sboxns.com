@@ -257,6 +257,7 @@ function versionHtml(slug) {
   return `<section class="docs-versions" aria-label="Documentation versions">
     ${server.select}
     ${library.select}
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
     <noscript><ul class="docs-version-links">${[...server.links, ...library.links, `<li><a href="${esc(defaultHome)}">Default version</a></li>`].join('')}</ul></noscript>
   </section>`;
 }

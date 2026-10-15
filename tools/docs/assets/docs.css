@@ -83,6 +83,12 @@
 .docs-versions .docs-version-field select { width: 100%; min-width: 0; height: 34px; padding: 0 8px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--bg); color: var(--text); font: inherit; font-size: .84rem; text-overflow: ellipsis; }
 .docs-versions .docs-version-field select:focus { outline: none; }
 .docs-versions .docs-version-field select:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.docs-versions .docs-version-history { color: var(--text-2); font-size: .8rem; text-decoration: underline; }
+.docs-prose .validation-details { margin-top: 16px; min-width: 0; overflow-wrap: anywhere; }
+.docs-prose .validation-details summary { cursor: pointer; font-weight: 600; }
+.docs-prose .validation-details :is(th, td):first-child { min-width: 320px; }
+.docs-prose .validation-details :is(th, td):nth-child(2) { min-width: 100px; white-space: nowrap; }
+.docs-prose .validation-details :is(th, td):nth-child(3) { min-width: 200px; }
 .docs-version-note { margin: 0 0 16px; padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--r); color: var(--text-2); font-size: .9rem; line-height: 1.5; overflow-wrap: anywhere; }
 .docs-versions .docs-version-links { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: .8rem; }
 .docs-versions .docs-version-links li { margin: 0; }
