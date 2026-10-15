@@ -94,8 +94,8 @@
     var button = document.createElement("button");
     button.type = "button";
     button.className = "copy-button";
-    var copyIcon = '<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-copy"></use></svg>';
-    var doneIcon = '<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-check"></use></svg>';
+    var copyIcon = '<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-copy"></use></svg>';
+    var doneIcon = '<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check"></use></svg>';
     button.innerHTML = copyIcon;
     var container = code.closest("[data-copy-label], article, li, section");
     var heading = container && (container.getAttribute("data-copy-label") ? null : container.querySelector("h4, h3, h2"));

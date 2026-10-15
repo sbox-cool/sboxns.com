@@ -8,7 +8,7 @@
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function icon(name) {
-    return '<svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-' + name + '"></use></svg>';
+    return '<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-' + name + '"></use></svg>';
   }
 
   // Theme toggle: flips between dark and light and remembers the choice.
