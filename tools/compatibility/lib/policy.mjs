@@ -7,8 +7,13 @@ export function classification(body) {
   const selected = [...text.matchAll(/^\s*- \[[xX]\] \*\*(None|Additive, off by default|Changed|Library code)\*\*/gm)].map(match => names.get(match[1]));
   return selected.length === 1 ? selected[0] : null;
 }
+function buildConfiguration(file) {
+  if (file.split('/').some(segment => ['obj', 'bin', '__pycache__'].includes(segment))) return false;
+  const name = file.split('/').at(-1);
+  return /\.(props|targets|rsp|ruleset)$/i.test(name) || name === '.editorconfig' || /^(global\.json|nuget\.config|\.version|network-storage\.sbproj|\.sboxignore)$/i.test(file) || (/\.csproj$/i.test(file) && (!file.includes('/') || /^(Code|Editor)\//.test(file)));
+}
 export function runtimePath(file) {
-  return (/^(Code|Editor)\//.test(file) && !file.split('/').some(segment => ['obj', 'bin', '__pycache__'].includes(segment))) || ['network-storage.sbproj', 'source-authoring.schema.json', '.version'].includes(file) || (file.startsWith('.bin/') && !file.endsWith('.xml'));
+  return buildConfiguration(file) || (/^(Code|Editor)\//.test(file) && !file.split('/').some(segment => ['obj', 'bin', '__pycache__'].includes(segment))) || file === 'source-authoring.schema.json' || (file.startsWith('.bin/') && !file.endsWith('.xml'));
 }
 export function evaluatePullRequest({ head, files, analysis, surface, review, runtimeEvidence, editorEvidence }) {
   if (!/^[a-f0-9]{40}$/.test(head ?? '')) throw new Error('PR head must be a full commit');
@@ -17,11 +22,12 @@ export function evaluatePullRequest({ head, files, analysis, surface, review, ru
   const source = files.filter(file => runtimePath(file) && (!file.endsWith('.cs') || meaningfulCs.has(file)));
   const automation = files.some(file => file.startsWith('.github/') || file.startsWith('tools/compatibility/'));
   const runtime = source.some(file => !file.startsWith('Editor/'));
-  const editor = source.some(file => file.startsWith('Editor/'));
+  const editor = source.some(file => file.startsWith('Editor/') || file === 'source-authoring.schema.json');
   const reasons = [];
   if (analysis.errors.length) reasons.push('Contract analysis failed; compatibility is unknown.');
   if (analysis.removed.length) reasons.push(`${analysis.removed.length} existing public contract declaration(s) were removed or changed. Preserve the old contract; a rename/default/signature change is not an additive release.`);
   if (files.some(file => file.startsWith('.bin/') && !file.endsWith('.xml'))) reasons.push('Published/generated package artifacts changed. Source-recompiled tests cannot validate that binary/code-archive change; preserve existing artifacts until actual package-loading evidence is supported.');
+  if (files.some(buildConfiguration)) reasons.push('Build configuration/package metadata changed. Trusted source-only tests do not execute candidate project settings or package-loader metadata; preserve them until exact package-build/loading validation is supported.');
   const impacted = source.length > 0 || analysis.added.length > 0 || analysis.removed.length > 0;
   if (impacted || automation) {
     if (!surface) reasons.push('Choose exactly one Client-visible surface classification in the PR template.');

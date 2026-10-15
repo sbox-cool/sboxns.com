@@ -31,6 +31,7 @@ The trusted `pull_request_target` workflow never executes the PR checkout, its s
 - New public APIs and meaningful runtime/editor changes are flagged, not automatically declared safe. Private helper, using, string-literal and conditional-compilation changes remain significant even when public signatures are unchanged.
 - Whitespace/comments-only changes and documentation/assets-only PRs can pass without native testing.
 - Generated compiled package/archive changes are blocked: source-recompiled tests cannot establish package-loading compatibility.
+- Build settings/inherited compiler flags and package-loader metadata are blocked too. The trusted source harness deliberately ignores candidate MSBuild projects, so a source-only pass cannot approve their effects. Authoring-schema changes require editor evidence even though the schema lives outside `Editor/`.
 - Meaningful source changes require a canonical classification, an exact-head maintainer acknowledgement, and complete native evidence for the changed runtime/editor surface. Runtime evidence cannot stand in for editor evidence.
 
 The analyzer inspects all combinations of up to six conditional symbols. Syntax errors/unsupported syntax and larger conditional spaces fail closed. It is a conservative syntax-contract check, not a semantic theorem: equivalent spelling/refactoring can still be flagged, and arbitrary behavioral compatibility cannot be proven from a diff. Preserve existing contracts rather than treating a green check as permission to silently change them.

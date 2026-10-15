@@ -44,3 +44,13 @@ test('classification requires one visible canonical checkbox; comments and multi
   assert.equal(classification('- [x] **Library code**'), 'library-code');
   assert.equal(classification('- [x] **None**\n- [x] **Changed**'), null);
 });
+test('source-only native evidence cannot approve inherited build flags or SDK project changes', () => {
+  const input = validated();
+  assert.equal(evaluatePullRequest({ ...input, files: ['Directory.Build.props'] }).state, 'failure');
+  assert.equal(evaluatePullRequest({ ...input, files: ['Code/network-storage.csproj'] }).state, 'failure');
+});
+test('authoring schema changes need actual editor evidence rather than runtime evidence alone', () => {
+  const input = { ...validated(), files: ['source-authoring.schema.json'] };
+  assert.equal(evaluatePullRequest(input).state, 'failure');
+  assert.equal(evaluatePullRequest({ ...input, editorEvidence: { head, verified: true } }).state, 'success');
+});
