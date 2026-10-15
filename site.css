@@ -8,6 +8,8 @@ body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 syste
 .brand img { width: 32px; height: 32px; border-radius: 6px; }
 nav { display: flex; flex-wrap: wrap; gap: 24px; font-size: .9rem; }
 nav a { text-decoration: none; color: var(--muted); }
+nav a.nav-icon { display: inline-flex; align-items: center; align-self: center; }
+nav a.nav-icon svg { width: 20px; height: 20px; }
 a { color: var(--accent); text-underline-offset: 4px; }
 a:hover { color: var(--fg); }
 a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
