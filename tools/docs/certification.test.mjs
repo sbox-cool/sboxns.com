@@ -71,3 +71,17 @@ test('pair keys do not depend on JSON key insertion order', () => {
   const id = identity();
   assert.equal(identityKey(id), identityKey(Object.fromEntries(Object.entries(id).reverse())));
 });
+
+test('candidate source evidence is bound to a Git head and cannot claim an assigned package revision', () => {
+  const expected = identity();
+  expected.library.compilation = 'github-source';
+  expected.library.revision = null;
+  const candidate = report();
+  candidate.identity = structuredClone(expected);
+  assert.equal(certify(expected, candidate, methods).result, 'pass');
+  candidate.identity.library.revision = '900000001';
+  assert.throws(() => certify(expected, candidate, methods), /must not claim/);
+  candidate.identity = structuredClone(expected);
+  candidate.identity.library.commit = null;
+  assert.throws(() => certify(expected, candidate, methods), /library.commit/);
+});

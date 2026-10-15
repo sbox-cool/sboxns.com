@@ -16,8 +16,11 @@ export function validateIdentity(identity) {
   if (identity.library?.commit !== null) sha(identity.library?.commit, 40, 'library.commit');
   sha(identity.library?.manifestSha256, 64, 'library.manifestSha256');
   sha(identity.library?.artifactSha256, 64, 'library.artifactSha256');
-  if (!['published-package', 'published-source-recompiled'].includes(identity.library.compilation)) throw new Error('Missing library compilation provenance');
-  if (!/^[1-9]\d*$/.test(identity.library.revision ?? '')) throw new Error('Missing published library revision');
+  if (!['published-package', 'published-source-recompiled', 'github-source'].includes(identity.library.compilation)) throw new Error('Missing library compilation provenance');
+  if (identity.library.compilation === 'github-source') {
+    sha(identity.library.commit, 40, 'library.commit');
+    if (identity.library.revision !== null) throw new Error('Unpublished GitHub source must not claim a package revision');
+  } else if (!/^[1-9]\d*$/.test(identity.library.revision ?? '')) throw new Error('Missing published library revision');
   sha(identity.suite?.commit, 40, 'suite.commit');
   sha(identity.suite.inventorySha256, 64, 'suite.inventorySha256');
   for (const field of ['engineBuild', 'os', 'database', 'clientMode', 'securityMode']) text(identity[field], field);

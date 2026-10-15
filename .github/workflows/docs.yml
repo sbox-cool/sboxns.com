@@ -11,6 +11,7 @@ on:
       - '.github/workflows/release-reconcile.yml'
       - '.github/workflows/certify-native.yml'
       - 'tools/native-certification/**'
+      - 'tools/compatibility/**'
   schedule:
     - cron: '23 5 * * *'
 permissions:
@@ -27,6 +28,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.100
       - name: Build
         working-directory: tools/docs
         run: |
@@ -35,6 +39,7 @@ jobs:
           node versions.mjs
           node check-links.mjs
           npm test
+          dotnet run --project ../compatibility/ContractInspector -- --self-test
       - name: Commit and publish
         if: github.event_name != 'pull_request'
         env:

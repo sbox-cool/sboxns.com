@@ -85,7 +85,8 @@ const validation = `<h2 id="validation">Exact-build validation</h2>
 <p>Native test evidence applies only to its exact client, server artifacts, engine, database and security mode. Incomplete means some methods remain unvalidated, even when every executed scenario passed. <a href="/docs/validation/index.json">Machine-readable results</a>.</p>` + (certificates.length ? certificates.map(certificate => {
   const identity = certificate.identity;
   const passed = certificate.methods.filter(method => method.result === 'pass').length;
-  return `<details class="validation-details" id="validation-${certificate.key}"><summary>Server ${esc(identity.server.version)} + package revision ${esc(identity.library.revision)}: ${esc(certificate.result)} (${passed}/${certificate.methods.length} methods)</summary>
+  const client = identity.library.compilation === 'github-source' ? `Git source ${identity.library.commit}` : `package revision ${identity.library.revision}`;
+  return `<details class="validation-details" id="validation-${certificate.key}"><summary>Server ${esc(identity.server.version)} + ${esc(client)}: ${esc(certificate.result)} (${passed}/${certificate.methods.length} methods)</summary>
 <p>${esc(identity.os)}; ${esc(identity.database)}; ${esc(identity.clientMode)}; ${esc(identity.securityMode)}. Library compilation: <code>${esc(identity.library.compilation)}</code>. Source-recompiled results do not certify published code-archive loading. Source-built server artifacts do not certify a separately built release binary.</p>
 <p>Server commit <code>${esc(identity.server.commit)}</code>; suite commit <code>${esc(identity.suite.commit)}</code>. Engine build: <code>${esc(identity.engineBuild)}</code>.</p>
 <p>${certificate.evidence.map((url, index) => `<a href="${esc(url)}">Run evidence ${index + 1}</a>`).join(' · ')}</p>

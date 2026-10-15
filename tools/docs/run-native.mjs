@@ -8,6 +8,7 @@ import os from 'node:os';
 import { createServer } from 'node:net';
 import { fileURLToPath } from 'node:url';
 import { ensureBareClone, resolveRef } from './lib/git.mjs';
+import { materializeSource } from '../compatibility/lib/git-source.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const site = path.resolve(here, '../..');
@@ -15,12 +16,17 @@ const args = process.argv.slice(2);
 function option(name) { const i = args.indexOf(name); if (i < 0 || !args[i + 1]) throw new Error(`Required ${name}`); return args[i + 1]; }
 const engine = path.resolve(option('--engine'));
 const output = path.resolve(option('--output'));
-const revision = option('--revision');
+const revision = args.includes('--revision') ? option('--revision') : null;
+const libraryCommit = args.includes('--library-commit') ? option('--library-commit') : null;
+const libraryPr = args.includes('--library-pr') ? option('--library-pr') : null;
+if (!!revision === !!libraryCommit) throw new Error('Select exactly one --revision or --library-commit');
+if (libraryCommit && !/^[a-f0-9]{40}$/.test(libraryCommit)) throw new Error('Library source must be an exact commit');
+if (libraryPr && !/^[1-9]\d*$/.test(libraryPr)) throw new Error('Library PR number must be numeric');
 const ref = option('--server-ref');
 if (!/^v\d+\.\d+\.\d+$/.test(ref)) throw new Error('Select an exact stable server tag');
 if (existsSync(output)) throw new Error('Output must be a new directory');
 if (!existsSync(path.join(engine, 'bin/managed/Sandbox.Engine.dll'))) throw new Error('A built native sbox engine is required');
-if (execFileSync('git', ['status', '--porcelain', '--', 'tools/native-certification', 'tools/docs/run-native.mjs', 'tools/docs/download-library.mjs'], { cwd: site, encoding: 'utf8' }).trim()) throw new Error('Commit the native suite before recording exact-source evidence');
+if (execFileSync('git', ['status', '--porcelain', '--', 'tools/native-certification', 'tools/docs/run-native.mjs', 'tools/docs/download-library.mjs', 'tools/compatibility/lib/git-source.mjs'], { cwd: site, encoding: 'utf8' }).trim()) throw new Error('Commit the native suite before recording exact-source evidence');
 const suiteCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: site, encoding: 'utf8' }).trim();
 mkdirSync(output, { recursive: true });
 await new Promise((resolve, reject) => {
@@ -43,8 +49,21 @@ function run(command, arguments_, log, options = {}) {
   finally { closeSync(fd); }
 }
 try {
-  run(process.execPath, [path.join(here, 'download-library.mjs'), '--revision', revision, '--output', path.join(work, 'library')], 'download.log');
-  const publication = JSON.parse(readFileSync(path.join(work, 'library/publication.json'), 'utf8'));
+  let publication;
+  if (libraryCommit) {
+    const libraryBare = ensureBareClone({ name: 'library', url: 'https://github.com/sbox-cool/sbox-network-storage.git', cacheDir: path.join(here, '.cache') });
+    if (libraryPr) {
+      run('git', ['-C', libraryBare, 'fetch', '--quiet', 'origin', `refs/pull/${libraryPr}/head`], 'download.log');
+      if (execFileSync('git', ['-C', libraryBare, 'rev-parse', 'FETCH_HEAD'], { encoding: 'utf8' }).trim() !== libraryCommit) throw new Error('Candidate PR head changed before the native run');
+    }
+    const snapshot = materializeSource(libraryBare, libraryCommit, path.join(work, 'library'), ['Code']);
+    if (!snapshot.count) throw new Error('Candidate has no runtime source');
+    publication = { commit: libraryCommit, revision: null, manifestSha256: snapshot.sha256, compilation: 'github-source' };
+    writeFileSync(path.join(work, 'library/publication.json'), JSON.stringify(publication));
+  } else {
+    run(process.execPath, [path.join(here, 'download-library.mjs'), '--revision', revision, '--output', path.join(work, 'library')], 'download.log');
+    publication = JSON.parse(readFileSync(path.join(work, 'library/publication.json'), 'utf8'));
+  }
   const bare = ensureBareClone({ name: 'server', url: 'https://github.com/sbox-cool/sbox-network-storage-server.git', cacheDir: path.join(here, '.cache') });
   const source = resolveRef(bare, ref);
   const repo = path.join(work, 'server');
@@ -87,7 +106,7 @@ try {
   const engineManifest = JSON.parse(readFileSync(path.join(engine, 'bin/.sbox-artifacts.json'), 'utf8'));
   const identity = {
     server: { version: info.version, kind: info.kind, commit: source.commit, artifactSha256 },
-    library: { commit: null, revision: publication.revision, manifestSha256: publication.manifestSha256, compilation: publication.compilation },
+    library: { commit: publication.commit, revision: publication.revision, manifestSha256: publication.manifestSha256, compilation: publication.compilation },
     engineBuild: `git:${engineManifest.commit};managed:${treeDigest(path.join(engine, 'bin/managed'))};native:${treeDigest(path.join(engine, 'bin', nativeDir))}`,
     database: 'sqlite', clientMode: 'game', securityMode: 'no-player-auth', suite: { commit: suiteCommit },
   };
@@ -95,9 +114,9 @@ try {
   run('dotnet', ['test', path.join(site, 'tools/native-certification/NativeCertification.csproj'), '-nologo', `-p:SboxGame=${engine}`, `-p:NsLibrary=${path.join(work, 'library')}`, '--logger', `trx;LogFileName=${path.join(output, 'native.trx')}`], 'native.log', {
     env: { ...process.env, FACEPUNCH_ENGINE: engine, NS_E2E_PROJECT: project, NS_E2E_KEY: publicKey, NS_E2E_BASEURL: 'http://127.0.0.1:8443', NS_CERT_IDENTITY: path.join(output, 'requested.json'), NS_CERT_OUTPUT: output },
   });
-  console.log(`Native published-source run completed. Reports: ${output}. Add the durable run/artifact evidence URL before invoking certify.mjs; do not treat partial method coverage as a full certification.`);
+  console.log(`Native ${publication.compilation} run completed. Reports: ${output}. Add the durable run/artifact evidence URL before invoking certify.mjs; do not treat partial method coverage as a full certification.`);
 } finally {
-  if (server && server.exitCode === null) {
+  if (server?.pid && server.exitCode === null) {
     await new Promise(resolve => { const timer = setTimeout(() => { server.kill('SIGKILL'); }, 5000); server.once('exit', () => { clearTimeout(timer); resolve(); }); server.kill('SIGTERM'); });
   }
   rmSync(work, { recursive: true, force: true });

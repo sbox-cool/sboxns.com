@@ -64,7 +64,7 @@ public sealed class NativeEvidence
             File.WriteAllText(Path.Combine(output, "inventory.json"), JsonSerializer.Serialize(inventory, json));
             File.WriteAllText(Path.Combine(output, "expected.json"), identity.ToJsonString(json));
             File.WriteAllText(Path.Combine(output, "native-report.json"), JsonSerializer.Serialize(new {
-                identity, runtime = "sbox-native", compilation = "published-source-recompiled", startedAt = started,
+                identity, runtime = "sbox-native", compilation = identity["library"]!["compilation"]!.GetValue<string>(), startedAt = started,
                 finishedAt = DateTimeOffset.UtcNow, evidence = Array.Empty<string>(), scenarios,
             }, json));
         }

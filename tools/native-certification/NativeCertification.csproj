@@ -11,7 +11,7 @@
   </PropertyGroup>
   <Target Name="RequireInputs" BeforeTargets="ResolveReferences">
     <Error Condition="!Exists('$(SboxManaged)/Sandbox.Engine.dll')" Text="Set SboxGame to an installed engine game directory." />
-    <Error Condition="!Exists('$(NsLibrary)/publication.json')" Text="Use download-library.mjs to supply a verified published source directory." />
+    <Error Condition="!Exists('$(NsLibrary)/publication.json')" Text="Use the trusted native runner to supply an exact verified source identity." />
   </Target>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />

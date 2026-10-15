@@ -12,7 +12,7 @@
     "check:links": "node check-links.mjs",
     "track:revisions": "node track-revisions.mjs",
     "reconcile:releases": "node reconcile-releases.mjs",
-    "test": "node --test *.test.mjs"
+    "test": "node --test *.test.mjs ../compatibility/*.test.mjs"
   },
   "dependencies": {
     "marked": "18.1.1"
