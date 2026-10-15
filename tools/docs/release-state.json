@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-15T00:04:53.827Z",
+  "updatedAt": "2026-10-15T10:18:13.134Z",
   "validationRequest": {
     "serverRef": "v0.5.4",
     "serverCommit": "d35738b514db9691aeab2b888133f7bb80bbaa0a",
-    "libraryRevision": "422519",
+    "libraryRevision": "423774",
     "status": "pending-native-validation"
   },
   "library": {
@@ -82,8 +82,8 @@
   },
   "sbox": {
     "file": "sbox-revisions.json",
-    "latestRevision": "422519",
-    "firstObservedAt": "2026-10-14T22:39:55.068Z"
+    "latestRevision": "423774",
+    "firstObservedAt": "2026-10-15T10:07:09.395Z"
   },
   "publication": [
     {
