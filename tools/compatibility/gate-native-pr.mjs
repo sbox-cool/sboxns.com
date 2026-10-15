@@ -2,8 +2,11 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { certify } from '../docs/lib/certification.mjs';
 const root = process.argv[2];
-const evidence = process.env.NATIVE_EVIDENCE_URL;
-if (!root || !evidence?.startsWith('https://github.com/sbox-cool/sbox-network-storage/actions/runs/')) throw new Error('Trusted native report root and run evidence URL are required');
+const localEvidence = process.argv[3] === '--local-evidence' ? process.argv[4] : null;
+if (localEvidence && process.env.GITHUB_ACTIONS) throw new Error('Actions must use their own native run evidence URL');
+const evidence = localEvidence ?? process.env.NATIVE_EVIDENCE_URL;
+const validEvidence = localEvidence ? /^https:\/\/github\.com\/sbox-cool\/(?:sboxns\.com|sbox-network-storage)\/(?:pull|issues)\/\d+#issuecomment-\d+$/.test(evidence) : evidence?.startsWith('https://github.com/sbox-cool/sbox-network-storage/actions/runs/');
+if (!root || !validEvidence) throw new Error('Trusted native report root and actual native run evidence URL are required');
 let complete = true;
 let baselineIdentity;
 for (const stage of ['baseline', 'candidate']) {

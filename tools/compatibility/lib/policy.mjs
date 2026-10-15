@@ -28,8 +28,8 @@ export function evaluatePullRequest({ head, files, analysis, surface, review, ru
     if (impacted && surface === 'none') reasons.push('Meaningful library/source-authoring changes cannot self-declare no client impact.');
     if (!review || review.head !== head || review.surface !== surface || !review.maintainer) reasons.push(`A maintainer must acknowledge this exact head with /compatibility-review ${head} ${surface ?? '<classification>'}.`);
   }
-  if ((runtime || analysis.added.length > 0 && !editor) && (!runtimeEvidence?.verified || runtimeEvidence.head !== head)) reasons.push('A successful trusted native-runtime workflow for this exact head is missing. HTTP-only, another commit, skipped runs and incomplete coverage do not count.');
-  if (editor && (!editorEvidence?.verified || editorEvidence.head !== head)) reasons.push('A successful trusted editor workflow for this exact head is missing. A headless runtime test does not validate Sync Tool/editor behavior.');
+  if ((runtime || analysis.added.length > 0 && !editor) && (!runtimeEvidence?.verified || runtimeEvidence.head !== head)) reasons.push('Complete trusted native-runtime evidence for this exact head is missing. HTTP-only, another commit, skipped runs and incomplete coverage do not count.');
+  if (editor && (!editorEvidence?.verified || editorEvidence.head !== head)) reasons.push('Complete trusted editor evidence for this exact head is missing. A headless runtime test does not validate Sync Tool/editor behavior.');
   return { head, state: reasons.length ? 'failure' : 'success', impact: impacted ? 'potential-client-change' : automation ? 'automation-change' : 'none', surface: surface ?? (impacted ? null : 'none'), sourceFiles: source, removed: analysis.removed, added: analysis.added, reasons };
 }
 export function prFinding(repo, number, result, prUrl) {

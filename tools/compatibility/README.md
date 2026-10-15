@@ -63,6 +63,18 @@ It tests the actual current published runtime sources as the baseline and the ex
 
 The native job has no status-writing token. A separate hosted job posts the result; the PR gate verifies the completed trusted run rather than trusting a PR-supplied status link. Editor changes require an actual editor run/canonical editor record, not this headless harness.
 
+Local operators can exercise the same comparison gate with `--local-evidence`
+and an actual GitHub issue/PR comment recording the run. Actions reject this
+override and must use their native run URL. Local evidence does not create a
+trusted Actions status.
+
+The measured baseline/candidate smoke reports are retained under
+`tools/docs/evidence/compatibility-smoke-{baseline,candidate}/`: revision `422519` and
+Git source `13f51a81f046b1722a6b747712afebccaa9559b3` against server `v0.5.4`,
+SQLite, game/no-player-auth. Both passed four native scenarios but covered
+only 13/101 inventoried methods. The comparison gate exited 3 with both
+certificates `incomplete`; these are deliberately not canonical pass records.
+
 ## Merge protection
 
-The status context is `Network Storage / compatibility`. Make it required with up-to-date branches after installing the trusted workflow. A visible failing check alone does not block merges/direct pushes on an unprotected branch. The repository was unprotected when this work began; do not describe advisory checks as enforced merge protection. Keep workflow/policy changes subject to maintainer review. The server workflows remain maintainer-owned and require their owner's explicit cutover before installing a server-side equivalent.
+The status context is `Network Storage / compatibility`. Library main now requires it with up-to-date branches, including administrators; force pushes and deletion are disabled. Scheduled/event automation still requires the library workflow PR to merge. Its bootstrap check requires a real exact-head maintainer acknowledgement, not an automated approval. Keep workflow/policy changes subject to maintainer review. The server workflows remain maintainer-owned and require their owner's explicit cutover before installing a server-side equivalent.
