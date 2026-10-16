@@ -154,7 +154,7 @@ ${foot(96, 990)}
   <span class="c"># damage ≥ hp, or reject</span></pre></div>
 <ul class="list abs" style="left:96px;top:910px;width:1728px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
 <li>${check}<span><b>One request</b> loads every table. No ping per lookup.</span></li>
-<li>${check}<span><b>Sync Tool</b> pushes and pulls them with your project.</span></li>
+<li>${check}<span><b>Snapshotted</b> with every published build.</span></li>
 <li>${check}<span><b>Change a value live</b>, no game update needed.</span></li></ul>` }) },
 
   { file: 'images/marketing/card-anti-exploit.png', ...page({ width: 1920, height: 1080, gx: '72%', gy: '45%', body: `
