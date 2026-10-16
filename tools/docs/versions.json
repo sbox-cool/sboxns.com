@@ -92,6 +92,17 @@
         "revision": null,
         "evidence": null
       }
+    },
+    {
+      "id": "source-5369108",
+      "label": "main source (5369108)",
+      "ref": "5369108f168b35d6fc78fa4aaaa1c3af724232ee",
+      "commit": "5369108f168b35d6fc78fa4aaaa1c3af724232ee",
+      "publication": {
+        "status": "unverified",
+        "revision": null,
+        "evidence": null
+      }
     }
   ]
 }
