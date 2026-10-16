@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alerting | Network Storage docs</title>
+  <meta name="description" content="Email and webhook alerts for errors, updates and certificates.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.5.2/source-fc58d4e/server/alerting/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Alerting | Network Storage docs">
+  <meta property="og:description" content="Email and webhook alerts for errors, updates and certificates.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.5.2/source-fc58d4e/server/alerting/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.2/source-fc58d4e/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.2/source-fc58d4e/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.2 · main source (fc58d4e)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/0.5.4/source-fc58d4e/server/alerting/">0.5.4</option><option value="/docs/versions/0.5.3/source-fc58d4e/server/alerting/">0.5.3</option><option value="/docs/versions/0.5.2/source-fc58d4e/server/alerting/" selected>0.5.2</option><option value="/docs/versions/0.5.1/source-fc58d4e/server/alerting/">0.5.1</option><option value="/docs/versions/0.5.0/source-fc58d4e/server/alerting/">0.5.0</option><option value="/docs/versions/0.4.0/source-fc58d4e/server/alerting/">0.4.0</option><option value="/docs/versions/0.3.0/source-fc58d4e/server/alerting/">0.3.0</option><option value="/docs/versions/0.2.0/source-fc58d4e/server/alerting/">0.2.0</option><option value="/docs/versions/0.1.0/source-fc58d4e/server/alerting/">0.1.0</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.2/source-13f51a8/server/alerting/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.2/source-d369d1b/server/alerting/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.2/source-fc58d4e/server/alerting/" selected>main source (fc58d4e)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/0.5.4/source-fc58d4e/server/alerting/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-fc58d4e/server/alerting/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-fc58d4e/server/alerting/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-fc58d4e/server/alerting/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-fc58d4e/server/alerting/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-fc58d4e/server/alerting/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-fc58d4e/server/alerting/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-fc58d4e/server/alerting/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-fc58d4e/server/alerting/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.2/source-13f51a8/server/alerting/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.2/source-d369d1b/server/alerting/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.2/source-fc58d4e/server/alerting/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.4/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.2/source-fc58d4e/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.2/source-fc58d4e/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.2/source-fc58d4e/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.2/source-fc58d4e/library/overview/">Library overview</a><a href="/docs/versions/0.5.2/source-fc58d4e/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.2/source-fc58d4e/library/examples/">Examples</a><a href="/docs/versions/0.5.2/source-fc58d4e/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.2/source-fc58d4e/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.2/source-fc58d4e/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/configuration/">Configuration</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/database/">Databases</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/export/">Export and move projects</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/modules/">Modules</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/alerting/" aria-current="page">Alerting</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.2/source-fc58d4e/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.2/source-fc58d4e/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.2/source-fc58d4e/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.2/source-fc58d4e/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.2/source-fc58d4e/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Alerting</span></nav>
+  <article class="prose docs-prose">
+<h1>Alerting</h1>
+<p class="lead">Email and webhook alerts for errors, updates and certificates.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#channels">Channels</a><a href="#what-triggers-a-captured-error-alert">What triggers a captured-error alert</a><a href="#limits">Limits</a><a href="#discord-setup">Discord setup</a><a href="#smtp-setup">SMTP setup</a><a href="#providers-optional-one-click">Providers (optional, one-click)</a><a href="#webhooks">Webhooks</a><a href="#checking-the-configuration">Checking the configuration</a></nav>
+<p>sbox-ns notifies operators through <strong>channels</strong>: email over SMTP, Discord
+webhooks, and generic HTTP webhooks (with presets for Slack-compatible
+webhooks, Microsoft Teams, ntfy and Gotify). Alerts come from two sources:</p>
+<ul>
+<li><strong>Captured errors</strong>, built in and always on (below).</li>
+<li><strong>Alert rules</strong> you add in the owner console under <strong>Alerts</strong>, for example
+&quot;CPU use above 90 % for 2 minutes&quot; or &quot;free disk below 5 GB&quot;. Rules,
+metrics and the Server page are described in <a href="/docs/versions/0.5.2/source-fc58d4e/server/monitoring/">monitoring.md</a>.</li>
+</ul>
+<p>Every send is best-effort: a failed send is logged, shown in the alert
+history, and never fails the request or rule check that triggered it. No
+channel is configured by default, and no outside service is required.</p>
+<h2 id="channels"><a class="anchor" href="#channels" aria-hidden="true" tabindex="-1">#</a>Channels</h2>
+<p>Channels come from two places and are used the same way:</p>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Kinds</th>
+<th>Edited with</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>alerts.toml</code>, <code>conf.d/</code>, <code>NS_</code> environment variables</td>
+<td>one Discord webhook, one SMTP target</td>
+<td><code>sbox-ns config set</code>, restart to apply</td>
+</tr>
+<tr>
+<td>Owner console, <strong>Alerts → Channels</strong></td>
+<td>any number of email, Discord and webhook channels</td>
+<td>the console, live</td>
+</tr>
+</tbody></table>
+<p>Both appear in the console&#39;s channel list; <code>alerts.toml</code> channels are marked
+and read-only there. Each console channel has:</p>
+<ul>
+<li><strong>Minimum severity</strong>: <code>info</code>, <code>warning</code>, <code>error</code> or <code>critical</code>. The channel
+receives alerts at or above it. <code>alerts.toml</code> channels receive everything.</li>
+<li><strong>Scope</strong>: all alerts (server-wide), or only alerts about one project.
+Project-scoped channels receive that project&#39;s captured errors only; rules
+watch the whole server, so their alerts go to server-wide channels.</li>
+<li><strong>Send test</strong> sends a real notification and shows the result next to the
+channel. Tests ignore the severity and scope filters.</li>
+</ul>
+<h3 id="secrets"><a class="anchor" href="#secrets" aria-hidden="true" tabindex="-1">#</a>Secrets</h3>
+<p>Webhook URLs (which embed tokens), SMTP passwords and webhook signing
+secrets entered in the console are written owner-only (<code>0600</code>, or an
+owner-only ACL on Windows) to the server&#39;s secrets folder
+(<code>&lt;data&gt;/state/secrets/monitoring/</code> in the default layout) and never into
+the settings file. The console never shows them again: leave a secret field
+blank when editing to keep the saved value. A server export includes them
+only when you export with secrets.</p>
+<p><code>alerts.discord.webhook_url</code> and <code>alerts.smtp.password</code> are flagged secret:
+<code>sbox-ns config show</code> and <code>sbox-ns config get</code> print <code>********</code> unless
+<code>--show-secrets</code> is passed, the MCP <code>config_set</code> tool refuses them, and the
+values never appear in logs or alert payloads. Prefer the <code>*_file</code> keys so
+secrets live outside the TOML files (same pattern as
+<code>database.postgres.password_file</code>). The first line of the file is used.</p>
+<h2 id="what-triggers-a-captured-error-alert"><a class="anchor" href="#what-triggers-a-captured-error-alert" aria-hidden="true" tabindex="-1">#</a>What triggers a captured-error alert</h2>
+<p>Every error that reaches the shared error pipeline fans out to the log plus
+every channel that accepts the <code>error</code> severity:</p>
+<ul>
+<li>Unhandled request exceptions captured for the project&#39;s <strong>Errors</strong> tab (5xx,
+plus 503 database outages).</li>
+<li>Native endpoint-execution shadow failures (<code>EndpointShadowReporter</code>):
+executor exceptions, 5xx results, and 409 data-integrity conflicts
+(<code>SAVE_REGRESSION_BLOCKED</code> / <code>STALE_SAVE</code>). Repeated identical conflicts
+are throttled so a looping autosave cannot flood the channel.</li>
+<li>Compatibility-proxy captures (<code>ProxyErrorReporter</code>) and handler-caught
+exceptions reported via <code>HandlerErrorReporter</code>.</li>
+<li>Data-plane storage errors (<code>INetworkStorageErrorAlertSink</code>), e.g.
+unconfirmed saves reported by the game through
+<code>POST /api/network-storage/{projectId}/save-failure</code>. That route needs an
+enabled project and real collection and record ids, and cuts the client&#39;s
+<code>reason</code> to 200 characters.</li>
+<li>Optional library compatibility alerts: set the project&#39;s affected-traffic
+percentage in <strong>Project → Clients</strong>. A flushed batch needs at least 100
+authenticated requests and the configured share of unsupported/blocked
+library traffic (including the project&#39;s explicit minimum). The default is
+off. Version identities are self-reported. See <a href="/docs/versions/0.5.2/source-fc58d4e/compat/compatibility/">compatibility.md</a>.</li>
+</ul>
+<p>Each alert carries the correlation ID, route, classification, project, and
+timestamp so it can be matched against the project&#39;s Errors tab and the logs.</p>
+<h2 id="limits"><a class="anchor" href="#limits" aria-hidden="true" tabindex="-1">#</a>Limits</h2>
+<p>Anyone with a game&#39;s public key can cause some alerts, so every alert source
+(captured errors and rules) shares one limit. The log still records every
+error.</p>
+<ul>
+<li>An alert of a kind already sent in the last 10 minutes is not sent again.
+For errors the kind is the project, operation and code plus the collection
+(storage errors) or the route (request errors); the player does not count.
+For rules it is the rule and the transition (firing or resolved). The next
+alert of that kind says how many were held back.</li>
+<li>At most 10 alerts are sent per minute. The next alert sent says how many
+were dropped.</li>
+</ul>
+<p>Rules also have their own cooldown (see <a href="/docs/versions/0.5.2/source-fc58d4e/server/monitoring/">monitoring.md</a>).</p>
+<p>Chat channels (Discord, Slack-compatible, Teams) show the message, route and
+project as code, so text sent by a game client cannot add links or
+formatting, and alerts never ping anyone.</p>
+<h2 id="discord-setup"><a class="anchor" href="#discord-setup" aria-hidden="true" tabindex="-1">#</a>Discord setup</h2>
+<ol>
+<li>In the Discord channel: <strong>Edit Channel → Integrations → Webhooks →
+New Webhook</strong>, copy the webhook URL.</li>
+<li>Add it in <strong>Alerts → Add a channel</strong> (type Discord), or in config:</li>
+</ol>
+<pre><code class="language-toml"># alerts.toml
+[alerts.discord]
+enabled = true
+webhook_url_file = &quot;secrets/discord_webhook_url&quot;
+username = &quot;sbox-ns&quot;</code></pre>
+<p>or with environment variables:</p>
+<pre><code class="language-sh">NS_ALERTS__DISCORD__ENABLED=true
+NS_ALERTS__DISCORD__WEBHOOK_URL_FILE=/run/secrets/discord_webhook</code></pre>
+<p><code>webhook_url</code> and <code>webhook_url_file</code> are mutually exclusive; setting both is
+a validation error. Relative <code>*_file</code> paths resolve against the config
+folder. Discord URLs must use <code>https://</code>. The message is a single embed
+(title, description and fields; red for errors, yellow for warnings, blue
+for info, green for resolved).</p>
+<h3 id="webhook-target-safety"><a class="anchor" href="#webhook-target-safety" aria-hidden="true" tabindex="-1">#</a>Webhook target safety</h3>
+<p>Console-saved Discord and generic webhook URLs must not point at this server
+itself: loopback, link-local (including the <code>169.254.169.254</code> cloud metadata
+address), unspecified addresses and <code>localhost</code> are refused at save time.
+RFC 1918 private addresses stay allowed for self-hosters whose alert
+receiver lives on their own network. Alert sends never follow HTTP
+redirects.</p>
+<h2 id="smtp-setup"><a class="anchor" href="#smtp-setup" aria-hidden="true" tabindex="-1">#</a>SMTP setup</h2>
+<p>Add an email channel in the console (host, port, STARTTLS, optional user
+name and password, from, comma-separated recipients), or in config:</p>
+<pre><code class="language-toml"># alerts.toml
+[alerts.smtp]
+enabled = true
+host = &quot;mail.example.com&quot;
+port = 587
+username = &quot;sbox-ns@example.com&quot;
+password_file = &quot;secrets/smtp_password&quot;
+from = &quot;sbox-ns@example.com&quot;
+to = &quot;ops@example.com, oncall@example.com&quot;
+use_tls = true</code></pre>
+<p><code>password</code> and <code>password_file</code> are mutually exclusive. Empty <code>username</code>
+means no authentication. <code>to</code> accepts comma- or semicolon-separated
+addresses. Mail is plain text with a one-line subject (for errors
+<code>[sbox-ns] &lt;Classification&gt; &lt;Method&gt; &lt;Path&gt; (&lt;CorrelationId&gt;)</code>, for rules
+<code>[sbox-ns] FIRING &lt;rule&gt;</code> or <code>[sbox-ns] RESOLVED &lt;rule&gt;</code>) and a field-list
+body; delivery uses a 10-second timeout and STARTTLS when TLS is on.</p>
+<h2 id="providers-optional-one-click"><a class="anchor" href="#providers-optional-one-click" aria-hidden="true" tabindex="-1">#</a>Providers (optional, one-click)</h2>
+<p>Providers are optional adapters behind the same channels above. The server is
+fully self-contained: plain SMTP and webhooks need no outside account, and a
+provider never runs until you set it up in <strong>Alerts → Providers</strong>. Setup
+first shows exactly what will be created on the provider; confirming checks
+the credentials, creates it, and adds a provider channel, so the severity
+and project filters, the test button and the shared limits apply unchanged.
+Tear down deletes only the resources the setup recorded, and misses count as
+already removed. The UI labels each provider <strong>First party</strong> (sboxns.com) or
+<strong>Third party</strong> (everyone else). Provider tokens live owner-only in
+<code>&lt;data&gt;/state/secrets/monitoring/provider-&lt;id&gt;.json</code> and are never shown
+back: the preview asks for the token again on confirm.</p>
+<h3 id="cloudflare-email-third-party"><a class="anchor" href="#cloudflare-email-third-party" aria-hidden="true" tabindex="-1">#</a>Cloudflare Email (third party)</h3>
+<p>Outbound alerts through Cloudflare Email Sending, with optional forwarding
+through Email Routing. Create an API token with least-privilege scopes, all
+on the zone:</p>
+<ul>
+<li><strong>Email Sending, Edit</strong> (required: check the token, manage the sending
+subdomain, send).</li>
+<li><strong>Email Routing Rules, Edit</strong> (only when forwarding to an operator address
+is turned on).</li>
+</ul>
+<p>Setup creates the Email Sending subdomain and, when asked, the routing
+destination address and rule; it only reads the subdomain&#39;s DNS records back
+so you can add them at your DNS yourself. Alerts go to the forwarding
+address, or to the sender address when forwarding is off. Only these
+<code>https://api.cloudflare.com/client/v4</code> paths are called: <code>GET</code>
+<code>/user/tokens/verify</code>, <code>POST /zones/{zone_id}/email/sending/subdomains</code>,
+<code>GET</code> the subdomain&#39;s <code>/dns</code> and <code>/dns/status</code>, <code>POST</code>
+<code>/accounts/{account_id}/email/sending/send</code>, plus the routing
+<code>/addresses</code> and <code>/rules</code> paths when forwarding, deleted by teardown.</p>
+<h3 id="sboxnscom-email-first-party"><a class="anchor" href="#sboxnscom-email-first-party" aria-hidden="true" tabindex="-1">#</a>sboxns.com email (first party)</h3>
+<p>Sends as your sboxns.com name and forwards replies to you, using the
+existing tunnel or DNS identity. It stays hidden until the server has one
+(<code>tunnel enable</code> or <code>dns enable</code>). This repo holds only the client side of
+the proposed, versioned <code>sboxns.email/v1</code> contract (<code>GET v1/status</code>, <code>POST</code>
+<code>v1/forwarding</code>, <code>POST v1/send</code>, <code>DELETE v1/forwarding/{id}</code>); the
+service-side endpoint, quotas and pricing are out of scope and are not
+claimed to exist. Until it does, every operation reports &quot;service not
+available&quot; and everything else keeps working.</p>
+<h2 id="webhooks"><a class="anchor" href="#webhooks" aria-hidden="true" tabindex="-1">#</a>Webhooks</h2>
+<p>Webhook channels POST to any <code>http://</code> or <code>https://</code> URL with a 10-second
+timeout. Redirects are not followed. Network errors, HTTP 429 and 5xx are
+retried twice (after 1 and 4 seconds); other 4xx responses are not retried.
+The <strong>Payload</strong> setting picks the body:</p>
+<table>
+<thead>
+<tr>
+<th>Payload</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JSON (<code>sbox-ns.alert/v1</code>)</td>
+<td>the documented JSON below, optionally signed</td>
+</tr>
+<tr>
+<td>Slack-compatible</td>
+<td><code>{&quot;text&quot;: &quot;...&quot;}</code> (Slack, Mattermost, Rocket.Chat, Discord&#39;s <code>/slack</code> endpoint)</td>
+</tr>
+<tr>
+<td>Microsoft Teams</td>
+<td>a <code>MessageCard</code> with title and text (incoming webhook connectors)</td>
+</tr>
+<tr>
+<td>ntfy</td>
+<td>plain-text body with <code>Title</code>, <code>Priority</code> and <code>Tags</code> headers; the URL is the topic, e.g. <code>https://ntfy.sh/my-topic</code></td>
+</tr>
+<tr>
+<td>Gotify</td>
+<td><code>{&quot;title&quot;, &quot;message&quot;, &quot;priority&quot;}</code>; put the application token in the URL: <code>https://gotify.example/message?token=...</code></td>
+</tr>
+</tbody></table>
+<h3 id="json-payload-version-1"><a class="anchor" href="#json-payload-version-1" aria-hidden="true" tabindex="-1">#</a>JSON payload, version 1</h3>
+<pre><code class="language-json">{
+  &quot;schema&quot;: &quot;sbox-ns.alert/v1&quot;,
+  &quot;kind&quot;: &quot;rule&quot;,
+  &quot;severity&quot;: &quot;warning&quot;,
+  &quot;state&quot;: &quot;firing&quot;,
+  &quot;title&quot;: &quot;Firing: CPU high&quot;,
+  &quot;message&quot;: &quot;CPU use &gt; 90 % for 2 min. Current value: 97.2 %.&quot;,
+  &quot;timestamp&quot;: &quot;2026-10-12T08:00:00.0000000+00:00&quot;,
+  &quot;projectId&quot;: null,
+  &quot;ruleId&quot;: &quot;r1a2b3c4d5e6f&quot;,
+  &quot;correlationId&quot;: null,
+  &quot;server&quot;: { &quot;version&quot;: &quot;0.5.1&quot; },
+  &quot;fields&quot;: [ { &quot;name&quot;: &quot;Rule&quot;, &quot;value&quot;: &quot;CPU high&quot; } ]
+}</code></pre>
+<ul>
+<li><code>kind</code>: <code>error</code> (captured error), <code>rule</code> or <code>test</code>.</li>
+<li><code>severity</code>: <code>info</code>, <code>warning</code>, <code>error</code> or <code>critical</code>.</li>
+<li><code>state</code>: <code>firing</code> or <code>resolved</code> for rules, otherwise <code>null</code>.</li>
+<li><code>projectId</code> and <code>correlationId</code> are set for captured errors.</li>
+<li>New fields may be added within <code>v1</code>; receivers must ignore unknown fields.
+A breaking change gets a new <code>schema</code> value.</li>
+</ul>
+<h3 id="signature"><a class="anchor" href="#signature" aria-hidden="true" tabindex="-1">#</a>Signature</h3>
+<p>With a signing secret, each JSON request carries:</p>
+<pre><code>X-Sbox-Ns-Timestamp: 1791770082
+X-Sbox-Ns-Signature: sha256=&lt;hex HMAC-SHA256 of &quot;&lt;timestamp&gt;.&lt;raw body&gt;&quot; keyed with the secret&gt;</code></pre>
+<p>Recompute the HMAC over the timestamp, a dot and the exact body bytes,
+compare in constant time, and reject old timestamps (for example older than
+5 minutes) to stop replays. For example in Python:</p>
+<pre><code class="language-python">import hashlib, hmac, time
+def verify(secret: bytes, timestamp: str, body: bytes, signature: str) -&gt; bool:
+    expected = &quot;sha256=&quot; + hmac.new(secret, timestamp.encode() + b&quot;.&quot; + body, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(expected, signature) and abs(time.time() - int(timestamp)) &lt; 300</code></pre>
+<h2 id="checking-the-configuration"><a class="anchor" href="#checking-the-configuration" aria-hidden="true" tabindex="-1">#</a>Checking the configuration</h2>
+<pre><code class="language-sh">sbox-ns config validate                 # parse + combination checks with file:line
+sbox-ns config show                     # merged effective config, secrets redacted
+sbox-ns config set alerts.discord.enabled true
+sbox-ns config get alerts.smtp.host</code></pre>
+<p><code>config set</code>/<code>get</code> work for every <code>alerts.*</code> key through the generic
+mechanism. To verify delivery, press <strong>Send test</strong> next to the channel in
+<strong>Alerts</strong>; the result appears next to the channel and in the alert history.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ee60d4f401034724ee45934d8e6a1acc498e0fc6/docs/alerting.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/alerting.md</a> at <code>v0.5.2</code> (ee60d4f).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.2 (<code>0.5.2</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/ee60d4f401034724ee45934d8e6a1acc498e0fc6" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.2</code> (<code>ee60d4f</code>). <strong>Library:</strong> main source (fc58d4e) (<code>source-fc58d4e</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a</code> (<code>fc58d4e</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.2/source-fc58d4e/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.2/source-fc58d4e/api/">HTTP API</a><a href="/docs/versions/0.5.2/source-fc58d4e/library/api/">C# API</a><a href="/docs/versions/0.5.2/source-fc58d4e/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy" target="_blank" rel="noopener">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

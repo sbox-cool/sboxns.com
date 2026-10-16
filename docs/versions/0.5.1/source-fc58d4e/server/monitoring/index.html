@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monitoring | Network Storage docs</title>
+  <meta name="description" content="Health, metrics and logs.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.5.1/source-fc58d4e/server/monitoring/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Monitoring | Network Storage docs">
+  <meta property="og:description" content="Health, metrics and logs.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.5.1/source-fc58d4e/server/monitoring/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.1/source-fc58d4e/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.1/source-fc58d4e/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.1 · main source (fc58d4e)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/0.5.4/source-fc58d4e/server/monitoring/">0.5.4</option><option value="/docs/versions/0.5.3/source-fc58d4e/server/monitoring/">0.5.3</option><option value="/docs/versions/0.5.2/source-fc58d4e/server/monitoring/">0.5.2</option><option value="/docs/versions/0.5.1/source-fc58d4e/server/monitoring/" selected>0.5.1</option><option value="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.5.0&amp;library=source-fc58d4e">0.5.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.4.0&amp;library=source-fc58d4e">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.3.0&amp;library=source-fc58d4e">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.2.0&amp;library=source-fc58d4e">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.1.0&amp;library=source-fc58d4e">0.1.0 (page unavailable)</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.1/source-13f51a8/server/monitoring/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.1/source-d369d1b/server/monitoring/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.1/source-fc58d4e/server/monitoring/" selected>main source (fc58d4e)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/0.5.4/source-fc58d4e/server/monitoring/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-fc58d4e/server/monitoring/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-fc58d4e/server/monitoring/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-fc58d4e/server/monitoring/">Server: 0.5.1</a></li><li><a href="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.5.0&amp;library=source-fc58d4e">Server: 0.5.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.4.0&amp;library=source-fc58d4e">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.3.0&amp;library=source-fc58d4e">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.2.0&amp;library=source-fc58d4e">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmonitoring&amp;server=0.1.0&amp;library=source-fc58d4e">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/0.5.1/source-13f51a8/server/monitoring/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.1/source-d369d1b/server/monitoring/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.1/source-fc58d4e/server/monitoring/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.4/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.1/source-fc58d4e/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.1/source-fc58d4e/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.1/source-fc58d4e/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.1/source-fc58d4e/library/overview/">Library overview</a><a href="/docs/versions/0.5.1/source-fc58d4e/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.1/source-fc58d4e/library/examples/">Examples</a><a href="/docs/versions/0.5.1/source-fc58d4e/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.1/source-fc58d4e/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.1/source-fc58d4e/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/configuration/">Configuration</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/database/">Databases</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/export/">Export and move projects</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/modules/">Modules</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/monitoring/" aria-current="page">Monitoring</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/alerting/">Alerting</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.1/source-fc58d4e/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.1/source-fc58d4e/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.1/source-fc58d4e/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.1/source-fc58d4e/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.1/source-fc58d4e/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Monitoring</span></nav>
+  <article class="prose docs-prose">
+<h1>Monitoring</h1>
+<p class="lead">Health, metrics and logs.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#server-page">Server page</a><a href="#alert-rules">Alert rules</a><a href="#history-and-storage">History and storage</a></nav>
+<p>The owner console has two server-wide pages next to <strong>All projects</strong>:</p>
+<ul>
+<li><strong>Server</strong> (<code>/dashboard/server</code>): live CPU, memory, disk, network and
+request figures for this sbox-ns process and its host or container.</li>
+<li><strong>Alerts</strong> (<code>/dashboard/server/alerts</code>): alert rules over those figures,
+the notification channels, and a history of what was sent. Channels and
+delivery are described in <a href="/docs/versions/0.5.1/source-fc58d4e/server/alerting/">alerting.md</a>.</li>
+</ul>
+<p>Both are owner-only operator diagnostics. They are never exposed on
+game-facing routes, and the <a href="/docs/versions/0.5.1/source-fc58d4e/server/admin-panel/#public-read-only-demo">read-only demo</a>
+does not serve them. No configuration is needed and nothing is sent anywhere
+unless you add a channel.</p>
+<h2 id="server-page"><a class="anchor" href="#server-page" aria-hidden="true" tabindex="-1">#</a>Server page</h2>
+<p>The header shows the version, uptime, .NET runtime, OS and architecture,
+database provider, version and ping, and the data folder.</p>
+<p>The live tiles update every 500 ms by default. Pick 250 ms, 1 s, 2 s or 5 s,
+or pause; the choice is remembered in the browser. Each tile has a sparkline
+of the last 2 minutes, or of the last 15 minutes or 24 hours (one point per
+minute) when you change <strong>Chart</strong>. Polling pauses while the browser tab is
+hidden. Without JavaScript the page shows the latest sample; refresh it to
+update.</p>
+<table>
+<thead>
+<tr>
+<th>Tile</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CPU</td>
+<td>Linux: <code>/proc/stat</code>, or the cgroup&#39;s <code>cpu.stat</code> against its <code>cpu.max</code> (v2) or <code>cpuacct.usage</code> against <code>cpu.cfs_quota_us</code> (v1) when a CPU limit is set. macOS: <code>host_statistics</code>. Windows: <code>GetSystemTimes</code>.</td>
+</tr>
+<tr>
+<td>Server process CPU</td>
+<td>Process CPU time against every core the process may use.</td>
+</tr>
+<tr>
+<td>Load average (1 min)</td>
+<td>Linux <code>/proc/loadavg</code>, macOS <code>getloadavg</code>. Not reported on Windows.</td>
+</tr>
+<tr>
+<td>Memory in use</td>
+<td>Linux: <code>/proc/meminfo</code> (<code>MemTotal - MemAvailable</code>), or the cgroup&#39;s usage without reclaimable page cache against <code>memory.max</code> / <code>memory.limit_in_bytes</code>. macOS: app, wired and compressed memory. Windows: <code>GlobalMemoryStatusEx</code>.</td>
+</tr>
+<tr>
+<td>Server process memory, .NET heap</td>
+<td>Working set and GC heap size.</td>
+</tr>
+<tr>
+<td>Network in / out</td>
+<td>Linux <code>/proc/net/dev</code> of the process&#39;s network namespace (so a container reports its own interfaces); elsewhere the .NET interface statistics. Loopback is excluded.</td>
+</tr>
+<tr>
+<td>Open connections</td>
+<td>Kestrel&#39;s <code>kestrel.active_connections</code>.</td>
+</tr>
+<tr>
+<td>Requests per second, 5xx error rate, latency p50/p95</td>
+<td>ASP.NET Core&#39;s <code>http.server.request.duration</code>, over the last sample. The page&#39;s own polling is left out. Percentiles are the upper bound of a latency bucket (buckets grow by 30 %).</td>
+</tr>
+<tr>
+<td>Thread pool threads</td>
+<td>.NET thread pool size.</td>
+</tr>
+<tr>
+<td>Disk and backups</td>
+<td>Free and total space of the data volume, the data and <code>backups</code> folder sizes (measured every 5 minutes, stopping at 200,000 files) and the newest file in <code>&lt;data&gt;/backups</code>.</td>
+</tr>
+</tbody></table>
+<p>In a container with a CPU or memory limit, CPU and memory are relative to
+the limit, and the tile says &quot;container limit&quot;. A value the platform does
+not report is shown as <strong>Unavailable</strong>, never as 0. Request tiles show
+<strong>No requests</strong> for a sample without requests.</p>
+<h3 id="sampling-and-cost"><a class="anchor" href="#sampling-and-cost" aria-hidden="true" tabindex="-1">#</a>Sampling and cost</h3>
+<p>One sampler serves every open page and every rule. It runs only while
+someone watches the Server page (each poll keeps it going for a few seconds,
+at the fastest interval any open page asked for) or while an enabled rule
+needs it (one sample every 5 seconds). With no page open and no rule, it
+takes no samples.</p>
+<p>Samples stay in memory: 15 minutes at full resolution (at most 3,600 samples)
+and 24 hours as one-minute rollups. Nothing is written to the database, and
+a restart starts the history over. Each instance samples itself; several
+instances sharing one PostgreSQL database each show their own figures.</p>
+<p>Measured on an 8-core Apple M-series laptop (macOS, SQLite, Debug build): the
+idle server used 0.7 % of one core; with one Server page open at 500 ms it
+used 3.9 % of one core, which includes the page&#39;s two polls per second.</p>
+<h2 id="alert-rules"><a class="anchor" href="#alert-rules" aria-hidden="true" tabindex="-1">#</a>Alert rules</h2>
+<p>A rule is a metric, a comparison, a threshold, a duration, a severity and
+the channels to notify (none ticked means every channel that accepts the
+severity). Rules are checked every 5 seconds.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Unit</th>
+<th>How it is evaluated</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cpu.percent</code> CPU use</td>
+<td>%</td>
+<td>gauge</td>
+</tr>
+<tr>
+<td><code>process.cpu.percent</code> Server process CPU</td>
+<td>%</td>
+<td>gauge</td>
+</tr>
+<tr>
+<td><code>memory.percent</code> Memory in use</td>
+<td>%</td>
+<td>gauge</td>
+</tr>
+<tr>
+<td><code>process.memory.mb</code> Server process memory</td>
+<td>MB</td>
+<td>gauge</td>
+</tr>
+<tr>
+<td><code>disk.data.free.gb</code> Free disk space (data folder)</td>
+<td>GB</td>
+<td>gauge</td>
+</tr>
+<tr>
+<td><code>disk.data.free.percent</code> Free disk space (data folder)</td>
+<td>%</td>
+<td>gauge</td>
+</tr>
+<tr>
+<td><code>http.error_rate.percent</code> Request error rate</td>
+<td>%</td>
+<td>window, needs 20 requests</td>
+</tr>
+<tr>
+<td><code>http.p95.ms</code> Request latency p95</td>
+<td>ms</td>
+<td>window, needs 20 requests</td>
+</tr>
+<tr>
+<td><code>http.requests.per_second</code> Request rate</td>
+<td>req/s</td>
+<td>window</td>
+</tr>
+<tr>
+<td><code>backup.age.hours</code> Newest backup age</td>
+<td>h</td>
+<td>gauge, no result without a backup</td>
+</tr>
+<tr>
+<td><code>update.available</code> Update available</td>
+<td>1 or 0</td>
+<td>gauge</td>
+</tr>
+<tr>
+<td><code>server.started</code> Server started</td>
+<td></td>
+<td>one notification at each start</td>
+</tr>
+</tbody></table>
+<ul>
+<li>A <strong>gauge</strong> rule becomes <em>pending</em> when its condition holds and <em>firing</em>
+once it has held for the duration (0 fires on the first sample).</li>
+<li>A <strong>window</strong> rule measures the metric over the duration (at least 60
+seconds) and fires as soon as the condition holds. It has no result until
+half the window has been sampled, or with fewer than 20 requests for error
+rate and latency.</li>
+<li>When the condition stops holding, a firing rule is <em>resolved</em> and a
+resolved notification goes to the same channels.</li>
+<li><strong>No data</strong> (an unavailable metric, too few requests) never fires and
+never resolves a firing rule.</li>
+<li>The <strong>cooldown</strong> (default 10 minutes) is the minimum time between two
+firing notifications of one rule. A rule that fires again sooner changes
+state on the page without notifying, and its resolve is not sent either.
+Rule notifications also share the server-wide limits in
+<a href="/docs/versions/0.5.1/source-fc58d4e/server/alerting/#limits">alerting.md</a>.</li>
+<li>Rule state is kept in memory. Editing a rule, or restarting the server,
+starts its evaluation over; a condition that still holds fires again.</li>
+</ul>
+<p>Examples:</p>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Metric</th>
+<th>Comparison and threshold</th>
+<th>Duration</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CPU above 90 % for 2 minutes</td>
+<td>CPU use</td>
+<td><code>&gt; 90</code></td>
+<td>120</td>
+</tr>
+<tr>
+<td>Less than 5 GB free</td>
+<td>Free disk space (GB)</td>
+<td><code>&lt; 5</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>Error rate above 5 % over 5 minutes</td>
+<td>Request error rate</td>
+<td><code>&gt; 5</code></td>
+<td>300</td>
+</tr>
+<tr>
+<td>p95 above 800 ms over 5 minutes</td>
+<td>Request latency p95</td>
+<td><code>&gt; 800</code></td>
+<td>300</td>
+</tr>
+<tr>
+<td>Backup older than 24 hours</td>
+<td>Newest backup age</td>
+<td><code>&gt; 24</code></td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>The built-in <strong>Captured errors</strong> source (<a href="/docs/versions/0.5.1/source-fc58d4e/server/alerting/#what-triggers-a-captured-error-alert">alerting.md</a>)
+is listed with the rules. It is always on, uses severity <code>error</code>, and goes
+to every channel that accepts <code>error</code>.</p>
+<h2 id="history-and-storage"><a class="anchor" href="#history-and-storage" aria-hidden="true" tabindex="-1">#</a>History and storage</h2>
+<p><strong>Alerts → History</strong> lists the last 500 sent alerts, test notifications and
+rule or channel changes, newest first, with the delivery result (for
+example which channel failed and why).</p>
+<p>| <code>&lt;data&gt;/state/monitoring.json</code> | rules, channels and provider setups without secrets |
+| <code>&lt;data&gt;/state/monitoring-history.json</code> | the history |
+| <code>&lt;data&gt;/state/secrets/monitoring/channel-&lt;id&gt;.json</code> | one channel&#39;s secrets, owner-only |
+| <code>&lt;data&gt;/state/secrets/monitoring/provider-&lt;id&gt;.json</code> | one provider&#39;s token and settings, owner-only |</p>
+<p>A damaged <code>monitoring.json</code> is moved aside as
+<code>monitoring.json.damaged-&lt;timestamp&gt;</code> and the server starts without rules
+and channels. Rules, console channels and history are not part of a server
+export; recreate them after moving to a new server.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/1b949e42f1ba2a2be7a0999bfad0ffeea873b540/docs/monitoring.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/monitoring.md</a> at <code>v0.5.1</code> (1b949e4).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.1 (<code>0.5.1</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/1b949e42f1ba2a2be7a0999bfad0ffeea873b540" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.1</code> (<code>1b949e4</code>). <strong>Library:</strong> main source (fc58d4e) (<code>source-fc58d4e</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a</code> (<code>fc58d4e</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.1/source-fc58d4e/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.1/source-fc58d4e/api/">HTTP API</a><a href="/docs/versions/0.5.1/source-fc58d4e/library/api/">C# API</a><a href="/docs/versions/0.5.1/source-fc58d4e/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy" target="_blank" rel="noopener">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

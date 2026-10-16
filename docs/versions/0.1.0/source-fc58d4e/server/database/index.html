@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Databases | Network Storage docs</title>
+  <meta name="description" content="SQLite and PostgreSQL, migrations, backups and rollback.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.1.0/source-fc58d4e/server/database/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Databases | Network Storage docs">
+  <meta property="og:description" content="SQLite and PostgreSQL, migrations, backups and rollback.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.1.0/source-fc58d4e/server/database/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.1.0/source-fc58d4e/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.1.0/source-fc58d4e/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.1.0 · main source (fc58d4e)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/0.5.4/source-fc58d4e/server/database/">0.5.4</option><option value="/docs/versions/0.5.3/source-fc58d4e/server/database/">0.5.3</option><option value="/docs/versions/0.5.2/source-fc58d4e/server/database/">0.5.2</option><option value="/docs/versions/0.5.1/source-fc58d4e/server/database/">0.5.1</option><option value="/docs/versions/0.5.0/source-fc58d4e/server/database/">0.5.0</option><option value="/docs/versions/0.4.0/source-fc58d4e/server/database/">0.4.0</option><option value="/docs/versions/0.3.0/source-fc58d4e/server/database/">0.3.0</option><option value="/docs/versions/0.2.0/source-fc58d4e/server/database/">0.2.0</option><option value="/docs/versions/0.1.0/source-fc58d4e/server/database/" selected>0.1.0</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.1.0/source-13f51a8/server/database/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.1.0/source-d369d1b/server/database/">Legacy source (d369d1b)</option><option value="/docs/versions/0.1.0/source-fc58d4e/server/database/" selected>main source (fc58d4e)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/0.5.4/source-fc58d4e/server/database/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-fc58d4e/server/database/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-fc58d4e/server/database/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-fc58d4e/server/database/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-fc58d4e/server/database/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-fc58d4e/server/database/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-fc58d4e/server/database/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-fc58d4e/server/database/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-fc58d4e/server/database/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.1.0/source-13f51a8/server/database/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.1.0/source-d369d1b/server/database/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.1.0/source-fc58d4e/server/database/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.4/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.1.0/source-fc58d4e/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.1.0/source-fc58d4e/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.1.0/source-fc58d4e/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.1.0/source-fc58d4e/library/overview/">Library overview</a><a href="/docs/versions/0.1.0/source-fc58d4e/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.1.0/source-fc58d4e/library/examples/">Examples</a><a href="/docs/versions/0.1.0/source-fc58d4e/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.1.0/source-fc58d4e/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.1.0/source-fc58d4e/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.1.0/source-fc58d4e/server/configuration/">Configuration</a><a href="/docs/versions/0.1.0/source-fc58d4e/server/database/" aria-current="page">Databases</a><a href="/docs/versions/0.1.0/source-fc58d4e/server/admin-panel/">Owner console</a><a href="/docs/versions/0.1.0/source-fc58d4e/server/export/">Export and move projects</a><a href="/docs/versions/0.1.0/source-fc58d4e/server/alerting/">Alerting</a><a href="/docs/versions/0.1.0/source-fc58d4e/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.1.0/source-fc58d4e/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.1.0/source-fc58d4e/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.1.0/source-fc58d4e/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Databases</span></nav>
+  <article class="prose docs-prose">
+<h1>Databases</h1>
+<p class="lead">SQLite and PostgreSQL, migrations, backups and rollback.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#which-one-to-choose">Which one to choose</a><a href="#sqlite">SQLite</a><a href="#postgresql">PostgreSQL</a><a href="#migrations">Migrations</a><a href="#backups-and-restores">Backups and restores</a><a href="#resource-guidance">Resource guidance</a></nav>
+<p><code>sbox-ns</code> stores everything in one of two backends, selected by
+<code>database.provider</code> in <code>database.toml</code> (<code>sqlite</code> or <code>postgres</code> only).
+Check the connection with <code>sbox-ns db test</code> and inspect versions with
+<code>sbox-ns db status</code>. Every key below is also listed in
+<a href="/docs/versions/0.1.0/source-fc58d4e/server/configuration/">configuration.md</a>.</p>
+<h2 id="which-one-to-choose"><a class="anchor" href="#which-one-to-choose" aria-hidden="true" tabindex="-1">#</a>Which one to choose</h2>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Choose it when</th>
+<th>Scaling note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SQLite (default)</td>
+<td>Solo dev, a single server, or first install. Nothing to install or configure.</td>
+<td>One file, one writer machine. Fine for most single-server games.</td>
+</tr>
+<tr>
+<td>PostgreSQL 13 or newer</td>
+<td>You already operate Postgres, want the database on a separate machine, or want your provider&#39;s managed backups.</td>
+<td>Tune the pool (below). One server instance per schema; see below.</td>
+</tr>
+</tbody></table>
+<p>ScyllaDB is not supported by this server. There is no ScyllaDB provider
+setting. ScyllaDB notes elsewhere in this repo describe the managed service
+internals, not this binary.</p>
+<h2 id="sqlite"><a class="anchor" href="#sqlite" aria-hidden="true" tabindex="-1">#</a>SQLite</h2>
+<pre><code class="language-toml">[database]
+provider = &quot;sqlite&quot;
+
+[database.sqlite]
+path = &quot;sbox-ns.db&quot;   # relative paths resolve inside the data folder</code></pre>
+<p>Everything lives in <code>&lt;data dir&gt;/sbox-ns.db</code> (WAL mode). No users, no
+passwords, no server to run. Copy the file only while the server is stopped;
+for live backups use <code>sbox-ns db backup</code>, which backs up consistently while
+running.</p>
+<h2 id="postgresql"><a class="anchor" href="#postgresql" aria-hidden="true" tabindex="-1">#</a>PostgreSQL</h2>
+<pre><code class="language-toml">[database]
+provider = &quot;postgres&quot;
+startup_timeout_seconds = 60   # keep retrying at startup (for example when the DB boots together with the server)
+
+[database.postgres]
+# Full connection string. When set, it overrides the fields below.
+connection_string = &quot;&quot;
+# Example: &quot;Host=db.internal;Port=5432;Database=sbox_ns;Username=sbox_ns;Password=...&quot;
+
+host = &quot;localhost&quot;
+port = 5432
+database = &quot;sbox_ns&quot;
+username = &quot;sbox_ns&quot;
+
+# Prefer password_file so the secret is not stored in this file.
+password = &quot;&quot;
+password_file = &quot;&quot;
+
+# Disable, Allow, Prefer, Require, VerifyCA, VerifyFull
+ssl_mode = &quot;Prefer&quot;
+
+# Maximum pooled connections.
+max_pool_size = 50
+
+# All tables are created inside this schema, so the server can share a
+# database with other applications.
+schema = &quot;network_storage&quot;
+
+# Seconds to wait when opening a connection.
+connect_timeout_seconds = 15</code></pre>
+<p>Connection fields: <code>host</code>, <code>port</code>, <code>database</code>, <code>username</code>, plus either
+<code>password</code> or <code>password_file</code>. A full Npgsql <code>connection_string</code> may replace
+the individual fields. In containers, the same keys are available as
+<code>NS_</code> environment variables, for example
+<code>NS_DATABASE__POSTGRES__HOST=db.internal</code> with a Docker secret at
+<code>NS_DATABASE__POSTGRES__PASSWORD_FILE=/run/secrets/pg_password</code>
+(see <a href="/docs/versions/0.1.0/source-fc58d4e/server/self-hosting/">self-hosting.md</a> for a Compose example).</p>
+<p>Password handling: <code>sbox-ns setup</code> never takes a password as a command line
+argument. Typed interactively, the database password is stored in
+<code>config/secrets/postgres_password</code> and referenced from <code>password_file</code>;
+scripted installs use <code>--pg-password-file FILE</code>. Use an absolute path for
+<code>password_file</code> outside the default layout.</p>
+<p>Schema behavior: every table is created inside <code>database.postgres.schema</code>
+(default <code>network_storage</code>), so one database can host other applications
+alongside it. The PostgreSQL user needs permission to create the schema, or
+ownership of an existing one:</p>
+<pre><code class="language-sql">CREATE ROLE sbox_ns LOGIN PASSWORD 'change-me';
+CREATE DATABASE sbox_ns OWNER sbox_ns;</code></pre>
+<p>One server instance (one data directory) per schema. Sharing a schema
+between independent instances or data directories is not supported. Owner
+identity and cookie keys live with the data directory, so a schema moved
+without its data directory loses its owner sessions and secret key material.</p>
+<h2 id="migrations"><a class="anchor" href="#migrations" aria-hidden="true" tabindex="-1">#</a>Migrations</h2>
+<pre><code class="language-sh">sbox-ns db status    # provider, schema version, pending migrations
+sbox-ns db migrate   # apply pending migrations</code></pre>
+<p><code>db status</code> prints the schema version, the version the binary supports, and
+whether a migration is pending (or the database is newer than the binary, in
+which case upgrade <code>sbox-ns</code>). <code>db migrate</code> applies pending migrations; the
+server also migrates on start. Take a backup before upgrading to a release
+that needs a migration; releases list the minimum version they upgrade from,
+so old installs may need to step through an intermediate release
+(see <a href="/docs/versions/0.1.0/source-fc58d4e/server/self-hosting/#updates">self-hosting.md</a>).</p>
+<h2 id="backups-and-restores"><a class="anchor" href="#backups-and-restores" aria-hidden="true" tabindex="-1">#</a>Backups and restores</h2>
+<pre><code class="language-sh">sbox-ns db backup                        # timestamped backup inside the data folder
+sbox-ns db backup --output /backups/ns.bak
+sbox-ns db restore /backups/ns.bak       # stop the server first</code></pre>
+<p>Backups are same-provider restores, not cross-provider migration. To move
+between SQLite and PostgreSQL (either way) or to another machine, use
+<code>sbox-ns export</code> and <code>sbox-ns import</code>; see <a href="/docs/versions/0.1.0/source-fc58d4e/server/export/">export.md</a>.</p>
+<p>SQLite: the backup is a consistent file copy, safe while the server runs.
+Restore replaces the database file and keeps the replaced file as
+<code>.before-restore</code>; WAL sidecars are cleared.</p>
+<p>PostgreSQL: the backup uses <code>pg_dump</code> custom format scoped to the
+configured schema, and restore uses <code>pg_restore</code> with <code>--clean --if-exists --no-owner --schema=&lt;schema&gt;</code>. Both tools must be installed and on <code>PATH</code>;
+the server passes host, port, username, database, password (<code>PGPASSWORD</code>)
+and SSL mode from your configuration. Stop the server before restoring.</p>
+<p>Always back up the config folder with the database, including
+<code>&lt;config dir&gt;/secrets/</code>. Without the auth session secret, player sessions
+become invalid after a restore; without the storage encryption key, every
+secret API key stops working.</p>
+<h2 id="resource-guidance"><a class="anchor" href="#resource-guidance" aria-hidden="true" tabindex="-1">#</a>Resource guidance</h2>
+<p>SQLite: no tuning. Keep the data folder on local disk with room for the
+database plus timestamped backups under <code>&lt;data dir&gt;/backups/</code>.</p>
+<p>PostgreSQL: defaults are <code>max_pool_size = 50</code>, <code>connect_timeout_seconds = 15</code>, <code>startup_timeout_seconds = 60</code>. Raise <code>max_pool_size</code> only with the
+database sized to accept the connections; raise <code>startup_timeout_seconds</code>
+when the database boots at the same time as the server (Compose, systemd
+ordering). Connection problems surface in <code>sbox-ns db test</code>,
+<code>sbox-ns doctor</code>, and <code>GET /health</code> (503 with <code>database-unavailable</code> when
+the database is down).</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/5aeb8e2268316ece4ca3ce36110d4e8bce599632/docs/database.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/database.md</a> at <code>v0.1.0</code> (5aeb8e2).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.1.0 (<code>0.1.0</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/5aeb8e2268316ece4ca3ce36110d4e8bce599632" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.1.0</code> (<code>5aeb8e2</code>). <strong>Library:</strong> main source (fc58d4e) (<code>source-fc58d4e</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a</code> (<code>fc58d4e</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.1.0/source-fc58d4e/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.1.0/source-fc58d4e/api/">HTTP API</a><a href="/docs/versions/0.1.0/source-fc58d4e/library/api/">C# API</a><a href="/docs/versions/0.1.0/source-fc58d4e/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="https://sboxcool.com/privacy" target="_blank" rel="noopener">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

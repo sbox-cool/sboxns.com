@@ -50,6 +50,28 @@
     },
     {
       "server": {
+        "id": "0.5.4",
+        "label": "0.5.4",
+        "ref": "v0.5.4",
+        "commit": "d35738b514db9691aeab2b888133f7bb80bbaa0a",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.4/source-fc58d4e"
+    },
+    {
+      "server": {
         "id": "0.5.3",
         "label": "0.5.3",
         "ref": "v0.5.3",
@@ -91,6 +113,28 @@
         "repo": "sbox-cool/sbox-network-storage"
       },
       "basePath": "/docs/versions/0.5.3/source-d369d1b"
+    },
+    {
+      "server": {
+        "id": "0.5.3",
+        "label": "0.5.3",
+        "ref": "v0.5.3",
+        "commit": "6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.3/source-fc58d4e"
     },
     {
       "server": {
@@ -138,6 +182,28 @@
     },
     {
       "server": {
+        "id": "0.5.2",
+        "label": "0.5.2",
+        "ref": "v0.5.2",
+        "commit": "ee60d4f401034724ee45934d8e6a1acc498e0fc6",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.2/source-fc58d4e"
+    },
+    {
+      "server": {
         "id": "0.5.1",
         "label": "0.5.1",
         "ref": "v0.5.1",
@@ -179,6 +245,28 @@
         "repo": "sbox-cool/sbox-network-storage"
       },
       "basePath": "/docs/versions/0.5.1/source-d369d1b"
+    },
+    {
+      "server": {
+        "id": "0.5.1",
+        "label": "0.5.1",
+        "ref": "v0.5.1",
+        "commit": "1b949e42f1ba2a2be7a0999bfad0ffeea873b540",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.1/source-fc58d4e"
     },
     {
       "server": {
@@ -226,6 +314,28 @@
     },
     {
       "server": {
+        "id": "0.5.0",
+        "label": "0.5.0",
+        "ref": "v0.5.0",
+        "commit": "af11ab6f76f3cb7ba620f06f4e564d6d8481695e",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.0/source-fc58d4e"
+    },
+    {
+      "server": {
         "id": "0.4.0",
         "label": "0.4.0",
         "ref": "v0.4.0",
@@ -267,6 +377,28 @@
         "repo": "sbox-cool/sbox-network-storage"
       },
       "basePath": "/docs/versions/0.4.0/source-d369d1b"
+    },
+    {
+      "server": {
+        "id": "0.4.0",
+        "label": "0.4.0",
+        "ref": "v0.4.0",
+        "commit": "705f8cc95f69ac18d7c4569f561ac576136c688f",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.4.0/source-fc58d4e"
     },
     {
       "server": {
@@ -314,6 +446,28 @@
     },
     {
       "server": {
+        "id": "0.3.0",
+        "label": "0.3.0",
+        "ref": "v0.3.0",
+        "commit": "52397881b1c9f50ab651efc87a4ba94e4e2f9a62",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.3.0/source-fc58d4e"
+    },
+    {
+      "server": {
         "id": "0.2.0",
         "label": "0.2.0",
         "ref": "v0.2.0",
@@ -358,6 +512,28 @@
     },
     {
       "server": {
+        "id": "0.2.0",
+        "label": "0.2.0",
+        "ref": "v0.2.0",
+        "commit": "60c23c8260e6e84abf2364b575f4b29deb534a1d",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.2.0/source-fc58d4e"
+    },
+    {
+      "server": {
         "id": "0.1.0",
         "label": "0.1.0",
         "ref": "v0.1.0",
@@ -399,6 +575,28 @@
         "repo": "sbox-cool/sbox-network-storage"
       },
       "basePath": "/docs/versions/0.1.0/source-d369d1b"
+    },
+    {
+      "server": {
+        "id": "0.1.0",
+        "label": "0.1.0",
+        "ref": "v0.1.0",
+        "commit": "5aeb8e2268316ece4ca3ce36110d4e8bce599632",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.1.0/source-fc58d4e"
     }
   ]
 }
