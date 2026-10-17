@@ -1,15 +1,63 @@
 {
-  "defaults": { "server": "0.5.4", "library": "source-13f51a8" },
+  "defaults": {
+    "server": "0.5.4",
+    "library": "source-13f51a8"
+  },
   "servers": [
-    { "id": "0.5.4", "label": "0.5.4", "ref": "v0.5.4", "commit": "d35738b514db9691aeab2b888133f7bb80bbaa0a" },
-    { "id": "0.5.3", "label": "0.5.3", "ref": "v0.5.3", "commit": "6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36" },
-    { "id": "0.5.2", "label": "0.5.2", "ref": "v0.5.2", "commit": "ee60d4f401034724ee45934d8e6a1acc498e0fc6" },
-    { "id": "0.5.1", "label": "0.5.1", "ref": "v0.5.1", "commit": "1b949e42f1ba2a2be7a0999bfad0ffeea873b540" },
-    { "id": "0.5.0", "label": "0.5.0", "ref": "v0.5.0", "commit": "af11ab6f76f3cb7ba620f06f4e564d6d8481695e" },
-    { "id": "0.4.0", "label": "0.4.0", "ref": "v0.4.0", "commit": "705f8cc95f69ac18d7c4569f561ac576136c688f" },
-    { "id": "0.3.0", "label": "0.3.0", "ref": "v0.3.0", "commit": "52397881b1c9f50ab651efc87a4ba94e4e2f9a62" },
-    { "id": "0.2.0", "label": "0.2.0", "ref": "v0.2.0", "commit": "60c23c8260e6e84abf2364b575f4b29deb534a1d" },
-    { "id": "0.1.0", "label": "0.1.0", "ref": "v0.1.0", "commit": "5aeb8e2268316ece4ca3ce36110d4e8bce599632" }
+    {
+      "id": "0.5.4",
+      "label": "0.5.4",
+      "ref": "v0.5.4",
+      "commit": "d35738b514db9691aeab2b888133f7bb80bbaa0a"
+    },
+    {
+      "id": "0.5.3",
+      "label": "0.5.3",
+      "ref": "v0.5.3",
+      "commit": "6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36"
+    },
+    {
+      "id": "0.5.2",
+      "label": "0.5.2",
+      "ref": "v0.5.2",
+      "commit": "ee60d4f401034724ee45934d8e6a1acc498e0fc6"
+    },
+    {
+      "id": "0.5.1",
+      "label": "0.5.1",
+      "ref": "v0.5.1",
+      "commit": "1b949e42f1ba2a2be7a0999bfad0ffeea873b540"
+    },
+    {
+      "id": "0.5.0",
+      "label": "0.5.0",
+      "ref": "v0.5.0",
+      "commit": "af11ab6f76f3cb7ba620f06f4e564d6d8481695e"
+    },
+    {
+      "id": "0.4.0",
+      "label": "0.4.0",
+      "ref": "v0.4.0",
+      "commit": "705f8cc95f69ac18d7c4569f561ac576136c688f"
+    },
+    {
+      "id": "0.3.0",
+      "label": "0.3.0",
+      "ref": "v0.3.0",
+      "commit": "52397881b1c9f50ab651efc87a4ba94e4e2f9a62"
+    },
+    {
+      "id": "0.2.0",
+      "label": "0.2.0",
+      "ref": "v0.2.0",
+      "commit": "60c23c8260e6e84abf2364b575f4b29deb534a1d"
+    },
+    {
+      "id": "0.1.0",
+      "label": "0.1.0",
+      "ref": "v0.1.0",
+      "commit": "5aeb8e2268316ece4ca3ce36110d4e8bce599632"
+    }
   ],
   "libraries": [
     {
@@ -17,14 +65,44 @@
       "label": "1.1.0 source (13f51a8)",
       "ref": "13f51a81f046b1722a6b747712afebccaa9559b3",
       "commit": "13f51a81f046b1722a6b747712afebccaa9559b3",
-      "publication": { "status": "unverified", "revision": null, "evidence": null }
+      "publication": {
+        "status": "unverified",
+        "revision": null,
+        "evidence": null
+      }
     },
     {
       "id": "source-d369d1b",
       "label": "Legacy source (d369d1b)",
       "ref": "d369d1b0a43e30016fa919f260c696dc6aa255a6",
       "commit": "d369d1b0a43e30016fa919f260c696dc6aa255a6",
-      "publication": { "status": "unverified", "revision": null, "evidence": null }
+      "publication": {
+        "status": "unverified",
+        "revision": null,
+        "evidence": null
+      }
+    },
+    {
+      "id": "source-fc58d4e",
+      "label": "main source (fc58d4e)",
+      "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+      "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+      "publication": {
+        "status": "unverified",
+        "revision": null,
+        "evidence": null
+      }
+    },
+    {
+      "id": "source-5369108",
+      "label": "main source (5369108)",
+      "ref": "5369108f168b35d6fc78fa4aaaa1c3af724232ee",
+      "commit": "5369108f168b35d6fc78fa4aaaa1c3af724232ee",
+      "publication": {
+        "status": "unverified",
+        "revision": null,
+        "evidence": null
+      }
     }
   ]
 }

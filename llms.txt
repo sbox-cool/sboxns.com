@@ -1,11 +1,13 @@
 # sboxns.com
 
-> s&box Network Storage is an open-source (AGPL-3.0), self-hosted game backend for s&box. Games can be player-hosted, P2P or dedicated; either way, purchases, rewards, XP and scores change only through endpoints that run on the operator's Network Storage server, which validates them before anything is saved. sboxns.com is the landing site and optional free HTTPS name service, not a shared database or central admin panel.
+> s&box Network Storage is an open-source (AGPL-3.0), self-hosted game backend for s&box. Games can be player-hosted, P2P or dedicated; either way, purchases, rewards, XP, scores and combat results change only through endpoints that run on the operator's Network Storage server, which validates them before anything is saved, using game values (shared numbers and tables) that the game client reads too. sboxns.com is the landing site and optional free HTTPS name service, not a shared database or central admin panel.
 
 Key facts:
 
 - Player hosts and game clients hold only the public key (`sbox_ns_...`). Collections with `accessMode: endpoint` refuse direct client writes (`403 ENDPOINT_ONLY`). Dedicated servers hold a secret key (`sbox_sk_...`) for dedicated-only endpoints (`401 SECRET_KEY_REQUIRED` for the public key).
 - Endpoints, collections, queries (including leaderboards) and game values are YAML, pushed from the s&box editor Sync Tool or written in the owner dashboard.
+- Game values are named groups and typed tables (for example weapon damage, item catalogs, prices). The game reads all of them with one `NetworkStorage.GetGameValues()` call and they are read-only from game code; endpoints read the same numbers with `{{values.<group>.<key>}}` and `lookup` steps. Publishing a package revision snapshots endpoints, collections and game values, so builds that send their revision keep their own snapshot inside its support window; the Sync Tool can push to staged (next build) or live (every build). Player records are always live.
+- Endpoints can check client claims against the server clock (`{{_unixMs}}`): for example a combat endpoint that rejects more hits than the weapon's fire rate allows (`TOO_MANY_HITS`), a client clock off by more than a set skew (`CLOCK_SKEW`) or a replayed finish (`NO_COMBAT`). Checks bound what a client can claim; they cannot prove a hit landed.
 - Games use the existing Network Storage library unchanged: `NetworkStorage.Configure(projectId, publicKey, baseUrl)`. Server updates keep older published game builds working.
 - `sbox-ns mcp` serves an allowlisted Model Context Protocol server over stdio (locally or through SSH) for coding agents; writes are opt-in.
 - Self-hosting requires no sboxcool signup, subscription, email or telemetry. SQLite by default, PostgreSQL optional. Operators pay their own VPS provider.
@@ -14,13 +16,14 @@ Key facts:
 
 ## Pages
 
-- [Home](https://sboxns.com/): what Network Storage does, hosting models, use cases, FAQ.
+- [Home](https://sboxns.com/): what Network Storage does, game values, hosting models, use cases (including combat checks), real console screenshots, FAQ.
 - [Install guide](https://sboxns.com/install/): one-command install (public IP, tunnel, Windows, own domain), credentials, dashboard, editor setup, free HTTPS names, data boundaries.
 
 ## Official sources
 
 - [Server README](https://github.com/sbox-cool/sbox-network-storage-server): installation, client integration, features and preview limitations.
 - [Hosting models](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/hosting-models.md): player-hosted, dedicated and hybrid, and which key each caller uses.
+- [Game values](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/game-values.md): groups and tables shared by game and server, revisions, and a combat validation example.
 - [Self-hosting](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md): Linux, Windows, Docker, HTTPS, backups and optional services.
 - [Network Storage documentation](https://sboxcool.com/wiki/network-storage-v3): game library, YAML Source, endpoint and workflow reference.
 - [Client setup](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/client-setup.md): project credentials and custom Base URL.

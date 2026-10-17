@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>s&amp;box Network Storage: Server-Validated Game Backend</title>
-  <meta name="description" content="Open-source s&amp;box backend for player-hosted and dedicated games: Network Storage validates every purchase, reward and score server-side. Free to self-host.">
+  <meta name="description" content="Open-source s&amp;box backend: every purchase, reward, score and combat result is validated server-side, with game values shared by your game and your server. Free to self-host.">
   <link rel="canonical" href="https://sboxns.com/">
   <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta property="og:site_name" content="sboxns.com">
   <meta property="og:title" content="Any host. Every transaction validated. | s&amp;box Network Storage">
-  <meta property="og:description" content="Let players host or run dedicated servers. Your Network Storage backend checks every purchase, reward and score before it is saved. Open source, free to self-host.">
+  <meta property="og:description" content="Let players host or run dedicated servers. Your Network Storage backend checks every purchase, reward and combat result against shared game values before it is saved. Open source, free to self-host.">
   <meta property="og:url" content="https://sboxns.com/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://sboxns.com/images/social-card.png?v=359653244c">
@@ -19,7 +19,7 @@
   <meta property="og:image:alt" content="s&amp;box plus Network Storage: Any host. Every transaction validated.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Any host. Every transaction validated. | s&amp;box Network Storage">
-  <meta name="twitter:description" content="Let players host or run dedicated servers. Your Network Storage backend checks every purchase, reward and score before it is saved. Open source, free to self-host.">
+  <meta name="twitter:description" content="Let players host or run dedicated servers. Your Network Storage backend checks every purchase, reward and combat result against shared game values before it is saved. Open source, free to self-host.">
   <meta name="twitter:image" content="https://sboxns.com/images/social-card.png?v=359653244c">
   <meta name="twitter:image:alt" content="s&amp;box plus Network Storage: Any host. Every transaction validated.">
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=680b944973">
@@ -27,7 +27,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=d088f648ab">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=0a14d592b8">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=865089464c">
-  <link rel="stylesheet" href="/site.css?v=bdc70eda8c">
+  <link rel="stylesheet" href="/site.css?v=3d777bcbde">
   <script src="/theme.js?v=69fc3beec2"></script>
   <script src="/code.js?v=b02f2961da" defer></script>
   <script src="/site.js?v=3b12030e85" defer></script>
@@ -57,7 +57,7 @@
       "@type": "SoftwareApplication",
       "@id": "https://sboxns.com/#app",
       "name": "s&box Network Storage",
-      "description": "Open-source, self-hosted game backend for s&box. Player-hosted, P2P or dedicated: Network Storage validates purchases, rewards and scores on your server.",
+      "description": "Open-source, self-hosted game backend for s&box. Player-hosted, P2P or dedicated: Network Storage validates purchases, rewards, scores and combat results on your server, using game values shared with your game.",
       "applicationCategory": "DeveloperApplication",
       "applicationSubCategory": "Game backend",
       "operatingSystem": "Linux, Windows, macOS",
@@ -72,12 +72,14 @@
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Server-side endpoints for purchases, rewards and scores",
+        "Server-side endpoints for purchases, rewards, scores and combat",
+        "Game values shared by the game client and the server",
+        "Revision snapshots so older game builds keep their own definitions",
         "Player-hosted, P2P and dedicated game support",
         "Leaderboard queries",
         "SQLite or PostgreSQL",
         "Free HTTPS name",
-        "Owner dashboard",
+        "Owner dashboard with dry-run endpoint tests",
         "MCP server for coding agents"
       ],
       "publisher": {
@@ -96,7 +98,23 @@
           "name": "Can players cheat their currency or items?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not through Network Storage, as long as game data stays behind endpoints. Collections set to accessMode: endpoint refuse direct writes from game clients with ENDPOINT_ONLY, and every change goes through endpoint steps that run on your server: balance checks, prices from game values, once-per-day conditions. A player host only ever holds the public key, so it cannot call dedicated-only endpoints either. The dashboard's authority check lists any data a client could still change directly."
+            "text": "Not through Network Storage, as long as game data stays behind endpoints. Collections set to accessMode: endpoint refuse direct writes from game clients with ENDPOINT_ONLY, and every change goes through endpoint steps that run on your server: balance checks, prices from game values, once-per-day conditions, combat checks against weapon stats and the server clock. A player host only ever holds the public key, so it cannot call dedicated-only endpoints either. The dashboard's authority check lists any data a client could still change directly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are game values?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Named numbers and tables that your game and your server both read: weapon damage, item catalogs, prices, drop rates and reward amounts. Edit them in your server's dashboard or set them over its API. The game loads every group and table with one NetworkStorage.GetGameValues() call; endpoints read the same numbers with {{values.*}}, so the client can predict a result and the server checks it with the same math."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to older builds when I change game values?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Publishing a build snapshots its endpoints, collections and game values. Builds still in players' hands keep running against their own snapshot while it is inside its support window, so a new item never reaches a build that cannot load it. Push to staged to ship changes with your next build, or push to live to change every build at once. Player records are always shared live data."
           }
         },
         {
@@ -165,7 +183,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg?v=680b944973" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
-  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a class="wide-only" href="/#game-values">Game values</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
   <span class="spacer"></span>
   <div class="nav-actions">
     <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-sun"></use></svg></span></button>
@@ -173,14 +191,14 @@
     <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-x"></use></svg></span></button>
   </div>
 </div></header>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#game-values">Game values</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
 <main id="main">
 <div class="wrap">
 <section class="hero" aria-labelledby="hero-title">
   <div>
     <p class="lockup"><span class="sbox">s&amp;box</span><span class="plus" aria-hidden="true">+</span><img src="/images/icon.svg?v=680b944973" alt="" width="28" height="28"><span class="ns">Network Storage</span></p>
     <h1 id="hero-title">Any host.<br><span class="accent">Every transaction validated.</span></h1>
-    <p class="lead">The open-source game backend for <strong>s&amp;box</strong>. Let players host or run dedicated servers: purchases, rewards, XP and scores are checked by <strong>your</strong> Network Storage server before anything is saved.</p>
+    <p class="lead">The open-source game backend for <strong>s&amp;box</strong>. Let players host or run dedicated servers: purchases, rewards, XP and combat results are checked by <strong>your</strong> Network Storage server before anything is saved, using the same game values your game reads.</p>
     <div class="actions">
       <a class="btn primary" href="#install"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-terminal"></use></svg>Install the server</a>
       <a class="btn" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-play"></use></svg>Try the live demo</a>
@@ -215,6 +233,7 @@
     <p class="sim-foot">Runs in your browser with the same rules and error codes as the real endpoints.</p>
   </section>
 </section>
+<figure class="showcase"><img src="/images/marketing/hero-showcase.webp?v=23fe0c20fe" width="1140" height="560" loading="lazy" decoding="async" alt="Owner console: the finish-combat endpoint with eight steps, combat rules in game values YAML, and a dry run that rejects TOO_MANY_HITS"><figcaption>The real owner console: a combat endpoint, the game values it checks against, and a dry run rejecting an impossible kill.</figcaption></figure>
 </div>
 
 <section class="section" id="install" aria-labelledby="install-title"><div class="wrap">
@@ -250,9 +269,56 @@
   <p class="note"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-shield"></use></svg><span>The dashboard's authority check lists any game data a client could still change directly, so you close the gaps before players find them.</span></p>
 </div></section>
 
+<section class="section" id="game-values" aria-labelledby="gv-title"><div class="wrap">
+  <div class="sec-h"><div><h2 id="gv-title">Game values: one set of numbers for game and server</h2><p>Define weapons, items, prices and tuning once. Your game loads them in one call and shows them instantly; your endpoints check every claim against the same numbers.</p></div><a class="more" href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/game-values.md" target="_blank" rel="noopener">Game values guide<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-chev"></use></svg></a></div>
+  <div class="gv">
+    <div class="gv-feats">
+      <article class="card host"><span class="ico"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-bolt"></use></svg></span><h3>Predict on the client, check on the server</h3><p>Show a zombie's health as <code>20 × level</code> before the fight. The endpoint computes the same number from the same value and rejects a kill that does not add up.</p></article>
+      <article class="card host"><span class="ico"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-refresh"></use></svg></span><h3>Versioned with every build</h3><p>Publishing a build snapshots its game values. Players on the previous build keep theirs, so nobody is sent an item their build cannot load. Or push straight to live.</p></article>
+      <article class="card host"><span class="ico"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-database"></use></svg></span><h3>One request, then instant</h3><p>Load the whole item catalog when the game starts. Lookups after that are local: no round trip per item, no lag, less load on your server.</p></article>
+      <article class="card host"><span class="ico"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-doc"></use></svg></span><h3>Change a value live</h3><p>Edit them in your dashboard or over the API. New requests use the new numbers at once, with no game update; builds pinned to an older revision keep theirs.</p></article>
+    </div>
+    <div class="gv-code">
+      <div class="card uc-code"><span class="file"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-doc"></use></svg>Game values (YAML)</span><div class="code" data-copy-label="Game values"><pre><code class="language-yaml">items:
+  - id: combat
+    type: group
+    entries:
+      zombie_hp_per_level: 20
+      max_clock_skew_ms: 2000
+  - id: weapons
+    type: table
+    columns:
+      - key: weapon_id
+        type: string
+      - key: damage
+        type: number
+      - key: fire_interval_ms
+        type: number
+    rows:
+      - weapon_id: pistol
+        damage: 15
+        fire_interval_ms: 300
+      - weapon_id: shotgun
+        damage: 45
+        fire_interval_ms: 900</code></pre></div></div>
+      <div class="card uc-code"><span class="file"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-doc"></use></svg>In your game (C#)</span><div class="code" data-copy-label="Read game values in C#"><pre><code class="language-csharp">var gv = await NetworkStorage.GetGameValues();
+if ( !gv.HasValue ) return;
+var combat = gv.Value.GetProperty( &quot;groups&quot; )
+    .GetProperty( &quot;combat&quot; ).GetProperty( &quot;values&quot; );
+
+// Predict before the fight; the server checks the same number
+int zombieHp = combat.Int( &quot;zombie_hp_per_level&quot; ) * zombieLevel;
+
+var weapons = gv.Value.GetProperty( &quot;tables&quot; ).GetProperty( &quot;weapons&quot; )
+    .ReadList( &quot;rows&quot;, r =&gt; (Id: r.Str( &quot;weapon_id&quot; ), Damage: r.Int( &quot;damage&quot; )) );</code></pre></div></div>
+    </div>
+  </div>
+  <p class="note"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-shield"></use></svg><span>Game values are read-only from game code. Only your editor sync, your dashboard or a coding agent you allow can change them.</span></p>
+</div></section>
+
 <section class="section" id="use-cases" aria-labelledby="uc-title"><div class="wrap">
   <div class="sec-h"><div><h2 id="uc-title">Build the economy once. Enforce it everywhere.</h2><p>Collections hold the data and endpoints hold the rules. Both are YAML you push from the s&amp;box editor or write in the dashboard.</p></div></div>
-  <div class="uc-tabs"><div class="seg tabs" role="tablist" aria-label="Use cases"><button type="button" role="tab" id="tab-use-cases-rpg" aria-controls="panel-use-cases-rpg" aria-selected="true">RPG economy</button><button type="button" role="tab" id="tab-use-cases-boards" aria-controls="panel-use-cases-boards" aria-selected="false">Leaderboards</button><button type="button" role="tab" id="tab-use-cases-daily" aria-controls="panel-use-cases-daily" aria-selected="false">Daily rewards</button><button type="button" role="tab" id="tab-use-cases-limits" aria-controls="panel-use-cases-limits" aria-selected="false">Data rules</button></div></div><div class="tabpanel" role="tabpanel" id="panel-use-cases-rpg" aria-labelledby="tab-use-cases-rpg"><div class="card uc"><div class="uc-copy"><h3>Shops, crafting and inventories</h3><p>Prices live on your server in game values. The endpoint looks up the price, checks the balance, then charges and adds the item in one write.</p><ul class="checks"><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check-circle"></use></svg><span>The game sends an item id, never a price</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check-circle"></use></svg><span>Gold is a ledger field: every change records a reason</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check-circle"></use></svg><span><code>INSUFFICIENT_GOLD</code> returns before anything is written</span></li></ul><a class="more-link" href="/docs/library/source-authoring/">YAML Source reference<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-chev"></use></svg></a></div>
+  <div class="uc-tabs"><div class="seg tabs" role="tablist" aria-label="Use cases"><button type="button" role="tab" id="tab-use-cases-rpg" aria-controls="panel-use-cases-rpg" aria-selected="true">RPG economy</button><button type="button" role="tab" id="tab-use-cases-combat" aria-controls="panel-use-cases-combat" aria-selected="false">Combat checks</button><button type="button" role="tab" id="tab-use-cases-boards" aria-controls="panel-use-cases-boards" aria-selected="false">Leaderboards</button><button type="button" role="tab" id="tab-use-cases-daily" aria-controls="panel-use-cases-daily" aria-selected="false">Daily rewards</button><button type="button" role="tab" id="tab-use-cases-limits" aria-controls="panel-use-cases-limits" aria-selected="false">Data rules</button></div></div><div class="tabpanel" role="tabpanel" id="panel-use-cases-rpg" aria-labelledby="tab-use-cases-rpg"><div class="card uc"><div class="uc-copy"><h3>Shops, crafting and inventories</h3><p>Prices live on your server in game values. The endpoint looks up the price, checks the balance, then charges and adds the item in one write.</p><ul class="checks"><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check-circle"></use></svg><span>The game sends an item id, never a price</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check-circle"></use></svg><span>Gold is a ledger field: every change records a reason</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check-circle"></use></svg><span><code>INSUFFICIENT_GOLD</code> returns before anything is written</span></li></ul><a class="more-link" href="/docs/library/source-authoring/">YAML Source reference<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-chev"></use></svg></a></div>
 <div class="uc-code" data-copy-label="endpoints/purchase-item.endpoint.yml"><span class="file"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-doc"></use></svg>endpoints/purchase-item.endpoint.yml</span><div class="code" data-copy-label="endpoints/purchase-item.endpoint.yml"><pre><code class="language-yaml">kind: endpoint
 id: purchase-item
 method: POST
@@ -367,6 +433,90 @@ schema:
       min: 0
       default: 0
       _ledger: true</code></pre></div></div></div></div>
+<div class="tabpanel" role="tabpanel" id="panel-use-cases-combat" aria-labelledby="tab-use-cases-combat" hidden><div class="card uc"><div class="uc-copy"><h3>Combat a modded client cannot fake</h3><p>Start combat stamps the server time and reads the zombie's health from game values. Finish combat recomputes the damage from the weapons table, checks that the hits fit the weapon's fire rate and the client clock, then pays out once.</p><ul class="checks"><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check-circle"></use></svg><span>Damage comes from the weapons table, never from the client</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check-circle"></use></svg><span><code>TOO_MANY_HITS</code> when hits outrun the fire rate since the server-stamped start</span></li><li><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-check-circle"></use></svg><span><code>CLOCK_SKEW</code> beyond 2 s; a replayed finish gets <code>NO_COMBAT</code></span></li></ul><p>Lightweight authority for an RPG, without simulating the fight on a dedicated server. The checks bound what a client can claim; they cannot prove a hit landed.</p><a class="more-link" href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/game-values.md" target="_blank" rel="noopener">Full example with start-combat<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-chev"></use></svg></a></div>
+<div class="uc-code" data-copy-label="endpoints/finish-combat.endpoint.yml"><span class="file"><svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-doc"></use></svg>endpoints/finish-combat.endpoint.yml</span><div class="code" data-copy-label="endpoints/finish-combat.endpoint.yml"><pre><code class="language-yaml">kind: endpoint
+id: finish-combat
+method: POST
+input:
+  type: object
+  properties:
+    hits:
+      type: number
+    client_time_ms:
+      type: number
+  required:
+    - hits
+    - client_time_ms
+steps:
+  - id: player
+    type: read
+    collection: players
+    key: &quot;{{steamId}}&quot;
+  - id: in_combat
+    type: condition
+    check:
+      field: player.combat.started_ms
+      op: exists
+    onFail:
+      status: 409
+      error: NO_COMBAT
+  - id: weapon
+    type: lookup
+    source: values
+    table: weapons
+    where:
+      field: weapon_id
+      op: &quot;==&quot;
+      value: &quot;{{player.combat.weapon_id}}&quot;
+    required: true
+  - id: fight
+    type: compute
+    values:
+      damage: &quot;{{input.hits}} * {{weapon.damage}}&quot;
+      elapsed_ms: &quot;{{_unixMs}} - {{player.combat.started_ms}}&quot;
+      max_hits: &quot;floor({{fight.elapsed_ms}} / {{weapon.fire_interval_ms}}) + 1&quot;
+      clock_skew_ms: &quot;abs({{input.client_time_ms}} - {{_unixMs}})&quot;
+      xp: &quot;{{player.combat.zombie_level}} * {{values.combat.xp_per_zombie_level}}&quot;
+  - id: zombie_dead
+    type: condition
+    check:
+      field: fight.damage
+      op: &quot;&gt;=&quot;
+      value: &quot;{{player.combat.zombie_hp}}&quot;
+    onFail:
+      status: 400
+      error: ZOMBIE_ALIVE
+  - id: hits_possible
+    type: condition
+    check:
+      field: input.hits
+      op: &quot;&lt;=&quot;
+      value: &quot;{{fight.max_hits}}&quot;
+    onFail:
+      status: 400
+      error: TOO_MANY_HITS
+  - id: clock_ok
+    type: condition
+    check:
+      field: fight.clock_skew_ms
+      op: &quot;&lt;=&quot;
+      value: &quot;{{values.combat.max_clock_skew_ms}}&quot;
+    onFail:
+      status: 400
+      error: CLOCK_SKEW
+  - id: reward
+    type: write
+    collection: players
+    key: &quot;{{steamId}}&quot;
+    ops:
+      - op: inc
+        path: xp
+        value: &quot;{{fight.xp}}&quot;
+        reason: Zombie kill
+      - op: set
+        path: combat
+        value:
+          ended_ms: &quot;{{_unixMs}}&quot;</code></pre></div></div></div></div>
 </div></section>
 
 <section class="section" id="agents" aria-labelledby="agents-title"><div class="wrap">
@@ -405,11 +555,19 @@ schema:
 <div class="mc-main"><div class="mc-head"><h4>Player progress</h4><span class="new">New record</span></div>
 <div class="mc-meta"><code>players</code><span class="tag">Per-player</span><span>1,284 records · 247 KB</span></div>
 <div class="mc-table"><div class="mc-row"><span>Key</span><span>displayName</span><span class="n">level</span><span class="n">coins</span><span>Changed</span></div><div class="mc-row"><span class="k">76561198041327705</span><span>Scout</span><span class="n">7</span><span class="n">120</span><span class="m">2 min ago</span></div><div class="mc-row sel"><span class="k">76561198112094471</span><span>Builder</span><span class="n">10</span><span class="n">207</span><span class="m">5 min ago</span></div><div class="mc-row"><span class="k">76561198003318820</span><span>Miner</span><span class="n">13</span><span class="n">294</span><span class="m">11 min ago</span></div><div class="mc-row"><span class="k">76561198254871093</span><span>Ranger</span><span class="n">16</span><span class="n">381</span><span class="m">38 min ago</span></div><div class="mc-row"><span class="k">76561198090662318</span><span>Fisher</span><span class="n">19</span><span class="n">468</span><span class="m">1 h ago</span></div><div class="mc-row"><span class="k">76561198176503342</span><span>Captain</span><span class="n">22</span><span class="n">555</span><span class="m">3 h ago</span></div><div class="mc-row"><span class="k">76561198067213954</span><span>Trader</span><span class="n">27</span><span class="n">1,902</span><span class="m">Yesterday</span></div></div></div></div></div>
-</div></section>
+</div>
+<div class="wrap"><ul class="shots">
+<li><a href="/images/screens/console-game-values.webp?v=ef62fe6249" target="_blank" rel="noopener"><img src="/images/screens/console-game-values-thumb.webp?v=726c02f414" width="800" height="450" loading="lazy" decoding="async" alt="Game values page with combat rules and a weapons table in the YAML editor"><span><b>Game values</b> in the YAML editor</span></a></li>
+<li><a href="/images/screens/console-endpoint-pipeline.webp?v=de12e8543e" target="_blank" rel="noopener"><img src="/images/screens/console-endpoint-pipeline-thumb.webp?v=addb40bf98" width="800" height="450" loading="lazy" decoding="async" alt="The finish-combat endpoint as eight steps in the guided editor"><span><b>Endpoint pipeline</b> in the guided editor</span></a></li>
+<li><a href="/images/screens/console-endpoint-test.webp?v=8d676df9e8" target="_blank" rel="noopener"><img src="/images/screens/console-endpoint-test-thumb.webp?v=709b890df2" width="800" height="450" loading="lazy" decoding="async" alt="A dry-run endpoint test that passes because the server rejected TOO_MANY_HITS"><span><b>Dry runs</b> that prove a cheat is rejected</span></a></li>
+<li><a href="/images/screens/console-player-records.webp?v=a79b8f2047" target="_blank" rel="noopener"><img src="/images/screens/console-player-records-thumb.webp?v=dc983d844d" width="800" height="450" loading="lazy" decoding="async" alt="Player progress records in the data browser"><span><b>Player records</b> in the data browser</span></a></li>
+<li><a href="/images/screens/console-version-history.webp?v=e6e5e631ff" target="_blank" rel="noopener"><img src="/images/screens/console-version-history-thumb.webp?v=242b308b2b" width="800" height="450" loading="lazy" decoding="async" alt="Version history listing published game revisions"><span><b>Published revisions</b> kept for older builds</span></a></li>
+<li><a href="/images/screens/console-server-monitoring.webp?v=e1f9d070b5" target="_blank" rel="noopener"><img src="/images/screens/console-server-monitoring-thumb.webp?v=afafe59690" width="800" height="450" loading="lazy" decoding="async" alt="Live server monitoring with CPU, memory, network and latency charts"><span><b>Live monitoring</b> of your server</span></a></li>
+</ul><p class="shots-note">Real screenshots of release 0.5.4. The game values and combat shots come from an owner server seeded with the live demo's sample data.</p></div></section>
 
 <section class="section" id="faq" aria-labelledby="faq-title"><div class="wrap faq">
   <div class="sec-h"><div><h2 id="faq-title">Questions</h2><p>More in the <a href="/docs/">documentation</a> and on <a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">GitHub</a>.</p></div></div>
-  <div class="faq-list"><details><summary>Can players cheat their currency or items?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Not through Network Storage, as long as game data stays behind endpoints. Collections set to <code>accessMode: endpoint</code> refuse direct writes from game clients with <code>ENDPOINT_ONLY</code>, and every change goes through endpoint steps that run on your server: balance checks, prices from game values, once-per-day conditions.</p><p>A player host only ever holds the public key, so it cannot call dedicated-only endpoints either. The dashboard's authority check lists any data a client could still change directly.</p></div></details><details><summary>Player-hosted or dedicated: which should I use?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Start player-hosted: it costs nothing to run game sessions and is safe by default, because the rules live on your backend. Add a dedicated server when you want tournaments, seasons or other modes worth protecting; it holds a secret key for dedicated-only endpoints. One project can serve both at once.</p></div></details><details><summary>Do I need to change my game code?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>No. Games use the existing Network Storage library for s&amp;box. Point <code>NetworkStorage.Configure</code> at your server's URL with your project ID and public key. Server updates keep older published game builds working, so you do not have to republish to update the backend.</p></div></details><details><summary>What does it cost?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>The server is free and open source (AGPL-3.0). You pay your own VPS provider; a VPS around $5 a month can be a starting point for a small game, depending on your workload. There is no signup, subscription or required telemetry.</p></div></details><details><summary>Which databases does it support?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>SQLite by default, with no setup. Switch to PostgreSQL when you need it. Export your configuration and data at any time for backups or to move servers.</p></div></details><details><summary>Does my server depend on sboxns.com?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Only to create your free name and to update it when your IP changes. With a public IP, players connect to you directly and Bunny DNS answers the lookup; with a tunnel, Cloudflare carries the traffic to you. If sboxcool.com goes down, your existing name keeps working. You can also use your own domain and skip sboxns.com entirely.</p></div></details><details><summary>Where is my admin panel?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Open <code>https://YOUR_NAME/login</code> to sign in and <code>/dashboard</code> to manage your server. For the first sign-in, run <code>sbox-ns admin login-link</code> on the server and open its single-use link. There is no <code>/admin/login</code> route.</p></div></details><details><summary>Can coding agents manage it?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Yes. <code>sbox-ns mcp</code> serves the Model Context Protocol over stdio, locally or through SSH, for Claude Code, Cursor and other agents. Agents can read everything; saving definitions, writing player data and deleting are each off until you turn them on.</p></div></details></div>
+  <div class="faq-list"><details><summary>Can players cheat their currency or items?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Not through Network Storage, as long as game data stays behind endpoints. Collections set to <code>accessMode: endpoint</code> refuse direct writes from game clients with <code>ENDPOINT_ONLY</code>, and every change goes through endpoint steps that run on your server: balance checks, prices from game values, once-per-day conditions, combat checks against weapon stats and the server clock.</p><p>A player host only ever holds the public key, so it cannot call dedicated-only endpoints either. The dashboard's authority check lists any data a client could still change directly.</p></div></details><details><summary>What are game values?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Named numbers and tables that your game and your server both read: weapon damage, item catalogs, prices, drop rates and reward amounts. Edit them in your server's dashboard or set them over its API.</p><p>The game loads every group and table with one <code>NetworkStorage.GetGameValues()</code> call; endpoints read the same numbers with <code>{{values.*}}</code>, so the client can predict a result and the server checks it with the same math.</p></div></details><details><summary>What happens to older builds when I change game values?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Publishing a build snapshots its endpoints, collections and game values. Builds still in players' hands keep running against their own snapshot while it is inside its support window, so a new item never reaches a build that cannot load it.</p><p>Push to staged to ship changes with your next build, or push to live to change every build at once. Player records are always shared live data.</p></div></details><details><summary>Player-hosted or dedicated: which should I use?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Start player-hosted: it costs nothing to run game sessions and is safe by default, because the rules live on your backend. Add a dedicated server when you want tournaments, seasons or other modes worth protecting; it holds a secret key for dedicated-only endpoints. One project can serve both at once.</p></div></details><details><summary>Do I need to change my game code?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>No. Games use the existing Network Storage library for s&amp;box. Point <code>NetworkStorage.Configure</code> at your server's URL with your project ID and public key. Server updates keep older published game builds working, so you do not have to republish to update the backend.</p></div></details><details><summary>What does it cost?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>The server is free and open source (AGPL-3.0). You pay your own VPS provider; a VPS around $5 a month can be a starting point for a small game, depending on your workload. There is no signup, subscription or required telemetry.</p></div></details><details><summary>Which databases does it support?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>SQLite by default, with no setup. Switch to PostgreSQL when you need it. Export your configuration and data at any time for backups or to move servers.</p></div></details><details><summary>Does my server depend on sboxns.com?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Only to create your free name and to update it when your IP changes. With a public IP, players connect to you directly and Bunny DNS answers the lookup; with a tunnel, Cloudflare carries the traffic to you. If sboxcool.com goes down, your existing name keeps working. You can also use your own domain and skip sboxns.com entirely.</p></div></details><details><summary>Where is my admin panel?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Open <code>https://YOUR_NAME/login</code> to sign in and <code>/dashboard</code> to manage your server. For the first sign-in, run <code>sbox-ns admin login-link</code> on the server and open its single-use link. There is no <code>/admin/login</code> route.</p></div></details><details><summary>Can coding agents manage it?<svg class="i" aria-hidden="true"><use href="/images/icons.svg?v=d0eeac5061#i-plus"></use></svg></summary><div class="ans"><p>Yes. <code>sbox-ns mcp</code> serves the Model Context Protocol over stdio, locally or through SSH, for Claude Code, Cursor and other agents. Agents can read everything; saving definitions, writing player data and deleting are each off until you turn them on.</p></div></details></div>
 </div></section>
 </main>
 <footer class="foot"><div class="wrap">
