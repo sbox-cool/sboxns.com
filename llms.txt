@@ -18,6 +18,7 @@ Key facts:
 
 - [Home](https://sboxns.com/): what Network Storage does, game values, hosting models, use cases (including combat checks), real console screenshots, FAQ.
 - [Install guide](https://sboxns.com/install/): one-command install (public IP, tunnel, Windows, own domain), credentials, dashboard, editor setup, free HTTPS names, data boundaries.
+- [Contact](https://sboxns.com/contact/): open-source repos, community Discord, and how to reach the primary maintainers.
 
 ## Official sources
 
@@ -30,7 +31,7 @@ Key facts:
 - [Compatibility policy](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/compatibility.md): how older game builds keep working.
 - [MCP](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md): allowlisted stdio tools and SSH operations.
 - [Hosted-name acceptable use](https://sboxcool.com/network-storage/hosted-names/acceptable-use): abuse reporting and service boundaries.
-- [Privacy](https://sboxcool.com/privacy): sboxcool-operated services.
+- [Privacy](https://sboxns.com/privacy/): what sboxns.com measures, your choice, and what stays on your device.
 
 ## Docs
 
