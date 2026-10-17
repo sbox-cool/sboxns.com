@@ -419,3 +419,23 @@ pre code { background: none; padding: 0; font-size: inherit; }
   .step-h .tabs { margin-left: 0; width: 100%; }
   pre { font-size: .78rem; word-break: break-all; }
 }
+
+/* Analytics consent. The banner is non-modal (the page stays usable); the
+   settings dialog opened from the footer is modal. Both use the same markup. */
+.ck-dialog { width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; padding: 0; border: 1px solid var(--line-strong); border-radius: var(--r-lg); background: var(--bg-raised); color: var(--text); box-shadow: var(--shadow); }
+.ck-dialog:not([open]) { display: none; }
+.ck-dialog[open]:not(:modal) { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); margin: 0; z-index: 60; }
+.ck-dialog::backdrop { background: var(--scrim); }
+.ck-body { display: grid; gap: 14px; padding: 20px; }
+.ck-body h2 { font-size: 1.05rem; }
+.ck-body p { color: var(--text-2); font-size: .9rem; }
+.ck-body a { color: var(--accent-fg); }
+.ck-status { min-height: 0; color: var(--text); font-weight: 600; font-size: .88rem; }
+.ck-status:empty { display: none; }
+.ck-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.ck-actions .btn { width: 100%; white-space: nowrap; }
+.foot nav .ck-link { display: block; width: 100%; padding: 4px 0; background: none; border: 0; margin: 0; font: inherit; color: var(--text); text-align: left; cursor: pointer; }
+.foot nav .ck-link:hover { color: var(--accent-fg); }
+@media (max-width: 520px) {
+  .ck-actions { grid-template-columns: minmax(0, 1fr); }
+}
