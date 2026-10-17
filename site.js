@@ -375,10 +375,8 @@
     dialog.innerHTML =
       '<div class="ck-body">' +
         '<h2 id="ck-title" tabindex="-1">Analytics on sboxns.com</h2>' +
-        '<p class="ck-region"></p><p id="ck-desc">Google Analytics counts visits to this website using analytics cookies. ' +
-        'Query strings, fragments and referrers are excluded; advertising features are off. ' +
-        'Change your choice anytime in Cookie settings in the footer. ' +
-        '<a href="/privacy/">Read the privacy notice</a>.</p>' +
+        '<p class="ck-region"></p><p id="ck-desc">Google Analytics uses cookies to measure visits, without advertising features. ' +
+        'Change this anytime in Cookie settings. <a href="/privacy/">Privacy notice</a>.</p>' +
         '<p class="ck-status" role="status"></p>' +
         '<div class="ck-actions">' +
           '<button type="button" class="btn" data-ck="accept">Accept analytics</button>' +
@@ -399,8 +397,8 @@
     // gives native focus trapping and Escape; the fallback just sets [open].
     function describe() {
       dialog.querySelector(".ck-region").textContent = consentRequired
-        ? "Analytics needs your permission in consent-first or undetermined regions. You can enable or disable it below."
-        : "Analytics is on by default in your region. You can turn it off below.";
+        ? "Analytics needs your permission."
+        : "Analytics is on by default in your region. You can turn it off.";
       status.textContent = privacySignal ? "Your browser privacy signal keeps analytics off."
         : !storageAvailable ? "Analytics is off because this browser cannot save your preference."
         : running() ? "Analytics is on." : "Analytics is off.";
