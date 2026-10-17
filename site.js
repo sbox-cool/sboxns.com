@@ -506,5 +506,76 @@
     });
   }
 
+  // External links: badge with an icon and confirm before leaving sboxns.com.
+  // Same-host absolute URLs are untouched; without this script links behave normally.
+  function setupExternalLinks() {
+    var dialog = document.createElement("dialog");
+    dialog.className = "ck-dialog";
+    dialog.setAttribute("aria-labelledby", "ext-title");
+    dialog.innerHTML =
+      '<div class="ck-body">' +
+        '<h2 id="ext-title" tabindex="-1">You are leaving sboxns.com</h2>' +
+        '<p>This link opens <code class="ext-host"></code> in a new tab. Continue?</p>' +
+        '<div class="ck-actions">' +
+          '<button type="button" class="btn primary" data-ext="go">Continue</button>' +
+          '<button type="button" class="btn" data-ext="back">Go back</button>' +
+        '</div>' +
+      '</div>';
+    var host = dialog.querySelector(".ext-host");
+    var pending = null;
+    function close(returnFocus) {
+      if (dialog.close) dialog.close();
+      else dialog.removeAttribute("open");
+      if (returnFocus && pending && pending.source) pending.source.focus({ preventScroll: true });
+      pending = null;
+    }
+    dialog.addEventListener("click", function (event) {
+      if (event.target.closest('[data-ext="back"]')) { close(true); return; }
+      if (event.target.closest('[data-ext="go"]') && pending) {
+        var url = pending.url;
+        close(false);
+        // A strict popup blocker can still refuse the new tab; fall back to
+        // this tab so the link never dead-ends after confirmation.
+        if (!window.open(url, "_blank", "noopener")) location.href = url;
+      }
+    });
+    dialog.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") { event.preventDefault(); close(true); }
+    });
+    document.body.appendChild(dialog);
+
+    function externalHref(anchor) {
+      var href = anchor.getAttribute("href");
+      if (!href || anchor.hasAttribute("data-no-ext")) return null;
+      if (!/^https?:\/\//i.test(href)) return null;
+      try {
+        if (new URL(href, location.href).hostname === location.hostname) return null;
+      } catch (e) { return null; }
+      return href;
+    }
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (anchor) {
+      var href = externalHref(anchor);
+      if (!href) return;
+      anchor.classList.add("ext");
+      var badge = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      badge.setAttribute("class", "i i-ext");
+      badge.setAttribute("aria-hidden", "true");
+      var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+      use.setAttribute("href", "/images/icons.svg?v=d0eeac5061#i-ext");
+      badge.appendChild(use);
+      anchor.appendChild(badge);
+      anchor.addEventListener("click", function (event) {
+        // New-tab links pause for confirmation; same-tab externals (rare) do too.
+        event.preventDefault();
+        pending = { url: anchor.href, source: anchor };
+        host.textContent = new URL(anchor.href).hostname;
+        if (dialog.showModal) dialog.showModal();
+        else dialog.setAttribute("open", "");
+        dialog.querySelector("h2").focus({ preventScroll: true });
+      });
+    });
+  }
+
   setupAnalytics();
+  setupExternalLinks();
 })();
