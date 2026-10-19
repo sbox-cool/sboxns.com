@@ -1,14 +1,14 @@
 # sboxns.com
 
-> s&box Network Storage is an open-source (AGPL-3.0), self-hosted game backend for s&box. Games can be player-hosted, P2P or dedicated; either way, purchases, rewards, XP, scores and combat results change only through endpoints that run on the operator's Network Storage server, which validates them before anything is saved, using game values (shared numbers and tables) that the game client reads too. sboxns.com is the landing site and optional free HTTPS name service, not a shared database or central admin panel.
+> s&box Network Storage is an open-source (AGPL-3.0), self-hosted game backend for s&box. Games can be player-hosted, P2P or dedicated; either way, purchases, rewards, XP, scores and combat results are checked by endpoints on the operator's Network Storage server before they are saved, using game values (shared numbers and tables) that the game client reads too. sboxns.com is the landing site and optional free HTTPS name service, not a shared database or central admin panel.
 
 Key facts:
 
 - Player hosts and game clients hold only the public key (`sbox_ns_...`). Collections with `accessMode: endpoint` refuse direct client writes (`403 ENDPOINT_ONLY`). Dedicated servers hold a secret key (`sbox_sk_...`) for dedicated-only endpoints (`401 SECRET_KEY_REQUIRED` for the public key).
-- Endpoints, collections, queries (including leaderboards) and game values are YAML, pushed from the s&box editor Sync Tool or written in the owner dashboard.
-- Game values are named groups and typed tables (for example weapon damage, item catalogs, prices). The game reads all of them with one `NetworkStorage.GetGameValues()` call and they are read-only from game code; endpoints read the same numbers with `{{values.<group>.<key>}}` and `lookup` steps. Publishing a package revision snapshots endpoints, collections and game values, so builds that send their revision keep their own snapshot inside its support window; the Sync Tool can push to staged (next build) or live (every build). Player records are always live.
+- Endpoints, collections and queries (including leaderboards) are YAML, pushed from the s&box editor Sync Tool or written in the owner dashboard. Game values are edited in the owner dashboard or over the API.
+- Game values are named groups and typed tables (for example weapon damage, item catalogs, prices). The game reads all of them with one `NetworkStorage.GetGameValues()` call and they are read-only from game code; endpoints read the same numbers with `{{values.<group>.<key>}}` and `lookup` steps. Publishing a package revision snapshots endpoints, collections and game values. Builds that send a supported revision keep their own snapshot; requests with no revision header, or with an unknown or expired revision, use live values, and a missing snapshot resource may fall back to live values. Pushing to staged (next build) or to live (every build) does not overwrite supported snapshots. Player records are always live.
 - Endpoints can check client claims against the server clock (`{{_unixMs}}`): for example a combat endpoint that rejects more hits than the weapon's fire rate allows (`TOO_MANY_HITS`), a client clock off by more than a set skew (`CLOCK_SKEW`) or a replayed finish (`NO_COMBAT`). Checks bound what a client can claim; they cannot prove a hit landed.
-- Games use the existing Network Storage library unchanged: `NetworkStorage.Configure(projectId, publicKey, baseUrl)`. Server updates keep older published game builds working.
+- Games use the existing Network Storage library unchanged: `NetworkStorage.Configure(projectId, publicKey, baseUrl)`. Server updates keep published game builds working within their support window.
 - `sbox-ns mcp` serves an allowlisted Model Context Protocol server over stdio (locally or through SSH) for coding agents; writes are opt-in.
 - Self-hosting requires no sboxcool signup, subscription, email or telemetry. SQLite by default, PostgreSQL optional. Operators pay their own VPS provider.
 - Owner login: https://YOUR_HOSTNAME/login. Owner dashboard: /dashboard. First sign-in: `sbox-ns admin login-link`. /admin/login is not a supported route.
@@ -28,7 +28,7 @@ Key facts:
 - [Self-hosting](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/self-hosting.md): Linux, Windows, Docker, HTTPS, backups and optional services.
 - [Network Storage documentation](https://sboxcool.com/wiki/network-storage-v3): game library, YAML Source, endpoint and workflow reference.
 - [Client setup](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/client-setup.md): project credentials and custom Base URL.
-- [Compatibility policy](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/compatibility.md): how older game builds keep working.
+- [Compatibility policy](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/compatibility.md): how older game builds are supported within their support window.
 - [MCP](https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/mcp.md): allowlisted stdio tools and SSH operations.
 - [Hosted-name acceptable use](https://sboxcool.com/network-storage/hosted-names/acceptable-use): abuse reporting and service boundaries.
 - [Privacy](https://sboxns.com/privacy/): what sboxns.com measures, your choice, and what stays on your device.
