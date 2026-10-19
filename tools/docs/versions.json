@@ -5,6 +5,12 @@
   },
   "servers": [
     {
+      "id": "next-8e7623d",
+      "label": "Next release (unreleased, 8e7623d)",
+      "ref": "8e7623dda7e37159dc1757b76ad110fad5dd6f11",
+      "commit": "8e7623dda7e37159dc1757b76ad110fad5dd6f11"
+    },
+    {
       "id": "0.5.4",
       "label": "0.5.4",
       "ref": "v0.5.4",

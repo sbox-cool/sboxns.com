@@ -94,6 +94,7 @@ const PAGE_DEFS = [
   ['start/game-client', SERVER, 'docs/game-client.md', 'Game client startup', 'start', 'What the library sends at startup: revision init, heartbeats and compatibility headers.'],
   ['library/overview', LIBRARY, 'README.md', 'Library overview', 'library', 'Install the library, configure credentials and call endpoints from game code.'],
   ['library/source-authoring', LIBRARY, 'source-authoring.md', 'Authoring collections and endpoints', 'library', 'YAML sources for collections, endpoints and workflows, synced by the editor tool.'],
+  ['library/script-endpoints', SERVER, 'docs/endpoints-javascript.md', 'Script endpoints (JavaScript / TypeScript)', 'library', 'Write endpoints in YAML or JavaScript/TypeScript: sandboxed, with a shared global environment of reusable code.'],
   ['library/examples', LIBRARY, 'Examples/README.md', 'Examples', 'library', 'Example sources you can copy into a project.'],
   ['server/self-hosting', SERVER, 'docs/self-hosting.md', 'Self-hosting', 'server', 'Install, update, back up and run the server on Linux, macOS, Windows or Docker.'],
   ['server/hosting-models', SERVER, 'docs/hosting-models.md', 'Hosting models', 'server', 'Player-hosted, P2P and dedicated servers, and what the backend checks in each.'],
@@ -606,6 +607,18 @@ if (AVAILABLE.has('library/api')) {
   search.push({ t: 'C# API reference', u: urlOf('library/api'), s: 'Game library', h: '', x: plain(cs.html).slice(0, 3000) });
 }
 
+// "New" notice: script endpoints ship in the next server release. On builds that already have the page it links
+// to it; otherwise to the newest unreleased ("next-") server snapshot that has it.
+const scriptEndpointsNotice = (() => {
+  const text = 'Endpoints can now be written in <strong>YAML or JavaScript/TypeScript</strong> (more languages planned): a full global environment of shared code, sandboxed on your server.';
+  if (AVAILABLE.has('library/script-endpoints')) return `<p class="docs-new"><strong>New:</strong> ${text} <a href="${urlOf('library/script-endpoints')}">Script endpoints</a></p>\n`;
+  const versions = JSON.parse(readFileSync(path.join(here, 'versions.json'), 'utf8'));
+  const next = versions.servers.find((s) => s.id.startsWith('next-'));
+  if (!next) return '';
+  const href = pageUrl(`/docs/versions/${next.id}/${versions.defaults.library}`, 'library/script-endpoints');
+  return `<p class="docs-new"><strong>New in the next server release:</strong> ${text} <a href="${href}">Script endpoints docs (${esc(next.label)})</a></p>\n`;
+})();
+
 // Docs home.
 const cards = SECTIONS.map((s) => {
   const items = sectionItems(s.id);
@@ -615,7 +628,7 @@ const cards = SECTIONS.map((s) => {
 write('', layout({
   slug: '', title: 'Documentation', description: 'Network Storage documentation: connect a game, the C# library, the HTTP API and self-hosting, generated from the source repositories.',
   crumbs: [],
-  body: `<h1>Documentation</h1>\n<p class="lead">Connect your s&amp;box game, call your backend from the C# library or plain HTTP, and run the server yourself. Generated from <a href="https://github.com/${SERVER.repo}">the server</a> at <code>${esc(SERVER.ref)}</code> and <a href="https://github.com/${LIBRARY.repo}">the library</a> at <code>${esc(LIBRARY.ref)}</code>.</p>\n${cards}`,
+  body: `<h1>Documentation</h1>\n<p class="lead">Connect your s&amp;box game, call your backend from the C# library or plain HTTP, and run the server yourself. Generated from <a href="https://github.com/${SERVER.repo}">the server</a> at <code>${esc(SERVER.ref)}</code> and <a href="https://github.com/${LIBRARY.repo}">the library</a> at <code>${esc(LIBRARY.ref)}</code>.</p>\n${scriptEndpointsNotice}${cards}`,
   source: null,
 }));
 

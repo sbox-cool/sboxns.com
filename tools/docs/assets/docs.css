@@ -106,3 +106,7 @@ html:not(.docs-js) .docs-versions .docs-version-field { display: none; }
   .docs-menu-panel .docs-nav a { padding: 9px 10px; }
   .api-meta div { grid-template-columns: minmax(0, 1fr); gap: 0; }
 }
+
+/* "New" notice on the docs home (script endpoints). */
+.docs-new { margin: 0 0 1.5rem; padding: .75rem 1rem; border: 1px solid var(--line-strong); border-left: 3px solid var(--accent); border-radius: 8px; color: var(--text); }
+.docs-new strong:first-child { color: var(--accent-fg); }
