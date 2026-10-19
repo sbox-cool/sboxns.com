@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Library certification | Network Storage docs</title>
+  <meta name="description" content="How a library and server pairing is tested and recorded.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.5.3/source-9c4a235/compat/certification/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Library certification | Network Storage docs">
+  <meta property="og:description" content="How a library and server pairing is tested and recorded.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.5.3/source-9c4a235/compat/certification/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.3/source-9c4a235/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.3/source-9c4a235/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.3 · main source (9c4a235)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/0.5.4/source-9c4a235/compat/certification/">0.5.4</option><option value="/docs/versions/0.5.3/source-9c4a235/compat/certification/" selected>0.5.3</option><option value="/docs/versions/0.5.2/source-9c4a235/compat/certification/">0.5.2</option><option value="/docs/versions/0.5.1/source-9c4a235/compat/certification/">0.5.1</option><option value="/docs/versions/0.5.0/source-9c4a235/compat/certification/">0.5.0</option><option value="/docs/versions/0.4.0/source-9c4a235/compat/certification/">0.4.0</option><option value="/docs/versions/0.3.0/source-9c4a235/compat/certification/">0.3.0</option><option value="/docs/versions/0.2.0/source-9c4a235/compat/certification/">0.2.0</option><option value="/docs/versions/0.1.0/source-9c4a235/compat/certification/">0.1.0</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.3/source-13f51a8/compat/certification/">1.1.0 source (13f51a8)</option><option value="/docs/versions/?missing=compat%2Fcertification&amp;server=0.5.3&amp;library=source-d369d1b">Legacy source (d369d1b) (page unavailable)</option><option value="/docs/versions/0.5.3/source-fc58d4e/compat/certification/">main source (fc58d4e)</option><option value="/docs/versions/0.5.3/source-5369108/compat/certification/">main source (5369108)</option><option value="/docs/versions/0.5.3/source-9c4a235/compat/certification/" selected>main source (9c4a235)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/0.5.4/source-9c4a235/compat/certification/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-9c4a235/compat/certification/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-9c4a235/compat/certification/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-9c4a235/compat/certification/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-9c4a235/compat/certification/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-9c4a235/compat/certification/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-9c4a235/compat/certification/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-9c4a235/compat/certification/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-9c4a235/compat/certification/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.3/source-13f51a8/compat/certification/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/?missing=compat%2Fcertification&amp;server=0.5.3&amp;library=source-d369d1b">Library: Legacy source (d369d1b) (page unavailable)</a></li><li><a href="/docs/versions/0.5.3/source-fc58d4e/compat/certification/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.3/source-5369108/compat/certification/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.3/source-9c4a235/compat/certification/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.4/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.3/source-9c4a235/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.3/source-9c4a235/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.3/source-9c4a235/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.3/source-9c4a235/library/overview/">Library overview</a><a href="/docs/versions/0.5.3/source-9c4a235/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.3/source-9c4a235/library/examples/">Examples</a><a href="/docs/versions/0.5.3/source-9c4a235/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.3/source-9c4a235/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.3/source-9c4a235/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.3/source-9c4a235/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.3/source-9c4a235/server/configuration/">Configuration</a><a href="/docs/versions/0.5.3/source-9c4a235/server/database/">Databases</a><a href="/docs/versions/0.5.3/source-9c4a235/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.3/source-9c4a235/server/export/">Export and move projects</a><a href="/docs/versions/0.5.3/source-9c4a235/server/modules/">Modules</a><a href="/docs/versions/0.5.3/source-9c4a235/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.3/source-9c4a235/server/alerting/">Alerting</a><a href="/docs/versions/0.5.3/source-9c4a235/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.3/source-9c4a235/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.3/source-9c4a235/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.3/source-9c4a235/compat/certification/" aria-current="page">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.3/source-9c4a235/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.3/source-9c4a235/">Docs</a><span aria-hidden="true">/</span><span>Compatibility</span><span aria-hidden="true">/</span><span aria-current="page">Library certification</span></nav>
+  <article class="prose docs-prose">
+<h1>Library certification</h1>
+<p class="lead">How a library and server pairing is tested and recorded.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#certify-once">Certify once</a><a href="#fundamental-change-re-test-before-release">Fundamental change = re-test before release</a><a href="#lts-scrutiny-for-every-prissue">LTS scrutiny for every PR/issue</a></nav>
+<p>The library and the server are both LTS. Games embed the library for months;
+servers update independently. A pairing is certified once with real evidence,
+then held until a fundamental change forces re-testing.</p>
+<p>Tracking: <a href="https://github.com/sbox-cool/sbox-network-storage/issues/6" target="_blank" rel="noopener">library tracker #6</a>,
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/issues/57" target="_blank" rel="noopener">server epic #57</a>.
+Backend rules: <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/compatibility.md" target="_blank" rel="noopener">server docs/compatibility.md</a>.
+Backend PRs: <a href="https://github.com/sbox-cool/sbox-network-storage-server/pull/66" target="_blank" rel="noopener">server #66</a>, <a href="https://github.com/sbox-cool/sbox-network-storage-server/pull/67" target="_blank" rel="noopener">#67</a>, <a href="https://github.com/sbox-cool/sbox-network-storage-server/pull/70" target="_blank" rel="noopener">#70</a>.</p>
+<h2 id="certify-once"><a class="anchor" href="#certify-once" aria-hidden="true" tabindex="-1">#</a>Certify once</h2>
+<p>A certification is one server <code>tested</code> row: exact server version + source
+commit, library version + package revision (or null when genuinely
+unassigned), s&amp;box engine build, database
+providers actually exercised, a <code>pass</code> result, and evidence URLs (run logs,
+both-repo PRs/issues). <code>ci-only</code> backend HTTP tests never certify a pairing.
+A certified pattern covers that pattern only (revision-init, save/load round
+trip, endpoint success/error, game values, queries, heartbeat/analytics,
+Sync Tool push/pull, revision handling). New patterns need new rows.</p>
+<h2 id="fundamental-change-re-test-before-release"><a class="anchor" href="#fundamental-change-re-test-before-release" aria-hidden="true" tabindex="-1">#</a>Fundamental change = re-test before release</h2>
+<p>These invalidate affected certifications and MUST be re-tested on both sides
+before release:</p>
+<ul>
+<li>Library public method added/removed/renamed, signature or behavior changed.</li>
+<li>Request/response shapes, error codes/envelopes, defaults, retry/fallback.</li>
+<li>Auth handling (public/secret/dedicated keys, auth sessions, encryption).</li>
+<li>Save/endpoint/query/game-value semantics, revision-status handling.</li>
+<li>Sync Tool authoring model, preflight/push/pull/promote behavior (including
+server-side promotion).</li>
+<li>Identity headers/body versions, server-advertised capability gating, update
+prompts.</li>
+<li>Any change the server lists as fundamental in its compatibility doc.</li>
+</ul>
+<p>Internal refactors with no wire, semantic or storage-contract change do not
+invalidate certification, but still require <code>UnitTests/</code> and
+<code>Tests/test_source_compiler.py</code> plus the backend parity corpus on the server.</p>
+<h2 id="lts-scrutiny-for-every-prissue"><a class="anchor" href="#lts-scrutiny-for-every-prissue" aria-hidden="true" tabindex="-1">#</a>LTS scrutiny for every PR/issue</h2>
+<ul>
+<li>Label wire-affecting changes <code>compat</code> with <code>priority: P0/P1/P2</code>; link the
+server counterpart issue/PR and the dependency order. State additive vs
+deprecated vs removal, which old games stay working, the replacement and
+sunset, and the test evidence.</li>
+<li>Library public methods and server endpoints are LTS surface: no silent
+rename, removal, narrowing or meaning change. Ship a replacement first,
+keep the old form for at least six months after its successor ships with
+at least 90 days&#39; removal notice, add a migration guide, and record real
+old-client + new-client evidence plus unidentified-traffic impact. The later
+date wins; announced sunsets cannot be shortened.</li>
+<li>Reviewers MUST reject silent removals, narrowed support, renames without
+translation, shortened notice, patch-only syntax changes, and fundamental
+changes without new certification rows. When in doubt, keep the old form
+and add side-by-side. Players cannot update the library inside a published
+game; only a game republish delivers a fix.</li>
+</ul>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage/blob/9c4a23516b17a2776183299495a59e7d005ede22/docs/compatibility-certification.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage/docs/compatibility-certification.md</a> at <code>9c4a23516b17a2776183299495a59e7d005ede22</code> (9c4a235).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.3 (<code>0.5.3</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/6bf5b2a0f5a2eb0c34244cb574780a6ab30d4b36" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.3</code> (<code>6bf5b2a</code>). <strong>Library:</strong> main source (9c4a235) (<code>source-9c4a235</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/9c4a23516b17a2776183299495a59e7d005ede22" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>9c4a23516b17a2776183299495a59e7d005ede22</code> (<code>9c4a235</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.3/source-9c4a235/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.3/source-9c4a235/api/">HTTP API</a><a href="/docs/versions/0.5.3/source-9c4a235/library/api/">C# API</a><a href="/docs/versions/0.5.3/source-9c4a235/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

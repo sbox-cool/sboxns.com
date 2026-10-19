@@ -103,6 +103,17 @@
         "revision": null,
         "evidence": null
       }
+    },
+    {
+      "id": "source-9c4a235",
+      "label": "main source (9c4a235)",
+      "ref": "9c4a23516b17a2776183299495a59e7d005ede22",
+      "commit": "9c4a23516b17a2776183299495a59e7d005ede22",
+      "publication": {
+        "status": "unverified",
+        "revision": null,
+        "evidence": null
+      }
     }
   ]
 }
