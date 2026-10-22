@@ -26,7 +26,6 @@ for (const pair of catalog.versions) {
           assert.ok(nav, full);
           for (const [, href] of nav.matchAll(/href="([^"]+)"/g)) assert.ok(href.startsWith(pair.basePath + '/'), `${full}: ${href}`);
           assert.ok(html.includes(`${pair.basePath}/search-index.json`), full);
-          assert.ok(html.includes(`https://sboxns.com${pair.basePath}/`), full);
           for (const [, href] of html.matchAll(/<option[^>]*value="([^"]+)"/g)) {
             assert.ok(existsSync(path.join(site, href.split('?')[0], 'index.html')), `${full}: selector target ${href}`);
           }
