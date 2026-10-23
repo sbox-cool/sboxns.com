@@ -534,9 +534,9 @@
       if (event.target.closest('[data-ext="go"]') && pending) {
         var url = pending.url;
         close(false);
-        // A strict popup blocker can still refuse the new tab; fall back to
-        // this tab so the link never dead-ends after confirmation.
-        if (!window.open(url, "_blank", "noopener")) location.href = url;
+        // noopener intentionally returns null even when the new tab opens.
+        // Do not interpret that as a blocked popup and navigate this tab too.
+        window.open(url, "_blank", "noopener");
       }
     });
     dialog.addEventListener("keydown", function (event) {
