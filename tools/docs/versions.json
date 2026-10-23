@@ -1,6 +1,6 @@
 {
   "defaults": {
-    "server": "0.5.4",
+    "server": "0.5.5",
     "library": "source-13f51a8"
   },
   "servers": [
@@ -63,6 +63,12 @@
       "label": "0.1.0",
       "ref": "v0.1.0",
       "commit": "5aeb8e2268316ece4ca3ce36110d4e8bce599632"
+    },
+    {
+      "id": "0.5.5",
+      "label": "0.5.5",
+      "ref": "v0.5.5",
+      "commit": "3fe5c5971308791a04b7d96ffe86d758cf1ba784"
     }
   ],
   "libraries": [
@@ -126,6 +132,17 @@
       "label": "main source (9b6ec5d)",
       "ref": "9b6ec5d41d99afd1756293d958be1f1330aa73b7",
       "commit": "9b6ec5d41d99afd1756293d958be1f1330aa73b7",
+      "publication": {
+        "status": "unverified",
+        "revision": null,
+        "evidence": null
+      }
+    },
+    {
+      "id": "source-ddf9b61",
+      "label": "main source (ddf9b61)",
+      "ref": "ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750",
+      "commit": "ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750",
       "publication": {
         "status": "unverified",
         "revision": null,

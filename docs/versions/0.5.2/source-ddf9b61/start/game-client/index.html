@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Game client startup | Network Storage docs</title>
+  <meta name="description" content="What the library sends at startup: revision init, heartbeats and compatibility headers.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.5.2/source-13f51a8/start/game-client/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Game client startup | Network Storage docs">
+  <meta property="og:description" content="What the library sends at startup: revision init, heartbeats and compatibility headers.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.5.2/source-13f51a8/start/game-client/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.2/source-ddf9b61/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.2/source-ddf9b61/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.2 · main source (ddf9b61)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-ddf9b61/start/game-client/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-ddf9b61/start/game-client/">0.5.4</option><option value="/docs/versions/0.5.3/source-ddf9b61/start/game-client/">0.5.3</option><option value="/docs/versions/0.5.2/source-ddf9b61/start/game-client/" selected>0.5.2</option><option value="/docs/versions/0.5.1/source-ddf9b61/start/game-client/">0.5.1</option><option value="/docs/versions/0.5.0/source-ddf9b61/start/game-client/">0.5.0</option><option value="/docs/versions/0.4.0/source-ddf9b61/start/game-client/">0.4.0</option><option value="/docs/versions/0.3.0/source-ddf9b61/start/game-client/">0.3.0</option><option value="/docs/versions/0.2.0/source-ddf9b61/start/game-client/">0.2.0</option><option value="/docs/versions/0.1.0/source-ddf9b61/start/game-client/">0.1.0</option><option value="/docs/versions/0.5.5/source-ddf9b61/start/game-client/">0.5.5</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.2/source-13f51a8/start/game-client/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.2/source-d369d1b/start/game-client/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.2/source-fc58d4e/start/game-client/">main source (fc58d4e)</option><option value="/docs/versions/0.5.2/source-5369108/start/game-client/">main source (5369108)</option><option value="/docs/versions/0.5.2/source-9c4a235/start/game-client/">main source (9c4a235)</option><option value="/docs/versions/0.5.2/source-9b6ec5d/start/game-client/">main source (9b6ec5d)</option><option value="/docs/versions/0.5.2/source-ddf9b61/start/game-client/" selected>main source (ddf9b61)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-ddf9b61/start/game-client/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-ddf9b61/start/game-client/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-ddf9b61/start/game-client/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-ddf9b61/start/game-client/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-ddf9b61/start/game-client/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-ddf9b61/start/game-client/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-ddf9b61/start/game-client/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-ddf9b61/start/game-client/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-ddf9b61/start/game-client/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-ddf9b61/start/game-client/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-ddf9b61/start/game-client/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.2/source-13f51a8/start/game-client/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.2/source-d369d1b/start/game-client/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.2/source-fc58d4e/start/game-client/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.2/source-5369108/start/game-client/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.2/source-9c4a235/start/game-client/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.2/source-9b6ec5d/start/game-client/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.5.2/source-ddf9b61/start/game-client/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.5/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.2/source-ddf9b61/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.2/source-ddf9b61/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.2/source-ddf9b61/start/game-client/" aria-current="page">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.2/source-ddf9b61/library/overview/">Library overview</a><a href="/docs/versions/0.5.2/source-ddf9b61/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.2/source-ddf9b61/library/examples/">Examples</a><a href="/docs/versions/0.5.2/source-ddf9b61/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.2/source-ddf9b61/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.2/source-ddf9b61/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/configuration/">Configuration</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/database/">Databases</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/export/">Export and move projects</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/modules/">Modules</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/alerting/">Alerting</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.2/source-ddf9b61/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.2/source-ddf9b61/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.2/source-ddf9b61/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.2/source-ddf9b61/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.2/source-ddf9b61/">Docs</a><span aria-hidden="true">/</span><span>Get started</span><span aria-hidden="true">/</span><span aria-current="page">Game client startup</span></nav>
+  <article class="prose docs-prose">
+<h1>Game client startup</h1>
+<p class="lead">What the library sends at startup: revision init, heartbeats and compatibility headers.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#base-url-rule">Base URL rule</a><a href="#server-info-handshake">Server info handshake</a><a href="#library-compatibility">Library compatibility</a><a href="#revision-init-handshake">Revision init handshake</a><a href="#pinned-execution-and-_revisionstatus">Pinned execution and _revisionStatus</a><a href="#query-results">Query results</a></nav>
+<p>This page documents what the unmodified Network Storage client library says
+to your server on top of the base URL. For pointing the game and editor at
+your server, see <a href="/docs/versions/0.5.2/source-ddf9b61/start/connect-a-game/">client-setup.md</a>. For which URL types
+s&amp;box clients can reach, see the reachability table there (all rows
+currently untested); this page does not repeat it.</p>
+<p>Client library source: <code>github.com/sbox-cool/sbox-network-storage</code>
+(<code>Code/Core/NetworkStorageRevisionInit.cs</code> for the handshake below).
+Library page: <code>sbox.game/sboxcool/network-storage</code>. API and library docs:
+<code>sbox.cool/wiki/network-storage-v3</code>.</p>
+<h2 id="base-url-rule"><a class="anchor" href="#base-url-rule" aria-hidden="true" tabindex="-1">#</a>Base URL rule</h2>
+<p>The client appends the API version itself (<code>/v3/...</code>), so the base URL is
+only scheme, host and port with no path and no trailing slash, for example
+<code>http://your-server:8080</code>. Verify the server answers from the machine
+running s&amp;box:</p>
+<pre><code class="language-sh">curl -i http://your-server:8080/health
+curl http://your-server:8080/v3/server-info</code></pre>
+<h2 id="server-info-handshake"><a class="anchor" href="#server-info-handshake" aria-hidden="true" tabindex="-1">#</a>Server info handshake</h2>
+<p><code>GET /v3/server-info</code> is public and returns server identity, answered
+natively without a database write:</p>
+<pre><code class="language-json">{
+  &quot;kind&quot;: &quot;self-hosted&quot;,
+  &quot;product&quot;: &quot;sbox-network-storage-server&quot;,
+  &quot;version&quot;: &quot;0.0.0-dev&quot;,
+  &quot;apiVersions&quot;: [&quot;v3&quot;],
+  &quot;database&quot;: &quot;sqlite&quot;,
+  &quot;capabilities&quot;: [&quot;records&quot;, &quot;global-records&quot;, &quot;endpoints&quot;, &quot;workflows&quot;, &quot;queries&quot;, &quot;game-values&quot;, &quot;rate-limits&quot;, &quot;auth-sessions&quot;, &quot;analytics&quot;, &quot;package-sync&quot;, &quot;https-tunnel&quot;],
+  &quot;tunnel&quot;: { &quot;enabled&quot;: false, &quot;name&quot;: &quot;&quot;, &quot;hostname&quot;: &quot;&quot;, &quot;registry&quot;: &quot;&quot;, &quot;connectorState&quot;: &quot;disabled&quot;, &quot;connectorVersion&quot;: &quot;&quot;, &quot;processId&quot;: null, &quot;updatedAt&quot;: &quot;2026-10-10T00:00:00+00:00&quot; },
+  &quot;compat&quot;: { &quot;library&quot;: { &quot;minimum&quot;: &quot;1.1.0&quot;, &quot;recommended&quot;: &quot;1.1.0&quot;, &quot;latest&quot;: &quot;1.1.0&quot;, &quot;legacy&quot;: &quot;supported&quot;, &quot;deprecated&quot;: [], &quot;blocked&quot;: [], &quot;knownBroken&quot;: [{ &quot;version&quot;: &quot;1.0.165702&quot;, &quot;revision&quot;: 165702, &quot;engine&quot;: &quot;&gt;=26.10&quot;, &quot;reason&quot;: &quot;Stale library breaks editor startup on s&amp;box engine 26.10 or later.&quot;, &quot;issue&quot;: &quot;sbox-cool/sbox-network-storage#4&quot; }], &quot;tested&quot;: [] }, &quot;matrixUrl&quot;: &quot;https://github.com/sbox-cool/sbox-network-storage-server/blob/main/compat/library-matrix.json&quot; },
+  &quot;update&quot;: null
+}</code></pre>
+<p><code>database</code> is the configured provider name. <code>tunnel</code> describes the
+<code>sbox-ns tunnel</code> connector. <code>update</code> carries the latest release notice when
+an update check has run, else null. <code>compat</code> is described under
+<a href="#library-compatibility">Library compatibility</a>. <code>sbox-ns doctor</code> also polls
+this route to check the listener.</p>
+<p>The additive <code>compat</code> advertisement and optional <code>x-ns-library-*</code> identity/status
+headers are the whole version contract. Unidentified older libraries remain
+accepted by default; recommendations and deprecations alone never reject a
+working game. An explicit owner minimum and advisory-linked blocks return
+HTTP 426 with <code>{ &quot;ok&quot;: false, &quot;error&quot;: { &quot;code&quot;: &quot;LIBRARY_UNSUPPORTED&quot;, &quot;message&quot;: &quot;...&quot; } }</code> (or <code>LIBRARY_BLOCKED</code>); the existing library understands
+this structured envelope, but the engine may hide 4xx bodies. See
+<a href="/docs/versions/0.5.2/source-ddf9b61/compat/compatibility/">compatibility.md</a> for the operator policy.</p>
+<h2 id="library-compatibility"><a class="anchor" href="#library-compatibility" aria-hidden="true" tabindex="-1">#</a>Library compatibility</h2>
+<p>The server runs many library versions at once, and most are older than the
+server. Nothing here is required: a library that sends none of the request
+headers below keeps working exactly as before. The rules are in
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ee60d4f401034724ee45934d8e6a1acc498e0fc6/compat/library-matrix.json" target="_blank" rel="noopener">compat/library-matrix.json</a>, which is also
+embedded in the binary, so everything on this page works offline.</p>
+<h3 id="request-headers-library-to-server"><a class="anchor" href="#request-headers-library-to-server" aria-hidden="true" tabindex="-1">#</a>Request headers (library to server)</h3>
+<p>The library sends these on runtime and Sync Tool requests. All are optional.</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>x-ns-library-version</code></td>
+<td>SemVer, e.g. <code>1.1.0</code></td>
+<td>Version of the Network Storage library. Missing or invalid (not <code>MAJOR.MINOR.PATCH[-pre][+build]</code>, longer than 64 characters) is the <code>legacy</code> bucket, never an error. The old constant <code>1.0</code> counts as <code>legacy</code>.</td>
+</tr>
+<tr>
+<td><code>x-ns-library-revision</code></td>
+<td>integer, e.g. <code>309133</code></td>
+<td>s&amp;box package revision of the library, best effort. Ignored when not a non-negative integer.</td>
+</tr>
+<tr>
+<td><code>x-ns-client-type</code></td>
+<td><code>game</code>, <code>editor</code> or <code>dedicated</code></td>
+<td>Which kind of client is calling. Any other value is ignored.</td>
+</tr>
+<tr>
+<td><code>x-ns-revision-id</code></td>
+<td>integer</td>
+<td>Game revision the client was built from (published bundles only).</td>
+</tr>
+<tr>
+<td><code>x-ns-engine-version</code></td>
+<td>engine build, e.g. <code>26.10.02</code></td>
+<td>The s&amp;box engine build the client runs on. At most 32 characters of <code>[0-9A-Za-z._+-]</code>; any other value is ignored.</td>
+</tr>
+</tbody></table>
+<p>Libraries that do not send the header can still report their version in a
+request body, and the server uses it when the headers carry no valid version
+(a valid header always wins):</p>
+<ul>
+<li><code>networkStorageVersion</code> in the <code>revision-init</code> body,</li>
+<li><code>libraryVersion</code> (or <code>library_version</code>) in heartbeat and analytics event bodies.</li>
+</ul>
+<p>An old library&#39;s constant <code>&quot;1.0&quot;</code> there is <code>legacy</code> as well.</p>
+<p>The resolved identity (library version or <code>legacy</code>, client type, engine build)
+is written with each runtime request to <code>storage_request_log</code> and shown as the
+<strong>Library</strong>, <strong>Client</strong> and <strong>Engine</strong> columns on the project&#39;s Logs tab. Rows
+written before the columns existed show them empty.</p>
+<h3 id="response-headers-server-to-library"><a class="anchor" href="#response-headers-server-to-library" aria-hidden="true" tabindex="-1">#</a>Response headers (server to library)</h3>
+<p>Every response carries these, including errors and rejected requests. They are
+headers only: no response body changes, and older libraries ignore them.</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>When</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>x-ns-server-version</code></td>
+<td>always</td>
+<td>The server version (<code>BuildInfo.Version</code>), e.g. <code>0.5.0</code>.</td>
+</tr>
+<tr>
+<td><code>x-ns-library-status</code></td>
+<td>always</td>
+<td><code>supported</code>, <code>outdated</code>, <code>deprecated</code>, <code>unsupported</code>, <code>blocked</code> or <code>unknown</code>.</td>
+</tr>
+<tr>
+<td><code>x-ns-library-latest</code></td>
+<td>status <code>outdated</code> or worse</td>
+<td>Newest library version the server knows.</td>
+</tr>
+<tr>
+<td><code>x-ns-library-sunset</code></td>
+<td>status <code>deprecated</code></td>
+<td>Date (<code>yyyy-MM-dd</code>) support for that version ends.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>supported</code></td>
+<td>At or above the recommended version.</td>
+</tr>
+<tr>
+<td><code>outdated</code></td>
+<td>Supported, but a newer version is recommended.</td>
+</tr>
+<tr>
+<td><code>deprecated</code></td>
+<td>Support ends on the sunset date.</td>
+</tr>
+<tr>
+<td><code>unsupported</code></td>
+<td>Below the matrix <code>minimum</code>, or a build known to be broken (for example on the engine builds named in the matrix).</td>
+</tr>
+<tr>
+<td><code>blocked</code></td>
+<td>A security or data-loss problem, listed in the matrix <code>blocked</code> ranges.</td>
+</tr>
+<tr>
+<td><code>unknown</code></td>
+<td>No valid library version was sent: the <code>legacy</code> bucket. The server serves it as before; the status is <code>unknown</code> because it cannot tell which build this is.</td>
+</tr>
+</tbody></table>
+<p>When several rules match, the strictest status wins. The server only reports
+status. Runtime requests are served whatever the status; the editor and the
+dashboard are where developers are pushed to update.</p>
+<h3 id="compat-block-of-v3server-info"><a class="anchor" href="#compat-block-of-v3server-info" aria-hidden="true" tabindex="-1">#</a><code>compat</code> block of <code>/v3/server-info</code></h3>
+<pre><code class="language-json">&quot;compat&quot;: {
+  &quot;library&quot;: {
+    &quot;minimum&quot;: &quot;1.1.0&quot;,
+    &quot;recommended&quot;: &quot;1.1.0&quot;,
+    &quot;latest&quot;: &quot;1.1.0&quot;,
+    &quot;legacy&quot;: &quot;supported&quot;,
+    &quot;deprecated&quot;: [{ &quot;range&quot;: &quot;&lt;1.2.0&quot;, &quot;sunset&quot;: &quot;2027-03-01&quot; }],
+    &quot;blocked&quot;: [{ &quot;range&quot;: &quot;1.2.1&quot;, &quot;reason&quot;: &quot;...&quot;, &quot;advisory&quot;: &quot;GHSA-...&quot; }],
+    &quot;knownBroken&quot;: [{ &quot;version&quot;: &quot;1.0.165702&quot;, &quot;revision&quot;: 165702, &quot;engine&quot;: &quot;&gt;=26.10&quot;, &quot;reason&quot;: &quot;...&quot;, &quot;issue&quot;: &quot;sbox-cool/sbox-network-storage#4&quot; }],
+    &quot;tested&quot;: [{ &quot;server&quot;: &quot;0.5.0&quot;, &quot;library&quot;: &quot;1.1.0&quot;, &quot;revision&quot;: 310500, &quot;engine&quot;: &quot;26.10.02&quot;, &quot;os&quot;: &quot;Windows 11&quot;, &quot;database&quot;: [&quot;sqlite&quot;], &quot;result&quot;: &quot;pass&quot;, &quot;evidence&quot;: [&quot;...&quot;] }]
+  },
+  &quot;matrixUrl&quot;: &quot;https://github.com/sbox-cool/sbox-network-storage-server/blob/main/compat/library-matrix.json&quot;
+}</code></pre>
+<p><code>minimum</code> and <code>recommended</code> are library versions; <code>latest</code> is the newest the
+matrix knows. <code>legacy</code> is the status the matrix gives the no-version bucket.
+<code>deprecated</code> and <code>blocked</code> are version ranges (<code>1.2.1</code> exact, <code>&lt;1.2.0</code>,
+<code>&gt;=1.1.0 &lt;1.3.0</code>; all comparators must hold). <code>knownBroken</code> lists builds known to break on
+particular engine builds. <code>tested</code> lists the editor and CI runs recorded for
+releases (<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ee60d4f401034724ee45934d8e6a1acc498e0fc6/docs/releasing.md#release-evidence" target="_blank" rel="noopener">release evidence</a>). <code>deprecated</code>, <code>blocked</code>, <code>knownBroken</code> and
+<code>tested</code> are empty arrays when there is nothing to report.</p>
+<p>A library should decide features from <code>capabilities</code>, not from version
+numbers. Where the server must act on a library version anyway, it does so in
+one place (<code>LibraryCompatShims</code>), and each entry there names its reason, its
+issue and the server version at which it must be removed.</p>
+<h3 id="release-feed-overlay"><a class="anchor" href="#release-feed-overlay" aria-hidden="true" tabindex="-1">#</a>Release-feed overlay</h3>
+<p>When update checks are on (<code>updates.check</code>), the server also reads an optional
+<code>libraryCompat</code> object from the signed release feed, so a <code>blocked</code> range can reach
+servers that have not been updated. The overlay applies only when the release info
+came from the signed feed: the unsigned GitHub <code>release.json</code> fallback never carries
+one, even if it contains a <code>libraryCompat</code> object. An overlay can only make a status
+<strong>stricter</strong>: it can raise <code>minimum</code> and <code>recommended</code>, add <code>blocked</code> and
+<code>deprecated</code> ranges, and deprecate or un-support the <code>legacy</code> bucket. It cannot
+change an announced sunset: a feed <code>deprecated</code> range only dates versions the
+embedded matrix does not already deprecate. It cannot lower <code>minimum</code>, remove a
+block, set <code>legacy</code> back to <code>supported</code> or block the whole <code>legacy</code> bucket; those parts
+are ignored, as is an overlay whose optional <code>schemaVersion</code> is newer than the matrix
+schema this server reads (1). A feed response without <code>libraryCompat</code> keeps the current
+overlay, but only for a while: after 3 consecutive checks with no overlay (or failed
+checks) the overlay expires and the embedded matrix applies again. An empty <code>{}</code> removes
+it immediately. <code>/v3/server-info</code> reports whether one is in effect in the <code>compat</code> block
+(<code>&quot;overlay&quot;: {&quot;applied&quot;: true}</code>). Nothing needs network access:
+without the feed, the embedded matrix applies.</p>
+<h2 id="revision-init-handshake"><a class="anchor" href="#revision-init-handshake" aria-hidden="true" tabindex="-1">#</a>Revision init handshake</h2>
+<p>At game startup the client sends a one-time handshake with its running
+revision: <code>POST /v3/manage/{projectId}/revision-init</code>. The server compares
+it against the synced game package and reports whether the client is
+outdated. The route is read-only and never mutates the store.</p>
+<p>Authentication uses the public game key (no management scope needed), sent
+as the <code>x-api-key</code> header, the <code>?apiKey=</code> query parameter, or the
+<code>x-public-key</code> header. The client revision travels in the JSON body as
+<code>revisionId</code>, or in the <code>x-ns-revision-id</code> header (body wins when both are
+present). The <code>x-ns-client-type</code> header marks the caller as the game.</p>
+<p>Success body (HTTP 200):</p>
+<pre><code class="language-json">{
+  &quot;ok&quot;: true,
+  &quot;playerRevision&quot;: 42,
+  &quot;currentRevisionId&quot;: 42,
+  &quot;latestRevisionId&quot;: 42,
+  &quot;revisionOutdated&quot;: false,
+  &quot;message&quot;: &quot;Revision is current.&quot;
+}</code></pre>
+<p><code>revisionOutdated</code> is true when the client revision trails the synced
+package. A missing client revision is not an error; the server acknowledges
+with its latest revision and a message saying so. A project with no synced
+game package answers that there is nothing to compare against. Revisions the
+server does not know (<code>playerRevision</code>, <code>currentRevisionId</code>,
+<code>latestRevisionId</code>) are left out of the body rather than sent as <code>null</code>.</p>
+<p>Failures use the status code plus a short body: 401 <code>UNAUTHORIZED</code> for a
+missing, invalid, or disabled key or an unknown project; 403
+<code>PROJECT_DISABLED</code> for a disabled project; 400 <code>INVALID_JSON</code> for a
+non-JSON body. The client tolerates handshake failure, so a failed
+revision-init never blocks gameplay; it only skips the outdated notice.</p>
+<p>When the owner saved an explicit version policy (see
+<a href="/docs/versions/0.5.2/source-ddf9b61/compat/version-policy/">version-policy.md</a>), the handshake additively returns
+<code>action</code> (<code>none</code>, <code>notify</code>, <code>rejoin</code>, <code>block_writes</code> or <code>block_all</code>), the
+owner&#39;s notice as <code>message</code> for outdated clients, <code>graceEndsAt</code> (unix
+seconds, when a grace window applies) and <code>minimumRevisionId</code> (when set).
+Without a policy these fields are omitted and the body above is unchanged.
+The handshake stays read-only and never fails because of policy.</p>
+<h2 id="pinned-execution-and-_revisionstatus"><a class="anchor" href="#pinned-execution-and-_revisionstatus" aria-hidden="true" tabindex="-1">#</a>Pinned execution and <code>_revisionStatus</code></h2>
+<p>Published game bundles send <code>x-ns-revision-id</code> on every runtime call. When
+it names a retained revision inside its support window, endpoints,
+workflows, queries, game values and collection definitions run from that
+revision&#39;s snapshot; anything else (no header, unknown or expired
+revision) runs against live. Player records are always live.</p>
+<p>When a version policy is configured, every endpoint response — success and
+error bodies alike — carries a top-level <code>_revisionStatus</code> object with the
+library&#39;s exact keys (<code>isOutdatedRevision</code>, <code>graceRemainingMinutes</code>,
+<code>graceExpired</code>, <code>action</code>, <code>message</code>, <code>playerRevision</code>, <code>currentRevision</code>,
+<code>enforcementMode</code>, <code>policy{...}</code>); queries and values responses carry it
+too. Without a policy it is absent. With server-side enforcement switched
+on, expired known revisions get HTTP 403 <code>REVISION_BLOCKED</code> (secret keys
+exempt). Details: <a href="/docs/versions/0.5.2/source-ddf9b61/compat/version-policy/">version-policy.md</a>.
+The game package the server compares against is synced from the editor Sync
+Tool (<code>POST /v3/manage/{projectId}/package-sync</code>), exactly as with the
+managed service. Sync your <code>Editor/Network Storage/</code> sources after pointing
+the editor at your server (see <a href="/docs/versions/0.5.2/source-ddf9b61/start/connect-a-game/">client-setup.md</a>), then
+publish a new build so players run against the synced revision.</p>
+<h2 id="query-results"><a class="anchor" href="#query-results" aria-hidden="true" tabindex="-1">#</a>Query results</h2>
+<p><code>GET /v3/queries/{projectId}/{queryId}</code> (also <code>/v1/queries/...</code> and
+<code>/api/storage/{projectId}/queries/...</code>) runs a query over whole collections,
+so the server keeps each query&#39;s latest result and shares it between
+callers:</p>
+<ul>
+<li>A result is reused for the query&#39;s <code>cache.ttlSeconds</code> (300 when not set),
+and always for at least 2 seconds, even with a TTL of 0.</li>
+<li>A record or player-profile write in the project ends that reuse: the next
+call runs the query again once the result is at least 2 seconds old. A
+player who saves a score sees it in the leaderboard within about 2 seconds.</li>
+<li>Changing a query, collection or game value drops the project&#39;s results at
+once.</li>
+<li>When many calls miss at the same time, the query runs once and they all
+get that result.</li>
+</ul>
+<p>Calls with the public key always get the shared result, because every
+player has that key. <code>?live=1</code>, <code>?fresh=1</code>, <code>?noCache=1</code> and <code>?cache=0</code>
+force a new run only together with a secret key (as <code>x-api-key</code> or
+<code>x-secret-key</code>). Without <code>?cache=1</code> the response looks like a live result
+(<code>Cache-Control: no-store</code>, no cache fields); <code>lastran</code> and
+<code>performance.at</code> say when the query last ran. With <code>?cache=1</code> a reused
+result also carries <code>fromCache</code>, <code>cachedAt</code> and <code>expiresAt</code>.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ee60d4f401034724ee45934d8e6a1acc498e0fc6/docs/game-client.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/game-client.md</a> at <code>v0.5.2</code> (ee60d4f).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.2 (<code>0.5.2</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/ee60d4f401034724ee45934d8e6a1acc498e0fc6" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.2</code> (<code>ee60d4f</code>). <strong>Library:</strong> main source (ddf9b61) (<code>source-ddf9b61</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750</code> (<code>ddf9b61</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.2/source-ddf9b61/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.2/source-ddf9b61/api/">HTTP API</a><a href="/docs/versions/0.5.2/source-ddf9b61/library/api/">C# API</a><a href="/docs/versions/0.5.2/source-ddf9b61/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

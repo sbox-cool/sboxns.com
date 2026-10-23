@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Self-hosting | Network Storage docs</title>
+  <meta name="description" content="Install, update, back up and run the server on Linux, macOS, Windows or Docker.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/server/self-hosting/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Self-hosting | Network Storage docs">
+  <meta property="og:description" content="Install, update, back up and run the server on Linux, macOS, Windows or Docker.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/server/self-hosting/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">Next release (unreleased, 8e7623d) · main source (ddf9b61)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-ddf9b61/server/self-hosting/" selected>Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-ddf9b61/server/self-hosting/">0.5.4</option><option value="/docs/versions/0.5.3/source-ddf9b61/server/self-hosting/">0.5.3</option><option value="/docs/versions/0.5.2/source-ddf9b61/server/self-hosting/">0.5.2</option><option value="/docs/versions/0.5.1/source-ddf9b61/server/self-hosting/">0.5.1</option><option value="/docs/versions/0.5.0/source-ddf9b61/server/self-hosting/">0.5.0</option><option value="/docs/versions/0.4.0/source-ddf9b61/server/self-hosting/">0.4.0</option><option value="/docs/versions/0.3.0/source-ddf9b61/server/self-hosting/">0.3.0</option><option value="/docs/versions/0.2.0/source-ddf9b61/server/self-hosting/">0.2.0</option><option value="/docs/versions/0.1.0/source-ddf9b61/server/self-hosting/">0.1.0</option><option value="/docs/versions/0.5.5/source-ddf9b61/server/self-hosting/">0.5.5</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/next-8e7623d/source-13f51a8/server/self-hosting/">1.1.0 source (13f51a8)</option><option value="/docs/versions/next-8e7623d/source-d369d1b/server/self-hosting/">Legacy source (d369d1b)</option><option value="/docs/versions/next-8e7623d/source-fc58d4e/server/self-hosting/">main source (fc58d4e)</option><option value="/docs/versions/next-8e7623d/source-5369108/server/self-hosting/">main source (5369108)</option><option value="/docs/versions/next-8e7623d/source-9c4a235/server/self-hosting/">main source (9c4a235)</option><option value="/docs/versions/next-8e7623d/source-9b6ec5d/server/self-hosting/">main source (9b6ec5d)</option><option value="/docs/versions/next-8e7623d/source-ddf9b61/server/self-hosting/" selected>main source (ddf9b61)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/self-hosting/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-ddf9b61/server/self-hosting/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-ddf9b61/server/self-hosting/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-ddf9b61/server/self-hosting/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-ddf9b61/server/self-hosting/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-ddf9b61/server/self-hosting/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-ddf9b61/server/self-hosting/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-ddf9b61/server/self-hosting/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-ddf9b61/server/self-hosting/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-ddf9b61/server/self-hosting/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-ddf9b61/server/self-hosting/">Server: 0.5.5</a></li><li><a href="/docs/versions/next-8e7623d/source-13f51a8/server/self-hosting/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/next-8e7623d/source-d369d1b/server/self-hosting/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/next-8e7623d/source-fc58d4e/server/self-hosting/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/next-8e7623d/source-5369108/server/self-hosting/">Library: main source (5369108)</a></li><li><a href="/docs/versions/next-8e7623d/source-9c4a235/server/self-hosting/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/next-8e7623d/source-9b6ec5d/server/self-hosting/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/self-hosting/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.5/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/next-8e7623d/source-ddf9b61/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/next-8e7623d/source-ddf9b61/start/connect-a-game/">Connect a game</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/next-8e7623d/source-ddf9b61/library/overview/">Library overview</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/library/examples/">Examples</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/next-8e7623d/source-ddf9b61/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/self-hosting/" aria-current="page">Self-hosting</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/hosting-models/">Hosting models</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/configuration/">Configuration</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/database/">Databases</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/admin-panel/">Owner console</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/export/">Export and move projects</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/modules/">Modules</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/monitoring/">Monitoring</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/alerting/">Alerting</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/next-8e7623d/source-ddf9b61/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/compat/version-policy/">Version policy</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/next-8e7623d/source-ddf9b61/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/next-8e7623d/source-ddf9b61/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Self-hosting</span></nav>
+  <article class="prose docs-prose">
+<h1>Self-hosting</h1>
+<p class="lead">Install, update, back up and run the server on Linux, macOS, Windows or Docker.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#requirements">Requirements</a><a href="#local-owner-and-management-dashboard">Local owner and management dashboard</a><a href="#install">Install</a><a href="#configure">Configure</a><a href="#run">Run</a><a href="#config-and-state-folders">Config and state folders</a><a href="#database">Database</a><a href="#backups">Backups</a><a href="#updates">Updates</a><a href="#uninstall">Uninstall</a></nav>
+<p>This guide covers installing, configuring, running, backing up and updating
+sbox Network Storage Server. For every configuration key see
+<a href="/docs/versions/next-8e7623d/source-ddf9b61/server/configuration/">configuration.md</a>. To connect your game see
+<a href="/docs/versions/next-8e7623d/source-ddf9b61/start/connect-a-game/">client-setup.md</a>.</p>
+<blockquote>
+<p>Status: early preview. Releases before 1.0 may change configuration and
+storage formats. Keep backups. The local-owner dashboard manages projects,
+API keys and core settings; it does not yet have full managed-dashboard or
+managed project export/import parity. Resources can be pushed from the s&amp;box editor Sync Tool.</p>
+</blockquote>
+<h2 id="requirements"><a class="anchor" href="#requirements" aria-hidden="true" tabindex="-1">#</a>Requirements</h2>
+<ul>
+<li>Linux (x64 or arm64), macOS (Apple Silicon or Intel) or Windows (x64)</li>
+<li>No .NET runtime needed: release binaries are self-contained</li>
+<li>SQLite needs nothing extra. PostgreSQL 13 or newer if you choose it.</li>
+<li>A port reachable by your players (8080 by default)</li>
+</ul>
+<h2 id="local-owner-and-management-dashboard"><a class="anchor" href="#local-owner-and-management-dashboard" aria-hidden="true" tabindex="-1">#</a>Local owner and management dashboard</h2>
+<p>Run <code>sbox-ns setup</code> to choose the database and optionally create the owner with
+hidden password input. Leave the owner username blank to use browser setup.
+For scripted setup, supply <code>--admin-username NAME --admin-password-file FILE</code>
+or <code>NS_ADMIN_USERNAME</code> and <code>NS_ADMIN_PASSWORD</code>; passwords are never accepted
+as command-line arguments. Password files are read relative to the current
+working directory, with a final newline removed. Passwords must be 12–1024
+characters. Setup retains an existing account rather than overwriting it.</p>
+<p>For a remote server, the simplest first login is <code>sbox-ns admin login-link</code>.
+Run it on the server and open the printed single-use link; with no owner yet,
+the link opens owner creation. See <a href="/docs/versions/next-8e7623d/source-ddf9b61/server/admin-panel/">admin panel</a> for how the
+link works, HTTPS, and the data browser.</p>
+<p>On startup without an owner, the server log contains a local <code>/setup?token=...</code>
+URL, using the HTTP listener with TLS off or the HTTPS listener when
+certificate/ACME TLS is enabled. This random one-time capability expires after
+two hours, rotates on restart, and works only over a loopback connection.
+For a remote plain-HTTP host, tunnel the listener:
+<code>ssh -L 8080:127.0.0.1:8080 user@server</code>, then open the logged URL locally.
+For TLS, tunnel the HTTPS port and route a hostname matching its certificate
+to loopback before opening the URL with that hostname.
+Docker&#39;s bridged port mapping is not a loopback connection inside the container;
+create its owner with <code>docker exec -it sbox-ns /app/sbox-ns admin create</code>
+instead. Creating the owner consumes the setup capability; <code>/setup</code> subsequently
+returns 404.</p>
+<p>The account is persisted at workspace object <code>server/identity/owner.json</code> in
+the selected SQLite/PostgreSQL provider. It contains the username, a salted
+ASP.NET Identity PBKDF2 hash (210,000 iterations), creation time and a security
+stamp—never the plaintext password. No website identity database is involved.
+Use one server instance and the same data directory for its operator CLI.
+Owner mutations are serialized locally; sharing a PostgreSQL schema between
+independent server instances/data directories is not supported.</p>
+<p>Runtime entry points:</p>
+<ul>
+<li><code>/login</code>: owner login, rate limited per client IP.</li>
+<li><code>/login/link</code>: single-use login links from <code>sbox-ns admin login-link</code>
+(GET confirms, POST consumes), with the same rate limit.</li>
+<li><code>/dashboard</code>: list/create projects and view available update notices.</li>
+<li><code>/dashboard/projects/{projectId}</code>: project/security/player-key settings,
+create/enable/disable/revoke keys, synced collection/endpoint inventory, and
+confirmed permanent project deletion.</li>
+<li><code>/dashboard/projects/{projectId}/data</code>: read-only data browser with JSON
+download per collection and confirmed, audited single-record deletion.</li>
+<li><code>POST /logout</code>: ends every owner session, including copies of the cookie.</li>
+</ul>
+<p>All management mutations, login, setup and logout require ASP.NET antiforgery
+tokens. Owner cookies are HttpOnly, SameSite Strict, and <code>__Host-</code> prefixed (Secure, no Domain) on HTTPS; sessions
+last eight hours without sliding renewal. Management pages are not cached and
+load an embedded external stylesheet, with no inline scripts or CSS. Owner
+passwords and login links are refused over plain HTTP from another machine
+unless <code>adminpanel.allow_insecure_http</code> is true; use an SSH port forward, a
+tunnel or HTTPS. Cookie protection keys live
+in <code>data/owner-cookie-keys</code>; protect and back up that directory with the data
+directory. Keys are protected by OS directory permissions, not encrypted at
+rest on platforms without a configured OS key protector.</p>
+<p>Owner recovery is local operator access, not email:</p>
+<pre><code class="language-sh">sbox-ns admin create --username owner           # hidden, confirmed password input
+sbox-ns admin reset-password                   # invalidates existing owner sessions
+sbox-ns admin reset-password --password-file /run/secrets/new-owner-password</code></pre>
+<p>The dashboard reuses the extracted project/key/settings and audit services.
+The managed record editors, query/workflow authoring, game-value editor,
+analytics/log/error/usage views and project export/import are <strong>not ported</strong>.
+Full dashboard parity and managed project export/import parity are <strong>not
+established</strong>. The existing editor and <code>/v3</code> management APIs are the resource
+entry points; <code>db backup/restore</code> is a whole-store recovery tool, not a substitute
+for managed project export/import.
+Moving the whole server to another machine or between SQLite and PostgreSQL
+is <code>sbox-ns export</code> / <code>sbox-ns import</code> (also <strong>Export server</strong> on the
+dashboard); see <a href="/docs/versions/next-8e7623d/source-ddf9b61/server/export/">export.md</a>.</p>
+<h2 id="install"><a class="anchor" href="#install" aria-hidden="true" tabindex="-1">#</a>Install</h2>
+<h3 id="linux-and-macos"><a class="anchor" href="#linux-and-macos" aria-hidden="true" tabindex="-1">#</a>Linux and macOS</h3>
+<pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh | sh</code></pre>
+<p>The installer:</p>
+<ol>
+<li>Detects your OS and CPU (x64 or arm64).</li>
+<li>Validates the resolved version, downloads the release archive, <code>SHA256SUMS</code>
+and <code>SHA256SUMS.p256.sig</code> over HTTPS, verifies the checksum manifest&#39;s
+ECDSA P-256/SHA-256 signature with a pinned current or rotation public key,
+and only then checks the archive hash. Missing/invalid signatures and hash
+mismatches abort before extraction or binary replacement. Redirects to HTTP
+are refused by both curl and wget.</li>
+<li>Installs <code>sbox-ns</code>:<ul>
+<li>as root on Linux: <code>/usr/local/bin/sbox-ns</code>, operator config in <code>/etc/sbox-ns/</code>
+(<code>root:sbox-ns</code>, directories <code>0750</code>, files <code>0640</code>, read-only to the service),
+data and runtime state in <code>/var/lib/sbox-ns/</code> owned by the stable <code>sbox-ns</code>
+system user (created with <code>systemd-sysusers</code>, or <code>useradd</code>/<code>adduser</code> as a fallback);</li>
+<li>otherwise: <code>~/.local/share/sbox-ns/</code> linked into <code>~/.local/bin/sbox-ns</code>
+(or <code>/opt/sbox-ns/</code> linked into <code>/usr/local/bin</code> as root on macOS).</li>
+</ul>
+</li>
+<li>On a Linux upgrade, runs the verified new binary&#39;s <code>layout migrate</code> before
+setup, unit installation or service startup. The new binary is installed
+first because older releases do not have the migration command; rendered
+units must use the permanent installed binary path.</li>
+<li>Runs <code>sbox-ns setup</code> interactively if a terminal is attached, otherwise
+prints the command to run. Linux setup and quickstart run as root because
+they write operator configuration; runtime state is created with the service
+identity. Tunnel, DNS and telemetry enablement run through <code>runuser -u sbox-ns</code>.
+No recursive config-to-service-user ownership transfer is performed.</li>
+<li>Installs and starts the OS service when setup has run: on Linux root installs
+with systemd, <code>sbox-ns service install</code> and <code>sbox-ns service start</code>; on macOS a
+launchd job (a LaunchDaemon in <code>/Library/LaunchDaemons</code> with <code>sudo</code>, otherwise a
+per-user LaunchAgent in <code>~/Library/LaunchAgents</code>). Re-running the installer
+restarts the existing service with the new binary. A per-user LaunchAgent needs
+a logged-in GUI session; over SSH-only, run the installer with <code>sudo</code>.</li>
+</ol>
+<p>Linux/macOS signature verification requires <code>openssl</code> on <code>PATH</code>; install it
+with <code>sudo apt-get install openssl</code>, <code>sudo dnf install openssl</code> or
+<code>brew install openssl</code>. Linux root installs also require <code>runuser</code> from
+<code>util-linux</code>. Generated secrets, managed configuration overlays and cloudflared
+live in <code>/var/lib/sbox-ns/state/{secrets,conf.d,bin}</code>, not <code>/etc/sbox-ns</code>.</p>
+<p>Installer options are environment variables:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SBOX_NS_VERSION=0.3.0</code></td>
+<td>install a specific version instead of the latest</td>
+</tr>
+<tr>
+<td><code>SBOX_NS_PRERELEASE=1</code></td>
+<td>allow the newest prerelease</td>
+</tr>
+<tr>
+<td><code>SBOX_NS_NO_SETUP=1</code></td>
+<td>skip <code>sbox-ns setup</code></td>
+</tr>
+<tr>
+<td><code>SBOX_NS_NO_SERVICE=1</code></td>
+<td>skip <code>sbox-ns service install</code></td>
+</tr>
+<tr>
+<td><code>SBOX_NS_INSECURE_SKIP_SIGNATURE=1</code></td>
+<td><strong>DANGEROUS:</strong> manual install only; explicitly disables release signature authentication, prints a loud warning, and still checks archive hashes</td>
+</tr>
+<tr>
+<td><code>GITHUB_TOKEN=...</code></td>
+<td>authenticate GitHub API calls (rate limits)</td>
+</tr>
+</tbody></table>
+<p>For a system service on Linux, run the installer as root:</p>
+<pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh | sudo sh</code></pre>
+<p>The insecure signature override is never appropriate for unattended updates:
+the installer refuses it with <code>SBOX_NS_AUTO_UPDATE=1</code>, and <code>sbox-ns update --auto</code>
+also refuses it. Without that explicit override, missing pinned keys fail
+closed; the installer never downloads a key from the same release it verifies.
+Maintainers supply the actual current and next P-256 public keys in
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/8e7623dda7e37159dc1757b76ad110fad5dd6f11/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub" target="_blank" rel="noopener"><code>Updates/release-signing-keys.pub</code></a>
+and run <code>sh scripts/pin-release-keys.sh</code> (Python 3 and OpenSSL required) before
+shipping installers. The script validates and synchronizes those keys; it
+does not generate replacement keys. Until the owner supplies the public keys,
+the empty trust set deliberately refuses installation.</p>
+<h3 id="windows"><a class="anchor" href="#windows" aria-hidden="true" tabindex="-1">#</a>Windows</h3>
+<p>In PowerShell (as administrator to install for all users into Program Files):</p>
+<pre><code class="language-powershell">irm https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.ps1 | iex</code></pre>
+<p>The script authenticates <code>SHA256SUMS.p256.sig</code> before checking the archive with
+<code>Get-FileHash</code>, installs to <code>%ProgramFiles%\sbox-ns\</code> (administrator) or
+<code>%LOCALAPPDATA%\Programs\sbox-ns\</code>, adds it to <code>PATH</code> and runs <code>sbox-ns setup</code>.
+Windows PowerShell 5.1 needs no extra module: verification uses <code>ECDsaCng</code>
+with pinned <code>EccPublicBlob</code> keys, converting the DER signature to IEEE P1363.
+HTTPS-to-HTTP redirects, unsafe version strings, missing signatures, invalid
+signatures and hash mismatches are refused. The same explicitly warned
+manual-only insecure override is available; it is not the default.</p>
+<h3 id="docker"><a class="anchor" href="#docker" aria-hidden="true" tabindex="-1">#</a>Docker</h3>
+<pre><code class="language-sh">docker run -d --name sbox-ns \
+  -p 8080:8080 \
+  -v sbox-ns-config:/config \
+  -v sbox-ns-data:/data \
+  --restart unless-stopped \
+  ghcr.io/sbox-cool/sbox-network-storage-server:latest
+
+docker exec -it sbox-ns /app/sbox-ns setup
+docker restart sbox-ns
+docker exec -it sbox-ns /app/sbox-ns project create &quot;My Game&quot;</code></pre>
+<p>The image uses the .NET 10 chiseled runtime, runs as non-root UID 1654, reads
+config from <code>/config</code> and stores data in <code>/data</code>. It has no shell; use
+<code>docker exec &lt;container&gt; /app/sbox-ns ...</code> for operator commands. Any setting
+can also be passed as an <code>NS_</code> environment variable, for example
+<code>-e NS_DATABASE__PROVIDER=postgres</code>.</p>
+<p>Docker Compose with PostgreSQL:</p>
+<pre><code class="language-yaml">services:
+  sbox-ns:
+    image: ghcr.io/sbox-cool/sbox-network-storage-server:latest
+    ports: [&quot;8080:8080&quot;]
+    volumes:
+      - config:/config
+      - data:/data
+    environment:
+      NS_DATABASE__PROVIDER: postgres
+      NS_DATABASE__POSTGRES__HOST: postgres
+      NS_DATABASE__POSTGRES__USERNAME: sbox_ns
+      NS_DATABASE__POSTGRES__PASSWORD_FILE: /run/secrets/pg_password
+    secrets: [pg_password]
+    depends_on: [postgres]
+    restart: unless-stopped
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: sbox_ns
+      POSTGRES_DB: sbox_ns
+      POSTGRES_PASSWORD_FILE: /run/secrets/pg_password
+    secrets: [pg_password]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+secrets:
+  pg_password:
+    file: ./pg_password.txt
+volumes:
+  config:
+  data:
+  pgdata:</code></pre>
+<h3 id="manual-install"><a class="anchor" href="#manual-install" aria-hidden="true" tabindex="-1">#</a>Manual install</h3>
+<p>Download <code>sbox-ns-&lt;version&gt;-&lt;platform&gt;.tar.gz</code> (or <code>.zip</code> on Windows),
+<code>SHA256SUMS</code> and <code>SHA256SUMS.p256.sig</code> from the
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">releases page</a>.
+Authenticate the manifest first, using a current or rotation public key
+obtained from a previously trusted checkout or installer—not from the archive
+being verified. Save one trusted PEM key block as <code>release-key.pub</code>; OpenSSL&#39;s
+<code>-verify</code> reads one key, so try the other pinned key separately during rotation.
+Proceed only after one key successfully verifies:</p>
+<pre><code class="language-sh">openssl dgst -sha256 -verify release-key.pub -signature SHA256SUMS.p256.sig SHA256SUMS &amp;&amp;
+sha256sum --check --ignore-missing SHA256SUMS &amp;&amp;
+tar -xzf sbox-ns-&lt;version&gt;-linux-x64.tar.gz &amp;&amp;
+./sbox-ns setup &amp;&amp;
+./sbox-ns start</code></pre>
+<p>Every release ships <code>SHA256SUMS.p256.sig</code>, an ECDSA P-256 signature of
+<code>SHA256SUMS</code> made with a key whose public half is pinned in the binary and in
+the install scripts
+(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/8e7623dda7e37159dc1757b76ad110fad5dd6f11/src/SboxNetworkStorage.Server/Updates/release-signing-keys.pub" target="_blank" rel="noopener"><code>release-signing-keys.pub</code></a>).
+<code>sbox-ns update</code> and the install scripts refuse a release with a missing or
+invalid signature. The installer never treats a checksum downloaded alongside
+an archive as proof of authenticity.</p>
+<p><code>SHA256SUMS</code> is also signed with Sigstore keyless signing, pinned to the release
+workflow on a version tag:</p>
+<pre><code class="language-sh">cosign verify-blob SHA256SUMS \
+  --signature SHA256SUMS.sig \
+  --certificate SHA256SUMS.pem \
+  --certificate-identity-regexp '^https://github\.com/sbox-cool/sbox-network-storage-server/\.github/workflows/release\.yml@refs/tags/v.+$' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com</code></pre>
+<h2 id="configure"><a class="anchor" href="#configure" aria-hidden="true" tabindex="-1">#</a>Configure</h2>
+<p><code>sbox-ns setup</code> asks for the database (SQLite or PostgreSQL), the listen
+address and the public URL, writes <code>server.toml</code>, <code>database.toml</code> and
+<code>updates.toml</code>, generates the server secrets in <code>&lt;data dir&gt;/state/secrets/</code>
+(auth session secret, storage encryption key, security signing key) and runs
+database migrations. <code>sbox-ns start</code> also generates any missing secret, so a
+Docker container works without running setup first. For scripted installs:</p>
+<pre><code class="language-sh">sbox-ns setup --non-interactive --database sqlite --listen 0.0.0.0:8080 --public-url http://ns.example.com:8080
+sbox-ns setup --non-interactive --database postgres --pg-host db.internal --listen 0.0.0.0:8080</code></pre>
+<p>On an IPv6-only machine listen on <code>[::]</code> and open the dashboard with the address in
+square brackets (without them the URL does not parse):</p>
+<pre><code class="language-sh">sbox-ns setup --non-interactive --database sqlite --listen '[::]:8080'
+# dashboard: http://[2001:db8::1]:8080/login — brackets required
+curl -g http://[2001:db8::1]:8080/health</code></pre>
+<p><code>sbox-ns login-link</code> and the dashboard Connect card print the detected address
+already bracketed. Game clients still need a domain name (an IP literal, v4 or
+v6, is refused by s&amp;box game code); use <code>sbox-ns tunnel enable</code> or
+<code>sbox-ns dns enable</code> for that.</p>
+<p>Afterwards:</p>
+<pre><code class="language-sh">sbox-ns config path        # where config and data live
+sbox-ns config show        # effective configuration, secrets redacted
+sbox-ns config validate    # check the files
+sbox-ns doctor             # check config, database, ports and update status</code></pre>
+<p>Edit the TOML files and restart to apply changes.</p>
+<h3 id="projects-and-api-keys"><a class="anchor" href="#projects-and-api-keys" aria-hidden="true" tabindex="-1">#</a>Projects and API keys</h3>
+<p>Use the owner dashboard or create projects and keys with the CLI, then
+enter them in the s&amp;box editor (see <a href="/docs/versions/next-8e7623d/source-ddf9b61/start/connect-a-game/">client-setup.md</a>):</p>
+<pre><code class="language-sh">sbox-ns project create &quot;My Game&quot;                         # prints the project ID
+sbox-ns project list
+sbox-ns key create &lt;projectId&gt; --type public --label game
+sbox-ns key create &lt;projectId&gt; --type secret --label editor
+sbox-ns key list &lt;projectId&gt;
+sbox-ns key revoke &lt;projectId&gt; &lt;key&gt;
+sbox-ns project delete &lt;projectId&gt;</code></pre>
+<p>The public key goes into your game; the secret key is only for the editor
+Sync Tool. Collections, endpoints and workflows are pushed from the editor
+Sync Tool, exactly as with the managed service.</p>
+<h3 id="https"><a class="anchor" href="#https" aria-hidden="true" tabindex="-1">#</a>HTTPS</h3>
+<p>Plain HTTP on port 8080 is the default. For HTTPS, choose one of:</p>
+<ul>
+<li><p><strong>Let&#39;s Encrypt (built in).</strong> Needs a domain pointing at this server and
+ports 80 and 443 reachable from the internet:</p>
+<pre><code class="language-toml">[tls]
+mode = &quot;acme&quot;
+acme_domain = &quot;ns.example.com&quot;
+acme_email = &quot;you@example.com&quot;
+acme_accept_terms = true</code></pre>
+</li>
+<li><p><strong>Your own certificate.</strong> PEM files:</p>
+<pre><code class="language-toml">[tls]
+mode = &quot;certificate&quot;
+certificate_path = &quot;/etc/sbox-ns/tls/fullchain.pem&quot;
+key_path = &quot;/etc/sbox-ns/tls/privkey.pem&quot;</code></pre>
+</li>
+<li><p><strong>Reverse proxy.</strong> Run Caddy, nginx or Traefik in front of the server, set
+<code>server.listen = &quot;127.0.0.1:8080&quot;</code> and <code>server.public_url = &quot;https://ns.example.com&quot;</code>.
+Example Caddyfile:</p>
+<pre><code class="language-text">ns.example.com {
+    reverse_proxy 127.0.0.1:8080
+}</code></pre>
+</li>
+</ul>
+<p>HTTPS on port 443 needs either root, the <code>CAP_NET_BIND_SERVICE</code> capability
+(see below) or a reverse proxy.</p>
+<p>Which URL types s&amp;box game clients can reach is untested; see
+<a href="/docs/versions/next-8e7623d/source-ddf9b61/start/connect-a-game/#client-reachability">client-setup.md</a>.</p>
+<h3 id="hosted-https-without-a-domain"><a class="anchor" href="#hosted-https-without-a-domain" aria-hidden="true" tabindex="-1">#</a>Hosted HTTPS without a domain</h3>
+<p>Hosted names are optional. They do not require a website account, payment or a
+domain purchase. Enabling a name accepts the
+<a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">hosted-name acceptable-use policy</a>.
+Operators can disable names for abuse; this does not delete your local data.</p>
+<pre><code class="language-sh">sbox-ns tunnel enable
+sbox-ns service restart
+sbox-ns tunnel status
+sbox-ns doctor</code></pre>
+<p>The CLI creates a private P-256 identity, derives a stable 12-character name,
+and downloads the SHA-256-verified official cloudflared 2026.10.0 binary.
+Keep <code>&lt;data dir&gt;/state/secrets/identity_ecdsa_p256.pem</code>: replacing it changes the name.
+The connector token remains in <code>&lt;data dir&gt;/state/secrets/tunnel_token</code>, never in
+CLI arguments, public server-info or registry database rows. Back up the state
+folder as secret material. On Linux, a root-run command creates the identity, token
+and connector files as the state folder&#39;s owner (the service user) and writes
+nothing into the config folder.</p>
+<p>Enabling writes <code>state/conf.d/zzzz-tunnel.toml</code>, binds HTTP to <code>127.0.0.1</code> on your
+existing HTTP port, disables local TLS and sets <code>server.public_url</code> to the
+hosted HTTPS URL. Restart before using it. Keep the direct HTTP port closed in
+your firewall; verify a remote request to the server IP cannot reach it.
+Only local connector traffic is trusted for forwarded HTTPS headers, so owner
+and antiforgery cookies retain HTTPS <code>__Host-</code> protection.</p>
+<p>The server supervises the child with bounded restart backoff, redacts its
+free-form output, and reports connection state in <code>doctor</code>, <code>tunnel status</code>
+and server-info. It never auto-updates cloudflared. The official optional
+cloudflared dependency includes Cloudflare crash reporting; the server&#39;s
+opt-in usage statistics policy does not describe that third-party process.</p>
+<pre><code class="language-sh">sbox-ns tunnel disable
+sbox-ns service restart</code></pre>
+<p>Disable removes the hosted tunnel/DNS route and restores the listener,
+public URL and TLS mode captured before enable. It keeps the identity so a
+later enable derives the same name. Re-enable recovers a missing local token.
+Do not manually override the managed tunnel settings.</p>
+<p>A fresh service install can opt in before start:</p>
+<pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT=&quot;My Game&quot; SBOX_NS_TUNNEL=1 sh</code></pre>
+<h3 id="free-hosted-name-with-your-own-ip-sboxnscom"><a class="anchor" href="#free-hosted-name-with-your-own-ip-sboxnscom" aria-hidden="true" tabindex="-1">#</a>Free hosted name with your own IP (sboxns.com)</h3>
+<p>If your server already has a public IP address, you can get a free name such
+as <code>abcdefgh2345.n1.sboxns.com</code> that points straight at it. Players connect
+directly to your server over HTTPS (no proxy in between) using a free Let&#39;s
+Encrypt certificate. No website account, payment or domain is needed.</p>
+<p><strong>Dependency notice.</strong> Signed DNS registration and public-IP updates require
+the sboxcool registry. Existing names resolve through Bunny DNS; player traffic
+goes directly to your server and is not tunneled. The separate tunnel mode
+sends traffic through Cloudflare. These optional hosted dependencies have no
+reliability guarantee: a registry outage prevents registration/address changes,
+and DNS, certificate or tunnel-provider outages can affect reachability.</p>
+<p>The installer can opt in after starting the service (never before the registry&#39;s
+HTTP ownership proof). Open the public HTTP port and 443 first:</p>
+<pre><code class="language-sh">curl -fsSL https://github.com/sbox-cool/sbox-network-storage-server/releases/latest/download/install.sh \
+  | sudo env SBOX_NS_PROJECT=&quot;My Game&quot; SBOX_NS_DNS=1 \
+    SBOX_NS_ACME_EMAIL=&quot;you@example.com&quot; SBOX_NS_ACCEPT_LETSENCRYPT_TERMS=1 sh</code></pre>
+<p>On a Mac the same command installs a LaunchDaemon and registers the name, but
+only when ports 80 and 443 are reachable from the internet (a server with a
+public IP, or port forwarding). A Mac on a home network without open ports should
+use the tunnel command (<code>SBOX_NS_TUNNEL=1</code>, no <code>sudo</code>) instead.</p>
+<p>On Windows the same environment variables require an elevated PowerShell
+installer. Without a supported service installation, start the server yourself
+and use <code>dns enable</code> below. DNS and tunnel opt-ins are mutually exclusive.</p>
+<p>Requirements:</p>
+<ul>
+<li>A public IPv4 or IPv6 address on this machine (or a router that forwards to it).</li>
+<li>Port <strong>443</strong> (HTTPS) and your HTTP port (<code>server.listen</code>, default 8080) open to
+the internet. The HTTP port must not be bound to <code>127.0.0.1</code>.</li>
+<li>The server running while you enable the name: the registry checks that the
+address really belongs to this server by fetching a signed proof from
+<code>http://&lt;your IP&gt;:&lt;HTTP port&gt;/.well-known/sbox-ns/dns-proof/...</code>.</li>
+<li>Accepting the <a href="https://letsencrypt.org/repository/" target="_blank" rel="noopener">Let&#39;s Encrypt subscriber agreement</a>
+and giving a contact email for the certificate.</li>
+</ul>
+<p>Steps:</p>
+<pre><code class="language-sh">sbox-ns start                     # or: sbox-ns service start
+sbox-ns dns enable --accept-letsencrypt-terms --email you@example.com
+sbox-ns service restart
+sbox-ns dns status
+sbox-ns doctor</code></pre>
+<p><code>dns enable</code> detects your public address automatically. To publish a specific
+address instead, pass <code>--ipv4 203.0.113.5</code> and/or <code>--ipv6 2001:db8::5</code>; this
+turns off automatic address updates. With automatic updates on, the server
+checks its public address every 10 minutes and updates the name when it changes.</p>
+<p>Enabling sets <code>server.public_url</code> to <code>https://&lt;name&gt;.nN.sboxns.com</code>,
+<code>tls.mode = &quot;acme&quot;</code> and <code>tls.acme_domain</code> to that name in
+<code>state/conf.d/zzzzz-dns.toml</code>. <code>tls.https_listen</code> stays <code>0.0.0.0:443</code>. Nothing changes
+if any step fails. The name uses the same identity key as tunnels
+(<code>&lt;data dir&gt;/state/secrets/identity_ecdsa_p256.pem</code>); keep and back it up.</p>
+<p>What is public: the name resolves to your IP address, so anyone who knows the
+name can see the IP. Use tunnel mode if you want to keep the IP hidden.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Own IP (<code>dns enable</code>)</th>
+<th>Tunnel (<code>tunnel enable</code>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Traffic path</td>
+<td>Direct to your server</td>
+<td>Through Cloudflare</td>
+</tr>
+<tr>
+<td>Your IP</td>
+<td>Public</td>
+<td>Hidden</td>
+</tr>
+<tr>
+<td>Needs public IP and open ports</td>
+<td>Yes (443 and HTTP port)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Extra software</td>
+<td>None</td>
+<td>cloudflared</td>
+</tr>
+<tr>
+<td>Certificate</td>
+<td>Let&#39;s Encrypt on your server</td>
+<td>Cloudflare</td>
+</tr>
+</tbody></table>
+<p>Only one mode can be enabled at a time; disable the other first.</p>
+<p>Limits: until sboxns.com is accepted on the Public Suffix List, the registry
+allows only a limited number of new names per week across all servers, and a
+few new names per hour from one address. If the limit is reached, <code>dns enable</code>
+reports when to retry. Updating or re-enabling an existing name is not
+affected by the weekly cap.</p>
+<p>To remove the name:</p>
+<pre><code class="language-sh">sbox-ns dns disable
+sbox-ns service restart</code></pre>
+<p>Disable deletes the DNS records and restores the public URL and TLS settings
+that were in effect before enable. The identity is kept, so a later enable
+gets the same name back.</p>
+<h3 id="optional-security-and-update-email-notices"><a class="anchor" href="#optional-security-and-update-email-notices" aria-hidden="true" tabindex="-1">#</a>Optional security and update email notices</h3>
+<p>Interactive setup offers an email prompt; blank input and non-interactive
+setup send no request and create no install ID. Registration is independent
+of tunnels and always optional:</p>
+<pre><code class="language-sh">sbox-ns register --email you@example.com
+sbox-ns register --remove</code></pre>
+<p>Registration sends only email, installed version and a random install ID to
+the website notice service. No game data, project IDs or API keys are sent.
+Open the confirmation email within 48 hours; its link is single-use. No
+security/update notices are sent before confirmation. Every notice includes
+an unsubscribe link; CLI removal also removes pending confirmations.</p>
+<p>Keep <code>&lt;data dir&gt;/install-id</code> private: it is the removal capability. Copy it
+separately when moving an installation if you want to preserve CLI removal;
+portable server archives do not include this data-directory file. Editing
+<code>notices.email</code> does not subscribe or unsubscribe. No marketing or billing
+integration is involved.</p>
+<h3 id="anonymous-usage-statistics-opt-in"><a class="anchor" href="#anonymous-usage-statistics-opt-in" aria-hidden="true" tabindex="-1">#</a>Anonymous usage statistics (opt-in)</h3>
+<p>Usage statistics are off by default. Interactive setup asks once
+(<code>Share anonymous usage statistics (version, platform, project and player counts)? [y/N]</code>, default No); non-interactive setup never enables them. When
+enabled, the server posts one small JSON report to <code>telemetry.endpoint</code>
+(default <code>https://sboxcool.com/api/network-storage/telemetry</code>) about 10
+minutes after it starts and then every 24 hours. These are the only fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>schema</code></td>
+<td>Report format version, currently <code>1</code></td>
+</tr>
+<tr>
+<td><code>installId</code></td>
+<td>Random UUID stored in <code>&lt;data dir&gt;/telemetry-id</code> (owner-only file), used only for these statistics and separate from the notices <code>install-id</code></td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Installed sbox-ns version</td>
+</tr>
+<tr>
+<td><code>os</code></td>
+<td><code>linux</code>, <code>windows</code>, <code>macos</code> or <code>other</code></td>
+</tr>
+<tr>
+<td><code>arch</code></td>
+<td><code>x64</code>, <code>arm64</code> or <code>other</code></td>
+</tr>
+<tr>
+<td><code>container</code></td>
+<td><code>true</code> when <code>DOTNET_RUNNING_IN_CONTAINER</code> is set (Docker images)</td>
+</tr>
+<tr>
+<td><code>database</code></td>
+<td><code>sqlite</code> or <code>postgres</code></td>
+</tr>
+<tr>
+<td><code>tunnel</code></td>
+<td>Whether the hosted <code>sboxns.com</code> tunnel is enabled</td>
+</tr>
+<tr>
+<td><code>uptimeHours</code></td>
+<td>Whole hours since the server process started</td>
+</tr>
+<tr>
+<td><code>projects</code></td>
+<td>Number of projects</td>
+</tr>
+<tr>
+<td><code>players</code></td>
+<td>Distinct players across all projects (a count only)</td>
+</tr>
+<tr>
+<td><code>activePlayers30d</code></td>
+<td>Distinct players seen in the last 30 days (a count only)</td>
+</tr>
+</tbody></table>
+<p>No IP addresses are stored, and no emails, project IDs, project names, API
+keys, player IDs or game data are sent. A failed or rejected request is skipped
+silently until the next interval; the server never retries in a loop and never
+logs the report above Debug level.</p>
+<pre><code class="language-sh">sbox-ns telemetry status     # enabled or disabled, endpoint, telemetry ID file
+sbox-ns telemetry preview    # print the exact JSON that would be sent, without sending it
+sbox-ns telemetry enable     # opt in; restart the server afterward
+sbox-ns telemetry disable    # opt out; restart the server afterward</code></pre>
+<p><code>preview</code> runs as a separate CLI process, so its <code>uptimeHours</code> is <code>0</code>; the
+running server reports its own uptime. Disabling keeps <code>telemetry-id</code> so a
+later enable is counted as the same install; delete the file to start over
+with a new random ID. A fresh install can opt in with <code>SBOX_NS_TELEMETRY=1</code>
+(both <code>install.sh</code> and <code>install.ps1</code>).</p>
+<h2 id="run"><a class="anchor" href="#run" aria-hidden="true" tabindex="-1">#</a>Run</h2>
+<h3 id="foreground"><a class="anchor" href="#foreground" aria-hidden="true" tabindex="-1">#</a>Foreground</h3>
+<pre><code class="language-sh">sbox-ns start
+sbox-ns start --listen 0.0.0.0:9000</code></pre>
+<p>Stops on Ctrl+C. Useful for testing and inside containers.</p>
+<h3 id="as-a-service"><a class="anchor" href="#as-a-service" aria-hidden="true" tabindex="-1">#</a>As a service</h3>
+<pre><code class="language-sh">sudo sbox-ns service install     # systemd on Linux, launchd on macOS, Windows service on Windows
+sbox-ns service start
+sbox-ns service status
+sbox-ns service restart
+sbox-ns service stop
+sbox-ns logs                     # recent log lines; add -f to follow
+sudo sbox-ns service uninstall</code></pre>
+<p>On Linux the unit file is <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/8e7623dda7e37159dc1757b76ad110fad5dd6f11/install/sbox-ns.service" target="_blank" rel="noopener"><code>install/sbox-ns.service</code></a>:
+it runs as the <code>sbox-ns</code> user with systemd hardening, and only
+<code>/var/lib/sbox-ns</code> is writable: <code>/etc/sbox-ns</code> is read-only to the service once the
+layout is migrated (see <a href="#config-and-state-folders">Config and state folders</a>).
+<code>sudo sbox-ns service install</code> adds a managed drop-in granting only
+<code>CAP_NET_BIND_SERVICE</code> when an HTTP or enabled HTTPS listener uses a port below
+1024. Re-running installation, or <code>sudo sbox-ns service restart</code>, updates that
+drop-in after a listener change; high-port listeners run with no capabilities.</p>
+<p>The default sandbox uses <code>SystemCallFilter=@system-service</code> and
+<code>ProtectProc=invisible</code>. If a verified runtime or connector needs a relaxation,
+use <code>sudo systemctl edit sbox-ns</code> (or <code>sbox-ns@&lt;name&gt;</code>), never edit the generated
+unit. Reset the specific setting in your operator drop-in:</p>
+<pre><code class="language-ini">[Service]
+SystemCallFilter=
+ProtectProc=default</code></pre>
+<p>Relax only the setting that caused a journal denial, then run
+<code>sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart sbox-ns</code>. Such overrides
+reduce isolation and are not the shipped baseline.</p>
+<h3 id="health-checks"><a class="anchor" href="#health-checks" aria-hidden="true" tabindex="-1">#</a>Health checks</h3>
+<ul>
+<li><code>GET /health</code> returns 200 when the server and database are up; use it for
+load balancers, uptime monitors and container health checks.</li>
+<li><code>GET /api/server-info</code> (also <code>/v3/server-info</code>) returns the server version and basic information.</li>
+</ul>
+<h2 id="config-and-state-folders"><a class="anchor" href="#config-and-state-folders" aria-hidden="true" tabindex="-1">#</a>Config and state folders</h2>
+<p>The server separates what an operator edits from what it writes itself:</p>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Holds</th>
+<th>Owner and mode on a Linux service install</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/etc/sbox-ns</code> (<code>/etc/sbox-ns/&lt;name&gt;</code>)</td>
+<td><code>server.toml</code>, <code>database.toml</code>, <code>updates.toml</code>, <code>alerts.toml</code>, your <code>conf.d/</code> drop-ins, operator-provided secrets such as a database password file</td>
+<td><code>root:sbox-ns</code>, folders <code>0750</code>, files <code>0640</code>; not in the unit&#39;s <code>ReadWritePaths</code></td>
+</tr>
+<tr>
+<td><code>/var/lib/sbox-ns/state</code> (<code>/var/lib/sbox-ns/&lt;name&gt;/state</code>)</td>
+<td>generated secrets, tunnel identity and token, the managed overlays in <code>conf.d/</code>, the <code>cloudflared</code> binary, the telemetry ID, the <code>.layout-version</code> marker</td>
+<td><code>sbox-ns</code>, folders <code>0700</code>, files <code>0600</code></td>
+</tr>
+</tbody></table>
+<p><code>sbox-ns setup</code>, <code>config set</code>, <code>adminpanel</code>, <code>register</code> and the other commands that
+edit operator files must run as root on a Linux service install; commands that create
+runtime state (<code>tunnel</code>, <code>dns</code>, <code>telemetry</code>, generated secrets) may run as root or as
+the service user and always leave the files owned by the service user. Generated
+secrets, the tunnel and DNS overlays and the connector binary are never written into
+the config folder. <code>sbox-ns config show</code> and <code>doctor</code> print which files were loaded.</p>
+<p>Hosts installed before the split keep working unchanged: until the marker
+<code>/var/lib/sbox-ns/state/.layout-version</code> exists, runtime files are read from and
+written to the config folder, and <code>doctor</code> and the server&#39;s startup log print a
+notice to run <code>sudo sbox-ns layout migrate</code>. That command (Linux, root) runs, in
+order:</p>
+<ol>
+<li>refuses to start while an update holds <code>&lt;binary&gt;.update-lock</code>;</li>
+<li>stops the instance units that are running;</li>
+<li>moves the runtime files out of each config folder into its state folder (a rename
+inside a verified folder, falling back to copy and delete);</li>
+<li>sets the config folders to <code>root:&lt;service group&gt;</code> <code>0750</code> (files <code>0640</code>) and the
+state folders to the service user, <code>0700</code> (files <code>0600</code>);</li>
+<li>moves each instance&#39;s <code>&lt;data dir&gt;/updates/last-update.json</code> and
+<code>&lt;binary&gt;.previous</code> into the root-only update state (<code>/var/lib/sbox-ns-update</code>);</li>
+<li>re-renders the installed systemd units without the config folder in
+<code>ReadWritePaths</code>;</li>
+<li>starts the units that were running;</li>
+<li>writes <code>.layout-version</code> last.</li>
+</ol>
+<p>Every step is safe to re-run, and a second run with the marker present changes
+nothing. If a step fails the command undoes what it did, restores ownership and modes,
+prints the exact commands to finish by hand, writes no marker and exits non-zero;
+until the runtime files are back in one place <code>doctor</code> reports the layout as
+partial. <code>sudo sbox-ns layout migrate --revert</code> moves the files back into the config
+folders (owned by the service user again, with the unit allowed to write them) and
+removes the marker, for example before running an older binary.</p>
+<p><code>sbox-ns update --auto</code> runs the migration as its first step when the marker is
+missing, before it contacts the release feed, and <code>sbox-ns rollback</code> reverts the
+layout before it restores the previous binary, because older binaries expect their
+secrets in the config folder.</p>
+<h2 id="database"><a class="anchor" href="#database" aria-hidden="true" tabindex="-1">#</a>Database</h2>
+<pre><code class="language-sh">sbox-ns db test       # connect with the current settings
+sbox-ns db status     # provider, schema version, pending migrations, size
+sbox-ns db migrate    # apply pending migrations (automatic on start unless auto_migrate = false)</code></pre>
+<p>SQLite stores everything in one file, <code>&lt;data dir&gt;/sbox-ns.db</code>, which
+is fine for most single-server games. Choose PostgreSQL if you already run it,
+want managed backups from your provider, or want to run the database on a
+separate machine. All tables are created inside the configured schema
+(default <code>network_storage</code>), so the server can share a database with other
+applications.</p>
+<h2 id="backups"><a class="anchor" href="#backups" aria-hidden="true" tabindex="-1">#</a>Backups</h2>
+<p>Back up the database <strong>and</strong> the config folder, plus the state folder
+<code>&lt;data dir&gt;/state/</code> (it holds <code>secrets/</code>). Without the auth session secret, existing player
+sessions become invalid after a restore; without the storage encryption key,
+every secret API key stops working.</p>
+<h3 id="built-in"><a class="anchor" href="#built-in" aria-hidden="true" tabindex="-1">#</a>Built-in</h3>
+<pre><code class="language-sh">sbox-ns db backup                       # writes a timestamped backup into the data folder
+sbox-ns db backup --output /backups/ns.bak
+sbox-ns db restore /backups/ns.bak      # stop the server first</code></pre>
+<p>For SQLite this copies the database file. For PostgreSQL it uses <code>pg_dump</code>
+and <code>pg_restore</code>, which must be installed and on <code>PATH</code>.</p>
+<h3 id="sqlite-by-hand"><a class="anchor" href="#sqlite-by-hand" aria-hidden="true" tabindex="-1">#</a>SQLite by hand</h3>
+<p>Do not copy <code>sbox-ns.db</code> while the server is running; the copy can be
+inconsistent. Either stop the server first, or use the SQLite CLI:</p>
+<pre><code class="language-sh">sqlite3 /var/lib/sbox-ns/sbox-ns.db &quot;.backup '/backups/sbox-ns.db'&quot;</code></pre>
+<h3 id="postgresql-by-hand"><a class="anchor" href="#postgresql-by-hand" aria-hidden="true" tabindex="-1">#</a>PostgreSQL by hand</h3>
+<pre><code class="language-sh">pg_dump --format=custom --schema=network_storage --file=ns.dump &quot;postgresql://sbox_ns@db/sbox_ns&quot;
+pg_restore --clean --if-exists --dbname=&quot;postgresql://sbox_ns@db/sbox_ns&quot; ns.dump</code></pre>
+<p>Schedule backups with cron, a systemd timer or your provider&#39;s snapshots, and
+test a restore now and then.</p>
+<h2 id="updates"><a class="anchor" href="#updates" aria-hidden="true" tabindex="-1">#</a>Updates</h2>
+<p>Unless you opt in to <a href="#automatic-updates">automatic updates</a>, the server never
+updates itself. When a new release is published it prints a notice in the logs
+and in <code>sbox-ns doctor</code>, including whether the release fixes a security issue or
+needs a database migration.</p>
+<pre><code class="language-sh">sbox-ns update --check            # show the latest version and release notes link
+sbox-ns update                    # install the latest release
+sbox-ns update --version v0.4.0   # install a specific release
+sbox-ns rollback                  # return to the previous binary (restores the pre-update database backup)
+sbox-ns rollback --keep-data      # return to the previous binary and keep the database, when safe</code></pre>
+<p>Before installing, <code>sbox-ns update</code> checks the release&#39;s own compatibility evidence
+against your games. Every release is tested in CI with the real library inside s&amp;box for
+the library builds games still embed, and lists them in its signed <code>release.json</code>
+(<code>testedLibraries</code>). The update compares that list with the library versions your games
+sent in the last 30 days:</p>
+<ul>
+<li>a library build with at least 1% of your requests that the release lists as <code>fail</code>
+stops the update (<code>Nothing was installed</code>); <code>--ignore-compat</code> installs it anyway;</li>
+<li>a library build the release was not tested with is printed as a warning;</li>
+<li>releases published before this evidence existed, and servers without traffic, are
+not judged.</li>
+</ul>
+<p>Unattended updates hold a release with a <code>fail</code> for one of your libraries and re-check
+on the next run.</p>
+<p>Take a backup (<code>sbox-ns db backup</code>) before updating to a release that needs a
+database migration. Releases list a minimum version they can be upgraded
+from; older installs must step through an intermediate release.</p>
+<p>Docker installs update by pulling a new image and recreating the container
+with the same volumes:</p>
+<pre><code class="language-sh">docker pull ghcr.io/sbox-cool/sbox-network-storage-server:latest
+docker rm -f sbox-ns &amp;&amp; docker run ...   # same arguments as before</code></pre>
+<p>To turn off update checks entirely, set this in <code>updates.toml</code>:</p>
+<pre><code class="language-toml">[updates]
+check = false</code></pre>
+<p>Set <code>include_prereleases = true</code> to also be notified about prereleases.</p>
+<p>The update check requests
+<code>https://sboxcool.com/api/network-storage/releases/latest?channel=&lt;updates.channel&gt;</code>
+and falls back to the newest stable release on GitHub when the feed is unreachable.</p>
+<h3 id="rolling-back"><a class="anchor" href="#rolling-back" aria-hidden="true" tabindex="-1">#</a>Rolling back</h3>
+<pre><code class="language-sh">sbox-ns rollback                   # previous binary + the database backup taken before the update
+sbox-ns rollback --keep-data       # previous binary, database kept as it is (only when that is safe)
+sbox-ns update --version 0.5.1 --allow-downgrade   # install an older release, same safety check</code></pre>
+<p><code>sbox-ns rollback</code> restores the pre-update database backup, so everything written
+since the update is lost (it asks before doing so; <code>--yes</code> skips the question).</p>
+<p><code>sbox-ns rollback --keep-data</code> swaps the binary back and leaves the database alone.
+It is available when every migration applied since the previous release is
+<strong>additive</strong>: each migration is tagged <code>additive</code> or <code>breaking</code> in the code, and the
+database records <code>min_binary_schema</code>, the highest <code>breaking</code> version applied. A binary
+runs on a newer database when the schema it supports is at least that floor. Before
+touching anything, <code>--keep-data</code> reads the database state and asks the previous binary
+which schema it supports (<code>sbox-ns schema-info --json</code>), and runs the previous binary&#39;s own
+non-mutating check (<code>sbox-ns compatibility --json</code>) against every instance&#39;s database. Either
+side refusing stops everything before the service is stopped, and the check runs again while
+stopped. If the previous binary cannot run on the database, the command changes nothing
+and prints why, for example:</p>
+<pre><code class="language-text">error: cannot do this without losing data: migration v4 (&quot;drop column x&quot;) is breaking: a binary must support schema 4 or newer to run on this database, but 0.5.1 supports 3 (database schema 4). `sbox-ns rollback` (without --keep-data) restores the database backup taken before the update and loses everything written since.</code></pre>
+<p>then <code>sbox-ns rollback</code> is today&#39;s restore path. <code>sbox-ns update --version X.Y.Z --allow-downgrade</code> applies the same two-sided check to the release it downloads, before the
+service is stopped and again while stopped. Anything that is not provably newer than the
+installed version takes this downgrade path: an unparseable version, an equal version from a
+different build, or an older one all need a pinned <code>--version</code> with <code>--allow-downgrade</code>;
+unattended updates never install such a target. Without <code>--allow-downgrade</code> an older
+<code>--version</code> is refused.
+With <code>--all-instances</code>, <code>--keep-data</code> requires every instance&#39;s database to pass.
+Both rollback modes move the runtime files back into the config folder first (layout revert),
+because the previous binary may predate the state layout; only the database restore is
+skipped with <code>--keep-data</code>.
+<code>sbox-ns doctor</code> and <code>sbox-ns db status</code> show the same floor: a database that is newer
+than the binary through additive migrations only is reported as usable, and the
+server starts on it. A database with a breaking migration beyond the binary is
+refused exactly as before (<code>doctor</code> fails, <code>start</code> exits).</p>
+<p>Each release&#39;s notes end with a line such as &quot;Rolls back without data loss to: 0.5.1,
+0.5.2&quot;, generated from the migration tags (see <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/8e7623dda7e37159dc1757b76ad110fad5dd6f11/docs/releasing.md" target="_blank" rel="noopener">releasing.md</a>).</p>
+<p><strong>Limitation.</strong> Releases published before this feature neither know the floor rule nor
+answer <code>schema-info</code>. They only run on the exact schema they shipped with, so rolling
+back <em>to</em> one of them (or from a database it migrated) always needs the backup restore,
+and <code>--keep-data</code> refuses with &quot;predates rollback-safe migrations&quot;. The first release
+that contains the floor rule is the oldest one <code>--keep-data</code> can return to.</p>
+<h3 id="watching-an-update"><a class="anchor" href="#watching-an-update" aria-hidden="true" tabindex="-1">#</a>Watching an update</h3>
+<p>For 48 hours after each update, the server compares the error rate of each client library on the new build with the previous build. A library whose error rate rises by at least 10 points and at least 2× its baseline, with at least 50 requests on both sides, is a regression. The first regression sends one critical alert through your alert channels per build. The watch never rolls back on its own: a regression during the window is what the unattended updater acts on (see <a href="#automatic-updates">Automatic updates</a>).</p>
+<ul>
+<li><code>sbox-ns doctor</code> shows the watch as &quot;update health&quot;, and the Server page of the owner console shows the same state with the per-library numbers.</li>
+<li><code>sbox-ns update verify [--hours N] [--json]</code> prints the verdict for the last N hours on the running build (default 24, at most 168). It exits with code 5 on a regression. A regression verdict is the signal for <code>sbox-ns rollback --keep-data</code>, or <code>sbox-ns rollback</code> when the database must return too.</li>
+</ul>
+<p>A verdict needs traffic on both sides. <code>insufficient data</code> means too few requests to judge; <code>no baseline</code> means no previous build has traffic in the last 7 days.</p>
+<h3 id="automatic-updates"><a class="anchor" href="#automatic-updates" aria-hidden="true" tabindex="-1">#</a>Automatic updates</h3>
+<p>Off by default. On Linux with systemd, opt in with:</p>
+<pre><code class="language-sh">sudo sbox-ns service install --auto-update     # or install.sh with SBOX_NS_AUTO_UPDATE=1</code></pre>
+<p>This sets <code>updates.auto_install = true</code> and installs <code>sbox-ns-update.timer</code>
+(<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/8e7623dda7e37159dc1757b76ad110fad5dd6f11/install/sbox-ns-update.timer" target="_blank" rel="noopener"><code>install/sbox-ns-update.timer</code></a>), which
+runs <code>sbox-ns update --auto --all-instances</code> as root every hour (spread
+by up to 15 minutes). A run installs nothing unless all of these hold:</p>
+<ul>
+<li>every instance on the host has <code>updates.auto_install = true</code>;</li>
+<li>the current UTC time is inside <code>updates.window</code> (default <code>&quot;03:00-05:00&quot;</code>;
+the start is inclusive, the end exclusive, <code>&quot;22:00-02:00&quot;</code> wraps midnight,
+<code>&quot;00:00-24:00&quot;</code> is always open);</li>
+<li>the release feed answers for <code>updates.channel</code> and offers a newer version.
+Unattended runs use only the feed, never the GitHub fallback, so channel
+promotion and holds always apply. They never downgrade;</li>
+<li>the version has been on its channel for <code>updates.min_release_age_hours</code>
+(<code>-1</code>, the default, means 24 hours on <code>stable</code> and 0 on <code>canary</code>), measured
+from the feed&#39;s <code>promotedAt</code> (or the release&#39;s <code>publishedAt</code>);</li>
+<li>that version has not already failed an unattended install on this host
+(install it by hand with <code>sbox-ns update --version X.Y.Z</code> to retry).</li>
+<li>the release&#39;s compatibility evidence lists no <code>fail</code> for a library version
+your games use (see <a href="#updates">Updates</a>).</li>
+</ul>
+<p><strong>Automatic rollback.</strong> For 48 hours after an unattended update, each hourly run
+first checks the post-update watch (<a href="#watching-an-update">Watching an update</a>). When
+a library regressed and <code>updates.auto_rollback</code> is on (the default), it puts the
+previous binary back with the database kept as it is, records the version as failed
+so it is not installed again, and exits 1. It only does this when
+<code>rollback --keep-data</code> is safe for every instance; otherwise it leaves everything in
+place and the regression alert tells you how to roll back.</p>
+<p><strong>Channels.</strong> <code>canary</code> receives every new release as soon as it is published.
+<code>stable</code> receives a release only after it has run on the official canary
+server for at least 24 hours and passed the managed-service parity corpus
+there. sboxcool can hold a channel at a version (for example to stop a bad
+release); the feed then keeps offering the held version.
+The hourly <code>.github/workflows/canary-verify.yml</code> gate uses <code>OSS_CANARY_URL</code>,
+fixture credential secrets <code>OSS_CANARY_PROJECT_ID</code>, <code>OSS_CANARY_PUBLIC_KEY</code>,
+<code>OSS_CANARY_SECRET_KEY</code>, and <code>OSS_RELEASE_OPS_TOKEN</code>. It refuses automatic
+promotion while either channel is held. After a successful stable promotion,
+optional secret <code>OSS_WEBSITE_DISPATCH_TOKEN</code> and variable
+<code>OSS_WEBSITE_REPOSITORY</code> (<code>owner/repo</code>) send <code>oss-release-promoted</code> to the
+website&#39;s official deployment workflow; without them deployment is manual.</p>
+<p><strong>What a run does.</strong> It downloads the release, verifies the pinned-key
+signature of <code>SHA256SUMS</code> and then the archive checksum (and the cosign
+signature as an extra check when <code>cosign</code> is installed), then for every
+instance sharing the binary: stops the running instances, backs up each
+database (<code>pre-&lt;version&gt;</code> in <code>&lt;data dir&gt;/backups</code>), swaps the binary (keeping
+the previous one as <code>sbox-ns.previous</code>), runs <code>db migrate</code> for each instance,
+starts the instances that were running, and waits up to 120 seconds for each
+<code>/health</code> to answer 200 with the new version. Backups, restores and migrations
+run as the instance&#39;s service user; root only controls the services and swaps
+the binary. Before anything else, a run on a host that has not been migrated performs
+<code>sbox-ns layout migrate</code> (see <a href="#config-and-state-folders">Config and state folders</a>).</p>
+<p><strong>Update state.</strong> The updater keeps its records and the previous binary in
+<code>/var/lib/sbox-ns-update</code> (<code>root:root</code>, mode <code>0700</code>), never in a folder the
+service account can write. Rollback restores only the installed <code>sbox-ns</code>
+binary from that folder. The release repository, feed URL and signing keys are
+compiled into the binary; <code>updates.feed_url</code> and <code>updates.github_repo</code> are no
+longer settings. Unattended updates never honor <code>SBOX_NS_INSECURE_SKIP_SIGNATURE</code>.</p>
+<p><strong>Rollback.</strong> If any step fails, the run puts the previous binary back,
+restores every database backup taken in that run, starts the instances again,
+checks they report the old version, and records <code>failed</code> with the reason in
+each instance&#39;s <code>last-update.json</code> in the update state folder (shown by
+<code>sbox-ns doctor</code>). After a successful run, <code>sbox-ns rollback --all-instances</code>
+undoes it; with <code>--keep-data</code> it keeps every database (only when each one passes the
+gate) but still reverts the layout and never restores backups. If a service cannot be stopped
+during recovery, no database or binary is
+restored underneath it; the run exits 3 and preserves the backup files for
+operator recovery.</p>
+<table>
+<thead>
+<tr>
+<th>Exit code of <code>update --auto</code></th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>Updated and healthy, or nothing to do (the reason is printed)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>The update failed and every instance was rolled back, or it failed before anything changed (download or verification)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Configuration problem: an invalid config, or instances that disagree on <code>updates.channel</code>/<code>updates.window</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>The update failed and the rollback did not complete: check <code>sbox-ns doctor</code> and the logs now</td>
+</tr>
+<tr>
+<td>4</td>
+<td>The release feed was unreachable or invalid; nothing changed</td>
+</tr>
+</tbody></table>
+<p>Follow runs with <code>journalctl -u sbox-ns-update</code>. Turn unattended updates off
+with <code>sbox-ns config set updates.auto_install false</code> (or
+<code>systemctl disable --now sbox-ns-update.timer</code>).</p>
+<p><strong>What can still go wrong.</strong></p>
+<ul>
+<li>Migrations are forward-only. A plain rollback restores the database backup taken
+just before the update, so it only works with that backup in place: keep
+enough disk space for one backup per instance. When every migration since is
+additive, <code>sbox-ns rollback --keep-data</code> needs no backup
+(see <a href="#rolling-back">Rolling back</a>).</li>
+<li>Data written after an update is lost when the update is rolled back: with
+<code>sbox-ns rollback</code>, everything since the update; with an automatic rollback,
+whatever players wrote to instances already restarted on the new version
+during the health checks (at most a few minutes).</li>
+<li>A release can pass the health check and still misbehave for your game.
+Stay on <code>stable</code>, and pick a window when few players are online: every
+instance is unavailable while it updates (usually well under a minute).</li>
+<li>PostgreSQL backups and restores need <code>pg_dump</code> and <code>pg_restore</code> on the host.</li>
+</ul>
+<h3 id="several-instances-on-one-host"><a class="anchor" href="#several-instances-on-one-host" aria-hidden="true" tabindex="-1">#</a>Several instances on one host</h3>
+<p>Each instance has its own config folder, data folder and port, and runs as the
+systemd unit <code>sbox-ns@&lt;name&gt;</code> (<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/8e7623dda7e37159dc1757b76ad110fad5dd6f11/install/sbox-ns@.service" target="_blank" rel="noopener"><code>install/sbox-ns@.service</code></a>):
+Use <code>--all-instances</code> for automated updates and rollbacks when another
+registered instance shares the binary; selecting only one is refused.</p>
+<pre><code class="language-sh">sudo sbox-ns service install --instance alpha --port 8101 --auto-update
+sudo systemctl start sbox-ns@alpha</code></pre>
+<p>This creates <code>/etc/sbox-ns/alpha</code> (keeping existing files) and
+<code>/var/lib/sbox-ns/alpha</code>, sets <code>server.listen = &quot;127.0.0.1:8101&quot;</code> (put a
+reverse proxy in front), and enables the unit. Use
+<code>--config-dir /etc/sbox-ns/alpha --data-dir /var/lib/sbox-ns/alpha</code> with other
+commands to address the instance. All instances share <code>/usr/local/bin/sbox-ns</code>,
+so they are updated together and must use the same <code>updates.channel</code> and
+<code>updates.window</code>; <code>--all-instances</code> covers <code>/etc/sbox-ns/server.toml</code> (the
+default instance, unit <code>sbox-ns</code>) and every <code>/etc/sbox-ns/&lt;name&gt;/server.toml</code>.
+Each instance needs its own database (or PostgreSQL schema).</p>
+<h2 id="uninstall"><a class="anchor" href="#uninstall" aria-hidden="true" tabindex="-1">#</a>Uninstall</h2>
+<pre><code class="language-sh">sudo sbox-ns service uninstall
+sudo rm /usr/local/bin/sbox-ns
+# Remove configuration and data only if you no longer need them:
+sudo rm -rf /etc/sbox-ns /var/lib/sbox-ns
+sudo userdel sbox-ns</code></pre>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/8e7623dda7e37159dc1757b76ad110fad5dd6f11/docs/self-hosting.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/self-hosting.md</a> at <code>8e7623dda7e37159dc1757b76ad110fad5dd6f11</code> (8e7623d).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> Next release (unreleased, 8e7623d) (<code>next-8e7623d</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/8e7623dda7e37159dc1757b76ad110fad5dd6f11" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>8e7623dda7e37159dc1757b76ad110fad5dd6f11</code> (<code>8e7623d</code>). <strong>Library:</strong> main source (ddf9b61) (<code>source-ddf9b61</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750</code> (<code>ddf9b61</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/next-8e7623d/source-ddf9b61/start/connect-a-game/">Connect a game</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/api/">HTTP API</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/library/api/">C# API</a><a href="/docs/versions/next-8e7623d/source-ddf9b61/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

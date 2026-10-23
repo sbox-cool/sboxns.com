@@ -42,6 +42,7 @@ Key facts:
 - [Game client startup](https://sboxns.com/docs/start/game-client/)
 - [Library overview](https://sboxns.com/docs/library/overview/)
 - [Authoring collections and endpoints](https://sboxns.com/docs/library/source-authoring/)
+- [Script endpoints (JavaScript / TypeScript)](https://sboxns.com/docs/library/script-endpoints/)
 - [Examples](https://sboxns.com/docs/library/examples/)
 - [Self-hosting](https://sboxns.com/docs/server/self-hosting/)
 - [Hosting models](https://sboxns.com/docs/server/hosting-models/)
