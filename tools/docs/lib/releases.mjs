@@ -30,8 +30,10 @@ export function stableReleases(releases) {
     .sort((a, b) => compareVersions(a.id, b.id));
 }
 
+// Newest stable version. Unreleased snapshots such as `next-<sha>` are skipped: they are pinned for preview
+// docs (build.mjs) and must never become the default or block a stable release from being adopted.
 export function newestVersion(ids) {
-  return ids.reduce((best, id) => (best === null || compareVersions(id, best) > 0 ? id : best), null);
+  return ids.filter(id => parseVersion(id)).reduce((best, id) => (best === null || compareVersions(id, best) > 0 ? id : best), null);
 }
 
 // The short SHA id is the default. The full SHA is used only when the short id already names a different commit.
