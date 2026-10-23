@@ -69,6 +69,20 @@ Run `npm run reconcile:releases` locally to see what would change. It writes onl
 
 The generated `docs/versions.json` is output only. Edit the curated `tools/docs/versions.json`.
 
+### Search indexing
+
+The build compares articles at the same documentation path across snapshots,
+normalizing only links within each selected version. Identical articles share
+one canonical URL, preferring the unversioned `/docs/` page when its content
+matches. Distinct historical content keeps its own canonical URL; nothing is
+redirected or marked `noindex`, and version navigation and source provenance
+stay pinned. The sitemap includes only those canonical pages, not every copy.
+The versions catalog remains indexable with its own title and description.
+
+This addresses Search Console's duplicate-canonical reports without replacing
+old API documentation with today's API. Google's indexing decisions and
+recrawl timing remain outside the generator's control.
+
 ### Manifest
 
 - `servers`: stable releases, pinned by `reconcile-releases.mjs` (currently 0.1.0 through 0.5.4). Each entry has `id` and `label` (the version), `ref` (its `vX.Y.Z` tag) and `commit` (full SHA). Draft and prerelease releases are not listed.

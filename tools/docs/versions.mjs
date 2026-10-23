@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ensureBareClone, resolveRef } from './lib/git.mjs';
 import { certify } from './lib/certification.mjs';
+import { consolidateDocCanonicals } from './lib/seo.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const site = path.resolve(here, '../..');
@@ -107,6 +108,8 @@ ${validation}
 const home = readFileSync(path.join(out, 'index.html'), 'utf8');
 const catalog = home.replace(/<article class="prose docs-prose">[\s\S]*?<\/article>/, `<article class="prose docs-prose">${article}</article>`)
   .replace(/<title>[^<]*<\/title>/, '<title>Documentation versions | Network Storage docs</title>')
+  .replace(/(<meta property="og:title" content=")[^"]*(")/, '$1Documentation versions | Network Storage docs$2')
+  .replace(/(<meta (?:name="description"|property="og:description") content=")[^"]*(")/g, '$1Browse pinned server and library documentation, package revision history and exact-build validation evidence.$2')
   .replaceAll('https://sboxns.com/docs/"', 'https://sboxns.com/docs/versions/"');
 mkdirSync(path.join(out, 'versions'), { recursive: true });
 writeFileSync(path.join(out, 'versions', 'index.html'), catalog);
@@ -120,9 +123,10 @@ function walk(dir) {
   }
 }
 walk(out);
+const canonicalPages = consolidateDocCanonicals(site, pages);
 const sitemapPath = path.join(site, 'sitemap.xml');
 const sitemap = readFileSync(sitemapPath, 'utf8').replace(/\s*<url><loc>https:\/\/sboxns\.com\/docs\/[^<]*<\/loc><\/url>/g, '');
-writeFileSync(sitemapPath, sitemap.replace('</urlset>', pages.map(u => `  <url><loc>https://sboxns.com${u}</loc></url>`).join('\n') + '\n</urlset>'));
+writeFileSync(sitemapPath, sitemap.replace('</urlset>', canonicalPages.map(u => `  <url><loc>https://sboxns.com${u}</loc></url>`).join('\n') + '\n</urlset>'));
 const llmsPath = path.join(site, 'llms.txt');
 writeFileSync(llmsPath, readFileSync(llmsPath, 'utf8').trimEnd() + '\n- [Documentation versions](https://sboxns.com/docs/versions/): independent pinned server/library snapshots; package publication evidence is separate.\n');
-console.log(`Built ${versions.length} source pair snapshots, ${pages.length} documentation pages.`);
+console.log(`Built ${versions.length} source pair snapshots, ${pages.length} documentation pages, ${canonicalPages.length} canonical documentation URLs.`);

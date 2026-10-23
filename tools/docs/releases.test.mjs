@@ -57,6 +57,19 @@ test('a new stable release is appended, the default moves to it, and existing pi
   assert.deepEqual(before, manifest(), 'input manifest must not be mutated');
 });
 
+test('an unreleased next- snapshot never blocks or becomes the default when a stable release arrives', () => {
+  const before = manifest();
+  before.servers.unshift({ id: 'next-8e7623d', label: 'Next release (unreleased, 8e7623d)', ref: sha('8'), commit: sha('8') });
+  const { manifest: next, added } = reconcileManifest(before, {
+    releases: [resolved('v0.5.3', sha('c')), resolved('v0.5.4', OLD_SERVER), resolved('v0.5.5', NEW_SERVER)],
+    head: head(OLD_LIB),
+  });
+  assert.deepEqual(added.servers, ['0.5.5']);
+  assert.equal(next.defaults.server, '0.5.5');
+  assert.equal(next.servers[0].id, 'next-8e7623d', 'the snapshot pin is kept');
+  assert.equal(newestVersion(['next-8e7623d', '0.5.4']), '0.5.4');
+});
+
 test('reconciling an already-pinned state is a no-op', () => {
   const { manifest: next, added, changed } = reconcileManifest(manifest(), {
     releases: [resolved('v0.5.3', sha('c')), resolved('v0.5.4', OLD_SERVER)],

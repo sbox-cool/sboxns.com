@@ -42,9 +42,25 @@ export function resolveRef(dir, ref) {
     if (!tags.length) throw new Error(`no vX.Y.Z tags in ${dir}`);
     target = tags.at(-1);
   }
-  const commit = git(dir, ['rev-parse', '--verify', '--quiet', `${target}^{commit}`]).trim();
+  const commit = commitOf(dir, target);
   if (!commit) throw new Error(`ref ${target} not found in ${dir}`);
   return { ref: target, commit };
+}
+
+// A pinned full SHA can stop being reachable from any branch (for example a squash-merged feature branch). The
+// clone only fetches branches and tags, so fetch such a commit explicitly; the pin itself is never changed.
+function commitOf(dir, target) {
+  const parse = () => {
+    try {
+      return git(dir, ['rev-parse', '--verify', '--quiet', `${target}^{commit}`]).trim();
+    } catch {
+      return '';
+    }
+  };
+  const found = parse();
+  if (found || !/^[a-f0-9]{40}$/.test(target)) return found;
+  git(dir, ['fetch', '--quiet', 'origin', target]);
+  return parse();
 }
 
 export function readFileAt(dir, commit, file) {

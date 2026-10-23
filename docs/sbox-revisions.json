@@ -1,8 +1,15 @@
 {
   "package": "sboxcool.network-storage",
   "sourceUrl": "https://public.facepunch.com/sbox/package/versions/2/sboxcool.network-storage",
-  "latestRevision": "423774",
+  "latestRevision": "427072",
   "revisions": [
+    {
+      "revision": "427072",
+      "createdAt": "2026-10-20T02:16:12.1+00:00",
+      "engineVersion": 30,
+      "manifestUrl": "https://public.facepunch.com/sbox/package/manifest/1/sboxcool.network-storage/427072?v=6ad6cf03",
+      "firstObservedAt": "2026-10-20T10:12:14.152Z"
+    },
     {
       "revision": "423774",
       "createdAt": "2026-10-15T08:12:25+00:00",
