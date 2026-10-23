@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media uploads | Network Storage docs</title>
+  <meta name="description" content="Player and project media, quotas and retention.">
+  <link rel="canonical" href="https://sboxns.com/docs/server/media/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Media uploads | Network Storage docs">
+  <meta property="og:description" content="Player and project media, quotas and retention.">
+  <meta property="og:url" content="https://sboxns.com/docs/server/media/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.5/source-9b6ec5d/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.5/source-9b6ec5d/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.5 · main source (9b6ec5d)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-9b6ec5d/server/media/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.4&amp;library=source-9b6ec5d">0.5.4 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.3&amp;library=source-9b6ec5d">0.5.3 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.2&amp;library=source-9b6ec5d">0.5.2 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.1&amp;library=source-9b6ec5d">0.5.1 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.0&amp;library=source-9b6ec5d">0.5.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmedia&amp;server=0.4.0&amp;library=source-9b6ec5d">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmedia&amp;server=0.3.0&amp;library=source-9b6ec5d">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmedia&amp;server=0.2.0&amp;library=source-9b6ec5d">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmedia&amp;server=0.1.0&amp;library=source-9b6ec5d">0.1.0 (page unavailable)</option><option value="/docs/versions/0.5.5/source-9b6ec5d/server/media/" selected>0.5.5</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.5/source-13f51a8/server/media/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.5/source-d369d1b/server/media/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.5/source-fc58d4e/server/media/">main source (fc58d4e)</option><option value="/docs/versions/0.5.5/source-5369108/server/media/">main source (5369108)</option><option value="/docs/versions/0.5.5/source-9c4a235/server/media/">main source (9c4a235)</option><option value="/docs/versions/0.5.5/source-9b6ec5d/server/media/" selected>main source (9b6ec5d)</option><option value="/docs/versions/0.5.5/source-ddf9b61/server/media/">main source (ddf9b61)</option><option value="/docs/versions/0.5.5/source-7f77770/server/media/">main source (7f77770)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-9b6ec5d/server/media/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.4&amp;library=source-9b6ec5d">Server: 0.5.4 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.3&amp;library=source-9b6ec5d">Server: 0.5.3 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.2&amp;library=source-9b6ec5d">Server: 0.5.2 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.1&amp;library=source-9b6ec5d">Server: 0.5.1 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmedia&amp;server=0.5.0&amp;library=source-9b6ec5d">Server: 0.5.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmedia&amp;server=0.4.0&amp;library=source-9b6ec5d">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmedia&amp;server=0.3.0&amp;library=source-9b6ec5d">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmedia&amp;server=0.2.0&amp;library=source-9b6ec5d">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmedia&amp;server=0.1.0&amp;library=source-9b6ec5d">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/0.5.5/source-9b6ec5d/server/media/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.5/source-13f51a8/server/media/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.5/source-d369d1b/server/media/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.5/source-fc58d4e/server/media/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.5/source-5369108/server/media/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.5/source-9c4a235/server/media/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.5/source-9b6ec5d/server/media/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.5.5/source-ddf9b61/server/media/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.5/source-7f77770/server/media/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.5/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.5/source-9b6ec5d/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.5/source-9b6ec5d/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.5/source-9b6ec5d/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.5/source-9b6ec5d/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.5/source-9b6ec5d/library/overview/">Library overview</a><a href="/docs/versions/0.5.5/source-9b6ec5d/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.5/source-9b6ec5d/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.5/source-9b6ec5d/library/examples/">Examples</a><a href="/docs/versions/0.5.5/source-9b6ec5d/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.5/source-9b6ec5d/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.5/source-9b6ec5d/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/configuration/">Configuration</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/database/">Databases</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/media/" aria-current="page">Media uploads</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/game-logs/">Game logs</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/export/">Export and move projects</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/modules/">Modules</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/alerting/">Alerting</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.5/source-9b6ec5d/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.5/source-9b6ec5d/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.5/source-9b6ec5d/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.5/source-9b6ec5d/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.5/source-9b6ec5d/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Media uploads</span></nav>
+  <article class="prose docs-prose">
+<h1>Media uploads</h1>
+<p class="lead">Player and project media, quotas and retention.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#enabling">Enabling</a><a href="#flow">Flow</a><a href="#policy">Policy</a><a href="#limits-and-sizes">Limits and sizes</a><a href="#errors">Errors</a><a href="#storage-backends">Storage backends</a><a href="#retention-and-deletion">Retention and deletion</a><a href="#backups-and-export">Backups and export</a><a href="#compatibility">Compatibility</a></nav>
+<p>Media uploads let a game store small images (PNG, JPEG or WebP) on the server
+through single-use upload grants. Media is <strong>off by default</strong> for every project.
+While it is off, the media routes answer exactly what an unrecognized Network
+Storage route answers today, so enabling the feature in a build changes nothing
+for projects that do not turn it on.</p>
+<h2 id="enabling"><a class="anchor" href="#enabling" aria-hidden="true" tabindex="-1">#</a>Enabling</h2>
+<ol>
+<li>Turn on the server-side backend in <code>server.toml</code> (see
+<a href="/docs/versions/0.5.5/source-9b6ec5d/server/configuration/#media-uploads">configuration.md</a>). The default is local disk.</li>
+<li>In the owner panel, open the project&#39;s <strong>Settings → Media uploads</strong> section,
+tick <strong>Enable media uploads for this project</strong>, and configure at least one
+purpose: a name (<code>a-z</code>, <code>0-9</code>, <code>-</code>, up to 32 characters), <strong>Enable this
+purpose</strong>, and the limits described below.</li>
+</ol>
+<p>The project settings are stored under the <code>media</code> key of the project. The
+owner form rewrites only the purpose named in the form; other purposes are kept.</p>
+<h2 id="flow"><a class="anchor" href="#flow" aria-hidden="true" tabindex="-1">#</a>Flow</h2>
+<pre><code class="language-text">game server (secret key)              sbox-ns                      game client
+   POST /v3/media/{pid}/grants  -&gt;  validates policy, mints grant
+   &lt;- 201 { grantToken, uploadUrl, mediaId, expiresAtUnixMs }
+   hand grantToken to the client  -------------------------------&gt;  PUT raw image bytes
+                                 &lt;-  PUT /v3/media/{pid}/upload/{grantToken}
+                                 -&gt;  201 { mediaId, sha256, width, height, ... }
+   GET /v3/media/{pid}/objects/{mediaId}   (read; see visibility)</code></pre>
+<p>A grant is a signed, short-lived token. It can be used once; the second upload
+with the same token gets <code>409 GRANT_USED</code>.</p>
+<h3 id="routes"><a class="anchor" href="#routes" aria-hidden="true" tabindex="-1">#</a>Routes</h3>
+<p>Each route is also served under <code>/api/media/...</code> through the API root aliases.
+<code>uploadUrl</code> in the grant response uses the <code>/api/</code> form.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Auth</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>POST</td>
+<td><code>/v3/media/{projectId}/grants</code></td>
+<td><code>x-api-key</code> (secret or public key)</td>
+<td>Mint a grant</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/v3/media/{projectId}/upload/{grantToken}</code></td>
+<td>none; the grant is the credential</td>
+<td>Upload the raw body</td>
+</tr>
+<tr>
+<td>GET, HEAD</td>
+<td><code>/v3/media/{projectId}/objects/{mediaId}</code></td>
+<td><code>x-api-key</code> header for private objects (a query-string key is not read)</td>
+<td>Read the bytes (HEAD returns headers only)</td>
+</tr>
+</tbody></table>
+<h3 id="minting-a-grant"><a class="anchor" href="#minting-a-grant" aria-hidden="true" tabindex="-1">#</a>Minting a grant</h3>
+<p>Body (JSON):</p>
+<pre><code class="language-json">{
+  &quot;purpose&quot;: &quot;avatar&quot;,
+  &quot;contentType&quot;: &quot;image/png&quot;,
+  &quot;sizeBytes&quot;: 48213,
+  &quot;sha256&quot;: &quot;&lt;64 lowercase hex characters&gt;&quot;,
+  &quot;forSteamId&quot;: &quot;76561198000000001&quot;
+}</code></pre>
+<ul>
+<li><code>purpose</code>, <code>contentType</code>, <code>sizeBytes</code> (at least 1) and <code>sha256</code> are required.</li>
+<li><code>sha256</code> is the digest of the exact bytes the client will upload.</li>
+<li><code>forSteamId</code> is required with the <strong>secret key</strong> (the server names the player
+the grant is for). With a <strong>public key</strong>, the player&#39;s identity is taken from the
+verified session or s&amp;box token and <code>forSteamId</code> is ignored.</li>
+</ul>
+<p>Response <code>201</code>:</p>
+<pre><code class="language-json">{
+  &quot;ok&quot;: true,
+  &quot;grantToken&quot;: &quot;sbox_mg_…&quot;,
+  &quot;uploadUrl&quot;: &quot;/api/media/{projectId}/upload/sbox_mg_…&quot;,
+  &quot;method&quot;: &quot;PUT&quot;,
+  &quot;mediaId&quot;: &quot;…32 hex…&quot;,
+  &quot;contentType&quot;: &quot;image/png&quot;,
+  &quot;maxBytes&quot;: 48213,
+  &quot;expiresAtUnixMs&quot;: 1760000000000,
+  &quot;_requestId&quot;: &quot;…&quot;
+}</code></pre>
+<p><code>maxBytes</code> is the declared <code>sizeBytes</code> the grant is bound to. The upload must not
+exceed it.</p>
+<h3 id="uploading"><a class="anchor" href="#uploading" aria-hidden="true" tabindex="-1">#</a>Uploading</h3>
+<p><code>PUT</code> the raw image bytes with a <code>Content-Type</code> header that matches the grant&#39;s
+<code>contentType</code>. There is no multipart form and no API key. The server checks, in
+order:</p>
+<ol>
+<li>the grant&#39;s signature, project and expiry (<code>401</code>, <code>410</code>);</li>
+<li>the declared <code>Content-Length</code> and the bytes actually read (<code>413</code>);</li>
+<li>the declared <code>Content-Type</code> against the grant and the purpose&#39;s allowed types (<code>415</code>);</li>
+<li>the sniffed format from the first bytes, which must match the declared type (<code>415</code>);</li>
+<li>the image dimensions against <code>maxWidth</code> / <code>maxHeight</code> (<code>422</code>);</li>
+<li>the SHA-256 of the bytes against the grant (<code>422</code>);</li>
+<li>the project quota, if one is set (<code>413</code>);</li>
+<li>only then, the grant is consumed (<code>409</code> if already used), the bytes are stored, and the object row is written.</li>
+</ol>
+<p>A rejected upload (steps 2–7) does <strong>not</strong> consume the grant, so the client can
+retry with corrected bytes until the grant expires. A successful upload consumes
+it.</p>
+<p>Response <code>201</code>:</p>
+<pre><code class="language-json">{
+  &quot;ok&quot;: true,
+  &quot;mediaId&quot;: &quot;…&quot;,
+  &quot;sha256&quot;: &quot;…&quot;,
+  &quot;contentType&quot;: &quot;image/png&quot;,
+  &quot;sizeBytes&quot;: 48213,
+  &quot;width&quot;: 256,
+  &quot;height&quot;: 256,
+  &quot;visibility&quot;: &quot;private&quot;,
+  &quot;expiresAtUnixMs&quot;: 1767000000000,
+  &quot;_requestId&quot;: &quot;…&quot;
+}</code></pre>
+<h3 id="reading"><a class="anchor" href="#reading" aria-hidden="true" tabindex="-1">#</a>Reading</h3>
+<p><code>GET</code> and <code>HEAD</code> return the same headers: <code>Content-Type</code>, <code>Content-Length</code> (from the
+stored record), <code>ETag</code> (the SHA-256), <code>X-Content-Type-Options: nosniff</code> and
+<code>Content-Security-Policy: sandbox</code>. <code>HEAD</code> never opens the blob and sends no body.
+<code>GET</code> streams the blob. Public objects send <code>Cache-Control: public, max-age=3600</code>;
+private objects send <code>private, no-store</code>.</p>
+<p>The API key is read from the <code>x-api-key</code> header only. A <code>?apiKey=</code> query value is
+ignored, because query strings end up in proxy and browser logs. A private object
+read with a key in the query string returns <code>404 MEDIA_NOT_FOUND</code>.</p>
+<ul>
+<li><code>public</code> visibility: anyone with the URL can read.</li>
+<li><code>private</code> visibility: only a secret-key caller can read. Other callers get
+<code>404 MEDIA_NOT_FOUND</code>, the same as an unknown id.</li>
+</ul>
+<h2 id="policy"><a class="anchor" href="#policy" aria-hidden="true" tabindex="-1">#</a>Policy</h2>
+<p>Each project has a <code>media</code> object. Each <strong>purpose</strong> is an entry in
+<code>media.purposes</code>, keyed by its name.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>enabled</code> (root)</td>
+<td><code>false</code></td>
+<td>Media on for the project</td>
+</tr>
+<tr>
+<td><code>purposes.&lt;name&gt;.enabled</code></td>
+<td><code>false</code></td>
+<td>Purpose on</td>
+</tr>
+<tr>
+<td><code>allowClientSelfGrant</code></td>
+<td><code>false</code></td>
+<td>Game clients (public key) may request grants for this purpose</td>
+</tr>
+<tr>
+<td><code>visibility</code></td>
+<td><code>private</code></td>
+<td><code>public</code> or <code>private</code></td>
+</tr>
+<tr>
+<td><code>contentTypes</code></td>
+<td>all of png, jpeg, webp</td>
+<td>Subset of <code>image/png</code>, <code>image/jpeg</code>, <code>image/webp</code></td>
+</tr>
+<tr>
+<td><code>maxBytes</code></td>
+<td><code>media.max_object_bytes</code></td>
+<td>Per-object cap; clamped to the server cap</td>
+</tr>
+<tr>
+<td><code>maxWidth</code>, <code>maxHeight</code></td>
+<td>4096</td>
+<td>Pixel limits (1–16384)</td>
+</tr>
+<tr>
+<td><code>perPlayerPerHour</code></td>
+<td>30</td>
+<td>Grants a player may be issued per purpose per hour</td>
+</tr>
+<tr>
+<td><code>projectQuotaBytes</code></td>
+<td>0 (unlimited)</td>
+<td>Total stored bytes for the purpose. Must be above 0 when <code>allowClientSelfGrant</code> is on (see Quota)</td>
+</tr>
+<tr>
+<td><code>retentionDays</code></td>
+<td>30</td>
+<td>Object lifetime, 1–3650 days</td>
+</tr>
+</tbody></table>
+<h3 id="who-may-mint-a-grant"><a class="anchor" href="#who-may-mint-a-grant" aria-hidden="true" tabindex="-1">#</a>Who may mint a grant</h3>
+<ul>
+<li><strong>Secret key</strong> (server side): allowed for any enabled purpose.</li>
+<li><strong>Public key</strong> (game client): refused with <code>403 MEDIA_GRANT_FORBIDDEN</code> unless
+the purpose sets <code>allowClientSelfGrant</code>. The default refusal happens before
+any identity lookup. A client grant also needs a verified player identity: a
+valid session token or s&amp;box token. Without one the request gets <code>401</code>.</li>
+</ul>
+<h3 id="rate-limiting"><a class="anchor" href="#rate-limiting" aria-hidden="true" tabindex="-1">#</a>Rate limiting</h3>
+<p>Each minted grant counts toward <code>perPlayerPerHour</code> for the player it is issued
+to, per purpose, over a rolling hour. Exceeding it returns <code>429 MEDIA_RATE_LIMITED</code>.
+Grants count whether or not they are later used. The count and the insert run in one
+transaction (a per-owner lock on PostgreSQL, the write lock on SQLite), so parallel
+grant requests cannot exceed the limit.</p>
+<h3 id="quota"><a class="anchor" href="#quota" aria-hidden="true" tabindex="-1">#</a>Quota</h3>
+<p><code>projectQuotaBytes</code> is checked before the upload is stored. Only objects that have not
+expired count toward the total. The check and the insert are not atomic, so concurrent
+uploads near the limit can overshoot by up to one object per concurrent request.</p>
+<p>A purpose with <code>allowClientSelfGrant</code> on must set <code>projectQuotaBytes</code> above 0. Saving
+project settings that enable client self-grant with no quota (0 or unlimited) is
+refused with a validation message, so a public key cannot fill the project without a
+bound.</p>
+<h2 id="limits-and-sizes"><a class="anchor" href="#limits-and-sizes" aria-hidden="true" tabindex="-1">#</a>Limits and sizes</h2>
+<ul>
+<li>Grants expire <strong>120 seconds</strong> after issue.</li>
+<li>The upload route applies <code>media.max_object_bytes</code> as its request body limit.
+A body larger than the server cap is refused by the generic body limit with
+<code>413</code> before the media checks run. This is also true for a project where media
+is disabled: the body limit can answer before the not-found response. This is
+deliberate; the global limits are not changed for media.</li>
+<li>Objects are stored and served as the exact bytes uploaded. Nothing is re-encoded,
+and embedded metadata (for example EXIF camera or location fields in a JPEG) is kept
+and served as uploaded. Metadata stripping is deferred; until it ships, uploads can
+carry that metadata to every reader.</li>
+</ul>
+<h2 id="errors"><a class="anchor" href="#errors" aria-hidden="true" tabindex="-1">#</a>Errors</h2>
+<p>Errors use the standard envelope:</p>
+<pre><code class="language-json">{
+  &quot;ok&quot;: false,
+  &quot;status&quot;: 409,
+  &quot;error&quot;: { &quot;code&quot;: &quot;GRANT_USED&quot;, &quot;message&quot;: &quot;…&quot;, &quot;requestId&quot;: &quot;…&quot;, &quot;docsUrl&quot;: &quot;https://sboxcool.com/wiki/network-storage-v3/media&quot; },
+  &quot;message&quot;: &quot;…&quot;,
+  &quot;_requestId&quot;: &quot;…&quot;
+}</code></pre>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Code</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>400</td>
+<td><code>MEDIA_INVALID_REQUEST</code></td>
+<td>Missing or malformed fields; <code>forSteamId</code> missing for a secret-key grant</td>
+</tr>
+<tr>
+<td>401</td>
+<td><code>GRANT_INVALID</code></td>
+<td>Token not signed by this server, or wrong project</td>
+</tr>
+<tr>
+<td>401</td>
+<td><code>UNAUTHORIZED</code></td>
+<td>Missing or invalid API key on a grant request</td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>MEDIA_PURPOSE_DISABLED</code></td>
+<td>Purpose not enabled</td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>MEDIA_GRANT_FORBIDDEN</code></td>
+<td>Public-key self-grant without <code>allowClientSelfGrant</code></td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>PROJECT_DISABLED</code></td>
+<td>Project disabled; returned by the grant, upload, and read routes</td>
+</tr>
+<tr>
+<td>404</td>
+<td><code>NOT_FOUND</code></td>
+<td>Media disabled, or unknown project (the standard unrecognized-route answer)</td>
+</tr>
+<tr>
+<td>404</td>
+<td><code>MEDIA_NOT_FOUND</code></td>
+<td>Unknown or unreadable object</td>
+</tr>
+<tr>
+<td>409</td>
+<td><code>GRANT_USED</code></td>
+<td>Grant already consumed</td>
+</tr>
+<tr>
+<td>410</td>
+<td><code>GRANT_EXPIRED</code></td>
+<td>Grant past its 120-second lifetime</td>
+</tr>
+<tr>
+<td>413</td>
+<td><code>MEDIA_TOO_LARGE</code></td>
+<td>Body larger than the grant&#39;s <code>sizeBytes</code></td>
+</tr>
+<tr>
+<td>413</td>
+<td><code>MEDIA_QUOTA_EXCEEDED</code></td>
+<td>Purpose quota would be exceeded</td>
+</tr>
+<tr>
+<td>415</td>
+<td><code>MEDIA_TYPE_MISMATCH</code></td>
+<td>Declared or sniffed type not allowed or not matching</td>
+</tr>
+<tr>
+<td>422</td>
+<td><code>MEDIA_INVALID_IMAGE</code></td>
+<td>Magic bytes do not match the declared type, or the header dimensions cannot be read. The image is not decoded</td>
+</tr>
+<tr>
+<td>422</td>
+<td><code>MEDIA_DIMENSIONS_EXCEEDED</code></td>
+<td>Width or height over the purpose limit</td>
+</tr>
+<tr>
+<td>422</td>
+<td><code>MEDIA_HASH_MISMATCH</code></td>
+<td>SHA-256 of the bytes differs from the grant</td>
+</tr>
+<tr>
+<td>429</td>
+<td><code>MEDIA_RATE_LIMITED</code></td>
+<td>Per-player hourly grant limit reached</td>
+</tr>
+</tbody></table>
+<h2 id="storage-backends"><a class="anchor" href="#storage-backends" aria-hidden="true" tabindex="-1">#</a>Storage backends</h2>
+<p>Metadata (object rows, grants) lives in the relational store (SQLite or
+PostgreSQL). Bytes live in a blob backend chosen by <code>media.backend</code>:</p>
+<ul>
+<li><strong><code>local</code></strong> (default): files at <code>{media.local_dir}/{projectId}/{sha256}</code>. Empty
+<code>media.local_dir</code> uses <code>media/</code> under the data folder. Writes go to a temporary
+file and are moved into place.</li>
+<li><strong><code>s3</code></strong>: objects at <code>media/{projectId}/{sha256}</code> in <code>media.s3.bucket</code>, using
+<code>media.s3.endpoint</code> (empty for AWS), <code>media.s3.region</code>, and optional path-style
+addressing for most self-hosted S3-compatible stores.</li>
+</ul>
+<p>Objects are content-addressed by SHA-256 within each project. Two uploads of the
+same bytes share one blob file; each upload still gets its own object row.</p>
+<h2 id="retention-and-deletion"><a class="anchor" href="#retention-and-deletion" aria-hidden="true" tabindex="-1">#</a>Retention and deletion</h2>
+<p><strong>Not implemented yet.</strong> <code>retentionDays</code> is recorded on each object as
+<code>expiresAtUnixMs</code>. Expiry is enforced at read time: after that time <code>GET</code> and <code>HEAD</code>
+return <code>404 MEDIA_NOT_FOUND</code>, and expired objects no longer count toward the project
+quota. Neither the object row nor the blob is deleted yet. The M5 sweeper will purge
+them; until it ships, stored bytes grow for as long as the blob backend has room.</p>
+<h2 id="backups-and-export"><a class="anchor" href="#backups-and-export" aria-hidden="true" tabindex="-1">#</a>Backups and export</h2>
+<p><strong>Deferred.</strong> <code>sbox-ns db backup</code> and <code>sbox-ns export</code> do not include media
+objects or blobs. Media metadata sits in the database, so a database backup
+keeps the object rows, but the bytes in the local media folder or the S3 bucket
+are not in the backup. Back up the media folder or the bucket separately.
+Export and import of media are not implemented.</p>
+<h2 id="compatibility"><a class="anchor" href="#compatibility" aria-hidden="true" tabindex="-1">#</a>Compatibility</h2>
+<p>Media is additive and off by default. No existing route or response changes for
+projects that do not enable it. Only the server&#39;s capability list gains <code>media</code>.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/3fe5c5971308791a04b7d96ffe86d758cf1ba784/docs/media.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/media.md</a> at <code>v0.5.5</code> (3fe5c59).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.5 (<code>0.5.5</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/3fe5c5971308791a04b7d96ffe86d758cf1ba784" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.5</code> (<code>3fe5c59</code>). <strong>Library:</strong> main source (9b6ec5d) (<code>source-9b6ec5d</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/9b6ec5d41d99afd1756293d958be1f1330aa73b7" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>9b6ec5d41d99afd1756293d958be1f1330aa73b7</code> (<code>9b6ec5d</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.5/source-9b6ec5d/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.5/source-9b6ec5d/api/">HTTP API</a><a href="/docs/versions/0.5.5/source-9b6ec5d/library/api/">C# API</a><a href="/docs/versions/0.5.5/source-9b6ec5d/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

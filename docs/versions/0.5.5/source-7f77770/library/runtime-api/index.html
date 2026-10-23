@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Runtime guide | Network Storage docs</title>
+  <meta name="description" content="Endpoint calls, game values, encrypted requests and key pinning, compatibility status and helpers.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.1.0/source-7f77770/library/runtime-api/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Runtime guide | Network Storage docs">
+  <meta property="og:description" content="Endpoint calls, game values, encrypted requests and key pinning, compatibility status and helpers.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.1.0/source-7f77770/library/runtime-api/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.5/source-7f77770/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.5/source-7f77770/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.5 · main source (7f77770)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-7f77770/library/runtime-api/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-7f77770/library/runtime-api/">0.5.4</option><option value="/docs/versions/0.5.3/source-7f77770/library/runtime-api/">0.5.3</option><option value="/docs/versions/0.5.2/source-7f77770/library/runtime-api/">0.5.2</option><option value="/docs/versions/0.5.1/source-7f77770/library/runtime-api/">0.5.1</option><option value="/docs/versions/0.5.0/source-7f77770/library/runtime-api/">0.5.0</option><option value="/docs/versions/0.4.0/source-7f77770/library/runtime-api/">0.4.0</option><option value="/docs/versions/0.3.0/source-7f77770/library/runtime-api/">0.3.0</option><option value="/docs/versions/0.2.0/source-7f77770/library/runtime-api/">0.2.0</option><option value="/docs/versions/0.1.0/source-7f77770/library/runtime-api/">0.1.0</option><option value="/docs/versions/0.5.5/source-7f77770/library/runtime-api/" selected>0.5.5</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-13f51a8">1.1.0 source (13f51a8) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-d369d1b">Legacy source (d369d1b) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-fc58d4e">main source (fc58d4e) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-5369108">main source (5369108) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-9c4a235">main source (9c4a235) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-9b6ec5d">main source (9b6ec5d) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-ddf9b61">main source (ddf9b61) (page unavailable)</option><option value="/docs/versions/0.5.5/source-7f77770/library/runtime-api/" selected>main source (7f77770)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-7f77770/library/runtime-api/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-7f77770/library/runtime-api/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-7f77770/library/runtime-api/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-7f77770/library/runtime-api/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-7f77770/library/runtime-api/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-7f77770/library/runtime-api/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-7f77770/library/runtime-api/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-7f77770/library/runtime-api/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-7f77770/library/runtime-api/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-7f77770/library/runtime-api/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-7f77770/library/runtime-api/">Server: 0.5.5</a></li><li><a href="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-13f51a8">Library: 1.1.0 source (13f51a8) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-d369d1b">Library: Legacy source (d369d1b) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-fc58d4e">Library: main source (fc58d4e) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-5369108">Library: main source (5369108) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-9c4a235">Library: main source (9c4a235) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-9b6ec5d">Library: main source (9b6ec5d) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fruntime-api&amp;server=0.5.5&amp;library=source-ddf9b61">Library: main source (ddf9b61) (page unavailable)</a></li><li><a href="/docs/versions/0.5.5/source-7f77770/library/runtime-api/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.5/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.5/source-7f77770/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.5/source-7f77770/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.5/source-7f77770/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.5/source-7f77770/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.5/source-7f77770/library/overview/">Library overview</a><a href="/docs/versions/0.5.5/source-7f77770/library/getting-started/">Install and configure</a><a href="/docs/versions/0.5.5/source-7f77770/library/runtime-api/" aria-current="page">Runtime guide</a><a href="/docs/versions/0.5.5/source-7f77770/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.5.5/source-7f77770/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.5/source-7f77770/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.5/source-7f77770/library/examples/">Examples</a><a href="/docs/versions/0.5.5/source-7f77770/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.5.5/source-7f77770/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.5/source-7f77770/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.5/source-7f77770/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.5/source-7f77770/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.5/source-7f77770/server/configuration/">Configuration</a><a href="/docs/versions/0.5.5/source-7f77770/server/database/">Databases</a><a href="/docs/versions/0.5.5/source-7f77770/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.5/source-7f77770/server/media/">Media uploads</a><a href="/docs/versions/0.5.5/source-7f77770/server/game-logs/">Game logs</a><a href="/docs/versions/0.5.5/source-7f77770/server/export/">Export and move projects</a><a href="/docs/versions/0.5.5/source-7f77770/server/modules/">Modules</a><a href="/docs/versions/0.5.5/source-7f77770/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.5/source-7f77770/server/alerting/">Alerting</a><a href="/docs/versions/0.5.5/source-7f77770/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.5/source-7f77770/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.5/source-7f77770/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.5/source-7f77770/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.5/source-7f77770/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.5/source-7f77770/">Docs</a><span aria-hidden="true">/</span><span>Game library</span><span aria-hidden="true">/</span><span aria-current="page">Runtime guide</span></nav>
+  <article class="prose docs-prose">
+<h1>Runtime guide</h1>
+<p class="lead">Endpoint calls, game values, encrypted requests and key pinning, compatibility status and helpers.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#calling-the-server">Calling the server</a><a href="#game-values">Game values</a><a href="#encrypted-requests">Encrypted requests</a><a href="#server-compatibility-status">Server compatibility status</a><a href="#helpers">Helpers</a></nav>
+<p>Everything game code calls. The generated per-member reference is at
+<a href="https://sboxns.com/docs/library/api/">sboxns.com/docs/library/api</a>; copyable patterns are in
+<a href="https://github.com/sbox-cool/sbox-network-storage/blob/7f77770c81dd6ab84facfa05e9a87010b6f27983/Examples/" target="_blank" rel="noopener">Examples/</a>.</p>
+<h2 id="calling-the-server"><a class="anchor" href="#calling-the-server" aria-hidden="true" tabindex="-1">#</a>Calling the server</h2>
+<pre><code class="language-csharp">if ( !NetworkStorage.IsConfigured )
+    NetworkStorage.Configure( &quot;your_project_id&quot;, &quot;sbox_ns_your_public_key&quot; );
+
+// Endpoint without input (GET; POST when encrypted requests are required)
+var player = await NetworkStorage.CallEndpoint( &quot;load-player&quot; );
+
+// Endpoint with input (POST)
+var result = await NetworkStorage.CallEndpoint( &quot;mine-ore&quot;, new { ore_id = &quot;iron&quot;, kg = 5.0f } );
+
+// Endpoint URLs copied from the dashboard work too; the slug is extracted.
+await NetworkStorage.CallEndpoint(
+    &quot;https://api.sboxcool.com/v3/endpoints/your_project_id/mine-ore?apiKey=sbox_ns_your_public_key&quot;,
+    new { ore_id = &quot;iron&quot;, kg = 5.0f } );
+
+// Documents (dedicated servers attach +network_storage_secret_key automatically)
+await NetworkStorage.SaveDocument( &quot;player-data&quot;, Game.SteamId.ToString(), new { level = 2, xp = 100 } );
+await NetworkStorage.UpdateDocument( &quot;player-data&quot;, Game.SteamId.ToString(),
+    NetworkStorageOperation.Increment( &quot;xp&quot;, 50, source: &quot;server&quot;, reason: &quot;quest&quot; ),
+    NetworkStorageOperation.Set( &quot;lastSeen&quot;, DateTimeOffset.UtcNow.ToUnixTimeSeconds() ) );
+await NetworkStorage.DeleteDocument( &quot;player-data&quot;, Game.SteamId.ToString() );
+
+if ( result.HasValue )
+{
+    var currency = result.Value.Int( &quot;currency&quot;, 0 );
+}</code></pre>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Configure(projectId, apiKey, ...)</code></td>
+<td>Set credentials once at startup. See <a href="/docs/versions/0.5.5/source-7f77770/library/getting-started/#configure">getting started</a>.</td>
+</tr>
+<tr>
+<td><code>IsConfigured</code> / <code>ApiRoot</code></td>
+<td>Whether <code>Configure</code> ran; the full API URL (<code>.../v3</code>, or <code>.../api</code> with <code>apiVersion</code> <code>api</code>).</td>
+</tr>
+<tr>
+<td><code>CallEndpoint(slugOrUrl, input?)</code></td>
+<td>Call an endpoint by slug or dashboard URL. Returns <code>JsonElement?</code>.</td>
+</tr>
+<tr>
+<td><code>TryGetLastEndpointError(...)</code></td>
+<td>The last error code and message for a call (endpoint slug, <code>storage</code> or <code>game-values</code>).</td>
+</tr>
+<tr>
+<td><code>GetGameValues()</code></td>
+<td>All game value groups and tables in one request.</td>
+</tr>
+<tr>
+<td><code>GetDocument(collectionId, documentId?)</code></td>
+<td>Read a document; defaults to the current player&#39;s Steam ID.</td>
+</tr>
+<tr>
+<td><code>SaveDocument</code> / <code>UpdateDocument</code> / <code>DeleteDocument</code></td>
+<td>Replace a document, apply <code>set</code>/<code>inc</code>/<code>push</code>/<code>pull</code>/<code>remove</code> operations, or delete one row. Public deletes need record deletes enabled on the server.</td>
+</tr>
+<tr>
+<td><code>ListRecords</code> / <code>CreateRecord</code> / <code>RenameRecord</code> / <code>DeleteRecord</code></td>
+<td>Multi-record save slots.</td>
+</tr>
+<tr>
+<td><code>TrackAnalyticsEvent(eventType, payload?)</code></td>
+<td>Custom Player Analytics event; the name must be listed in the project&#39;s analytics settings.</td>
+</tr>
+<tr>
+<td><code>NetworkStorageAnalytics.Warning/Error/SessionStart/SessionEnd</code></td>
+<td>Warnings, caught exceptions and session boundaries on the player timeline.</td>
+</tr>
+<tr>
+<td><code>LibraryVersion</code> / <code>MinServerVersion</code></td>
+<td>Library SemVer (<code>1.2.0</code>) and the oldest supported self-hosted server (<code>0.4.0</code>, metadata only).</td>
+</tr>
+<tr>
+<td><code>ServerVersion</code> / <code>LibraryStatus</code> / <code>OnLibraryStatusChanged</code> / <code>HasCapability(name)</code></td>
+<td>What the server reported; see <a href="#server-compatibility-status">server compatibility</a>.</td>
+</tr>
+</tbody></table>
+<h3 id="retries-and-errors"><a class="anchor" href="#retries-and-errors" aria-hidden="true" tabindex="-1">#</a>Retries and errors</h3>
+<p>Rate-limited calls (HTTP 429) are retried at most twice, with the total wait capped at 5 seconds,
+using the server&#39;s <code>Retry-After</code>. GET requests always retry; other methods only when the server
+marks the response <code>retrySafe</code>. A call that still fails is reported as <code>RATE_LIMITED</code> through
+<code>TryGetLastEndpointError</code>.</p>
+<h3 id="analytics-batching"><a class="anchor" href="#analytics-batching" aria-hidden="true" tabindex="-1">#</a>Analytics batching</h3>
+<p>When the server advertises <code>analytics-batch</code>, events are queued and sent together (up to 50 events
+or 256 KiB per request; the first event waits at most 2 seconds). Servers without the capability
+get one request per event. Rejected events, events over 32 KiB and events beyond the 500-event
+queue are counted in a <code>[NetworkStorage] Dropped N analytics event(s)</code> warning, at most once every
+30 seconds. An abrupt process exit can lose in-flight events.</p>
+<h2 id="game-values"><a class="anchor" href="#game-values" aria-hidden="true" tabindex="-1">#</a>Game values</h2>
+<p>Shared numbers the game and server both read: tuning constants, named groups and typed tables.
+Author them in the server&#39;s owner console or over its API; see the server&#39;s
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/main/docs/game-values.md" target="_blank" rel="noopener">game values guide</a>
+for revisions, snapshots and a worked anti-exploit example.</p>
+<pre><code class="language-csharp">var gv = (await NetworkStorage.GetGameValues()).Value;
+var combat = gv.GetProperty( &quot;groups&quot; ).GetProperty( &quot;combat&quot; ).GetProperty( &quot;values&quot; );
+int zombieHp = combat.Int( &quot;zombie_hp_per_level&quot; ) * zombieLevel;
+var weapons = gv.GetProperty( &quot;tables&quot; ).GetProperty( &quot;weapons&quot; )
+    .ReadList( &quot;rows&quot;, r =&gt; (Id: r.Str( &quot;weapon_id&quot; ), Damage: r.Int( &quot;damage&quot; ), Model: r.Str( &quot;model&quot; )) );</code></pre>
+<p><code>GetGameValues()</code> is one <code>GET {ApiRoot}/values/{projectId}</code>. The library keeps no offline copy:
+load once at startup and look up locally afterwards. Game code cannot write game values. Endpoints
+read the same numbers with <code>{{values.combat.zombie_hp_per_level}}</code> and <code>lookup</code> steps with
+<code>source: values</code>.</p>
+<p>A build keeps its published snapshot only when the project has an explicit revision policy and
+its revision is retained inside the support window; otherwise it reads live values.</p>
+<p><code>GetGameValues</code> is a public, unsigned GET outside the endpoint path: neither the encryption pin
+nor a refused config covers it, and a proxy can read or change it. Do not put secrets in game
+values.</p>
+<h2 id="encrypted-requests"><a class="anchor" href="#encrypted-requests" aria-hidden="true" tabindex="-1">#</a>Encrypted requests</h2>
+<p>The server owner picks the mode (<code>off</code>, <code>v1</code>, <code>v2-preferred</code>, <code>v2-required</code>) and the game follows
+the server&#39;s signed security config. v2 seals each request to a server-generated key that can
+rotate without a game update.</p>
+<ul>
+<li>With encryption required, a call without input is still sent as an encrypted POST. The host&#39;s
+<code>CallEndpointAs</code> path builds no envelope, so a no-input call on behalf of another player is
+refused locally with <code>ENCRYPTION_REQUIRES_POST</code>.</li>
+<li><strong>Pin the signing key</strong> so a proxy or swapped config cannot substitute its own: pass
+<code>securityKeyFingerprint</code> as the seventh <code>Configure</code> argument, or enter it in the Setup window.
+Copy it from <code>sbox-ns security status</code> (&quot;Security signing key&quot;); spaces, colons and case are
+ignored. With a pin, endpoint calls are refused with <code>ENCRYPTION_KEY_UNVERIFIED</code> until a config
+signed by that key loads.</li>
+<li><strong>Without a pin</strong>, the first signing key seen per API root is trusted and saved in the game&#39;s
+data folder (<code>network-storage-signing-key-trust.json</code>). A later change warns and is refused with
+<code>ENCRYPTION_SIGNING_KEY_CHANGED</code>; the last trusted config is kept. Verify the server out of band
+before setting a new pin or resetting the trust store. Unpinned games that never receive a
+trusted config stay on v1.</li>
+<li>A config that fails verification refuses every endpoint call, plain or encrypted. Calling
+<code>Configure</code> with a different pin, base URL, API version or project drops the held config and
+verifies again.</li>
+</ul>
+<h2 id="server-compatibility-status"><a class="anchor" href="#server-compatibility-status" aria-hidden="true" tabindex="-1">#</a>Server compatibility status</h2>
+<p>The library reads <code>x-ns-server-version</code> and <code>x-ns-library-status</code> from responses and
+<code>capabilities</code> from <code>/v3/server-info</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ServerVersion</code></td>
+<td>Last version the server reported, or <code>null</code>.</td>
+</tr>
+<tr>
+<td><code>LibraryStatus</code></td>
+<td><code>supported</code>, <code>outdated</code>, <code>deprecated</code>, <code>unsupported</code>, <code>blocked</code> or <code>unknown</code>.</td>
+</tr>
+<tr>
+<td><code>OnLibraryStatusChanged</code></td>
+<td>Raised when the status changes. No player-facing UI is shown.</td>
+</tr>
+<tr>
+<td><code>HasCapability(name)</code></td>
+<td><code>true</code> unless the server lists capabilities and the name is missing.</td>
+</tr>
+</tbody></table>
+<p>A <code>426 LIBRARY_UNSUPPORTED</code> or <code>LIBRARY_BLOCKED</code> response is surfaced through
+<code>TryGetLastEndpointError</code> and logged once. In the editor, Setup and the Sync Tool show a banner for
+<code>outdated</code>/<code>unknown</code> (or a newer published revision), a once-per-session dialog for <code>deprecated</code>,
+and refuse <strong>Push All</strong> for <code>unsupported</code>/<code>blocked</code>; Pull and Test Live keep working. Nothing here
+runs in play mode or published games.</p>
+<p>Runtime, Sync Tool and Python sync requests send <code>x-ns-library-version</code>. Editor tools also send
+<code>x-ns-client-type: editor</code> and, when the installed <code>.version</code> has a positive revision,
+<code>x-ns-library-revision</code>. Runtime never reads <code>.version</code>. These headers are self-reported
+diagnostics, not authentication.</p>
+<h2 id="helpers"><a class="anchor" href="#helpers" aria-hidden="true" tabindex="-1">#</a>Helpers</h2>
+<h3 id="json"><a class="anchor" href="#json" aria-hidden="true" tabindex="-1">#</a>JSON</h3>
+<pre><code class="language-csharp">var name   = data.Str( &quot;playerName&quot;, &quot;Unknown&quot; );   // JsonHelpers.GetString( data, ... )
+var level  = data.Int( &quot;level&quot;, 1 );                // missing keys and &quot;5&quot; strings handled
+var speed  = data.Float( &quot;speed&quot;, 1.0f );
+var active = JsonHelpers.GetBool( data, &quot;active&quot;, true );
+var upgrades = data.ReadStringList( &quot;purchasedUpgrades&quot; );
+var ores     = data.ReadDictionary( &quot;ores&quot;, v =&gt; (float)v.GetDouble() );
+var items    = data.ReadList( &quot;rows&quot;, row =&gt; new ItemInfo( row.Str( &quot;id&quot; ), row.Str( &quot;name&quot; ), row.Int( &quot;tier&quot; ) ) );</code></pre>
+<h3 id="savestatetracker"><a class="anchor" href="#savestatetracker" aria-hidden="true" tabindex="-1">#</a>SaveStateTracker</h3>
+<p>Wraps endpoint calls with state for HUD feedback:</p>
+<pre><code class="language-csharp">var tracker = new SaveStateTracker();
+var result = await tracker.Call( &quot;mine-ore&quot;, new { ore_id = &quot;iron&quot;, kg = 5 } ); // State: Saved or Error; IsBusy while in flight
+
+await tracker.CallAndApply( &quot;sell-ore&quot;, input,
+    applyOptimistic: () =&gt; { /* update local state */ },
+    applyServer: data =&gt; { /* apply authoritative response */ },
+    revert: () =&gt; { /* undo on failure */ } );</code></pre>
+<h3 id="netlog"><a class="anchor" href="#netlog" aria-hidden="true" tabindex="-1">#</a>NetLog</h3>
+<p>Ring buffer of every Network Storage request, response and error, for debug panels:</p>
+<pre><code class="language-csharp">foreach ( var entry in NetLog.Entries ) { /* entry.Time, entry.Kind, entry.Tag, entry.Message */ }
+NetLog.Info( &quot;my-system&quot;, &quot;Custom log message&quot; );
+var version = NetLog.Version; // increments on every add or clear</code></pre>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage/blob/7f77770c81dd6ab84facfa05e9a87010b6f27983/docs/runtime-api.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage/docs/runtime-api.md</a> at <code>7f77770c81dd6ab84facfa05e9a87010b6f27983</code> (7f77770).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.5 (<code>0.5.5</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/3fe5c5971308791a04b7d96ffe86d758cf1ba784" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.5</code> (<code>3fe5c59</code>). <strong>Library:</strong> main source (7f77770) (<code>source-7f77770</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/7f77770c81dd6ab84facfa05e9a87010b6f27983" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>7f77770c81dd6ab84facfa05e9a87010b6f27983</code> (<code>7f77770</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.5/source-7f77770/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.5/source-7f77770/api/">HTTP API</a><a href="/docs/versions/0.5.5/source-7f77770/library/api/">C# API</a><a href="/docs/versions/0.5.5/source-7f77770/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

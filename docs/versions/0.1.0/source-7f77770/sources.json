@@ -1,0 +1,12 @@
+{
+  "server": {
+    "repo": "sbox-cool/sbox-network-storage-server",
+    "ref": "v0.1.0",
+    "commit": "5aeb8e2268316ece4ca3ce36110d4e8bce599632"
+  },
+  "library": {
+    "repo": "sbox-cool/sbox-network-storage",
+    "ref": "7f77770c81dd6ab84facfa05e9a87010b6f27983",
+    "commit": "7f77770c81dd6ab84facfa05e9a87010b6f27983"
+  }
+}

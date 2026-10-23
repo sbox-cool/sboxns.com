@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alerting | Network Storage docs</title>
+  <meta name="description" content="Email and webhook alerts for errors, updates and certificates.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.1.0/source-13f51a8/server/alerting/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Alerting | Network Storage docs">
+  <meta property="og:description" content="Email and webhook alerts for errors, updates and certificates.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.1.0/source-13f51a8/server/alerting/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.3.0/source-7f77770/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.3.0/source-7f77770/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.3.0 · main source (7f77770)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-7f77770/server/alerting/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-7f77770/server/alerting/">0.5.4</option><option value="/docs/versions/0.5.3/source-7f77770/server/alerting/">0.5.3</option><option value="/docs/versions/0.5.2/source-7f77770/server/alerting/">0.5.2</option><option value="/docs/versions/0.5.1/source-7f77770/server/alerting/">0.5.1</option><option value="/docs/versions/0.5.0/source-7f77770/server/alerting/">0.5.0</option><option value="/docs/versions/0.4.0/source-7f77770/server/alerting/">0.4.0</option><option value="/docs/versions/0.3.0/source-7f77770/server/alerting/" selected>0.3.0</option><option value="/docs/versions/0.2.0/source-7f77770/server/alerting/">0.2.0</option><option value="/docs/versions/0.1.0/source-7f77770/server/alerting/">0.1.0</option><option value="/docs/versions/0.5.5/source-7f77770/server/alerting/">0.5.5</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.3.0/source-13f51a8/server/alerting/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.3.0/source-d369d1b/server/alerting/">Legacy source (d369d1b)</option><option value="/docs/versions/0.3.0/source-fc58d4e/server/alerting/">main source (fc58d4e)</option><option value="/docs/versions/0.3.0/source-5369108/server/alerting/">main source (5369108)</option><option value="/docs/versions/0.3.0/source-9c4a235/server/alerting/">main source (9c4a235)</option><option value="/docs/versions/0.3.0/source-9b6ec5d/server/alerting/">main source (9b6ec5d)</option><option value="/docs/versions/0.3.0/source-ddf9b61/server/alerting/">main source (ddf9b61)</option><option value="/docs/versions/0.3.0/source-7f77770/server/alerting/" selected>main source (7f77770)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-7f77770/server/alerting/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-7f77770/server/alerting/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-7f77770/server/alerting/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-7f77770/server/alerting/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-7f77770/server/alerting/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-7f77770/server/alerting/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-7f77770/server/alerting/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-7f77770/server/alerting/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-7f77770/server/alerting/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-7f77770/server/alerting/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-7f77770/server/alerting/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.3.0/source-13f51a8/server/alerting/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.3.0/source-d369d1b/server/alerting/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.3.0/source-fc58d4e/server/alerting/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.3.0/source-5369108/server/alerting/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.3.0/source-9c4a235/server/alerting/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.3.0/source-9b6ec5d/server/alerting/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.3.0/source-ddf9b61/server/alerting/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.3.0/source-7f77770/server/alerting/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.5/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.3.0/source-7f77770/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.3.0/source-7f77770/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.3.0/source-7f77770/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.3.0/source-7f77770/library/overview/">Library overview</a><a href="/docs/versions/0.3.0/source-7f77770/library/getting-started/">Install and configure</a><a href="/docs/versions/0.3.0/source-7f77770/library/runtime-api/">Runtime guide</a><a href="/docs/versions/0.3.0/source-7f77770/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.3.0/source-7f77770/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.3.0/source-7f77770/library/examples/">Examples</a><a href="/docs/versions/0.3.0/source-7f77770/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.3.0/source-7f77770/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.3.0/source-7f77770/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.3.0/source-7f77770/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.3.0/source-7f77770/server/configuration/">Configuration</a><a href="/docs/versions/0.3.0/source-7f77770/server/database/">Databases</a><a href="/docs/versions/0.3.0/source-7f77770/server/admin-panel/">Owner console</a><a href="/docs/versions/0.3.0/source-7f77770/server/export/">Export and move projects</a><a href="/docs/versions/0.3.0/source-7f77770/server/alerting/" aria-current="page">Alerting</a><a href="/docs/versions/0.3.0/source-7f77770/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.3.0/source-7f77770/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.3.0/source-7f77770/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.3.0/source-7f77770/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Alerting</span></nav>
+  <article class="prose docs-prose">
+<h1>Alerting</h1>
+<p class="lead">Email and webhook alerts for errors, updates and certificates.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#what-triggers-an-alert">What triggers an alert</a><a href="#discord-setup">Discord setup</a><a href="#smtp-setup">SMTP setup</a><a href="#secrets-handling">Secrets handling</a><a href="#checking-the-configuration">Checking the configuration</a></nav>
+<p>sbox-ns can notify operators when it captures errors: Discord channel
+messages via an incoming webhook, and plain-text email via SMTP. Both are
+<strong>disabled by default</strong>, best-effort (a failed send is logged and never fails
+the request that triggered it), and configured entirely through <code>alerts.toml</code>,
+<code>conf.d/</code> overrides, or <code>NS_</code> environment variables.</p>
+<h2 id="what-triggers-an-alert"><a class="anchor" href="#what-triggers-an-alert" aria-hidden="true" tabindex="-1">#</a>What triggers an alert</h2>
+<p>Every error that reaches the shared error pipeline fans out to the log plus
+any configured channel:</p>
+<ul>
+<li>Unhandled request exceptions captured for <code>/admin/errors</code> (5xx, plus 503
+database outages).</li>
+<li>Native endpoint-execution shadow failures (<code>EndpointShadowReporter</code>):
+executor exceptions, 5xx results, and 409 data-integrity conflicts
+(<code>SAVE_REGRESSION_BLOCKED</code> / <code>STALE_SAVE</code>). Repeated identical conflicts
+are throttled so a looping autosave cannot flood the channel.</li>
+<li>Compatibility-proxy captures (<code>ProxyErrorReporter</code>) and handler-caught
+exceptions reported via <code>HandlerErrorReporter</code>.</li>
+<li>Data-plane storage errors (<code>INetworkStorageErrorAlertSink</code>), e.g.
+unconfirmed saves.</li>
+</ul>
+<p>Each alert carries the correlation ID, route, classification, project, and
+timestamp so it can be matched against <code>/admin/errors</code> entries and logs.</p>
+<h2 id="discord-setup"><a class="anchor" href="#discord-setup" aria-hidden="true" tabindex="-1">#</a>Discord setup</h2>
+<ol>
+<li>In the Discord channel: <strong>Edit Channel → Integrations → Webhooks →
+New Webhook</strong>, copy the webhook URL.</li>
+<li>Store the URL in a secret file (recommended) or directly in config:</li>
+</ol>
+<pre><code class="language-toml"># alerts.toml
+[alerts.discord]
+enabled = true
+webhook_url_file = &quot;secrets/discord_webhook_url&quot;
+username = &quot;sbox-ns&quot;</code></pre>
+<p>or with environment variables:</p>
+<pre><code class="language-sh">NS_ALERTS__DISCORD__ENABLED=true
+NS_ALERTS__DISCORD__WEBHOOK_URL_FILE=/run/secrets/discord_webhook</code></pre>
+<p><code>webhook_url</code> and <code>webhook_url_file</code> are mutually exclusive; setting both is
+a validation error. Relative <code>*_file</code> paths resolve against the config
+folder. The message is a single embed (title, description, route / status /
+classification / correlation ID / project fields).</p>
+<h2 id="smtp-setup"><a class="anchor" href="#smtp-setup" aria-hidden="true" tabindex="-1">#</a>SMTP setup</h2>
+<pre><code class="language-toml"># alerts.toml
+[alerts.smtp]
+enabled = true
+host = &quot;mail.example.com&quot;
+port = 587
+username = &quot;sbox-ns@example.com&quot;
+password_file = &quot;secrets/smtp_password&quot;
+from = &quot;sbox-ns@example.com&quot;
+to = &quot;ops@example.com, oncall@example.com&quot;
+use_tls = true</code></pre>
+<p><code>password</code> and <code>password_file</code> are mutually exclusive. Empty <code>username</code>
+means no authentication. <code>to</code> accepts comma- or semicolon-separated
+addresses. Mail is plain text with subject
+<code>[sbox-ns] &lt;Classification&gt; &lt;Method&gt; &lt;Path&gt; (&lt;CorrelationId&gt;)</code> and a
+field-list body; delivery uses a 10-second timeout and STARTTLS when
+<code>use_tls</code> is true.</p>
+<h2 id="secrets-handling"><a class="anchor" href="#secrets-handling" aria-hidden="true" tabindex="-1">#</a>Secrets handling</h2>
+<ul>
+<li><code>alerts.discord.webhook_url</code> and <code>alerts.smtp.password</code> are flagged
+secret: <code>sbox-ns config show</code> prints <code>&quot;********&quot;</code> unless <code>--show-secrets</code>
+is passed, and the values never appear in logs or alert payloads.</li>
+<li>Prefer <code>*_file</code> so secrets live outside the TOML files (same pattern as
+<code>database.postgres.password_file</code>). The first line of the file is used.</li>
+</ul>
+<h2 id="checking-the-configuration"><a class="anchor" href="#checking-the-configuration" aria-hidden="true" tabindex="-1">#</a>Checking the configuration</h2>
+<pre><code class="language-sh">sbox-ns config validate                 # parse + combination checks with file:line
+sbox-ns config show                     # merged effective config, secrets redacted
+sbox-ns config set alerts.discord.enabled true
+sbox-ns config get alerts.smtp.host</code></pre>
+<p><code>config set</code>/<code>get</code> work for every <code>alerts.*</code> key through the generic
+mechanism — no special subcommands exist. There is no dry-run send command;
+to verify delivery, enable a channel and trigger a real capture (for
+example an invalid request against a test project), then confirm the
+correlation ID matches between the Discord/email alert, the server log,
+and <code>/admin/errors</code>.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/52397881b1c9f50ab651efc87a4ba94e4e2f9a62/docs/alerting.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/alerting.md</a> at <code>v0.3.0</code> (5239788).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.3.0 (<code>0.3.0</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/52397881b1c9f50ab651efc87a4ba94e4e2f9a62" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.3.0</code> (<code>5239788</code>). <strong>Library:</strong> main source (7f77770) (<code>source-7f77770</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/7f77770c81dd6ab84facfa05e9a87010b6f27983" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>7f77770c81dd6ab84facfa05e9a87010b6f27983</code> (<code>7f77770</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.3.0/source-7f77770/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.3.0/source-7f77770/api/">HTTP API</a><a href="/docs/versions/0.3.0/source-7f77770/library/api/">C# API</a><a href="/docs/versions/0.3.0/source-7f77770/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

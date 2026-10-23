@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-23T01:27:29.892Z",
+  "updatedAt": "2026-10-23T07:14:57.171Z",
   "validationRequest": {
     "serverRef": "v0.5.5",
     "serverCommit": "3fe5c5971308791a04b7d96ffe86d758cf1ba784",
@@ -11,13 +11,13 @@
     "repo": "sbox-cool/sbox-network-storage",
     "branch": "main",
     "head": {
-      "commit": "ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750",
-      "committedAt": "2026-10-20T02:07:28Z",
-      "observedAt": "2026-10-23T01:27:29.892Z"
+      "commit": "7f77770c81dd6ab84facfa05e9a87010b6f27983",
+      "committedAt": "2026-10-23T06:15:28Z",
+      "observedAt": "2026-10-23T07:14:57.171Z"
     },
     "candidate": {
-      "id": "source-ddf9b61",
-      "commit": "ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750"
+      "id": "source-7f77770",
+      "commit": "7f77770c81dd6ab84facfa05e9a87010b6f27983"
     }
   },
   "server": {
@@ -131,6 +131,12 @@
     {
       "library": "source-ddf9b61",
       "commit": "ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750",
+      "status": "unmapped",
+      "revision": null
+    },
+    {
+      "library": "source-7f77770",
+      "commit": "7f77770c81dd6ab84facfa05e9a87010b6f27983",
       "status": "pending",
       "revision": null
     }

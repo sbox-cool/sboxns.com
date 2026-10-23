@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Configuration | Network Storage docs</title>
+  <meta name="description" content="Every server.toml setting and environment variable.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/configuration/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Configuration | Network Storage docs">
+  <meta property="og:description" content="Every server.toml setting and environment variable.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/configuration/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.4.0/source-7f77770/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.4.0/source-7f77770/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.4.0 · main source (7f77770)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-7f77770/server/configuration/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-7f77770/server/configuration/">0.5.4</option><option value="/docs/versions/0.5.3/source-7f77770/server/configuration/">0.5.3</option><option value="/docs/versions/0.5.2/source-7f77770/server/configuration/">0.5.2</option><option value="/docs/versions/0.5.1/source-7f77770/server/configuration/">0.5.1</option><option value="/docs/versions/0.5.0/source-7f77770/server/configuration/">0.5.0</option><option value="/docs/versions/0.4.0/source-7f77770/server/configuration/" selected>0.4.0</option><option value="/docs/versions/0.3.0/source-7f77770/server/configuration/">0.3.0</option><option value="/docs/versions/0.2.0/source-7f77770/server/configuration/">0.2.0</option><option value="/docs/versions/0.1.0/source-7f77770/server/configuration/">0.1.0</option><option value="/docs/versions/0.5.5/source-7f77770/server/configuration/">0.5.5</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.4.0/source-13f51a8/server/configuration/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.4.0/source-d369d1b/server/configuration/">Legacy source (d369d1b)</option><option value="/docs/versions/0.4.0/source-fc58d4e/server/configuration/">main source (fc58d4e)</option><option value="/docs/versions/0.4.0/source-5369108/server/configuration/">main source (5369108)</option><option value="/docs/versions/0.4.0/source-9c4a235/server/configuration/">main source (9c4a235)</option><option value="/docs/versions/0.4.0/source-9b6ec5d/server/configuration/">main source (9b6ec5d)</option><option value="/docs/versions/0.4.0/source-ddf9b61/server/configuration/">main source (ddf9b61)</option><option value="/docs/versions/0.4.0/source-7f77770/server/configuration/" selected>main source (7f77770)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-7f77770/server/configuration/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-7f77770/server/configuration/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-7f77770/server/configuration/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-7f77770/server/configuration/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-7f77770/server/configuration/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-7f77770/server/configuration/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-7f77770/server/configuration/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-7f77770/server/configuration/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-7f77770/server/configuration/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-7f77770/server/configuration/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-7f77770/server/configuration/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.4.0/source-13f51a8/server/configuration/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.4.0/source-d369d1b/server/configuration/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.4.0/source-fc58d4e/server/configuration/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.4.0/source-5369108/server/configuration/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.4.0/source-9c4a235/server/configuration/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.4.0/source-9b6ec5d/server/configuration/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.4.0/source-ddf9b61/server/configuration/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.4.0/source-7f77770/server/configuration/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.5/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.4.0/source-7f77770/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.4.0/source-7f77770/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.4.0/source-7f77770/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.4.0/source-7f77770/library/overview/">Library overview</a><a href="/docs/versions/0.4.0/source-7f77770/library/getting-started/">Install and configure</a><a href="/docs/versions/0.4.0/source-7f77770/library/runtime-api/">Runtime guide</a><a href="/docs/versions/0.4.0/source-7f77770/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.4.0/source-7f77770/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.4.0/source-7f77770/library/examples/">Examples</a><a href="/docs/versions/0.4.0/source-7f77770/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.4.0/source-7f77770/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.4.0/source-7f77770/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.4.0/source-7f77770/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.4.0/source-7f77770/server/configuration/" aria-current="page">Configuration</a><a href="/docs/versions/0.4.0/source-7f77770/server/database/">Databases</a><a href="/docs/versions/0.4.0/source-7f77770/server/admin-panel/">Owner console</a><a href="/docs/versions/0.4.0/source-7f77770/server/export/">Export and move projects</a><a href="/docs/versions/0.4.0/source-7f77770/server/alerting/">Alerting</a><a href="/docs/versions/0.4.0/source-7f77770/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.4.0/source-7f77770/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.4.0/source-7f77770/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.4.0/source-7f77770/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Configuration</span></nav>
+  <article class="prose docs-prose">
+<h1>Configuration</h1>
+<p class="lead">Every server.toml setting and environment variable.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#owner-administration-security">Owner administration security</a><a href="#where-the-files-live">Where the files live</a><a href="#files-and-precedence">Files and precedence</a><a href="#servertoml">server.toml</a><a href="#databasetoml">database.toml</a><a href="#updatestoml">updates.toml</a><a href="#confd">conf.d</a></nav>
+<p>sbox Network Storage Server reads its settings from a folder of commented TOML
+files. <code>sbox-ns setup</code> writes these files for you; this page documents every key
+so you can edit them by hand. Changes apply after a restart
+(<code>sbox-ns service restart</code>, or stop and rerun <code>sbox-ns start</code> in the foreground).</p>
+<h2 id="owner-administration-security"><a class="anchor" href="#owner-administration-security" aria-hidden="true" tabindex="-1">#</a>Owner administration security</h2>
+<p>The owner panel is enabled by default. <code>sbox-ns adminpanel disable</code> writes
+<code>adminpanel.enabled = false</code>; restart the server to deny all owner controller
+endpoints, including setup, login links, login and the dashboard. Game APIs and
+health remain available. Restore with <code>sbox-ns adminpanel enable</code> or
+<code>sbox-ns config set adminpanel.enabled true</code>, then restart. Environment and
+<code>conf.d</code> overrides still take precedence over the file changed by the CLI.</p>
+<p><code>adminpanel.demo_read_only</code> defaults to false. It is only for a dedicated public
+demonstration using an isolated SQLite database: the server seeds fixture data
+and supplies an ephemeral guest dashboard, rejecting owner auth/security/export,
+game operations and writes. Never enable it on a real operator database.</p>
+<p><code>adminpanel.allowed_ips</code> is an optional comma-separated list of addresses or
+CIDRs, for example <code>&quot;127.0.0.1,::1,192.0.2.0/24&quot;</code>. An empty string permits
+all addresses. Restrictions apply before authentication and CSRF to every
+owner controller route. The policy uses only trusted <code>Connection.RemoteIpAddress</code>
+and never reads raw visitor headers. The server&#39;s existing forwarded-header
+middleware trusts only loopback proxies, with a one-hop limit. Through a local
+connector this may be the forwarded visitor address; without trusted forwarding
+it is the connector&#39;s address. <code>CF-Connecting-IP</code> is not used by this policy.
+Do not expose a loopback-origin listener through an untrusted local proxy.</p>
+<p>Owners may enroll an authenticator at <code>/dashboard/security</code> after signing in.
+Enter the displayed secret manually in an authenticator app using SHA-1,
+six digits and a 30-second period, then confirm a current code and password.
+Enrollment expires after ten minutes and is not enabled until confirmation.
+The encrypted secret, last accepted time step and hashed recovery codes are
+stored with the owner account. Protect and back up the data directory, including
+<code>owner-cookie-keys</code>: losing its protection keys prevents authenticator verification.
+Only a new time step can be used; a 30-second clock-skew window is supported.
+Ten random recovery codes are shown once and each can be used once in the login
+code field. Enrollment invalidates all existing sessions. Local
+<code>sbox-ns admin reset-2fa</code> removes the authenticator and invalidates sessions;
+password reset preserves an enabled authenticator. The existing locally issued
+single-use <code>admin login-link</code> remains a shell-authorized recovery route.</p>
+<h3 id="optional-cloudflare-turnstile"><a class="anchor" href="#optional-cloudflare-turnstile" aria-hidden="true" tabindex="-1">#</a>Optional Cloudflare Turnstile</h3>
+<p>Turnstile is off by default and never gates game APIs. Create and configure your
+own widget; the server does not provision widgets or Cloudflare resources.
+Set these keys in <code>server.toml</code> and restart:</p>
+<pre><code class="language-toml">[adminpanel.turnstile]
+enabled = true
+sitekey = &quot;YOUR_PUBLIC_SITEKEY&quot;
+hostname = &quot;YOUR_EXACT_PUBLIC_HOSTNAME&quot;</code></pre>
+<p>Supply the secret through <code>NS_ADMINPANEL__TURNSTILE__SECRET</code> in the service&#39;s
+protected environment or set <code>adminpanel.turnstile.secret</code> in operator-only
+configuration. Do not put it in a game client, source control or browser code.
+Register the exact hostname in the widget&#39;s allowed domains. For an enabled
+<code>sboxns.com</code> tunnel use the actual <code>tunnel.hostname</code>, also reflected in
+<code>server.public_url</code>, as <code>hostname</code>; schemes, paths and ports are not allowed.
+No direct-origin hostname is inferred from untrusted request headers.</p>
+<p>The external widget script is loaded only when enabled. Server-side Siteverify
+must report success, the exact configured hostname, and the matching action:
+<code>owner_login</code>, <code>owner_setup</code>, or <code>owner_link</code>. Missing tokens, mismatches,
+provider errors, malformed responses and timeouts fail closed. Existing CSRF
+and rate limits remain in force. A local-only setup hostname will not pass a
+production hostname check: use the public single-use login link to create the
+owner through the tunnel, or create the owner locally with the CLI.
+Provider-boundary tests are deterministic; they are not proof that an operator&#39;s
+live widget and hostname configuration work. Validate a fresh live token and
+its replay rejection on your actual deployment.</p>
+<h2 id="where-the-files-live"><a class="anchor" href="#where-the-files-live" aria-hidden="true" tabindex="-1">#</a>Where the files live</h2>
+<table>
+<thead>
+<tr>
+<th>Install type</th>
+<th>Config folder</th>
+<th>Data folder</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Linux service install (installer run as root)</td>
+<td><code>/etc/sbox-ns/</code></td>
+<td><code>/var/lib/sbox-ns/</code></td>
+</tr>
+<tr>
+<td>Everything else (user installs, macOS, Windows, portable)</td>
+<td><code>&lt;install dir&gt;/config/</code></td>
+<td><code>&lt;install dir&gt;/data/</code></td>
+</tr>
+<tr>
+<td>Docker image</td>
+<td><code>/config</code> (volume, <code>NS_CONFIG_DIR</code>)</td>
+<td><code>/data</code> (volume, <code>NS_DATA_DIR</code>)</td>
+</tr>
+</tbody></table>
+<p><code>&lt;install dir&gt;</code> is the folder that contains the <code>sbox-ns</code> executable. The
+installers use:</p>
+<ul>
+<li>Linux as root: <code>/usr/local/bin/sbox-ns</code>, with <code>/etc/sbox-ns/</code> and <code>/var/lib/sbox-ns/</code></li>
+<li>Linux and macOS without root: <code>~/.local/share/sbox-ns/</code> (linked into <code>~/.local/bin</code>)</li>
+<li>macOS as root: <code>/opt/sbox-ns/</code> (linked into <code>/usr/local/bin</code>)</li>
+<li>Windows as administrator: <code>%ProgramFiles%\sbox-ns\</code></li>
+<li>Windows as a normal user: <code>%LOCALAPPDATA%\Programs\sbox-ns\</code></li>
+</ul>
+<p>The folders can always be chosen explicitly with the <code>--config-dir</code> and
+<code>--data-dir</code> flags or the <code>NS_CONFIG_DIR</code> and <code>NS_DATA_DIR</code> environment
+variables. Run <code>sbox-ns config path</code> to print the folders the server will use.</p>
+<h2 id="files-and-precedence"><a class="anchor" href="#files-and-precedence" aria-hidden="true" tabindex="-1">#</a>Files and precedence</h2>
+<pre><code class="language-text">&lt;config dir&gt;/
+  server.toml      listener, TLS, logging, auth
+  database.toml    SQLite or PostgreSQL
+  updates.toml     update notices
+  conf.d/*.toml    optional overrides, loaded in alphabetical order
+  secrets/         generated secrets (auth session secret, storage encryption key, security signing key)</code></pre>
+<p>Each key belongs to one main file (<code>server.*</code>, <code>tls.*</code>, <code>logging.*</code> and <code>auth.*</code>
+in <code>server.toml</code>; <code>database.*</code> in <code>database.toml</code>; <code>updates.*</code> in
+<code>updates.toml</code>); validation reports a key placed in the wrong main file.
+Files in <code>conf.d/</code> may set any key. Values are layered, later sources override
+earlier ones:</p>
+<ol>
+<li>Built-in defaults</li>
+<li><code>server.toml</code>, <code>database.toml</code>, <code>updates.toml</code></li>
+<li><code>conf.d/*.toml</code> (alphabetical, so <code>conf.d/90-local.toml</code> beats <code>conf.d/10-base.toml</code>)</li>
+<li>Environment variables prefixed with <code>NS_</code></li>
+<li>Command line flags</li>
+</ol>
+<h3 id="environment-variables"><a class="anchor" href="#environment-variables" aria-hidden="true" tabindex="-1">#</a>Environment variables</h3>
+<p>Any key can be set with an environment variable: <code>NS_</code> followed by the dotted
+key path in upper case, with each <code>.</code> replaced by <code>__</code> (two underscores).</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Environment variable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>server.listen</code></td>
+<td><code>NS_SERVER__LISTEN=0.0.0.0:9000</code></td>
+</tr>
+<tr>
+<td><code>tls.mode</code></td>
+<td><code>NS_TLS__MODE=certificate</code></td>
+</tr>
+<tr>
+<td><code>database.provider</code></td>
+<td><code>NS_DATABASE__PROVIDER=postgres</code></td>
+</tr>
+<tr>
+<td><code>database.postgres.host</code></td>
+<td><code>NS_DATABASE__POSTGRES__HOST=db.internal</code></td>
+</tr>
+<tr>
+<td><code>database.postgres.password_file</code></td>
+<td><code>NS_DATABASE__POSTGRES__PASSWORD_FILE=/run/secrets/pg</code></td>
+</tr>
+<tr>
+<td><code>updates.check</code></td>
+<td><code>NS_UPDATES__CHECK=false</code></td>
+</tr>
+</tbody></table>
+<p><code>NS_CONFIG_DIR</code> and <code>NS_DATA_DIR</code> select the config and data folders themselves.</p>
+<h3 id="command-line-flags"><a class="anchor" href="#command-line-flags" aria-hidden="true" tabindex="-1">#</a>Command line flags</h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Overrides</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--config-dir &lt;path&gt;</code></td>
+<td>config folder</td>
+</tr>
+<tr>
+<td><code>--data-dir &lt;path&gt;</code></td>
+<td>data folder</td>
+</tr>
+<tr>
+<td><code>--listen &lt;address:port&gt;</code></td>
+<td><code>server.listen</code> (for <code>start</code> and <code>setup</code>)</td>
+</tr>
+</tbody></table>
+<h3 id="editing-from-the-command-line"><a class="anchor" href="#editing-from-the-command-line" aria-hidden="true" tabindex="-1">#</a>Editing from the command line</h3>
+<pre><code class="language-sh">sbox-ns config path                     # config and data folders in use
+sbox-ns config show                     # merged effective config, secrets redacted
+sbox-ns config get server.listen
+sbox-ns config set server.listen 0.0.0.0:9000
+sbox-ns config validate                 # parse and check every file
+sbox-ns config edit                     # open the config in $EDITOR</code></pre>
+<h2 id="servertoml"><a class="anchor" href="#servertoml" aria-hidden="true" tabindex="-1">#</a>server.toml</h2>
+<pre><code class="language-toml"># sbox Network Storage Server: server settings.
+# Edit, then restart the server to apply.
+
+[server]
+# Address and port for plain HTTP. &quot;0.0.0.0:8080&quot; accepts connections on every
+# IPv4 interface; &quot;127.0.0.1:8080&quot; only from this machine (for example behind
+# a reverse proxy on the same host).
+listen = &quot;0.0.0.0:8080&quot;
+
+# The URL players and the s&amp;box editor use to reach this server, for example
+# &quot;https://ns.example.com&quot; or &quot;http://203.0.113.10:8080&quot;. Shown in setup and
+# doctor output. Empty means it is derived from `listen`.
+public_url = &quot;&quot;
+
+# Where the database file, backups and ACME certificates are stored.
+# Empty uses the default: /var/lib/sbox-ns for Linux service installs,
+# otherwise &lt;install dir&gt;/data. Docker sets /data through NS_DATA_DIR.
+data_dir = &quot;&quot;
+
+[tls]
+# &quot;off&quot;          plain HTTP only (default)
+# &quot;certificate&quot;  serve HTTPS with the PEM files below
+# &quot;acme&quot;         obtain and renew a Let's Encrypt certificate automatically.
+#                Requires ports 80 and 443 reachable from the internet for acme_domain.
+#                Certificates are cached in &lt;data dir&gt;/acme.
+mode = &quot;off&quot;
+
+# Address and port for HTTPS when mode is &quot;certificate&quot; or &quot;acme&quot;.
+https_listen = &quot;0.0.0.0:443&quot;
+
+# mode = &quot;certificate&quot;: PEM certificate (full chain) and PEM private key.
+certificate_path = &quot;&quot;
+key_path = &quot;&quot;
+
+# mode = &quot;acme&quot;: the public domain name, a contact email for Let's Encrypt,
+# and explicit acceptance of the Let's Encrypt subscriber agreement.
+acme_domain = &quot;&quot;
+acme_email = &quot;&quot;
+acme_accept_terms = false
+
+[logging]
+# Trace, Debug, Information, Warning, Error
+level = &quot;Information&quot;
+
+[auth]
+# Secret files, relative to the config folder. Missing files are generated with
+# permissions 600 on first start (or by `sbox-ns setup`) and are never rotated
+# automatically. Keep them private and include them in backups.
+#
+# Signs player auth sessions. Losing it signs every player out.
+session_secret_file = &quot;secrets/auth_session_secret&quot;
+# 64 hex characters that derive secret API key identifiers. Losing it
+# invalidates every existing secret key (sbox_sk_...).
+storage_encryption_key_file = &quot;secrets/storage_encryption_key&quot;
+# RSA private key (PEM) that signs the security config game clients download.
+security_signing_key_file = &quot;secrets/security_signing_key.pem&quot;
+# Key id published with the signed security config. Empty (default) derives it
+# from the public key. Set it to the previous server's key id when moving a
+# project here with its signing key, so game clients keep accepting the config.
+security_signing_key_id = &quot;&quot;</code></pre>
+<h3 id="hosted-tunnel-and-notice-settings"><a class="anchor" href="#hosted-tunnel-and-notice-settings" aria-hidden="true" tabindex="-1">#</a>Hosted tunnel and notice settings</h3>
+<p>These keys also belong to <code>server.toml</code>. Use <code>tunnel enable|disable</code> and
+<code>dns enable|disable</code> rather than manually changing tunnel or DNS state: the CLI
+atomically manages <code>conf.d/zzzz-tunnel.toml</code> (loopback listener and public URL)
+and <code>conf.d/zzzzz-dns.toml</code> (public URL and Let&#39;s Encrypt settings). Disabling
+DNS removes its overrides from <code>zzzzz-dns.toml</code>, so the values in effect before
+enable apply again. Tunnel and DNS modes cannot be enabled at the same time.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tunnel.enabled</code></td>
+<td><code>false</code></td>
+<td>Start the supervised connector after server restart</td>
+</tr>
+<tr>
+<td><code>tunnel.registry</code></td>
+<td><code>https://sboxcool.com/api/network-storage/tunnels</code></td>
+<td>Signed registry API; HTTPS required except loopback testing</td>
+</tr>
+<tr>
+<td><code>tunnel.name</code></td>
+<td>empty</td>
+<td>Derived identity name, managed by enable</td>
+</tr>
+<tr>
+<td><code>tunnel.hostname</code></td>
+<td>empty</td>
+<td>Assigned public hostname, managed by enable</td>
+</tr>
+<tr>
+<td><code>tunnel.local_port</code></td>
+<td><code>8080</code></td>
+<td>HTTP loopback origin port, managed by enable</td>
+</tr>
+<tr>
+<td><code>tunnel.previous_listen</code></td>
+<td>empty</td>
+<td>Original listener restored by disable</td>
+</tr>
+<tr>
+<td><code>tunnel.previous_public_url</code></td>
+<td>empty</td>
+<td>Original public URL restored by disable</td>
+</tr>
+<tr>
+<td><code>tunnel.previous_tls_mode</code></td>
+<td><code>off</code></td>
+<td>Original TLS mode restored by disable</td>
+</tr>
+<tr>
+<td><code>dns.enabled</code></td>
+<td><code>false</code></td>
+<td>Hosted <code>&lt;name&gt;.nN.sboxns.com</code> DNS name pointing at this server&#39;s own IP; use <code>dns enable</code> / <code>dns disable</code></td>
+</tr>
+<tr>
+<td><code>dns.registry</code></td>
+<td><code>https://sboxcool.com/api/network-storage/dns</code></td>
+<td>Signed DNS registry API; HTTPS required except loopback testing</td>
+</tr>
+<tr>
+<td><code>dns.hostname</code></td>
+<td>empty</td>
+<td>Assigned hostname, managed by <code>dns enable</code></td>
+</tr>
+<tr>
+<td><code>dns.ipv4</code></td>
+<td>empty</td>
+<td>Published IPv4 address, managed by <code>dns enable</code> and the address updater</td>
+</tr>
+<tr>
+<td><code>dns.ipv6</code></td>
+<td>empty</td>
+<td>Published IPv6 address, managed by <code>dns enable</code> and the address updater</td>
+</tr>
+<tr>
+<td><code>dns.auto_address</code></td>
+<td><code>true</code></td>
+<td>Check the public address every 10 minutes and update the name when it changes; <code>dns enable --ipv4/--ipv6</code> sets it to <code>false</code></td>
+</tr>
+<tr>
+<td><code>dns.previous_public_url</code></td>
+<td>empty</td>
+<td>Public URL in effect before <code>dns enable</code> (restored by disable)</td>
+</tr>
+<tr>
+<td><code>dns.previous_tls_mode</code></td>
+<td><code>off</code></td>
+<td>TLS mode in effect before <code>dns enable</code> (restored by disable)</td>
+</tr>
+<tr>
+<td><code>dns.previous_acme_domain</code></td>
+<td>empty</td>
+<td>ACME domain in effect before <code>dns enable</code> (restored by disable)</td>
+</tr>
+<tr>
+<td><code>notices.registry</code></td>
+<td><code>https://sboxcool.com/api/network-storage/notices</code></td>
+<td>Optional notice API; no request without explicit opt-in</td>
+</tr>
+<tr>
+<td><code>notices.email</code></td>
+<td>empty</td>
+<td>Last registered email, not authoritative consent; use <code>register</code> to subscribe/remove</td>
+</tr>
+<tr>
+<td><code>telemetry.enabled</code></td>
+<td><code>false</code></td>
+<td>Send anonymous usage statistics once a day; use <code>telemetry enable</code> / <code>telemetry disable</code></td>
+</tr>
+<tr>
+<td><code>telemetry.endpoint</code></td>
+<td><code>https://sboxcool.com/api/network-storage/telemetry</code></td>
+<td>Usage statistics API; HTTPS required except loopback testing; no request unless enabled</td>
+</tr>
+</tbody></table>
+<p>Identity and connector credentials are separate private files under
+<code>secrets/</code>, not TOML values. Notice removal uses the private
+<code>&lt;data dir&gt;/install-id</code> file; usage statistics use the separate private
+<code>&lt;data dir&gt;/telemetry-id</code> file. See the
+<a href="/docs/versions/0.4.0/source-7f77770/server/self-hosting/#hosted-https-without-a-domain">hosted HTTPS and notices guide</a>
+and <a href="/docs/versions/0.4.0/source-7f77770/server/self-hosting/#anonymous-usage-statistics-opt-in">anonymous usage statistics</a>.</p>
+<h2 id="databasetoml"><a class="anchor" href="#databasetoml" aria-hidden="true" tabindex="-1">#</a>database.toml</h2>
+<pre><code class="language-toml"># sbox Network Storage Server: database settings.
+# Edit, then restart the server to apply. Check the connection with: sbox-ns db test
+
+[database]
+# &quot;sqlite&quot; (default, zero configuration) or &quot;postgres&quot;.
+provider = &quot;sqlite&quot;
+
+# Seconds to keep retrying the database connection at startup before giving up.
+# Useful when the database starts at the same time as the server.
+startup_timeout_seconds = 60
+
+[database.sqlite]
+# Database file. Relative paths are inside the data folder.
+path = &quot;sbox-ns.db&quot;
+
+[database.postgres]
+# Full Npgsql connection string. When set, it overrides the fields below.
+# Example: &quot;Host=db.internal;Port=5432;Database=sbox_ns;Username=sbox_ns;Password=...&quot;
+connection_string = &quot;&quot;
+
+host = &quot;localhost&quot;
+port = 5432
+database = &quot;sbox_ns&quot;
+username = &quot;sbox_ns&quot;
+
+# Prefer password_file over password so the secret is not stored in this file.
+password = &quot;&quot;
+password_file = &quot;&quot;
+
+# Disable, Allow, Prefer, Require, VerifyCA, VerifyFull
+ssl_mode = &quot;Prefer&quot;
+
+# Maximum pooled connections.
+max_pool_size = 50
+
+# All tables are created inside this schema, so the server can share a
+# database with other applications.
+schema = &quot;network_storage&quot;
+
+# Seconds to wait when opening a connection.
+connect_timeout_seconds = 15</code></pre>
+<p>The PostgreSQL user needs permission to create the schema, or ownership of an
+existing one. A minimal setup:</p>
+<pre><code class="language-sql">CREATE ROLE sbox_ns LOGIN PASSWORD 'change-me';
+CREATE DATABASE sbox_ns OWNER sbox_ns;</code></pre>
+<h2 id="updatestoml"><a class="anchor" href="#updatestoml" aria-hidden="true" tabindex="-1">#</a>updates.toml</h2>
+<pre><code class="language-toml"># sbox Network Storage Server: update notices and opt-in unattended updates.
+# Manual: sbox-ns update   (undo with: sbox-ns rollback)
+# Unattended: sudo sbox-ns service install --auto-update (see self-hosting.md, &quot;Automatic updates&quot;)
+
+[updates]
+# Check for new releases in the background and show a notice in the logs and
+# in `sbox-ns doctor`. Set to false to disable all outbound update checks.
+check = true
+
+# Release feed, requested as &lt;feed_url&gt;?channel=&lt;channel&gt;. If unreachable, the
+# newest stable GitHub release of github_repo is used for notices and manual
+# updates (never for unattended updates).
+feed_url = &quot;https://sboxcool.com/api/network-storage/releases/latest&quot;
+github_repo = &quot;sbox-cool/sbox-network-storage-server&quot;
+
+# Hours between background checks.
+interval_hours = 24
+
+# Also notify about prereleases (versions with a &quot;-&quot; suffix, for example 0.4.0-rc.1).
+include_prereleases = false
+
+# &quot;stable&quot;: releases promoted after soaking on the official canary server.
+# &quot;canary&quot;: every release as soon as it is published.
+channel = &quot;stable&quot;
+
+# Install releases unattended (`sbox-ns update --auto`, run every 15 minutes by
+# sbox-ns-update.timer). With several instances on one host, all must opt in.
+auto_install = false
+
+# UTC window &quot;HH:MM-HH:MM&quot; in which unattended updates may start. The end is
+# exclusive; &quot;22:00-02:00&quot; wraps midnight and &quot;00:00-24:00&quot; is always open.
+window = &quot;03:00-05:00&quot;
+
+# Hours a release must have been on its channel before an unattended install.
+# -1 = channel default: 24 on stable, 0 on canary.
+min_release_age_hours = -1</code></pre>
+<h2 id="confd"><a class="anchor" href="#confd" aria-hidden="true" tabindex="-1">#</a>conf.d</h2>
+<p>Drop extra <code>.toml</code> files into <code>conf.d/</code> to override settings without editing
+the main files, for example from configuration management:</p>
+<pre><code class="language-toml"># conf.d/50-production.toml
+[server]
+listen = &quot;127.0.0.1:8080&quot;
+public_url = &quot;https://ns.example.com&quot;
+
+[logging]
+level = &quot;Warning&quot;</code></pre>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/705f8cc95f69ac18d7c4569f561ac576136c688f/docs/configuration.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/configuration.md</a> at <code>v0.4.0</code> (705f8cc).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.4.0 (<code>0.4.0</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/705f8cc95f69ac18d7c4569f561ac576136c688f" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.4.0</code> (<code>705f8cc</code>). <strong>Library:</strong> main source (7f77770) (<code>source-7f77770</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/7f77770c81dd6ab84facfa05e9a87010b6f27983" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>7f77770c81dd6ab84facfa05e9a87010b6f27983</code> (<code>7f77770</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.4.0/source-7f77770/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.4.0/source-7f77770/api/">HTTP API</a><a href="/docs/versions/0.4.0/source-7f77770/library/api/">C# API</a><a href="/docs/versions/0.4.0/source-7f77770/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>
