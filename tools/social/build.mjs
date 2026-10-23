@@ -17,7 +17,7 @@ const site = path.resolve(here, '../..');
 const chrome = process.env.CHROME ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const logo = readFileSync(path.join(site, 'images/icon.svg'), 'utf8').replace(/<title>.*?<\/title>/, '');
 
-const TAGLINE = ['Any host.', 'Every transaction validated.'];
+const TAGLINE = ['Any host.', 'Your server runs the rules.'];
 const CHECKS = [['200', 'ok', 'purchase-item'], ['409', 'err', 'ALREADY_CLAIMED'], ['403', 'err', 'ENDPOINT_ONLY']];
 
 const CARDS = [

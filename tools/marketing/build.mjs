@@ -100,13 +100,13 @@ ${crop({ name: 'game-values', left: 724, top: 30, w: 416, h: 214, width: 1000, x
 ${crop({ name: 'endpoint-test', left: 724, top: 276, w: 416, h: 214, width: 1000, x: 196, y: 62 })}
 <div class="chip" style="left:770px;top:228px;height:44px;font-size:16px;padding:0 14px;gap:10px"><span class="code inf" style="font-size:14px">values</span>combat · weapons · items</div>
 <div class="chip" style="left:886px;top:470px;height:44px;font-size:16px;padding:0 14px;gap:10px"><span class="code err" style="font-size:14px">400</span>TOO_MANY_HITS</div>
-<div class="chip" style="left:24px;top:440px;height:44px;font-size:16px;padding:0 14px;gap:10px"><span class="code inf" style="font-size:14px">rev 42</span>live · older builds pinned</div>
+<div class="chip" style="left:24px;top:440px;height:44px;font-size:16px;padding:0 14px;gap:10px"><span class="code inf" style="font-size:14px">rev 42</span>live · supported builds pinned</div>
 <div class="chip" style="left:420px;top:496px;height:44px;font-size:16px;padding:0 14px;gap:10px"><span class="code ok" style="font-size:14px">200</span>finish-combat · +45 xp</div>` }) },
 
   { file: 'images/marketing/card-hero.png', ...page({ width: 1920, height: 1080, gx: '74%', gy: '40%', body: `
 <div class="abs" style="left:96px;top:104px;width:790px">${lockup}
-<h1 style="margin-top:64px;font-size:94px">Any host.<span>Every transaction validated.</span></h1>
-<p class="lead" style="margin-top:34px">The open-source game backend for <b>s&amp;box</b>. Saves, purchases, rewards and combat results are checked on <b>your</b> server before anything is saved.</p>
+<h1 style="margin-top:64px;font-size:94px">Any host.<span>Your server runs the rules.</span></h1>
+<p class="lead" style="margin-top:34px">The open-source game backend for <b>s&amp;box</b>. Saves, purchases, rewards and combat results are checked on <b>your</b> server before they are saved.</p>
 <div class="pills" style="margin-top:44px"><span class="pill">${check}Game values</span><span class="pill">${check}Server-side rules</span><span class="pill">${check}Versioned builds</span></div></div>
 ${foot(96, 990)}
 <div class="shot" style="left:960px;top:140px;width:1160px;height:653px"><img src="${shot('endpoint-test')}" alt=""></div>
@@ -122,7 +122,7 @@ ${foot(96, 990)}
   { file: 'images/marketing/card-game-values.png', ...page({ width: 1920, height: 1080, gx: '50%', gy: '62%', body: `
 <div class="abs" style="left:96px;top:92px;width:1500px"><p class="eyebrow">${logo}Game values</p>
 <h1 style="margin-top:30px">Define it once. <span style="display:inline">Game and server agree.</span></h1>
-<p class="lead" style="margin-top:26px;max-width:1420px">Weapons, items, prices and tuning live in game values. Your game loads them in <b>one call</b> and predicts locally; your endpoints check every claim against <b>the same numbers</b> on the server.</p></div>
+<p class="lead" style="margin-top:26px;max-width:1420px">Weapons, items, prices and tuning live in game values. Your game loads them in <b>one call</b> and predicts locally; your endpoints check claims against <b>the same numbers</b> on the server.</p></div>
 <div class="panel abs" style="left:96px;top:424px;width:520px;height:440px"><div class="panel-h"><span class="dot"></span>game values</div><pre><span class="k">items</span>:
   - <span class="k">id</span>: combat
     <span class="k">type</span>: group
@@ -154,13 +154,13 @@ ${foot(96, 990)}
   <span class="c"># damage ≥ hp, or reject</span></pre></div>
 <ul class="list abs" style="left:96px;top:910px;width:1728px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
 <li>${check}<span><b>One request</b> loads every table. No ping per lookup.</span></li>
-<li>${check}<span><b>Snapshotted</b> with every published build.</span></li>
+<li>${check}<span><b>Snapshotted</b> per published build while supported.</span></li>
 <li>${check}<span><b>Change a value live</b>, no game update needed.</span></li></ul>` }) },
 
   { file: 'images/marketing/card-anti-exploit.png', ...page({ width: 1920, height: 1080, gx: '72%', gy: '45%', body: `
 <div class="abs" style="left:96px;top:92px;width:820px"><p class="eyebrow">${logo}Server-side rules</p>
-<h1 style="margin-top:30px">Modded client?<span>Rejected, not saved.</span></h1>
-<p class="lead" style="margin-top:28px">Endpoints recompute every claim from game values and the server clock. Lightweight authority for an RPG, without simulating it on a dedicated server.</p>
+<h1 style="margin-top:30px">Modded client?<span>Rejected when it does not add up.</span></h1>
+<p class="lead" style="margin-top:28px">Endpoints recompute claims from game values and the server clock. Lightweight authority for an RPG, without simulating it on a dedicated server.</p>
 <ul class="list" style="margin-top:46px">
 <li>${check}<span>Damage must reach the zombie's <b>HP from game values</b></span></li>
 <li>${check}<span>Hits must fit the weapon's fire rate since a <b>server-stamped start</b></span></li>
@@ -179,23 +179,23 @@ ${crop({ name: 'endpoint-pipeline', left: 1000, top: 590, w: 824, h: 350, width:
 
   { file: 'images/marketing/card-versions.png', ...page({ width: 1920, height: 1080, gx: '66%', gy: '58%', body: `
 <div class="abs" style="left:96px;top:92px;width:1600px"><p class="eyebrow">${logo}Revisions</p>
-<h1 style="margin-top:30px">Ship updates. <span style="display:inline">Old builds keep working.</span></h1>
-<p class="lead" style="margin-top:26px;max-width:1480px">Publishing a build snapshots its endpoints, collections and game values. Players still on the previous build keep their revision while they update, so <b>nobody gets an item their build cannot load</b>.</p></div>
+<h1 style="margin-top:30px">Ship updates. <span style="display:inline">Supported builds keep working.</span></h1>
+<p class="lead" style="margin-top:26px;max-width:1480px">Publishing a build snapshots its endpoints, collections and game values. Players still on a supported previous build keep their revision while they update, so <b>new items do not reach builds that cannot load them</b>.</p></div>
 <div class="abs" style="left:96px;top:440px;width:1180px;display:grid;gap:26px">
 <div class="lane"><div class="box"><b>Build r41<span class="tag old">updating</span></b><small>players on yesterday's build</small></div>${arrow}<div class="box"><b>Revision 41 snapshot</b><small><code>pistol damage 15 · 4 items</code></small></div></div>
 <div class="lane"><div class="box"><b>Build r42<span class="tag live">new</span></b><small>just published to sbox.game</small></div>${arrow}<div class="box live"><b>Revision 42 · live</b><small><code>pistol damage 18 · 5 items + flare_gun</code></small></div></div></div>
 <div class="abs" style="left:1330px;top:440px;width:494px;display:grid;gap:22px">
-<div class="tile" style="padding:26px"><h3>Push Staged</h3><p>Changes ship with your next published build. Older builds keep theirs.</p></div>
-<div class="tile" style="padding:26px"><h3>Push Live</h3><p>Keep it simple: every build gets the change right now.</p></div></div>
+<div class="tile" style="padding:26px"><h3>Push Staged</h3><p>Changes ship with your next published build. Older supported builds keep theirs.</p></div>
+<div class="tile" style="padding:26px"><h3>Push Live</h3><p>Every build not pinned to a supported snapshot gets the change now. Supported snapshots are not overwritten.</p></div></div>
 <div class="shot" style="left:96px;top:760px;width:1180px;height:220px"><img src="${shot('version-history')}" alt="" style="object-position:left 36%"></div>
-<p class="foot abs" style="left:1330px;top:900px;width:494px;line-height:1.4">Older revisions stay inside their support window. Player records are always shared live data.</p>` }) },
+<p class="foot abs" style="left:1330px;top:900px;width:494px;line-height:1.4">Older revisions stay inside their support window. Requests without a supported revision use live values. Player records are always shared live data.</p>` }) },
 
   { file: 'images/marketing/card-any-host.png', ...page({ width: 1920, height: 1080, gx: '50%', gy: '70%', body: `
 <div class="abs" style="left:96px;top:92px;width:1700px"><p class="eyebrow">${logo}Any host</p>
 <h1 style="margin-top:30px">Player-hosted, P2P or dedicated.<span>One backend owns the rules.</span></h1>
-<p class="lead" style="margin-top:26px;max-width:1400px">Game sessions stay thin. Currency, XP, items and scores only change through endpoints on <b>your</b> Network Storage server, whoever hosts the match.</p></div>
+<p class="lead" style="margin-top:26px;max-width:1400px">Game sessions stay thin. Currency, XP, items and scores change through endpoints on <b>your</b> Network Storage server when collections use endpoint access, whoever hosts the match.</p></div>
 <div class="abs" style="left:96px;top:500px;width:1728px;height:360px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
-<div class="tile">${icon('i-users')}<h3>Player-hosted</h3><p>A player runs the listen server with the public key. It can call public endpoints but cannot rewrite anyone's data. Free to run, safe by default.</p><span class="key"><i></i>Public key</span></div>
+<div class="tile">${icon('i-users')}<h3>Player-hosted</h3><p>A player runs the listen server with the public key. It can call public endpoints but not dedicated-only ones. Free to run; the rules still run on your backend.</p><span class="key"><i></i>Public key</span></div>
 <div class="tile">${icon('i-server')}<h3>Dedicated</h3><p>Your box holds a secret key for dedicated-only endpoints: tournaments, seasons and anything worth protecting.</p><span class="key"><i></i>Secret key</span></div>
 <div class="tile">${icon('i-arrows')}<h3>Hybrid</h3><p>Players host day-to-day sessions while your server runs special modes. One project serves both.</p><span class="key"><i></i>Both</span></div></div>
 ${foot(96, 990)}` }) },
