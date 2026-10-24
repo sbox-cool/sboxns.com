@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coding agents (MCP) | Network Storage docs</title>
+  <meta name="description" content="Let coding agents operate your server through MCP.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.2.0/source-13f51a8/server/mcp/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Coding agents (MCP) | Network Storage docs">
+  <meta property="og:description" content="Let coding agents operate your server through MCP.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.2.0/source-13f51a8/server/mcp/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.4.0/source-6efc43f/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.4.0/source-6efc43f/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.4.0 · main source (6efc43f)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-6efc43f/server/mcp/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-6efc43f/server/mcp/">0.5.4</option><option value="/docs/versions/0.5.3/source-6efc43f/server/mcp/">0.5.3</option><option value="/docs/versions/0.5.2/source-6efc43f/server/mcp/">0.5.2</option><option value="/docs/versions/0.5.1/source-6efc43f/server/mcp/">0.5.1</option><option value="/docs/versions/0.5.0/source-6efc43f/server/mcp/">0.5.0</option><option value="/docs/versions/0.4.0/source-6efc43f/server/mcp/" selected>0.4.0</option><option value="/docs/versions/0.3.0/source-6efc43f/server/mcp/">0.3.0</option><option value="/docs/versions/0.2.0/source-6efc43f/server/mcp/">0.2.0</option><option value="/docs/versions/0.1.0/source-6efc43f/server/mcp/">0.1.0</option><option value="/docs/versions/0.5.5/source-6efc43f/server/mcp/">0.5.5</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.4.0/source-13f51a8/server/mcp/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.4.0/source-d369d1b/server/mcp/">Legacy source (d369d1b)</option><option value="/docs/versions/0.4.0/source-fc58d4e/server/mcp/">main source (fc58d4e)</option><option value="/docs/versions/0.4.0/source-5369108/server/mcp/">main source (5369108)</option><option value="/docs/versions/0.4.0/source-9c4a235/server/mcp/">main source (9c4a235)</option><option value="/docs/versions/0.4.0/source-9b6ec5d/server/mcp/">main source (9b6ec5d)</option><option value="/docs/versions/0.4.0/source-ddf9b61/server/mcp/">main source (ddf9b61)</option><option value="/docs/versions/0.4.0/source-7f77770/server/mcp/">main source (7f77770)</option><option value="/docs/versions/0.4.0/source-470a694/server/mcp/">main source (470a694)</option><option value="/docs/versions/0.4.0/source-6efc43f/server/mcp/" selected>main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-6efc43f/server/mcp/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-6efc43f/server/mcp/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-6efc43f/server/mcp/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-6efc43f/server/mcp/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-6efc43f/server/mcp/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-6efc43f/server/mcp/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-6efc43f/server/mcp/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-6efc43f/server/mcp/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-6efc43f/server/mcp/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-6efc43f/server/mcp/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-6efc43f/server/mcp/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.4.0/source-13f51a8/server/mcp/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.4.0/source-d369d1b/server/mcp/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.4.0/source-fc58d4e/server/mcp/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.4.0/source-5369108/server/mcp/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.4.0/source-9c4a235/server/mcp/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.4.0/source-9b6ec5d/server/mcp/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.4.0/source-ddf9b61/server/mcp/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.4.0/source-7f77770/server/mcp/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.4.0/source-470a694/server/mcp/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.4.0/source-6efc43f/server/mcp/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.5/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.4.0/source-6efc43f/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.4.0/source-6efc43f/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.4.0/source-6efc43f/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.4.0/source-6efc43f/library/overview/">Library overview</a><a href="/docs/versions/0.4.0/source-6efc43f/library/getting-started/">Install and configure</a><a href="/docs/versions/0.4.0/source-6efc43f/library/runtime-api/">Runtime guide</a><a href="/docs/versions/0.4.0/source-6efc43f/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.4.0/source-6efc43f/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.4.0/source-6efc43f/library/examples/">Examples</a><a href="/docs/versions/0.4.0/source-6efc43f/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.4.0/source-6efc43f/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.4.0/source-6efc43f/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.4.0/source-6efc43f/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.4.0/source-6efc43f/server/configuration/">Configuration</a><a href="/docs/versions/0.4.0/source-6efc43f/server/database/">Databases</a><a href="/docs/versions/0.4.0/source-6efc43f/server/admin-panel/">Owner console</a><a href="/docs/versions/0.4.0/source-6efc43f/server/export/">Export and move projects</a><a href="/docs/versions/0.4.0/source-6efc43f/server/alerting/">Alerting</a><a href="/docs/versions/0.4.0/source-6efc43f/server/mcp/" aria-current="page">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.4.0/source-6efc43f/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.4.0/source-6efc43f/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.4.0/source-6efc43f/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Coding agents (MCP)</span></nav>
+  <article class="prose docs-prose">
+<h1>Coding agents (MCP)</h1>
+<p class="lead">Let coding agents operate your server through MCP.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#connect">Connect</a><a href="#tools">Tools</a><a href="#typical-first-session">Typical first session</a></nav>
+<p><code>sbox-ns mcp</code> serves the <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a>
+over stdio. Your coding agent starts it through SSH, so nothing extra is
+exposed on the network and the agent can only do what your SSH login can do.</p>
+<h2 id="connect"><a class="anchor" href="#connect" aria-hidden="true" tabindex="-1">#</a>Connect</h2>
+<p>The server runs as the <code>sbox-ns</code> system user after a service install, so run
+the MCP server as that user to keep database file ownership correct.</p>
+<p>Claude Code:</p>
+<pre><code class="language-sh">claude mcp add sbox-ns -- ssh my-vps sudo -u sbox-ns sbox-ns mcp</code></pre>
+<p>Cursor, Claude Desktop and other clients that read an <code>mcpServers</code> file:</p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;sbox-ns&quot;: {
+      &quot;command&quot;: &quot;ssh&quot;,
+      &quot;args&quot;: [&quot;my-vps&quot;, &quot;sudo&quot;, &quot;-u&quot;, &quot;sbox-ns&quot;, &quot;sbox-ns&quot;, &quot;mcp&quot;]
+    }
+  }
+}</code></pre>
+<p><code>my-vps</code> is a host from your <code>~/.ssh/config</code>. Neither SSH nor <code>sudo</code> may
+prompt for a password, because the agent cannot type one: use SSH key
+authentication, and either log in as root or allow this one command without a
+password (<code>youruser ALL=(sbox-ns) NOPASSWD: /usr/local/bin/sbox-ns</code> via <code>visudo</code>).
+On a local machine without a service install, use the command <code>sbox-ns</code>
+with arguments <code>[&quot;mcp&quot;]</code> instead of SSH.</p>
+<h2 id="tools"><a class="anchor" href="#tools" aria-hidden="true" tabindex="-1">#</a>Tools</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>server_status</code></td>
+<td><code>sbox-ns doctor</code>: config, database, port, TLS, disk, schema, updates</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Installed version</td>
+</tr>
+<tr>
+<td><code>quickstart</code></td>
+<td>Configure if needed, create or reuse a project, ensure keys, return the <code>NetworkStorage.Configure(...)</code> line</td>
+</tr>
+<tr>
+<td><code>project_list</code>, <code>project_create</code></td>
+<td>Projects</td>
+</tr>
+<tr>
+<td><code>key_list</code>, <code>key_create</code></td>
+<td>API keys (secret keys are returned once, when created)</td>
+</tr>
+<tr>
+<td><code>config_show</code>, <code>config_get</code>, <code>config_set</code>, <code>config_validate</code></td>
+<td>Settings (secrets redacted in <code>config_show</code>)</td>
+</tr>
+<tr>
+<td><code>db_status</code>, <code>db_backup</code></td>
+<td>Database status and consistent backups</td>
+</tr>
+<tr>
+<td><code>update_check</code></td>
+<td>Check for a newer release (never installs)</td>
+</tr>
+<tr>
+<td><code>service_status</code>, <code>service_restart</code></td>
+<td>The installed system service</td>
+</tr>
+<tr>
+<td><code>tunnel_status</code>, <code>tunnel_enable</code></td>
+<td>Inspect or enable the optional hosted HTTPS connector; restart the server afterward</td>
+</tr>
+<tr>
+<td><code>telemetry_status</code></td>
+<td>Show whether opt-in anonymous usage statistics are enabled (read-only; enable and disable are CLI-only)</td>
+</tr>
+</tbody></table>
+<p>Destructive operations (database restore, import, project delete, key revoke,
+tunnel disable) are deliberately not available as tools. Run them yourself over SSH.</p>
+<h2 id="typical-first-session"><a class="anchor" href="#typical-first-session" aria-hidden="true" tabindex="-1">#</a>Typical first session</h2>
+<p>Ask your agent: <em>&quot;Set up sbox-ns for my game called My Game and give me the
+line to add to my game.&quot;</em> It will call <code>server_status</code>, then <code>quickstart</code>,
+and hand you the <code>NetworkStorage.Configure(...)</code> line and the editor secret key.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/705f8cc95f69ac18d7c4569f561ac576136c688f/docs/mcp.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/mcp.md</a> at <code>v0.4.0</code> (705f8cc).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.4.0 (<code>0.4.0</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/705f8cc95f69ac18d7c4569f561ac576136c688f" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.4.0</code> (<code>705f8cc</code>). <strong>Library:</strong> main source (6efc43f) (<code>source-6efc43f</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/6efc43f065a348b38d51056bfccd162644d03de1" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>6efc43f065a348b38d51056bfccd162644d03de1</code> (<code>6efc43f</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.4.0/source-6efc43f/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.4.0/source-6efc43f/api/">HTTP API</a><a href="/docs/versions/0.4.0/source-6efc43f/library/api/">C# API</a><a href="/docs/versions/0.4.0/source-6efc43f/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

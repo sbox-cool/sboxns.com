@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Owner console | Network Storage docs</title>
+  <meta name="description" content="The web dashboard: login, projects, records, keys and security.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/admin-panel/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Owner console | Network Storage docs">
+  <meta property="og:description" content="The web dashboard: login, projects, records, keys and security.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/admin-panel/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.4.0/source-6efc43f/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.4.0/source-6efc43f/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.4.0 · main source (6efc43f)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-6efc43f/server/admin-panel/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-6efc43f/server/admin-panel/">0.5.4</option><option value="/docs/versions/0.5.3/source-6efc43f/server/admin-panel/">0.5.3</option><option value="/docs/versions/0.5.2/source-6efc43f/server/admin-panel/">0.5.2</option><option value="/docs/versions/0.5.1/source-6efc43f/server/admin-panel/">0.5.1</option><option value="/docs/versions/0.5.0/source-6efc43f/server/admin-panel/">0.5.0</option><option value="/docs/versions/0.4.0/source-6efc43f/server/admin-panel/" selected>0.4.0</option><option value="/docs/versions/0.3.0/source-6efc43f/server/admin-panel/">0.3.0</option><option value="/docs/versions/0.2.0/source-6efc43f/server/admin-panel/">0.2.0</option><option value="/docs/versions/0.1.0/source-6efc43f/server/admin-panel/">0.1.0</option><option value="/docs/versions/0.5.5/source-6efc43f/server/admin-panel/">0.5.5</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.4.0/source-13f51a8/server/admin-panel/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.4.0/source-d369d1b/server/admin-panel/">Legacy source (d369d1b)</option><option value="/docs/versions/0.4.0/source-fc58d4e/server/admin-panel/">main source (fc58d4e)</option><option value="/docs/versions/0.4.0/source-5369108/server/admin-panel/">main source (5369108)</option><option value="/docs/versions/0.4.0/source-9c4a235/server/admin-panel/">main source (9c4a235)</option><option value="/docs/versions/0.4.0/source-9b6ec5d/server/admin-panel/">main source (9b6ec5d)</option><option value="/docs/versions/0.4.0/source-ddf9b61/server/admin-panel/">main source (ddf9b61)</option><option value="/docs/versions/0.4.0/source-7f77770/server/admin-panel/">main source (7f77770)</option><option value="/docs/versions/0.4.0/source-470a694/server/admin-panel/">main source (470a694)</option><option value="/docs/versions/0.4.0/source-6efc43f/server/admin-panel/" selected>main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-6efc43f/server/admin-panel/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-6efc43f/server/admin-panel/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-6efc43f/server/admin-panel/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-6efc43f/server/admin-panel/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-6efc43f/server/admin-panel/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-6efc43f/server/admin-panel/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-6efc43f/server/admin-panel/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-6efc43f/server/admin-panel/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-6efc43f/server/admin-panel/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-6efc43f/server/admin-panel/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-6efc43f/server/admin-panel/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.4.0/source-13f51a8/server/admin-panel/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.4.0/source-d369d1b/server/admin-panel/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.4.0/source-fc58d4e/server/admin-panel/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.4.0/source-5369108/server/admin-panel/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.4.0/source-9c4a235/server/admin-panel/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.4.0/source-9b6ec5d/server/admin-panel/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.4.0/source-ddf9b61/server/admin-panel/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.4.0/source-7f77770/server/admin-panel/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.4.0/source-470a694/server/admin-panel/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.4.0/source-6efc43f/server/admin-panel/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.5/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.4.0/source-6efc43f/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.4.0/source-6efc43f/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.4.0/source-6efc43f/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.4.0/source-6efc43f/library/overview/">Library overview</a><a href="/docs/versions/0.4.0/source-6efc43f/library/getting-started/">Install and configure</a><a href="/docs/versions/0.4.0/source-6efc43f/library/runtime-api/">Runtime guide</a><a href="/docs/versions/0.4.0/source-6efc43f/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.4.0/source-6efc43f/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.4.0/source-6efc43f/library/examples/">Examples</a><a href="/docs/versions/0.4.0/source-6efc43f/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.4.0/source-6efc43f/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.4.0/source-6efc43f/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.4.0/source-6efc43f/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.4.0/source-6efc43f/server/configuration/">Configuration</a><a href="/docs/versions/0.4.0/source-6efc43f/server/database/">Databases</a><a href="/docs/versions/0.4.0/source-6efc43f/server/admin-panel/" aria-current="page">Owner console</a><a href="/docs/versions/0.4.0/source-6efc43f/server/export/">Export and move projects</a><a href="/docs/versions/0.4.0/source-6efc43f/server/alerting/">Alerting</a><a href="/docs/versions/0.4.0/source-6efc43f/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.4.0/source-6efc43f/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.4.0/source-6efc43f/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.4.0/source-6efc43f/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Owner console</span></nav>
+  <article class="prose docs-prose">
+<h1>Owner console</h1>
+<p class="lead">The web dashboard: login, projects, records, keys and security.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#first-login-sbox-ns-admin-login-link">First login: sbox-ns admin login-link</a><a href="#http-vs-https">HTTP vs HTTPS</a><a href="#ssh-tunnel-alternative">SSH tunnel alternative</a><a href="#data-browser">Data browser</a><a href="#authoring-and-runtime-diagnostics">Authoring and runtime diagnostics</a><a href="#move-one-project">Move one project</a><a href="#themes-and-visual-editing">Themes and visual editing</a><a href="#optional-admin-security">Optional admin security</a><a href="#public-read-only-demo">Public read-only demo</a></nav>
+<p>Every server includes a web admin panel for its single local owner: projects,
+API keys, project settings and a schema-validated record editor. No website account,
+signup or SSH tunnel is needed.</p>
+<ul>
+<li><code>/login</code>: password login</li>
+<li><code>/login/link</code>: single-use login links (see below)</li>
+<li><code>/dashboard</code>: projects, keys and settings</li>
+<li><code>/dashboard/projects/{projectId}/data</code>: data browser</li>
+</ul>
+<h2 id="first-login-sbox-ns-admin-login-link"><a class="anchor" href="#first-login-sbox-ns-admin-login-link" aria-hidden="true" tabindex="-1">#</a>First login: <code>sbox-ns admin login-link</code></h2>
+<p>Run this on the server, for example over SSH or through an agent with shell access:</p>
+<pre><code class="language-sh">sbox-ns admin login-link              # valid for 15 minutes
+sbox-ns admin login-link --minutes 5  # 1–60 minutes</code></pre>
+<p>It prints a link like this:</p>
+<pre><code class="language-text">https://ns.example.com/login/link?token=3f9c…
+Signs in as owner 'owner'.
+Single use; expires 2026-10-08 12:15:00 UTC (15 min). Opening the page does not use it up; confirming does.</code></pre>
+<p>Open the link and confirm. If no owner exists yet, the page asks you to choose
+the owner username and password (at least 12 characters). Being able to run
+commands on the server proves you control it, so this works from any address.
+The loopback-only <code>/setup?token=…</code> URL in the server log still works as well.</p>
+<p>How the link works:</p>
+<ul>
+<li><strong>Base URL.</strong> The link uses <code>server.public_url</code> when it is set. Otherwise it
+is built from the active listener: HTTPS with the ACME domain when TLS is on,
+or the bound address. For wildcard binds like <code>0.0.0.0</code> it uses the first
+routable IPv4 address of the machine. Set <code>server.public_url</code> if that guess
+is wrong, for example behind NAT or a proxy.</li>
+<li><strong>Token.</strong> Each token is 256 bits of randomness. Only its SHA-256 hash and
+expiry time are stored, as workspace object
+<code>server/identity/login-links/&lt;sha256&gt;.json</code> in the configured
+SQLite/PostgreSQL database. The raw token is printed once and never saved.
+Minting a new link deletes expired ones.</li>
+<li><strong>Opening (GET).</strong> Opening the link only shows a confirmation page and does
+not use the token. Chat apps and link previewers can fetch the URL without
+using it up. The page is sent with <code>Cache-Control: no-store</code> and
+<code>Referrer-Policy: no-referrer</code>.</li>
+<li><strong>Confirming (POST).</strong> Confirming needs an antiforgery token. The server
+deletes the token and signs you in in one atomic step, so a second attempt
+gets a 404. Expired, wrong or malformed tokens also get a 404. Each
+sign-in through a link is logged as a warning with the client address.</li>
+<li><strong>Rate limit.</strong> <code>/login</code>, <code>/login/link</code> and <code>/setup</code> share a limit of 10
+requests per minute per client IP. Requests over the limit get HTTP 429.</li>
+</ul>
+<p>Forgot your password? Run <code>sbox-ns admin login-link</code> to sign in, or
+<code>sbox-ns admin reset-password</code> to set a new password. A reset ends all
+existing sessions.</p>
+<h2 id="http-vs-https"><a class="anchor" href="#http-vs-https" aria-hidden="true" tabindex="-1">#</a>HTTP vs HTTPS</h2>
+<p>Over plain HTTP, your password, login links and session cookie all travel
+unencrypted. The panel shows a warning banner whenever it is served over plain
+HTTP to a non-loopback address. To use HTTPS, pick one of these:</p>
+<ul>
+<li><strong>Built-in Let&#39;s Encrypt:</strong> <code>sbox-ns config set tls.mode acme</code>, then set
+<code>tls.acme_domain</code>, <code>tls.acme_email</code> and <code>tls.acme_accept_terms = true</code>
+(see <a href="/docs/versions/0.4.0/source-6efc43f/server/configuration/">configuration</a>).</li>
+<li><strong>Your own certificate:</strong> set <code>tls.mode = &quot;certificate&quot;</code> with
+<code>tls.certificate_path</code> and <code>tls.key_path</code>.</li>
+<li><strong>TLS-terminating reverse proxy or tunnel</strong> on the same machine, such as
+Caddy, nginx or Cloudflare Tunnel. The server trusts <code>X-Forwarded-Proto</code> and
+<code>X-Forwarded-For</code> only from loopback proxies. Set <code>server.public_url</code> to the
+HTTPS URL.</li>
+</ul>
+<p>Cookie protection:</p>
+<ul>
+<li>Both cookies are always <code>HttpOnly</code>. The session cookie is <code>SameSite=Lax</code>, so a
+link to the panel from Discord, an alert email or a bookmark keeps you signed
+in; cross-site form posts never carry it, and every change is a POST that also
+needs an antiforgery token. The antiforgery cookie is <code>SameSite=Strict</code>.</li>
+<li>Over HTTPS they are sent as <code>__Host-sbox-ns-owner</code> and <code>__Host-sbox-ns-csrf</code>.
+That means <code>Secure</code>, <code>Path=/</code> and never a <code>Domain</code> attribute. Another
+subdomain of a shared parent domain therefore cannot plant or overwrite
+them. Over HTTPS the server ignores unprefixed copies of these cookies.</li>
+<li>Plain HTTP cannot carry <code>__Host-</code> cookies, so plain-HTTP access uses the
+unprefixed names.</li>
+<li>Sessions last eight hours and do not slide. Changing the password ends them.</li>
+</ul>
+<h2 id="ssh-tunnel-alternative"><a class="anchor" href="#ssh-tunnel-alternative" aria-hidden="true" tabindex="-1">#</a>SSH tunnel alternative</h2>
+<p>If you would rather not expose the panel at all, bind the server to loopback
+or firewall its port. Then tunnel to it:</p>
+<pre><code class="language-sh">ssh -L 8080:127.0.0.1:8080 user@server</code></pre>
+<p>Open <code>http://localhost:8080/login</code> locally. Loopback HTTP does not show the
+warning banner. <code>sbox-ns admin login-link</code> still works this way: replace the
+printed host with <code>localhost:8080</code>.</p>
+<h2 id="data-browser"><a class="anchor" href="#data-browser" aria-hidden="true" tabindex="-1">#</a>Data browser</h2>
+<p>On a project page, choose <strong>Browse stored records</strong>, or open
+<code>/dashboard/projects/{projectId}/data</code>.</p>
+<ul>
+<li><strong>Collections:</strong> every synced collection with its type (per-player or
+global) and live record count. Deleted (tombstoned) player records are not
+counted.</li>
+<li><strong>Records:</strong> sorted by key, 50 per page by default (<code>?size=</code> accepts 1–200).
+Each row shows version, last change, size and a short preview. Key search
+(<code>?q=</code>, up to 256 characters) is case-insensitive substring matching.</li>
+<li><strong>Record detail:</strong> pretty-printed JSON in an editable payload form.</li>
+<li><strong>Create:</strong> choose <strong>Create record</strong> on a collection. Player keys accept
+1–256 letters, numbers, underscores, hyphens or colons; global record IDs
+accept 1–128 letters, numbers, underscores or hyphens. Global records are
+shared entries, not player records.</li>
+<li><strong>Save:</strong> payloads must be JSON objects within the configured store byte
+limit and match the collection schema (including required fields, types,
+enums, nested objects/arrays and supported size/range constraints). Unsupported
+schema modifiers fail closed with an explicit error rather than being ignored.</li>
+<li><strong>Download:</strong> <code>…/data/{collectionId}/export</code> returns the whole collection as
+JSON. The file contains <code>format = &quot;sbox-ns.collection-export&quot;</code>, the
+collection type, and each record&#39;s key, version, change time and payload.</li>
+</ul>
+<p>The browser reads through the storage contract, so it behaves the same on
+SQLite and PostgreSQL. Record counts and pages are computed from the full
+collection on each request. Very large collections therefore take longer to
+list.</p>
+<p>All mutations require the owner session and an antiforgery token. Edit and
+delete forms carry the version and a protected snapshot of the original payload
+and change time. The database compares this state and changes the record
+atomically, including when game writers reuse a version number. A stale form
+receives HTTP 409 and cannot overwrite or delete changed content. Create uses
+an atomic missing-record check, so two create forms cannot overwrite one
+another. Player tombstones can be recreated; owner saves increment the row&#39;s
+version without changing the existing game API&#39;s version behavior.</p>
+<p>Validation errors (HTTP 400) and conflicts preserve the entered JSON and key.
+Use <strong>Reload current record</strong> to compare the latest stored value, then reconcile
+your changes before submitting again.</p>
+<p>Deletion additionally needs the exact record key typed as confirmation:</p>
+<ul>
+<li>Per-player records get a deletion tombstone, just like a delete through the
+storage API.</li>
+<li>Global records are removed from the global record table.</li>
+</ul>
+<p>Creates, edits and deletions are written to the project audit log as
+<code>record.create</code>, <code>record.update</code> and <code>record.delete</code>, with the collection, key,
+collection type and expected version.</p>
+<h2 id="authoring-and-runtime-diagnostics"><a class="anchor" href="#authoring-and-runtime-diagnostics" aria-hidden="true" tabindex="-1">#</a>Authoring and runtime diagnostics</h2>
+<p>The project overview links to collection/schema, endpoint, workflow and query
+definitions and game values. Edit JSON directly, or keep source-backed definitions
+in a wrapper with <code>sourceText</code>, <code>sourceFormat</code>, <code>sourcePath</code> and <code>authoringMode</code>.
+The owner console reuses the editor compiler and management writes. Source text
+remains authoritative when present; saving preserves source metadata and updates
+only the selected resource, not other definitions.</p>
+<p>Saved definitions are available to the runtime immediately. Editor sync can
+overwrite dashboard edits, so reconcile changes with your checked-in YAML/JSON
+source. Endpoint expressions use double braces, such as <code>{{steamId}}</code> and
+<code>{{player.level}}</code>.</p>
+<p>Analytics, audit/request logs, errors and usage tabs read stored runtime data.
+Empty panels mean no matching data has been recorded, not synthetic activity.
+The console does not replace every screen or workflow in the managed dashboard.</p>
+<h2 id="move-one-project"><a class="anchor" href="#move-one-project" aria-hidden="true" tabindex="-1">#</a>Move one project</h2>
+<p>On the project overview, <strong>Download project archive</strong> exports that project&#39;s
+metadata, definitions, records, runtime data and stored API-key material as a
+private <code>.tar.gz</code>. It excludes instance configuration and private secrets,
+including signing keys. On the destination dashboard, upload it under
+<strong>Import a portable project</strong>.</p>
+<p>Import retains the original project ID and assigns its owner membership to the
+destination instance&#39;s owner. An existing project ID is refused rather than
+overwritten. Limits are 64 MiB compressed and 256 MiB expanded. This is
+self-hosted SQLite/PostgreSQL portability, not a managed-host export contract.</p>
+<p>After moving to an independently configured instance:</p>
+<ul>
+<li>Create a new <strong>secret key</strong> for editor sync and dedicated servers. Secret-key
+lookup identifiers depend on the instance&#39;s encryption secret; copied hashes
+alone do not make the old secret key usable on a new instance.</li>
+<li>Point the game client and editor at the destination&#39;s base URL.</li>
+<li>Authenticate player sessions again; instance signing/session secrets are not
+part of the project archive.</li>
+</ul>
+<p>Keep the archive private: it contains player data and public runtime credentials.
+For whole-instance disaster recovery, use <a href="/docs/versions/0.4.0/source-6efc43f/server/export/">server export/import</a>
+with the required configuration/secrets, not a portable project archive.</p>
+<h2 id="themes-and-visual-editing"><a class="anchor" href="#themes-and-visual-editing" aria-hidden="true" tabindex="-1">#</a>Themes and visual editing</h2>
+<p>The theme selector offers System, Dark, Light, Slate and Warm. System follows
+your operating system. Your choice is stored in this browser only; it does not
+change other operators&#39; dashboards. All themes work without external assets.
+The shared design rules live in <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/705f8cc95f69ac18d7c4569f561ac576136c688f/docs/ui-guidelines.md" target="_blank" rel="noopener">UI guidelines</a>.</p>
+<p>Record payloads and collection definitions open in JSON mode. Select <strong>Visual</strong>
+to edit strings, numbers, booleans, objects and arrays without writing JSON.
+You can add or remove nested fields, then switch back to JSON or save directly.
+Unknown fields are kept, including authoring metadata.</p>
+<p>Visual mode refuses duplicate keys, numbers that JavaScript would round, and
+definitions with authoritative <code>sourceText</code>. Keep those in JSON mode to preserve
+the original text. Editing compiled fields cannot replace editing authoritative
+source. Both modes use the same server-side schema validation, permission checks
+and conflict detection.</p>
+<h2 id="optional-admin-security"><a class="anchor" href="#optional-admin-security" aria-hidden="true" tabindex="-1">#</a>Optional admin security</h2>
+<p>Open <strong>Admin security</strong> to add a time-based authenticator. Add the displayed
+secret manually in your authenticator app, then confirm your current password
+and a six-digit code. Enrollment expires after ten minutes. The server does
+not activate 2FA until confirmation succeeds.</p>
+<p>Save the ten recovery codes offline. Each works once. Enrollment and local
+reset invalidate existing owner sessions. Password reset does not remove 2FA.
+With local server access, recover using <code>sbox-ns admin reset-2fa</code>.
+Shell-issued login links remain a local-operator recovery capability, so
+protect SSH access and the configuration/data directories too.</p>
+<p>Disable the web admin surface with:</p>
+<pre><code class="language-sh">sbox-ns adminpanel disable
+sbox-ns service restart</code></pre>
+<p>This denies login, setup, login links and dashboard requests at the server
+boundary. It does not disable game APIs. Configuration changes take effect
+after restart; <code>sbox-ns adminpanel enable</code> restores access after another restart.
+If running in the foreground, stop and start the process instead.</p>
+<p>Allow only specific admin IPs or CIDR networks:</p>
+<pre><code class="language-sh">sbox-ns config set adminpanel.allowed_ips &quot;192.0.2.10,2001:db8:1234::/48&quot;
+sbox-ns service restart</code></pre>
+<p>Replace those documentation addresses with yours. An empty list allows all
+addresses. The policy uses the trusted connection address, not arbitrary
+forwarding headers. The built-in proxy trust is loopback, one hop. Confirm the
+observed address and your reverse proxy configuration before restricting access,
+especially with a Cloudflare tunnel; keep local recovery access available.</p>
+<p>Turnstile is optional. Create a widget for your exact public admin hostname
+(including your <code>sboxns.com</code> tunnel name when applicable), then configure
+<code>adminpanel.turnstile.enabled</code>, <code>site_key</code>, <code>secret</code> and <code>hostname</code> as described
+in <a href="/docs/versions/0.4.0/source-6efc43f/server/configuration/">configuration</a>. Keep the secret in a private config file
+or a protected environment variable, not shell history. The server checks
+success, action and hostname with Cloudflare before login/setup/link consumption,
+and denies requests when verification fails or Cloudflare is unavailable.
+Turnstile does not replace 2FA, passwords, rate limits or IP restrictions.</p>
+<h2 id="public-read-only-demo"><a class="anchor" href="#public-read-only-demo" aria-hidden="true" tabindex="-1">#</a>Public read-only demo</h2>
+<p><code>adminpanel.demo_read_only=true</code> is for a dedicated demonstration instance,
+not for making a production database public. It requires SQLite and refuses
+an existing project database without its demo marker. Start with a new, private
+configuration and data directory.</p>
+<p>The instance seeds clearly labeled generated player progress, inventory,
+world state, definitions and diagnostic rows into its real database. Visitors
+can browse anonymously and explore local editor changes. Every HTTP mutation,
+owner login/setup/security/export operation and game execution route is denied
+server-side. Health and server-info remain available. No production credentials
+or player data should ever be copied into this instance.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/705f8cc95f69ac18d7c4569f561ac576136c688f/docs/admin-panel.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/admin-panel.md</a> at <code>v0.4.0</code> (705f8cc).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.4.0 (<code>0.4.0</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/705f8cc95f69ac18d7c4569f561ac576136c688f" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.4.0</code> (<code>705f8cc</code>). <strong>Library:</strong> main source (6efc43f) (<code>source-6efc43f</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/6efc43f065a348b38d51056bfccd162644d03de1" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>6efc43f065a348b38d51056bfccd162644d03de1</code> (<code>6efc43f</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.4.0/source-6efc43f/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.4.0/source-6efc43f/api/">HTTP API</a><a href="/docs/versions/0.4.0/source-6efc43f/library/api/">C# API</a><a href="/docs/versions/0.4.0/source-6efc43f/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>
