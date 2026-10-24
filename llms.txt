@@ -46,6 +46,7 @@ Key facts:
 - [Script endpoints (JavaScript / TypeScript)](https://sboxns.com/docs/library/script-endpoints/)
 - [Examples](https://sboxns.com/docs/library/examples/)
 - [Self-hosting](https://sboxns.com/docs/server/self-hosting/)
+- [CLI reference](https://sboxns.com/docs/server/cli/)
 - [Hosting models](https://sboxns.com/docs/server/hosting-models/)
 - [Configuration](https://sboxns.com/docs/server/configuration/)
 - [Databases](https://sboxns.com/docs/server/database/)

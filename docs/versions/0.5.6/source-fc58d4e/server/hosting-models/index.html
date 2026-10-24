@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hosting models | Network Storage docs</title>
+  <meta name="description" content="Player-hosted, P2P and dedicated servers, and what the backend checks in each.">
+  <link rel="canonical" href="https://sboxns.com/docs/server/hosting-models/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Hosting models | Network Storage docs">
+  <meta property="og:description" content="Player-hosted, P2P and dedicated servers, and what the backend checks in each.">
+  <meta property="og:url" content="https://sboxns.com/docs/server/hosting-models/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-fc58d4e/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-fc58d4e/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.6 · main source (fc58d4e)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-fc58d4e/server/hosting-models/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-fc58d4e/server/hosting-models/">0.5.4</option><option value="/docs/versions/0.5.3/source-fc58d4e/server/hosting-models/">0.5.3</option><option value="/docs/versions/0.5.2/source-fc58d4e/server/hosting-models/">0.5.2</option><option value="/docs/versions/0.5.1/source-fc58d4e/server/hosting-models/">0.5.1</option><option value="/docs/versions/0.5.0/source-fc58d4e/server/hosting-models/">0.5.0</option><option value="/docs/versions/?missing=server%2Fhosting-models&amp;server=0.4.0&amp;library=source-fc58d4e">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fhosting-models&amp;server=0.3.0&amp;library=source-fc58d4e">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fhosting-models&amp;server=0.2.0&amp;library=source-fc58d4e">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fhosting-models&amp;server=0.1.0&amp;library=source-fc58d4e">0.1.0 (page unavailable)</option><option value="/docs/versions/0.5.5/source-fc58d4e/server/hosting-models/">0.5.5</option><option value="/docs/versions/0.5.6/source-fc58d4e/server/hosting-models/" selected>0.5.6</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.6/source-13f51a8/server/hosting-models/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.6/source-d369d1b/server/hosting-models/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.6/source-fc58d4e/server/hosting-models/" selected>main source (fc58d4e)</option><option value="/docs/versions/0.5.6/source-5369108/server/hosting-models/">main source (5369108)</option><option value="/docs/versions/0.5.6/source-9c4a235/server/hosting-models/">main source (9c4a235)</option><option value="/docs/versions/0.5.6/source-9b6ec5d/server/hosting-models/">main source (9b6ec5d)</option><option value="/docs/versions/0.5.6/source-ddf9b61/server/hosting-models/">main source (ddf9b61)</option><option value="/docs/versions/0.5.6/source-7f77770/server/hosting-models/">main source (7f77770)</option><option value="/docs/versions/0.5.6/source-470a694/server/hosting-models/">main source (470a694)</option><option value="/docs/versions/0.5.6/source-6efc43f/server/hosting-models/">main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-fc58d4e/server/hosting-models/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-fc58d4e/server/hosting-models/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-fc58d4e/server/hosting-models/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-fc58d4e/server/hosting-models/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-fc58d4e/server/hosting-models/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-fc58d4e/server/hosting-models/">Server: 0.5.0</a></li><li><a href="/docs/versions/?missing=server%2Fhosting-models&amp;server=0.4.0&amp;library=source-fc58d4e">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fhosting-models&amp;server=0.3.0&amp;library=source-fc58d4e">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fhosting-models&amp;server=0.2.0&amp;library=source-fc58d4e">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fhosting-models&amp;server=0.1.0&amp;library=source-fc58d4e">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/0.5.5/source-fc58d4e/server/hosting-models/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.6/source-fc58d4e/server/hosting-models/">Server: 0.5.6</a></li><li><a href="/docs/versions/0.5.6/source-13f51a8/server/hosting-models/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.6/source-d369d1b/server/hosting-models/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.6/source-fc58d4e/server/hosting-models/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.6/source-5369108/server/hosting-models/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.6/source-9c4a235/server/hosting-models/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.6/source-9b6ec5d/server/hosting-models/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.5.6/source-ddf9b61/server/hosting-models/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.6/source-7f77770/server/hosting-models/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.6/source-470a694/server/hosting-models/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.5.6/source-6efc43f/server/hosting-models/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.6/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.6/source-fc58d4e/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.6/source-fc58d4e/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-fc58d4e/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.6/source-fc58d4e/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.6/source-fc58d4e/library/overview/">Library overview</a><a href="/docs/versions/0.5.6/source-fc58d4e/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.6/source-fc58d4e/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.6/source-fc58d4e/library/examples/">Examples</a><a href="/docs/versions/0.5.6/source-fc58d4e/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.6/source-fc58d4e/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.6/source-fc58d4e/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/cli/">CLI reference</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/hosting-models/" aria-current="page">Hosting models</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/configuration/">Configuration</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/database/">Databases</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/media/">Media uploads</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/game-logs/">Game logs</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/export/">Export and move projects</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/modules/">Modules</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/alerting/">Alerting</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.6/source-fc58d4e/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.6/source-fc58d4e/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.6/source-fc58d4e/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.6/source-fc58d4e/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.6/source-fc58d4e/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Hosting models</span></nav>
+  <article class="prose docs-prose">
+<h1>Hosting models</h1>
+<p class="lead">Player-hosted, P2P and dedicated servers, and what the backend checks in each.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#player-hosted">Player-hosted</a><a href="#dedicated">Dedicated</a><a href="#hybrid">Hybrid</a><a href="#key-rules">Key rules</a><a href="#self-hosted-or-managed">Self-hosted or managed</a></nav>
+<p>s&amp;box Network Storage is the central server your game is missing. Your
+game servers, whether a player&#39;s listen server or your own dedicated box,
+are thin callers: currency, XP, levels, items, high scores and every other
+important rule run here, behind the HTTPS endpoint you control.</p>
+<h2 id="player-hosted"><a class="anchor" href="#player-hosted" aria-hidden="true" tabindex="-1">#</a>Player-hosted</h2>
+<p>A player runs the listen server from their own game. That server only ever
+holds the <strong>public key</strong> (<code>sbox_ns_...</code>), so it can read shared data and
+call public endpoints, but every important check runs on this backend.
+Game collections stay endpoint-only, so a compromised host cannot rewrite
+player data directly. This is the cheapest way to start, and it is safe by
+default.</p>
+<h2 id="dedicated"><a class="anchor" href="#dedicated" aria-hidden="true" tabindex="-1">#</a>Dedicated</h2>
+<p>Your own box runs the game server with a <strong>secret key</strong> (<code>sbox_sk_...</code>).
+It can call dedicated-only endpoints (<code>requiresSecretKey</code>) and use the
+management API. Players still only hold the public key in the published
+game. Use this for tournaments, seasons, or anything worth protecting.</p>
+<h2 id="hybrid"><a class="anchor" href="#hybrid" aria-hidden="true" tabindex="-1">#</a>Hybrid</h2>
+<p>Players host day-to-day sessions while your dedicated box handles special
+modes. One project serves both at once: public endpoints for everyone,
+secret-key endpoints for your box.</p>
+<h2 id="key-rules"><a class="anchor" href="#key-rules" aria-hidden="true" tabindex="-1">#</a>Key rules</h2>
+<ul>
+<li>The game client and any player-run host get only the project ID and the
+public key. The <code>NetworkStorage.Configure</code> line in game code uses those
+two values plus your base URL.</li>
+<li>The secret key belongs only in editor tooling (`Editor &gt; Network Storage<blockquote>
+<p>Setup`, the Sync Tool) and trusted servers. It never ships in a
+published game.</p>
+</blockquote>
+</li>
+<li>The dashboard authority check lists any game data a client could still
+change directly, so you can close the gaps before players find them. Set
+the project&#39;s hosting profile first; see <a href="/docs/versions/0.5.6/source-fc58d4e/server/admin-panel/#authority-check">admin-panel.md</a>
+for the findings and the CLI/MCP equivalents.</li>
+</ul>
+<h2 id="self-hosted-or-managed"><a class="anchor" href="#self-hosted-or-managed" aria-hidden="true" tabindex="-1">#</a>Self-hosted or managed</h2>
+<p>The same client library talks to either; only the base URL differs.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Self-hosted (this server)</th>
+<th>Managed (<a href="https://sbox.cool/tools/network-storage" target="_blank" rel="noopener">sbox.cool</a>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cost</td>
+<td>Free; you pay for your own server</td>
+<td>See sbox.cool</td>
+</tr>
+<tr>
+<td>Hosting, uptime, backups</td>
+<td>You (<code>sbox-ns db backup</code>)</td>
+<td>sbox.cool</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>SQLite or PostgreSQL you operate</td>
+<td>Managed</td>
+</tr>
+<tr>
+<td>Updates</td>
+<td>Notices by default, opt-in automatic</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Management</td>
+<td>Owner console, <code>sbox-ns</code> CLI, editor Sync Tool</td>
+<td>sbox.cool dashboard, editor Sync Tool</td>
+</tr>
+<tr>
+<td>Data location</td>
+<td>Your machine</td>
+<td>sbox.cool infrastructure</td>
+</tr>
+<tr>
+<td>Source</td>
+<td>AGPL-3.0</td>
+<td>Closed</td>
+</tr>
+</tbody></table>
+<p>For pointing the game and editor at your server, see
+<a href="/docs/versions/0.5.6/source-fc58d4e/start/connect-a-game/">client-setup.md</a>. For what the client says to your
+server, see <a href="/docs/versions/0.5.6/source-fc58d4e/start/game-client/">game-client.md</a>.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ba18db0529a36c950165b36089504b3e6ae88632/docs/hosting-models.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/hosting-models.md</a> at <code>v0.5.6</code> (ba18db0).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.6 (<code>0.5.6</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/ba18db0529a36c950165b36089504b3e6ae88632" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.6</code> (<code>ba18db0</code>). <strong>Library:</strong> main source (fc58d4e) (<code>source-fc58d4e</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a</code> (<code>fc58d4e</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.6/source-fc58d4e/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-fc58d4e/api/">HTTP API</a><a href="/docs/versions/0.5.6/source-fc58d4e/library/api/">C# API</a><a href="/docs/versions/0.5.6/source-fc58d4e/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

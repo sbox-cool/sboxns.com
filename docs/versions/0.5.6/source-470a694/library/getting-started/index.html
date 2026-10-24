@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Install and configure | Network Storage docs</title>
+  <meta name="description" content="Install, update and configure the library; API root, generated code and dedicated server keys.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.1.0/source-470a694/library/getting-started/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Install and configure | Network Storage docs">
+  <meta property="og:description" content="Install, update and configure the library; API root, generated code and dedicated server keys.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.1.0/source-470a694/library/getting-started/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-470a694/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-470a694/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.6 · main source (470a694)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-470a694/library/getting-started/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-470a694/library/getting-started/">0.5.4</option><option value="/docs/versions/0.5.3/source-470a694/library/getting-started/">0.5.3</option><option value="/docs/versions/0.5.2/source-470a694/library/getting-started/">0.5.2</option><option value="/docs/versions/0.5.1/source-470a694/library/getting-started/">0.5.1</option><option value="/docs/versions/0.5.0/source-470a694/library/getting-started/">0.5.0</option><option value="/docs/versions/0.4.0/source-470a694/library/getting-started/">0.4.0</option><option value="/docs/versions/0.3.0/source-470a694/library/getting-started/">0.3.0</option><option value="/docs/versions/0.2.0/source-470a694/library/getting-started/">0.2.0</option><option value="/docs/versions/0.1.0/source-470a694/library/getting-started/">0.1.0</option><option value="/docs/versions/0.5.5/source-470a694/library/getting-started/">0.5.5</option><option value="/docs/versions/0.5.6/source-470a694/library/getting-started/" selected>0.5.6</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-13f51a8">1.1.0 source (13f51a8) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-d369d1b">Legacy source (d369d1b) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-fc58d4e">main source (fc58d4e) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-5369108">main source (5369108) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-9c4a235">main source (9c4a235) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-9b6ec5d">main source (9b6ec5d) (page unavailable)</option><option value="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-ddf9b61">main source (ddf9b61) (page unavailable)</option><option value="/docs/versions/0.5.6/source-7f77770/library/getting-started/">main source (7f77770)</option><option value="/docs/versions/0.5.6/source-470a694/library/getting-started/" selected>main source (470a694)</option><option value="/docs/versions/0.5.6/source-6efc43f/library/getting-started/">main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-470a694/library/getting-started/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-470a694/library/getting-started/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-470a694/library/getting-started/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-470a694/library/getting-started/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-470a694/library/getting-started/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-470a694/library/getting-started/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-470a694/library/getting-started/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-470a694/library/getting-started/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-470a694/library/getting-started/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-470a694/library/getting-started/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-470a694/library/getting-started/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.6/source-470a694/library/getting-started/">Server: 0.5.6</a></li><li><a href="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-13f51a8">Library: 1.1.0 source (13f51a8) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-d369d1b">Library: Legacy source (d369d1b) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-fc58d4e">Library: main source (fc58d4e) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-5369108">Library: main source (5369108) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-9c4a235">Library: main source (9c4a235) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-9b6ec5d">Library: main source (9b6ec5d) (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fgetting-started&amp;server=0.5.6&amp;library=source-ddf9b61">Library: main source (ddf9b61) (page unavailable)</a></li><li><a href="/docs/versions/0.5.6/source-7f77770/library/getting-started/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.6/source-470a694/library/getting-started/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.5.6/source-6efc43f/library/getting-started/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.6/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.6/source-470a694/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.6/source-470a694/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-470a694/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.6/source-470a694/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.6/source-470a694/library/overview/">Library overview</a><a href="/docs/versions/0.5.6/source-470a694/library/getting-started/" aria-current="page">Install and configure</a><a href="/docs/versions/0.5.6/source-470a694/library/runtime-api/">Runtime guide</a><a href="/docs/versions/0.5.6/source-470a694/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.5.6/source-470a694/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.6/source-470a694/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.6/source-470a694/library/examples/">Examples</a><a href="/docs/versions/0.5.6/source-470a694/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.5.6/source-470a694/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.6/source-470a694/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.6/source-470a694/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.6/source-470a694/server/cli/">CLI reference</a><a href="/docs/versions/0.5.6/source-470a694/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.6/source-470a694/server/configuration/">Configuration</a><a href="/docs/versions/0.5.6/source-470a694/server/database/">Databases</a><a href="/docs/versions/0.5.6/source-470a694/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.6/source-470a694/server/media/">Media uploads</a><a href="/docs/versions/0.5.6/source-470a694/server/game-logs/">Game logs</a><a href="/docs/versions/0.5.6/source-470a694/server/export/">Export and move projects</a><a href="/docs/versions/0.5.6/source-470a694/server/modules/">Modules</a><a href="/docs/versions/0.5.6/source-470a694/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.6/source-470a694/server/alerting/">Alerting</a><a href="/docs/versions/0.5.6/source-470a694/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.6/source-470a694/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.6/source-470a694/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.6/source-470a694/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.6/source-470a694/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.6/source-470a694/">Docs</a><span aria-hidden="true">/</span><span>Game library</span><span aria-hidden="true">/</span><span aria-current="page">Install and configure</span></nav>
+  <article class="prose docs-prose">
+<h1>Install and configure</h1>
+<p class="lead">Install, update and configure the library; API root, generated code and dedicated server keys.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#install">Install</a><a href="#configure">Configure</a><a href="#dedicated-servers">Dedicated servers</a><a href="#security-model">Security model</a></nav>
+<h2 id="install"><a class="anchor" href="#install" aria-hidden="true" tabindex="-1">#</a>Install</h2>
+<h3 id="from-sbox-recommended"><a class="anchor" href="#from-sbox-recommended" aria-hidden="true" tabindex="-1">#</a>From s&amp;box (recommended)</h3>
+<p>Install from <a href="https://sbox.game/sboxcool/network-storage" target="_blank" rel="noopener">sbox.game/sboxcool/network-storage</a>, or in
+the editor:</p>
+<ol>
+<li>Open <strong>Editor &gt; Library Manager</strong>.</li>
+<li>Search for <strong>Network Storage</strong> and pick the one published by <strong>sboxcool</strong>. Do not install
+copies from other authors.</li>
+<li>Click <strong>Add to Project</strong>. The library appears in your project&#39;s <code>Libraries/</code> folder.</li>
+</ol>
+<h3 id="manual-git"><a class="anchor" href="#manual-git" aria-hidden="true" tabindex="-1">#</a>Manual (git)</h3>
+<pre><code class="language-sh">cd &quot;YourProject/Libraries&quot;
+git clone https://github.com/sbox-cool/sbox-network-storage &quot;Network Storage by sboxcool&quot;
+# or, as a submodule from the project root:
+git submodule add https://github.com/sbox-cool/sbox-network-storage &quot;Libraries/Network Storage by sboxcool&quot;</code></pre>
+<p>The editor does not pick up a library folder added while it is running: restart the editor (or
+reopen the project) after cloning. Checked on s&amp;box 26.10.13.</p>
+<h3 id="updating"><a class="anchor" href="#updating" aria-hidden="true" tabindex="-1">#</a>Updating</h3>
+<p>Use <strong>Library Manager</strong>; it replaces the library folder. For a manual install, <code>git pull</code> inside
+the folder, or delete the old <code>Libraries/&lt;library folder&gt;</code> completely and install again. <strong>Do not
+copy new files over an old install</strong>: files moved between versions (for example <code>JsonHelpers.cs</code>,
+<code>NetLog.cs</code> and <code>NetworkStorageClient.cs</code> now live under <code>Code/Core/</code>) would exist twice and the
+project fails to compile with duplicate-type errors (CS0121).</p>
+<p>Library versions before <code>1.0.309133</code> do not start on s&amp;box editor 26.10 or later
+(<code>Constructor on type &#39;SyncToolWindow&#39; not found</code>). Update the library.</p>
+<h3 id="unreleased-features-main"><a class="anchor" href="#unreleased-features-main" aria-hidden="true" tabindex="-1">#</a>Unreleased features (<code>main</code>)</h3>
+<p><code>main</code> can contain merged fixes that are not yet published on sbox.game. The self-hosted owner
+dashboard lists them, with how long they have waited. To try them:</p>
+<ol>
+<li>Close the editor.</li>
+<li>Delete (or back up) the library folder in <code>Libraries/</code>.</li>
+<li>Extract <code>https://github.com/sbox-cool/sbox-network-storage/archive/refs/heads/main.zip</code> into
+<code>Libraries/</code> and rename <code>sbox-network-storage-main</code> to <code>sboxcool.network-storage</code>, or <code>git clone</code>
+the repository into that folder.</li>
+<li>Start the editor.</li>
+</ol>
+<p>To go back, delete that folder and install from sbox.game. Unreleased code has passed the GitHub
+Actions compat gate but not the native editor run a published release requires: do not ship games
+built on it. <code>main</code> can need a newer server than the published library.</p>
+<h2 id="configure"><a class="anchor" href="#configure" aria-hidden="true" tabindex="-1">#</a>Configure</h2>
+<h3 id="1-get-a-project-and-keys"><a class="anchor" href="#1-get-a-project-and-keys" aria-hidden="true" tabindex="-1">#</a>1. Get a project and keys</h3>
+<p>Use a <a href="https://sboxns.com/install/">self-hosted server</a> (<code>sbox-ns quickstart &quot;My Game&quot;</code> prints
+everything below) or create a project on <a href="https://sboxcool.com" target="_blank" rel="noopener">sboxcool.com</a>. You need:</p>
+<ul>
+<li>the <strong>Project ID</strong>;</li>
+<li>a <strong>public key</strong> (<code>sbox_ns_...</code>): used by the game at runtime, safe to ship;</li>
+<li>a <strong>secret key</strong> (<code>sbox_sk_...</code>): editor tooling and trusted dedicated servers only, never in a
+published game.</li>
+</ul>
+<h3 id="2-enter-them-in-the-editor"><a class="anchor" href="#2-enter-them-in-the-editor" aria-hidden="true" tabindex="-1">#</a>2. Enter them in the editor</h3>
+<ol>
+<li>Open <strong>Editor &gt; Network Storage &gt; Setup</strong>.</li>
+<li>Enter the <strong>Project ID</strong>, <strong>Public API Key</strong> and <strong>Secret Key</strong>. For a self-hosted server, set
+<strong>Base URL</strong> to its scheme and host (for example <code>https://my-game.sboxns.com</code>, no path or
+trailing slash). Leave <strong>CDN URL</strong> empty unless you run one.</li>
+<li>Click <strong>Save Configuration</strong>, then <strong>Test Connection</strong>.</li>
+</ol>
+<p>Credentials are saved to <code>Editor/Network Storage/.env</code>. The <code>Editor/</code> folder is excluded from
+s&amp;box publishing and <code>.env</code> is gitignored, so the secret key never ships or gets committed.</p>
+<p>The Sync Tool window shows the active server (highlighted when it is not <code>api.sboxcool.com</code>) and
+the last request it sent.</p>
+<h3 id="or-configure-in-code"><a class="anchor" href="#or-configure-in-code" aria-hidden="true" tabindex="-1">#</a>Or configure in code</h3>
+<pre><code class="language-csharp">NetworkStorage.Configure( projectId, publicKey );                       // api.sboxcool.com
+NetworkStorage.Configure( projectId, publicKey, &quot;https://your-server&quot; ); // self-hosted</code></pre>
+<p>The full signature is <code>Configure( projectId, apiKey, baseUrl, apiVersion, cdnUrl, publishTarget, securityKeyFingerprint )</code>; see <a href="/docs/versions/0.5.6/source-470a694/library/runtime-api/#encrypted-requests">encrypted requests</a> for the
+fingerprint.</p>
+<h3 id="api-root"><a class="anchor" href="#api-root" aria-hidden="true" tabindex="-1">#</a>API root</h3>
+<p>New projects get <code>apiVersion</code> <code>v3</code> (<code>https://your-server/v3/...</code>). The hosted backend at
+<code>api.sboxcool.com</code> does not serve the <code>/api/{family}</code> routes, so <code>api</code> works only on self-hosted
+servers 0.5.5 and later: set <code>apiVersion</code> to <code>api</code> in
+<code>Editor/Network Storage/config/public/projectConfig.json</code>, or pass <code>&quot;api&quot;</code> as the fourth argument
+of <code>Configure</code>. A config without an <code>apiVersion</code> key keeps <code>v3</code>. <code>/api/storage</code> uses uniform
+storage routes only for library 1.2.0 and later; older libraries keep their legacy meaning.</p>
+<h3 id="generated-code"><a class="anchor" href="#generated-code" aria-hidden="true" tabindex="-1">#</a>Generated code</h3>
+<p>After a sync or pull the Sync Tool writes into <strong>your project</strong>:</p>
+<ul>
+<li><code>Code/Data/NetworkStorage/</code>: <code>Readme.txt</code> and <code>autoGenerated_Config.cs</code>, <code>_Collections.cs</code>,
+<code>_Endpoints.cs</code>, <code>_Workflows.cs</code>. They are regenerated every time; do not edit them.</li>
+<li><code>Assets/network-storage.credentials.json</code>: project ID, <strong>public</strong> key, base URL, API version and
+auth/encryption flags, never the secret key. It ships with the game, so point <code>baseUrl</code> at the
+server players should use before publishing.</li>
+</ul>
+<h2 id="dedicated-servers"><a class="anchor" href="#dedicated-servers" aria-hidden="true" tabindex="-1">#</a>Dedicated servers</h2>
+<p>A dedicated server can supply the secret key at launch without putting it in the published bundle:</p>
+<pre><code class="language-sh">sbox-server.exe +game your.org.game your.map +hostname &quot;My Server&quot; +network_storage_secret_key sbox_sk_your_secret_key</code></pre>
+<p><code>+network_storage_secret_key</code> is the primary name. On <code>Application.IsDedicatedServer</code> hosts the
+library also accepts <code>+network-storage-secret-key</code>, <code>+sboxcool_secret_key</code>,
+<code>+networkStorageSecretKey</code>, <code>+sboxcoolSecretKey</code>, <code>+nsSecretKey</code> and <code>+ns_secret_key</code>, and
+validates the key at startup. Generic names such as <code>+secret-key</code>, <code>+secret_key</code> and <code>+secretKey</code>
+are intentionally not supported.</p>
+<p>With the dedicated key the library does not request or send s&amp;box auth tokens. Endpoint requests
+carry the secret in the <code>x-secret-key</code> HTTPS header; storage document reads, writes and deletes send
+it as <code>x-api-key</code>, so secret keys with <code>collections:execute</code> can reach endpoint-only collections.
+Never put <code>sbox_sk_</code> values in code, public credentials or client-callable URLs. Collection schema
+deletion stays in the dashboard.</p>
+<h2 id="security-model"><a class="anchor" href="#security-model" aria-hidden="true" tabindex="-1">#</a>Security model</h2>
+<ul>
+<li>Only the public key ships in a game. Anything it can do, any player can do, so keep game data
+behind endpoints.</li>
+<li>Anti-exploit checks run on the server: endpoints recompute each claim from game values and the
+server clock and reject impossible results. The checks bound what a client can claim; they
+cannot prove a hit landed.</li>
+<li>New collections start in <code>accessMode: endpoint</code>; direct document calls from game clients get
+<code>403 ENDPOINT_ONLY</code>.</li>
+<li>The library runs in <strong>API only</strong> mode: runtime reads and editor sync use the API; there is no
+local JSON fallback.</li>
+</ul>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage/blob/470a69426ebe9af83a2f6ae8e77047faa80c1430/docs/getting-started.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage/docs/getting-started.md</a> at <code>470a69426ebe9af83a2f6ae8e77047faa80c1430</code> (470a694).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.6 (<code>0.5.6</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/ba18db0529a36c950165b36089504b3e6ae88632" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.6</code> (<code>ba18db0</code>). <strong>Library:</strong> main source (470a694) (<code>source-470a694</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/470a69426ebe9af83a2f6ae8e77047faa80c1430" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>470a69426ebe9af83a2f6ae8e77047faa80c1430</code> (<code>470a694</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.6/source-470a694/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-470a694/api/">HTTP API</a><a href="/docs/versions/0.5.6/source-470a694/library/api/">C# API</a><a href="/docs/versions/0.5.6/source-470a694/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

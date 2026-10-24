@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Script endpoints (JavaScript / TypeScript) | Network Storage docs</title>
+  <meta name="description" content="Write endpoints in YAML or JavaScript/TypeScript: sandboxed, with a shared global environment of reusable code.">
+  <link rel="canonical" href="https://sboxns.com/docs/library/script-endpoints/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Script endpoints (JavaScript / TypeScript) | Network Storage docs">
+  <meta property="og:description" content="Write endpoints in YAML or JavaScript/TypeScript: sandboxed, with a shared global environment of reusable code.">
+  <meta property="og:url" content="https://sboxns.com/docs/library/script-endpoints/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-9b6ec5d/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-9b6ec5d/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.6 · main source (9b6ec5d)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-9b6ec5d/library/script-endpoints/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.4&amp;library=source-9b6ec5d">0.5.4 (page unavailable)</option><option value="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.3&amp;library=source-9b6ec5d">0.5.3 (page unavailable)</option><option value="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.2&amp;library=source-9b6ec5d">0.5.2 (page unavailable)</option><option value="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.1&amp;library=source-9b6ec5d">0.5.1 (page unavailable)</option><option value="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.0&amp;library=source-9b6ec5d">0.5.0 (page unavailable)</option><option value="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.4.0&amp;library=source-9b6ec5d">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.3.0&amp;library=source-9b6ec5d">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.2.0&amp;library=source-9b6ec5d">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.1.0&amp;library=source-9b6ec5d">0.1.0 (page unavailable)</option><option value="/docs/versions/0.5.5/source-9b6ec5d/library/script-endpoints/">0.5.5</option><option value="/docs/versions/0.5.6/source-9b6ec5d/library/script-endpoints/" selected>0.5.6</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.6/source-13f51a8/library/script-endpoints/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.6/source-d369d1b/library/script-endpoints/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.6/source-fc58d4e/library/script-endpoints/">main source (fc58d4e)</option><option value="/docs/versions/0.5.6/source-5369108/library/script-endpoints/">main source (5369108)</option><option value="/docs/versions/0.5.6/source-9c4a235/library/script-endpoints/">main source (9c4a235)</option><option value="/docs/versions/0.5.6/source-9b6ec5d/library/script-endpoints/" selected>main source (9b6ec5d)</option><option value="/docs/versions/0.5.6/source-ddf9b61/library/script-endpoints/">main source (ddf9b61)</option><option value="/docs/versions/0.5.6/source-7f77770/library/script-endpoints/">main source (7f77770)</option><option value="/docs/versions/0.5.6/source-470a694/library/script-endpoints/">main source (470a694)</option><option value="/docs/versions/0.5.6/source-6efc43f/library/script-endpoints/">main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-9b6ec5d/library/script-endpoints/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.4&amp;library=source-9b6ec5d">Server: 0.5.4 (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.3&amp;library=source-9b6ec5d">Server: 0.5.3 (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.2&amp;library=source-9b6ec5d">Server: 0.5.2 (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.1&amp;library=source-9b6ec5d">Server: 0.5.1 (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.5.0&amp;library=source-9b6ec5d">Server: 0.5.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.4.0&amp;library=source-9b6ec5d">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.3.0&amp;library=source-9b6ec5d">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.2.0&amp;library=source-9b6ec5d">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=library%2Fscript-endpoints&amp;server=0.1.0&amp;library=source-9b6ec5d">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/0.5.5/source-9b6ec5d/library/script-endpoints/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.6/source-9b6ec5d/library/script-endpoints/">Server: 0.5.6</a></li><li><a href="/docs/versions/0.5.6/source-13f51a8/library/script-endpoints/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.6/source-d369d1b/library/script-endpoints/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.6/source-fc58d4e/library/script-endpoints/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.6/source-5369108/library/script-endpoints/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.6/source-9c4a235/library/script-endpoints/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.6/source-9b6ec5d/library/script-endpoints/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.5.6/source-ddf9b61/library/script-endpoints/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.6/source-7f77770/library/script-endpoints/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.6/source-470a694/library/script-endpoints/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.5.6/source-6efc43f/library/script-endpoints/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.6/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.6/source-9b6ec5d/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.6/source-9b6ec5d/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-9b6ec5d/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.6/source-9b6ec5d/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.6/source-9b6ec5d/library/overview/">Library overview</a><a href="/docs/versions/0.5.6/source-9b6ec5d/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.6/source-9b6ec5d/library/script-endpoints/" aria-current="page">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.6/source-9b6ec5d/library/examples/">Examples</a><a href="/docs/versions/0.5.6/source-9b6ec5d/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.6/source-9b6ec5d/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.6/source-9b6ec5d/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/cli/">CLI reference</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/configuration/">Configuration</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/database/">Databases</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/media/">Media uploads</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/game-logs/">Game logs</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/export/">Export and move projects</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/modules/">Modules</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/alerting/">Alerting</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.6/source-9b6ec5d/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.6/source-9b6ec5d/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.6/source-9b6ec5d/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.6/source-9b6ec5d/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.6/source-9b6ec5d/">Docs</a><span aria-hidden="true">/</span><span>Game library</span><span aria-hidden="true">/</span><span aria-current="page">Script endpoints (JavaScript / TypeScript)</span></nav>
+  <article class="prose docs-prose">
+<h1>Script endpoints (JavaScript / TypeScript)</h1>
+<p class="lead">Write endpoints in YAML or JavaScript/TypeScript: sandboxed, with a shared global environment of reusable code.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#contract">Contract</a><a href="#req">req</a><a href="#ns">ns</a><a href="#outbound-http-nsfetch">Outbound HTTP: ns.fetch</a><a href="#project-secrets-nssecretsget">Project secrets: ns.secrets.get</a><a href="#scope-imports-and-globals">Scope, imports and globals</a><a href="#legacy-workflows">Legacy workflows</a><a href="#typescript">TypeScript</a><a href="#limits">Limits</a><a href="#typed-error-codes">Typed error codes</a><a href="#sync-refusals">Sync refusals</a><a href="#templates">Templates</a><a href="#editing-in-the-dashboard">Editing in the dashboard</a><a href="#file-layout">File layout</a><a href="#third-party-notice">Third-party notice</a></nav>
+<p>Endpoints can be written in <strong>YAML</strong> (steps) or in <strong>JavaScript / TypeScript</strong>
+(code). Collections stay YAML. More languages are planned; YAML endpoints are
+unchanged and stay supported.</p>
+<ul>
+<li><strong>Code endpoints.</strong> Set <code>runtime: javascript</code> or <code>runtime: typescript</code> and put
+the code in <code>script</code>. The server runs it against the same records, game values,
+access rules and clock that YAML endpoints use.</li>
+<li><strong>A full global environment.</strong> Any endpoint can be <code>scope: global</code>: it gets no
+HTTP route and shares its exported functions, classes and constants with every
+other script, via <code>import { x } from &quot;globals/&lt;id&gt;&quot;</code> or <code>globals.&lt;id&gt;.x</code>
+without an import. Existing YAML workflows are callable as
+<code>workflows.&lt;name&gt;(input)</code>.</li>
+<li><strong>Sandboxed.</strong> Scripts run inside the server in an isolated interpreter with
+no file system, network, process or .NET access, and with per-request limits
+on time, statements, memory, recursion and storage operations (see
+<a href="#limits">Limits</a>). One project&#39;s scripts cannot see another project&#39;s data.</li>
+</ul>
+<p>Available on <code>main</code> now and in the next server release (0.5.5).</p>
+<pre><code class="language-yaml">method: POST
+runtime: javascript
+scope: public
+script: |
+  export default function handle(req, ns) {
+    if (req.player === null) ns.fail(&quot;AUTH_REQUIRED&quot;, &quot;Sign in first.&quot;, 401);
+    const player = ns.records.get(&quot;players&quot;, req.player.steamId) ?? { coins: 0 };
+    return { ok: true, coins: player.coins };
+  }</code></pre>
+<p>Starting templates for both runtimes are listed at the end of this page.</p>
+<h2 id="contract"><a class="anchor" href="#contract" aria-hidden="true" tabindex="-1">#</a>Contract</h2>
+<p>The script exports a default function <code>handle(req, ns)</code>. Its return value is
+the response body as JSON. Return plain data (objects, arrays, strings,
+numbers, booleans, null).</p>
+<p>A script ends the request with an error through <code>ns.fail</code>. A failed request
+answers with its status and this body:</p>
+<pre><code class="language-json">{ &quot;ok&quot;: false, &quot;error&quot;: { &quot;code&quot;: &quot;AUTH_REQUIRED&quot;, &quot;message&quot;: &quot;Sign in first.&quot; } }</code></pre>
+<p>The script cannot catch <code>ns.fail</code>. Its status must be in the 400-499 range;
+the default is 400.</p>
+<h2 id="req"><a class="anchor" href="#req" aria-hidden="true" tabindex="-1">#</a><code>req</code></h2>
+<p>The first argument. Its type is <code>EndpointRequest</code> in
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ba18db0529a36c950165b36089504b3e6ae88632/docs/owner-assets/endpoint-api/ns.d.ts" target="_blank" rel="noopener"><code>ns.d.ts</code></a>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>input</code></td>
+<td><code>Record&lt;string, unknown&gt;</code></td>
+<td>The query string for GET, the JSON body for POST.</td>
+</tr>
+<tr>
+<td><code>player</code></td>
+<td><code>{ steamId: string } | null</code></td>
+<td>The server-verified player. <code>null</code> when the caller is anonymous or called with a secret key.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td><code>&quot;GET&quot; | &quot;POST&quot;</code></td>
+<td>The HTTP method.</td>
+</tr>
+<tr>
+<td><code>endpoint</code></td>
+<td><code>string</code></td>
+<td>The endpoint slug.</td>
+</tr>
+<tr>
+<td><code>revision</code></td>
+<td><code>string | null</code></td>
+<td>The game client&#39;s revision id, or <code>null</code> when the client sent none.</td>
+</tr>
+</tbody></table>
+<p>Check <code>req.player</code> before you use it. Anonymous callers have no player, and a
+secret-key caller has no player either, even though the server trusts that
+caller.</p>
+<h2 id="ns"><a class="anchor" href="#ns" aria-hidden="true" tabindex="-1">#</a><code>ns</code></h2>
+<p>The second argument. Its type is <code>Ns</code> in <code>ns.d.ts</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ns.records.get(collection, key)</code></td>
+<td>Reads a record. Returns <code>null</code> when it does not exist.</td>
+</tr>
+<tr>
+<td><code>ns.records.put(collection, key, data)</code></td>
+<td>Writes a record. <code>data</code> is a JSON object.</td>
+</tr>
+<tr>
+<td><code>ns.records.delete(collection, key)</code></td>
+<td>Deletes a record.</td>
+</tr>
+<tr>
+<td><code>ns.records.list(collection)</code></td>
+<td>Lists the records of a collection.</td>
+</tr>
+<tr>
+<td><code>ns.values.get(path)</code></td>
+<td>Reads a game value by <code>&quot;group&quot;</code> or <code>&quot;group.key&quot;</code>. Returns <code>null</code> when absent.</td>
+</tr>
+<tr>
+<td><code>ns.workflows.run(id, input)</code></td>
+<td>Runs a workflow of this project and returns its result. See <a href="#legacy-workflows">Legacy workflows</a>.</td>
+</tr>
+<tr>
+<td><code>ns.now()</code></td>
+<td>Server time in milliseconds since the Unix epoch.</td>
+</tr>
+<tr>
+<td><code>ns.log(value)</code></td>
+<td>Keeps a line for this request, capped by <code>MaxLogBytes</code>. Endpoint tests and the owner&#39;s error detail show the lines when the call fails. Successful live calls do not keep them, and lines are not written to the server log.</td>
+</tr>
+<tr>
+<td><code>ns.fetch(url, options?)</code></td>
+<td>Calls an outside HTTP or HTTPS host. The result is <code>null</code> on the first run of the handler; see <a href="#outbound-http-nsfetch">Outbound HTTP</a>.</td>
+</tr>
+<tr>
+<td><code>ns.fail(code, message, status?)</code></td>
+<td>Ends the request with a typed error.</td>
+</tr>
+</tbody></table>
+<p>Writes made by a script apply when the endpoint returns normally. A request
+that ends with <code>ns.fail</code> does not keep its writes.</p>
+<p>Script record keys are literal: <code>item</code> and <code>item_default</code> name different records, just as in
+the document API and owner console. No <code>_default</code> suffix is stripped by <code>get</code>, <code>put</code> or
+<code>delete</code>. Legacy YAML read/write steps keep their historical <code>_default</code> key normalization.</p>
+<h2 id="outbound-http-nsfetch"><a class="anchor" href="#outbound-http-nsfetch" aria-hidden="true" tabindex="-1">#</a>Outbound HTTP: <code>ns.fetch</code></h2>
+<p><code>ns.fetch(url, options?)</code> calls an outside HTTP or HTTPS host. The owner lists the allowed hosts for each project under <strong>Script fetch (ns.fetch)</strong> (<a href="/docs/versions/0.5.6/source-9b6ec5d/server/admin-panel/#script-fetch-nsfetch">admin-panel.md</a>). A project with no listed host refuses every call. The operator setting <code>endpoints.fetch_private_networks</code> is in <a href="/docs/versions/0.5.6/source-9b6ec5d/server/configuration/#scripted-endpoints">configuration.md</a>. The types <code>FetchOptions</code>, <code>FetchResponse</code> and <code>FetchError</code> are in <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ba18db0529a36c950165b36089504b3e6ae88632/docs/owner-assets/endpoint-api/ns.d.ts" target="_blank" rel="noopener"><code>ns.d.ts</code></a>.</p>
+<pre><code class="language-js">export default function handle(req, ns) {
+  let res;
+  try {
+    res = ns.fetch(&quot;https://api.example.com/v1/rank&quot;, {
+      method: &quot;POST&quot;,
+      body: { steamId: req.player === null ? null : req.player.steamId },
+      timeoutMs: 3000,
+    });
+  } catch (error) {
+    if (error.code === &quot;FETCH_BLOCKED&quot;) return { rank: null };
+    throw error; // rethrown: the request answers 502 with the error's code
+  }
+  if (res === null) return null; // first run: the handler runs again with the response
+  return { rank: res.ok &amp;&amp; res.json !== null ? res.json.rank : null };
+}</code></pre>
+<h3 id="calls-run-in-rounds"><a class="anchor" href="#calls-run-in-rounds" aria-hidden="true" tabindex="-1">#</a>Calls run in rounds</h3>
+<p>A call returns <code>null</code> until its request has finished. On the first run the handler gets <code>null</code> from every new call. The server then sends the queued requests and runs the handler again. The re-run gets each stored response and sends no second request. So:</p>
+<ul>
+<li>Code after a call must handle <code>null</code>. The first run may throw on it; that run&#39;s result is discarded.</li>
+<li>Writes and the response come from the final run only.</li>
+<li>Each round that waits on <code>ns.fetch</code> counts toward the re-run limit that store reads share (see <a href="#limits">Limits</a>). The network wait is not script time.</li>
+<li>A call whose arguments come from an earlier call that was still <code>null</code> is sent again once those arguments change, and each send counts toward the five-call limit. Return early while an earlier result is <code>null</code> (<code>if (a === null) return null;</code>) to avoid sending the incomplete request.</li>
+</ul>
+<p>The server may also rerun a writing handler after taking record locks, using fresh
+record values. Once a fetch ordinal has executed in an earlier pass, its URL, method,
+headers, body and timeout must stay identical on that locked rerun. Changed arguments
+raise <code>FETCH_REPLAY_CONFLICT</code> instead of sending a second request. Separate calls
+within one run have separate ordinals and still execute independently.</p>
+<p>An external side effect can already have completed even when the endpoint later
+fails and its record writes are discarded. Fetches and database writes are not one
+transaction. Do not blindly retry a failed mutation: use a stable external
+idempotency key and reconcile the external result before retrying.</p>
+<h3 id="request-and-response"><a class="anchor" href="#request-and-response" aria-hidden="true" tabindex="-1">#</a>Request and response</h3>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>url</code></td>
+<td>Absolute <code>http</code> or <code>https</code> URL with no user name or password, at most 2,048 characters.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td><code>GET</code>, <code>HEAD</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code> or <code>DELETE</code>. Default <code>GET</code>. The type is uppercase; lowercase also works at run time.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>An object of strings. At most 32 headers, each value at most 4 KiB, no CR, LF or NUL. These names are refused: <code>host</code>, <code>content-length</code>, <code>transfer-encoding</code>, <code>connection</code>, <code>upgrade</code>, <code>expect</code>, <code>te</code>, <code>trailer</code>, <code>keep-alive</code>, and any <code>proxy-*</code>.</td>
+</tr>
+<tr>
+<td><code>body</code></td>
+<td>A string, an object or an array, at most 64 KiB. An object or array is sent as JSON with <code>content-type: application/json</code>, unless <code>headers</code> sets <code>content-type</code>. <code>GET</code> and <code>HEAD</code> take no body.</td>
+</tr>
+<tr>
+<td><code>timeoutMs</code></td>
+<td>A number, rounded and clamped to 100 to 10,000. Default 5,000.</td>
+</tr>
+</tbody></table>
+<p>An option name other than <code>method</code>, <code>headers</code>, <code>body</code> or <code>timeoutMs</code> is refused as <code>FETCH_INVALID_REQUEST</code>.</p>
+<p>The response is a <code>FetchResponse</code>:</p>
+<ul>
+<li><code>status</code>: the HTTP status.</li>
+<li><code>ok</code>: true for 200 to 299.</li>
+<li><code>headers</code>: names in lowercase. A repeated header is joined with <code>, </code>.</li>
+<li><code>body</code>: the text, decoded as UTF-8. Empty for <code>HEAD</code>.</li>
+<li><code>json</code>: the parsed body, or <code>null</code> when it is not JSON.</li>
+</ul>
+<p>The response body is at most 256 KiB. The server follows redirects for 301, 302, 303, 307 and 308, up to 5 hops. A 303 turns any method except GET and HEAD into GET, and a 301 or 302 does the same for POST. A converted request sends no body and drops the <code>content-*</code> headers. A cross-origin hop drops <code>authorization</code>, <code>cookie</code> and <code>proxy-authorization</code>. Every hop repeats the allow-list and address checks.</p>
+<h3 id="allow-list-and-address-rules"><a class="anchor" href="#allow-list-and-address-rules" aria-hidden="true" tabindex="-1">#</a>Allow-list and address rules</h3>
+<p>Checks run in this order:</p>
+<ol>
+<li><strong>An IP literal</strong> (for example <code>https://10.0.0.5/</code>). The address rules run first, so a blocked address is refused even when it is listed. An allowed address still needs an exact entry in the list, unless the project allows every public host.</li>
+<li><strong>A host name.</strong> The allow-list runs first. Then the server resolves the name and checks every address it gets back. One blocked address refuses the call.</li>
+</ol>
+<p>Allow-list entries:</p>
+<ul>
+<li><code>api.example.com</code> matches that host. <code>*.example.com</code> matches any subdomain at any depth, but not <code>example.com</code> itself.</li>
+<li>Entries are host names only, lowercased, with a trailing dot removed. The port of the URL is not part of the match.</li>
+<li>A list holds at most 100 entries of at most 253 characters each.</li>
+<li>An IP-literal entry matches that exact address and still goes through the address rules.</li>
+<li>With <strong>Allow every public host</strong> on, the list is not read. The address rules still apply.</li>
+</ul>
+<p>Address rules apply to every resolved address on every hop:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Ranges</th>
+<th>Blocked</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Metadata</td>
+<td><code>169.254.169.254</code>, <code>169.254.170.2</code>, <code>100.100.100.200</code>, <code>fd00:ec2::254</code></td>
+<td>Always</td>
+<td><code>metadata_address</code></td>
+</tr>
+<tr>
+<td>Reserved and special-use</td>
+<td><code>0.0.0.0/8</code>, <code>192.0.0.0/24</code>, <code>192.0.2.0/24</code>, <code>198.18.0.0/15</code>, <code>198.51.100.0/24</code>, <code>203.0.113.0/24</code>, <code>224.0.0.0/4</code>, <code>240.0.0.0/4</code>, <code>::/96</code>, <code>100::/64</code>, <code>2001:db8::/32</code>, <code>ff00::/8</code></td>
+<td>Always</td>
+<td><code>reserved_address</code></td>
+</tr>
+<tr>
+<td>Private, loopback and link-local</td>
+<td><code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>, <code>100.64.0.0/10</code>, <code>127.0.0.0/8</code>, <code>169.254.0.0/16</code>, <code>::1/128</code>, <code>fc00::/7</code>, <code>fe80::/10</code>, <code>fec0::/10</code></td>
+<td>Unless <code>endpoints.fetch_private_networks</code> is true</td>
+<td><code>private_address</code></td>
+</tr>
+</tbody></table>
+<p>An IPv4 address inside an IPv4-mapped IPv6 address, a NAT64 address (<code>64:ff9b::/96</code>) or a 6to4 address (<code>2002::/16</code>) is checked as IPv4. Metadata is checked before private, so <code>169.254.169.254</code> reports <code>metadata_address</code>.
+The local-use NAT64 prefix <code>64:ff9b:1::/48</code> is always refused as <code>reserved_address</code>, even when
+private networks are enabled; its deployment-specific translation cannot bypass metadata checks.</p>
+<h3 id="limits-errors-and-the-502-rule"><a class="anchor" href="#limits-errors-and-the-502-rule" aria-hidden="true" tabindex="-1">#</a>Limits, errors and the 502 rule</h3>
+<p>Per execution, across all rounds:</p>
+<ul>
+<li>At most 5 calls are queued. A call counts when it is queued, including one the transport refuses later (a name that resolves to a blocked address, or a redirect to one). A call refused by the allow-list or by an IP-literal address rule is refused at once and does not count. Each call counts, even when it repeats an earlier URL.</li>
+<li><code>timeoutMs</code> defaults to 5,000 ms, clamped to 100 to 10,000 ms.</li>
+</ul>
+<p>A failed call throws a JavaScript <code>Error</code>. Its <code>message</code> starts with <code>ns.fetch:</code>, and its <code>code</code> is one of these:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>FETCH_INVALID_REQUEST</code></td>
+<td>The URL, an option, a header or the body breaks a rule above. Nothing is sent and the call does not count.</td>
+</tr>
+<tr>
+<td><code>FETCH_BLOCKED</code></td>
+<td>The allow-list or an address rule refuses the host. The message gives the reason.</td>
+</tr>
+<tr>
+<td><code>FETCH_LIMIT_EXCEEDED</code></td>
+<td>A call beyond the fifth sent or queued request.</td>
+</tr>
+<tr>
+<td><code>FETCH_REPLAY_CONFLICT</code></td>
+<td>A fetch ordinal executed by an earlier pass has different arguments on the locked rerun. No second request is sent; an earlier external effect may already have completed.</td>
+</tr>
+<tr>
+<td><code>FETCH_TIMEOUT</code></td>
+<td>No complete response within <code>timeoutMs</code>.</td>
+</tr>
+<tr>
+<td><code>FETCH_RESPONSE_TOO_LARGE</code></td>
+<td>The response is larger than 256 KiB, by <code>Content-Length</code> or as it streams.</td>
+</tr>
+<tr>
+<td><code>FETCH_FAILED</code></td>
+<td>A network error, or more than 5 redirects.</td>
+</tr>
+</tbody></table>
+<p>The script can catch these errors. If the uncaught error is an <code>ns.fetch</code> error, the request answers <code>502</code> with that code:</p>
+<pre><code class="language-json">{ &quot;ok&quot;: false, &quot;error&quot;: { &quot;code&quot;: &quot;FETCH_BLOCKED&quot;, &quot;message&quot;: &quot;An outbound request failed.&quot; } }</code></pre>
+<p>A caught error that the script does not rethrow does not change the response. Any other uncaught error answers <code>500 SCRIPT_ERROR</code>.</p>
+<h3 id="diagnostics"><a class="anchor" href="#diagnostics" aria-hidden="true" tabindex="-1">#</a>Diagnostics</h3>
+<ul>
+<li><strong>Try-it trace.</strong> Each call adds a <code>fetch#N</code> step with <code>host</code>, <code>method</code>, <code>status</code>, <code>error</code> and <code>reason</code>.</li>
+<li><strong>Live requests.</strong> A refused call is reported to the owner&#39;s Errors page as <code>EndpointFetch.blocked</code> (status 502), with the host and reason as tags. Reports are throttled per project, endpoint, host and reason. A report is made even when the script caught the error and the response succeeded. Try-it runs are not reported. The owner&#39;s <strong>Script fetch (ns.fetch)</strong> card lists the refusals (<a href="/docs/versions/0.5.6/source-9b6ec5d/server/admin-panel/#script-fetch-nsfetch">admin-panel.md</a>).</li>
+</ul>
+<h2 id="project-secrets-nssecretsget"><a class="anchor" href="#project-secrets-nssecretsget" aria-hidden="true" tabindex="-1">#</a>Project secrets: <code>ns.secrets.get</code></h2>
+<p><code>ns.secrets.get(name)</code> returns the value of a named secret that the owner stored for this project, or <code>null</code> when no secret has that name. The owner sets, replaces and deletes secrets in the project page&#39;s <strong>Secrets</strong> section. Names are case-sensitive: 1 to 64 letters, digits, <code>_</code>, <code>.</code> or <code>-</code>, starting with a letter or digit. A name outside those rules throws an error. The type is <code>NsSecrets</code> in <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ba18db0529a36c950165b36089504b3e6ae88632/docs/owner-assets/endpoint-api/ns.d.ts" target="_blank" rel="noopener"><code>ns.d.ts</code></a>.</p>
+<ul>
+<li><strong>Read-only.</strong> A script cannot write secrets. A value is read when a run needs it and is kept for that run only.</li>
+<li><strong>Write-only in the panel.</strong> After saving, the panel shows the name and the last update time, never the value. Saving an existing name replaces its value.</li>
+<li><strong>Limits.</strong> 64 secrets per project. A value is 1 to 4096 UTF-8 bytes.</li>
+<li><strong>Encrypted at rest.</strong> Values are sealed with AES-256-GCM under a key derived from the storage encryption key (<code>auth.storage_encryption_key_file</code>, see <a href="/docs/versions/0.5.6/source-9b6ec5d/server/configuration/#project-secrets">configuration.md</a>). Without that key a secret cannot be saved, and a run that reads a stored secret fails with <code>SECRET_UNAVAILABLE</code> (500) instead of receiving <code>null</code>.</li>
+<li><strong>Accidental-output protection.</strong> Unchanged values read during a run are replaced with <code>[secret:NAME]</code> in responses, structured logs (before JSON escaping), property names, failure details, traces and blocked-fetch diagnostics. Replacements are matched against the original text once, longest value first; a replacement token is never scanned again. Colliding redacted property names fail closed with <code>SECRET_OUTPUT_REJECTED</code>. Very short secrets can mask unrelated text.</li>
+<li><strong>No secret-bearing record writes.</strong> A write whose collection, key, property name or string data contains a secret read by the run is rejected with <code>SECRET_WRITE_FORBIDDEN</code>, before persistence or player projections. Hiding only a write preview would leave a credential available to later reads.</li>
+<li><strong>Trusted scripts, not information-flow isolation.</strong> Scripts intentionally receive strings and may send them to an allowed external API. They can also encode, split or otherwise transform those strings; exact-value redaction cannot reliably recognise transformed data. Do not return or persist data derived from a secret. This is not a sandbox against a malicious project owner.</li>
+<li><strong>Outbound requests.</strong> A secret may be sent to an allowed host in an <code>ns.fetch</code> header or body; that is the intended use. Redaction covers what the script logs or returns, not the outbound request.</li>
+<li><strong>Audit.</strong> Owner set, replace and delete actions are audited with the secret&#39;s name only. Script reads are not audited individually.</li>
+<li><strong>Moving servers.</strong> Portable project archives exclude project secrets; re-enter them on the destination. Whole-server export format v2 carries their ciphertext only when secrets are included, and needs the same storage encryption key to decrypt after import. <code>--no-secrets</code> excludes both the values and that key. Format v1 archives remain importable. Deleting a project removes its secret rows atomically and prevents a racing save from leaving an orphan.</li>
+</ul>
+<h2 id="scope-imports-and-globals"><a class="anchor" href="#scope-imports-and-globals" aria-hidden="true" tabindex="-1">#</a>Scope, imports and globals</h2>
+<p><code>scope</code> says who can reach the script:</p>
+<ul>
+<li><code>scope: public</code> (the default). The endpoint is a public HTTP route like any
+other endpoint. Other scripts cannot import it.</li>
+<li><code>scope: global</code>. The endpoint is never a public route. A public call
+answers <code>404 ENDPOINT_NOT_FOUND</code>, the same as an unknown slug. Its exports
+are shared with other scripts.</li>
+</ul>
+<p>A global endpoint exports values with <code>export</code>:</p>
+<pre><code class="language-js">// endpoints/inventory.endpoint.js (scope: global)
+export class Inventory {
+  constructor(items) { this.items = items; }
+  has(itemId) { return this.items.includes(itemId); }
+}
+export function check_inventory_has_item(player, itemId) {
+  const record = ns.records.get(&quot;players&quot;, player.steamId);
+  return Boolean(record) &amp;&amp; (record.items ?? []).includes(itemId);
+}</code></pre>
+<p>Other scripts use an export in one of two ways.</p>
+<pre><code class="language-js">// 1. Import it by endpoint id.
+import { Inventory } from &quot;globals/inventory&quot;;
+
+// 2. Read it through the globals object.
+const has = globals.inventory.check_inventory_has_item(req.player, &quot;sword&quot;);</code></pre>
+<p>The <code>globals/&lt;id&gt;</code> import path and <code>globals.&lt;id&gt;</code> both use the global
+endpoint&#39;s slug. The server checks imports when the endpoint is saved: an
+import cycle reports <code>GLOBAL_CYCLE</code>, a missing global <code>GLOBAL_NOT_FOUND</code>, a
+missing export <code>GLOBAL_EXPORT_NOT_FOUND</code>, and module syntax outside the forms
+above <code>SCRIPT_MODULE_UNSUPPORTED</code>.</p>
+<p>Saving a global endpoint also checks the scripted endpoints that import it,
+and refuses the save if it would break one of them:</p>
+<ul>
+<li>it disables the global (<code>enabled: false</code>): <code>GLOBAL_NOT_FOUND</code> on <code>enabled</code>;</li>
+<li>it changes the global to <code>scope: public</code>: <code>GLOBAL_NOT_FOUND</code> on <code>scope</code>;</li>
+<li>it removes an export that an importer names: <code>GLOBAL_EXPORT_NOT_FOUND</code> on <code>script</code>.</li>
+</ul>
+<p>The error names the importer. Fix the importer, or keep the export, then save
+the global again. A global whose own script does not check fails its own save,
+so nothing is compared with its importers. Namespace imports
+(<code>import * as bank from &quot;globals/bank&quot;</code>) are checked for a disabled or
+re-scoped global, but not for removed exports. Reads through <code>globals.&lt;id&gt;</code>
+are not checked at save time.</p>
+<h2 id="legacy-workflows"><a class="anchor" href="#legacy-workflows" aria-hidden="true" tabindex="-1">#</a>Legacy workflows</h2>
+<p>Workflows remain the step-based definitions that YAML endpoints use. Scripts
+can run them in two ways:</p>
+<ul>
+<li><code>ns.workflows.run(&quot;&lt;workflow-id&gt;&quot;, input)</code></li>
+<li><code>workflows.&lt;alias&gt;(input)</code>, where the alias is the workflow id in camelCase</li>
+</ul>
+<p>A workflow&#39;s writes apply only if the workflow succeeds, as they do for YAML
+endpoints. Nested workflow calls stop at the workflow depth limit (see <a href="#limits">Limits</a>).</p>
+<p>An endpoint has either <code>script</code> or <code>steps</code>, never both. Setting both answers
+<code>SCRIPT_AND_STEPS</code> at save time.</p>
+<p>Save-time checks run when the owner dashboard saves an endpoint, and on the Sync Tool and endpoint writes: <code>PUT .../sync</code>, <code>PUT</code> and <code>POST .../endpoints</code>, and the single-resource <code>PATCH .../endpoints</code>. A write that carries a script the checks refuse is refused as a whole and stores nothing (see <a href="#sync-refusals">Sync refusals</a>). A script that passes is stored as received. The package sync (<code>POST .../package-sync</code>) does not run these checks.</p>
+<h2 id="typescript"><a class="anchor" href="#typescript" aria-hidden="true" tabindex="-1">#</a>TypeScript</h2>
+<p>Set <code>runtime: typescript</code>. The server removes the type annotations with the
+vendored <a href="https://github.com/alangpierce/sucrase" target="_blank" rel="noopener">sucrase</a> stripper (MIT, see
+<a href="#third-party-notice">Third-party notice</a>) and then runs the result as
+JavaScript. Nothing else is transformed.</p>
+<ul>
+<li>Types are removed, not checked. A type error does not stop the endpoint.</li>
+<li>Code the stripper cannot read is rejected as <code>SCRIPT_SYNTAX</code>, with a line and column, when the owner dashboard saves it.</li>
+<li>The <code>ns.d.ts</code> declarations give editors the types. The project typings
+endpoint adds the project&#39;s collections, game values, workflow aliases and
+global exports.</li>
+</ul>
+<h2 id="limits"><a class="anchor" href="#limits" aria-hidden="true" tabindex="-1">#</a>Limits</h2>
+<p>Every scripted request is bounded. These limits are fixed in code. The only script setting is <code>endpoints.scripts</code>; no limit is read from <code>server.toml</code>.</p>
+<p>The time and statement limits are one budget for the whole request. Module evaluation, the handler call, response
+serialisation and every re-run round all draw from it, and a re-run does not reset it. Memory is per engine: each
+round runs in its own engine, and rounds run one after another, so the peak is one engine&#39;s limit.</p>
+<p>Promises are bounded by the same time limit: a promise that does not settle before the request&#39;s deadline fails with <code>SCRIPT_LIMIT_EXCEEDED</code>, so an async handler cannot hang past it. If the caller disconnects, the run is cancelled and is not reported as <code>SCRIPT_ERROR</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Limit</th>
+<th>Default</th>
+<th>When exceeded</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Script execution time per request</td>
+<td>1 s of user-code evaluation across all rounds. Engine setup, TypeScript stripping and asynchronous host reads/fetches between rounds are excluded; they still observe request cancellation and the load/round limits.</td>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code></td>
+</tr>
+<tr>
+<td>Statements per request</td>
+<td>1,000,000, across all engine entries and rounds</td>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code></td>
+</tr>
+<tr>
+<td>Memory per engine</td>
+<td>64 MiB (each round has its own engine)</td>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code></td>
+</tr>
+<tr>
+<td>Call depth per engine</td>
+<td>200</td>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code></td>
+</tr>
+<tr>
+<td>Re-run rounds per request</td>
+<td>8. Store reads and <code>ns.fetch</code> waits share this count.</td>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code></td>
+</tr>
+<tr>
+<td>Outbound <code>ns.fetch</code> calls per request</td>
+<td>5 (see <a href="#outbound-http-nsfetch">Outbound HTTP</a>)</td>
+<td><code>FETCH_LIMIT_EXCEEDED</code>, 502 when uncaught</td>
+</tr>
+<tr>
+<td>Workflow nesting and steps per request</td>
+<td>depth 5, 10,000 steps</td>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code></td>
+</tr>
+<tr>
+<td>Record reads per request (record gets and lists, workflow definitions, global modules)</td>
+<td>64, across all rounds</td>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code></td>
+</tr>
+<tr>
+<td>Rows per collection scan</td>
+<td>1,000</td>
+<td><code>SCAN_TOO_LARGE</code> (400), checked before any row is read</td>
+</tr>
+<tr>
+<td>Record writes and staged data per run</td>
+<td>1,000 writes and 1 MiB of record data</td>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code>; the run&#39;s writes do not apply</td>
+</tr>
+<tr>
+<td>Concurrent scripted requests</td>
+<td>one per processor on the server; two per project</td>
+<td>A request waits up to <code>endpoints.script_gate.wait_ms</code> (default 2 s) for a free slot. Past that it is refused with <code>SCRIPT_BUSY</code> (429), <code>Retry-After</code>, and <code>retrySafe: true</code>, and it never runs.</td>
+</tr>
+<tr>
+<td>Script source</td>
+<td>64 KiB</td>
+<td>Rejected when the owner dashboard saves it, and refused by a Sync Tool or endpoint push</td>
+</tr>
+<tr>
+<td>Response body</td>
+<td>256 KiB</td>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code></td>
+</tr>
+<tr>
+<td>Log output per run</td>
+<td>8 KiB</td>
+<td>Lines past the cap are dropped and a <code>[log truncated]</code> line is kept.</td>
+</tr>
+</tbody></table>
+<p>Caches: the server keeps the 256 most recently used compiled JavaScript scripts and the 256 most recently used stripped TypeScript outputs in memory, and evicts the least recently used first. Each process starts with empty caches, so the first call after a restart parses or strips again.</p>
+<p>Kill switch: the server setting <code>endpoints.scripts</code> (default <code>true</code>) turns
+scripted endpoints off. While it is off, every scripted endpoint answers <code>503 SCRIPTS_DISABLED</code>, and YAML endpoints are unaffected. Restart the server after
+changing it.</p>
+<h2 id="typed-error-codes"><a class="anchor" href="#typed-error-codes" aria-hidden="true" tabindex="-1">#</a>Typed error codes</h2>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Reported</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SCRIPT_ERROR</code></td>
+<td>Run, 500</td>
+<td>The script threw an error that it did not handle.</td>
+</tr>
+<tr>
+<td><code>SCRIPT_LIMIT_EXCEEDED</code></td>
+<td>Run, 500</td>
+<td>A run limit was hit. See <a href="#limits">Limits</a>.</td>
+</tr>
+<tr>
+<td><code>SCRIPTS_DISABLED</code></td>
+<td>Run, 503</td>
+<td><code>endpoints.scripts</code> is off.</td>
+</tr>
+<tr>
+<td><code>SCRIPT_BUSY</code></td>
+<td>Run, 429</td>
+<td>The server or the project stayed at its maximum number of scripted requests past the wait. Nothing ran, so resend the same request after <code>Retry-After</code> (<code>retrySafe: true</code>).</td>
+</tr>
+<tr>
+<td><code>FETCH_*</code></td>
+<td>Run, 502</td>
+<td>An <code>ns.fetch</code> call failed and the script did not catch it. The codes are in <a href="#outbound-http-nsfetch">Outbound HTTP</a>.</td>
+</tr>
+<tr>
+<td><code>SECRET_UNAVAILABLE</code></td>
+<td>Run, 500</td>
+<td>The script read a project secret that is stored but cannot be decrypted, or no <code>STORAGE_ENCRYPTION_KEY</code> is configured. Nothing is returned. See <a href="#project-secrets-nssecretsget">Project secrets</a>.</td>
+</tr>
+<tr>
+<td><code>ENDPOINT_NOT_FOUND</code></td>
+<td>Run, 404</td>
+<td>Unknown slug, or a <code>scope: global</code> endpoint called publicly.</td>
+</tr>
+<tr>
+<td><code>SCRIPT_SYNTAX</code></td>
+<td>Save, sync</td>
+<td>The source cannot be parsed. Reports the line and column.</td>
+</tr>
+<tr>
+<td><code>SCRIPT_AND_STEPS</code></td>
+<td>Save</td>
+<td>An endpoint has both <code>script</code> and <code>steps</code>.</td>
+</tr>
+<tr>
+<td><code>MISSING_SCRIPT</code></td>
+<td>Save</td>
+<td>A scripted endpoint has no <code>script</code>.</td>
+</tr>
+<tr>
+<td><code>SCRIPT_FILE_WITHOUT_SCRIPT</code></td>
+<td>Save</td>
+<td><code>scriptFile</code> is set but <code>script</code> is not.</td>
+</tr>
+<tr>
+<td><code>SCRIPT_TOO_LARGE</code></td>
+<td>Save, sync</td>
+<td>The source is larger than the 64 KiB limit. Reported at <code>/script</code>.</td>
+</tr>
+<tr>
+<td><code>SCRIPT_MODULE_UNSUPPORTED</code></td>
+<td>Save, sync</td>
+<td>Module syntax outside the supported forms.</td>
+</tr>
+<tr>
+<td><code>GLOBAL_NOT_FOUND</code></td>
+<td>Save, sync</td>
+<td>An import names no enabled global endpoint. On a global save, also a scripted endpoint that imports a global the save disables or makes <code>scope: public</code>.</td>
+</tr>
+<tr>
+<td><code>GLOBAL_EXPORT_NOT_FOUND</code></td>
+<td>Save, sync</td>
+<td>A global endpoint does not export the imported name. On a global save, also a scripted endpoint that imports a name the save removes.</td>
+</tr>
+<tr>
+<td><code>GLOBAL_CYCLE</code></td>
+<td>Save, sync</td>
+<td>Global imports form a cycle.</td>
+</tr>
+<tr>
+<td><code>SOURCE_COMPILE_FAILED</code></td>
+<td>Save</td>
+<td>The endpoint source did not compile.</td>
+</tr>
+</tbody></table>
+<p>Sync preflight runs the same script checks as the sync write, with the batch&#39;s own globals included. Each code marked &quot;Save, sync&quot; above is an error in preflight, and any of them fails it with <code>PREFLIGHT_VALIDATION_FAILED</code> (400). Each finding carries <code>file</code>, and <code>line</code> and <code>column</code> where the parser reports them. Other findings stay warnings.</p>
+<p><code>ns.fail</code> takes any code and a status from 400 to 499. The codes above are
+the server&#39;s own. Template codes, such as <code>AUTH_REQUIRED</code> or
+<code>INSUFFICIENT_COINS</code>, belong to the template and are listed with it.</p>
+<h2 id="sync-refusals"><a class="anchor" href="#sync-refusals" aria-hidden="true" tabindex="-1">#</a>Sync refusals</h2>
+<p>A write that carries a scripted endpoint the checks refuse is refused as a whole. The checks are the ones marked &quot;Save, sync&quot; in <a href="#typed-error-codes">Typed error codes</a>. They run on <code>PUT .../sync</code>, <code>PUT</code> and <code>POST .../endpoints</code>, and <code>PATCH .../endpoints</code>. Nothing is written, not even the other items of the batch. An import of a global pushed in the same batch resolves, and an import of a stored global resolves against its stored definition.</p>
+<p>A refused write returns 400 <code>VALIDATION_FAILED</code>:</p>
+<ul>
+<li><code>ok</code> is <code>false</code>, and <code>source</code> is <code>&quot;candidate&quot;</code>.</li>
+<li><code>error</code> is <code>VALIDATION_FAILED</code>, and <code>message</code> says that nothing was written.</li>
+<li><code>diagnostics</code> lists every refused finding, with <code>code</code>, <code>severity</code> (<code>error</code>), <code>message</code>, <code>resourceKind</code>, <code>resourceId</code>, <code>sourcePath</code> (the JSON pointer, <code>/script</code>), <code>file</code>, and <code>line</code> and <code>column</code> where the parser reports them. <code>file</code> is the item&#39;s <code>sourcePath</code> from the push, when it has one.</li>
+<li><code>endpoints</code> is <code>{ ok, total, failed, results }</code>. Each failed endpoint in <code>results</code> has its <code>resourceId</code>, its own <code>error</code> and <code>message</code>, and its <code>diagnostics</code>.</li>
+</ul>
+<p>A sync preflight with the same finding returns 400 <code>PREFLIGHT_VALIDATION_FAILED</code>. Each finding is in the <code>diagnostics</code> of its item under <code>endpoints</code>, with the same fields. Preflight writes nothing.</p>
+<h2 id="templates"><a class="anchor" href="#templates" aria-hidden="true" tabindex="-1">#</a>Templates</h2>
+<p>Starter endpoints ship in JavaScript and TypeScript. The list of them is <code>wwwroot/js/endpoint-api/templates/index.json</code>, embedded in the server build. The New dialog and the examples gallery both read that list. Each entry has an <code>id</code>, <code>title</code>, <code>summary</code>, <code>scope</code> (<code>route</code> or <code>global</code>) and <code>runtimes</code>. An entry that imports another template&#39;s module names it in <code>needs</code>. Each runtime is one file, <code>&lt;id&gt;.&lt;runtime&gt;.endpoint.yml</code>, served at <code>/owner-assets/endpoint-api/templates/&lt;file&gt;</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Template</th>
+<th>Method</th>
+<th>Shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>grant-coins</code></td>
+<td>POST</td>
+<td>A secret-key-only grant that writes a record.</td>
+</tr>
+<tr>
+<td><code>submit-score</code></td>
+<td>POST</td>
+<td>Input validation, a best-score update and a typed error.</td>
+</tr>
+<tr>
+<td><code>daily-reward</code></td>
+<td>POST</td>
+<td>A 24-hour cooldown from <code>ns.now()</code> and a game value with a default.</td>
+</tr>
+<tr>
+<td><code>profile</code></td>
+<td>GET</td>
+<td>A read-only response for the signed-in player.</td>
+</tr>
+<tr>
+<td><code>inventory</code></td>
+<td>GET</td>
+<td>A <code>scope: global</code> module with a class and two functions. Not public.</td>
+</tr>
+<tr>
+<td><code>buy-item</code></td>
+<td>POST</td>
+<td><code>import</code> from <code>globals/inventory</code>, <code>globals.inventory</code>, and typed errors.</td>
+</tr>
+</tbody></table>
+<p>The New dialog offers Blank (YAML steps) and the standalone routes <code>grant-coins</code>, <code>submit-score</code>, <code>daily-reward</code> and <code>profile</code>, in both runtimes. Two templates stay out of the dialog and appear only in the gallery:</p>
+<ul>
+<li><code>buy-item</code> imports <code>globals/inventory</code>, so it fails validation unless the project already has that module. Its gallery card names the module it needs.</li>
+<li><code>inventory</code> is a <code>scope: global</code> module. It is not an HTTP route.</li>
+</ul>
+<p><code>GET /dashboard/projects/{id}/resources/endpoint/new?draft=&lt;id&gt;&amp;template=&lt;id&gt;.&lt;runtime&gt;</code> opens a draft from a template, for example <code>template=grant-coins.typescript</code>. Leave <code>template</code> out for Blank. An unknown or unoffered choice, or a template on another kind, returns 400. An index that failed to load returns 503 with the reason.</p>
+<p>The shared typings are at
+<code>/owner-assets/endpoint-api/ns.d.ts</code>. A project&#39;s typings, with its own
+collections, game values and globals, are at
+<code>GET /dashboard/projects/{id}/resources/endpoint-typings</code>.</p>
+<h2 id="editing-in-the-dashboard"><a class="anchor" href="#editing-in-the-dashboard" aria-hidden="true" tabindex="-1">#</a>Editing in the dashboard</h2>
+<p>The endpoint editor is Monaco, the editor behind VS Code. It is served from the server, so it works without a CDN. The YAML definition and the script body are separate editors. The script pane appears when the YAML has a top-level <code>script: |</code> block with runtime <code>javascript</code> or <code>typescript</code>.</p>
+<ul>
+<li>Completions and hover for <code>req</code>, <code>ns</code> and <code>globals</code> come from <code>ns.d.ts</code>. The project&#39;s typings are used first; the shared file is the fallback.</li>
+<li>The Script API panel lists each <code>ns</code> and <code>req</code> member with its docs. Filter the list, select an entry and insert its call at the cursor.</li>
+<li>Check results that report a line and column for <code>/script</code> appear as markers in the script. Results without a position stay in the results list.</li>
+<li>Ctrl+S (Cmd+S on macOS) saves. Tab indents inside the editor; press Ctrl+M to move focus out.</li>
+<li>Trying an endpoint from the editor is not available yet.</li>
+<li>If Monaco cannot load, the plain text box stays in use with the same content.</li>
+</ul>
+<h2 id="file-layout"><a class="anchor" href="#file-layout" aria-hidden="true" tabindex="-1">#</a>File layout</h2>
+<p>Authored endpoints keep the definition and the script side by side:</p>
+<pre><code class="language-text">Editor/Network Storage/
+  endpoints/daily-reward.endpoint.yml
+  endpoints/daily-reward.endpoint.js</code></pre>
+<p><code>scope</code> travels in the definition too. A file with <code>scope: global</code> saves a
+global endpoint, and a file without <code>scope</code> saves a public one.</p>
+<p><code>scriptFile</code> names the script file from the definition:</p>
+<pre><code class="language-yaml">method: POST
+runtime: javascript
+scope: public
+scriptFile: daily-reward.endpoint.js</code></pre>
+<p><code>scriptFile</code> is an authoring reference only. The server stores the script
+text under <code>script</code>. A definition that sets <code>scriptFile</code> without <code>script</code> is
+rejected with <code>SCRIPT_FILE_WITHOUT_SCRIPT</code>. The Sync Tool does not yet read
+<code>scriptFile</code> or upload script files. Support is tracked in
+<a href="https://github.com/sbox-cool/sbox-network-storage/issues/45" target="_blank" rel="noopener">sbox-cool/sbox-network-storage#45</a>.
+Until it lands, put the script text in <code>script</code>.</p>
+<h2 id="third-party-notice"><a class="anchor" href="#third-party-notice" aria-hidden="true" tabindex="-1">#</a>Third-party notice</h2>
+<p>The TypeScript runtime bundles sucrase 3.35.1 (MIT) with its dependencies:
+lines-and-columns 1.2.4 (MIT), ts-interface-checker 0.1.13 (Apache-2.0) and the
+@jridgewell source-map packages (MIT). The bundle, the licence texts and a build
+script are in <code>src/SboxNetworkStorage.Application/NetworkStorage/Endpoints/Scripting/ThirdParty/sucrase/</code>
+(see its <code>README.md</code>). The code runs inside the isolated script engine. It is
+not compiled into the server.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ba18db0529a36c950165b36089504b3e6ae88632/docs/endpoints-javascript.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/endpoints-javascript.md</a> at <code>v0.5.6</code> (ba18db0).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.6 (<code>0.5.6</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/ba18db0529a36c950165b36089504b3e6ae88632" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.6</code> (<code>ba18db0</code>). <strong>Library:</strong> main source (9b6ec5d) (<code>source-9b6ec5d</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/9b6ec5d41d99afd1756293d958be1f1330aa73b7" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>9b6ec5d41d99afd1756293d958be1f1330aa73b7</code> (<code>9b6ec5d</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.6/source-9b6ec5d/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-9b6ec5d/api/">HTTP API</a><a href="/docs/versions/0.5.6/source-9b6ec5d/library/api/">C# API</a><a href="/docs/versions/0.5.6/source-9b6ec5d/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

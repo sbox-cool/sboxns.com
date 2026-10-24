@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Authoring collections and endpoints | Network Storage docs</title>
+  <meta name="description" content="YAML sources for collections, endpoints and workflows, synced by the editor tool.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.1.0/source-470a694/library/source-authoring/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Authoring collections and endpoints | Network Storage docs">
+  <meta property="og:description" content="YAML sources for collections, endpoints and workflows, synced by the editor tool.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.1.0/source-470a694/library/source-authoring/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-ddf9b61/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-ddf9b61/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.6 · main source (ddf9b61)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-ddf9b61/library/source-authoring/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-ddf9b61/library/source-authoring/">0.5.4</option><option value="/docs/versions/0.5.3/source-ddf9b61/library/source-authoring/">0.5.3</option><option value="/docs/versions/0.5.2/source-ddf9b61/library/source-authoring/">0.5.2</option><option value="/docs/versions/0.5.1/source-ddf9b61/library/source-authoring/">0.5.1</option><option value="/docs/versions/0.5.0/source-ddf9b61/library/source-authoring/">0.5.0</option><option value="/docs/versions/0.4.0/source-ddf9b61/library/source-authoring/">0.4.0</option><option value="/docs/versions/0.3.0/source-ddf9b61/library/source-authoring/">0.3.0</option><option value="/docs/versions/0.2.0/source-ddf9b61/library/source-authoring/">0.2.0</option><option value="/docs/versions/0.1.0/source-ddf9b61/library/source-authoring/">0.1.0</option><option value="/docs/versions/0.5.5/source-ddf9b61/library/source-authoring/">0.5.5</option><option value="/docs/versions/0.5.6/source-ddf9b61/library/source-authoring/" selected>0.5.6</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.6/source-13f51a8/library/source-authoring/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.6/source-d369d1b/library/source-authoring/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.6/source-fc58d4e/library/source-authoring/">main source (fc58d4e)</option><option value="/docs/versions/0.5.6/source-5369108/library/source-authoring/">main source (5369108)</option><option value="/docs/versions/0.5.6/source-9c4a235/library/source-authoring/">main source (9c4a235)</option><option value="/docs/versions/0.5.6/source-9b6ec5d/library/source-authoring/">main source (9b6ec5d)</option><option value="/docs/versions/0.5.6/source-ddf9b61/library/source-authoring/" selected>main source (ddf9b61)</option><option value="/docs/versions/0.5.6/source-7f77770/library/source-authoring/">main source (7f77770)</option><option value="/docs/versions/0.5.6/source-470a694/library/source-authoring/">main source (470a694)</option><option value="/docs/versions/0.5.6/source-6efc43f/library/source-authoring/">main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-ddf9b61/library/source-authoring/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-ddf9b61/library/source-authoring/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-ddf9b61/library/source-authoring/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-ddf9b61/library/source-authoring/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-ddf9b61/library/source-authoring/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-ddf9b61/library/source-authoring/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-ddf9b61/library/source-authoring/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-ddf9b61/library/source-authoring/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-ddf9b61/library/source-authoring/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-ddf9b61/library/source-authoring/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-ddf9b61/library/source-authoring/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.6/source-ddf9b61/library/source-authoring/">Server: 0.5.6</a></li><li><a href="/docs/versions/0.5.6/source-13f51a8/library/source-authoring/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.6/source-d369d1b/library/source-authoring/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.6/source-fc58d4e/library/source-authoring/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.6/source-5369108/library/source-authoring/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.6/source-9c4a235/library/source-authoring/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.6/source-9b6ec5d/library/source-authoring/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.5.6/source-ddf9b61/library/source-authoring/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.6/source-7f77770/library/source-authoring/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.6/source-470a694/library/source-authoring/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.5.6/source-6efc43f/library/source-authoring/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.6/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.6/source-ddf9b61/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.6/source-ddf9b61/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-ddf9b61/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.6/source-ddf9b61/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.6/source-ddf9b61/library/overview/">Library overview</a><a href="/docs/versions/0.5.6/source-ddf9b61/library/source-authoring/" aria-current="page">Authoring collections and endpoints</a><a href="/docs/versions/0.5.6/source-ddf9b61/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.6/source-ddf9b61/library/examples/">Examples</a><a href="/docs/versions/0.5.6/source-ddf9b61/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.6/source-ddf9b61/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.6/source-ddf9b61/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/cli/">CLI reference</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/configuration/">Configuration</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/database/">Databases</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/media/">Media uploads</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/game-logs/">Game logs</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/export/">Export and move projects</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/modules/">Modules</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/alerting/">Alerting</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.6/source-ddf9b61/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.6/source-ddf9b61/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.6/source-ddf9b61/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.6/source-ddf9b61/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.6/source-ddf9b61/">Docs</a><span aria-hidden="true">/</span><span>Game library</span><span aria-hidden="true">/</span><span aria-current="page">Authoring collections and endpoints</span></nav>
+  <article class="prose docs-prose">
+<h1>Authoring collections and endpoints</h1>
+<p class="lead">YAML sources for collections, endpoints and workflows, synced by the editor tool.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#file-names">File Names</a><a href="#endpoint-exposure">Endpoint Exposure</a><a href="#endpoint-script-files">Endpoint Script Files</a><a href="#flat-and-wrapper-layouts">Flat And Wrapper Layouts</a><a href="#routes-rejection-and-webhooks">Routes, Rejection, And Webhooks</a><a href="#recursion-and-runtime-protection">Recursion And Runtime Protection</a><a href="#legacy-json">Legacy JSON</a><a href="#yaml-subset">YAML Subset</a><a href="#local-validation-and-canonical-preview">Local Validation And Canonical Preview</a></nav>
+<p>Network Storage source authoring treats YAML as source code for collections, endpoints, reusable logic, tests, and libraries. The backend compiler is the source of truth: local tools validate early, then <code>sync.py --sources</code> asks the backend to canonicalize and safely upgrade each source before upload.</p>
+<h2 id="file-names"><a class="anchor" href="#file-names" aria-hidden="true" tabindex="-1">#</a>File Names</h2>
+<p>Local projects store source files in the matching resource folder:</p>
+<pre><code class="language-text">Editor/Network Storage/
+  collections/&lt;id&gt;.collection.yml   # preferred typed name
+  collections/&lt;id&gt;.yml              # also accepted inside the folder
+  endpoints/&lt;slug&gt;.endpoint.yml
+  endpoints/&lt;slug&gt;.yml
+  workflows/&lt;id&gt;.workflow.yml
+  tests/&lt;id&gt;.test.yml
+  libraries/&lt;id&gt;.library.yml</code></pre>
+<p>Prefer <code>.yml</code> for new files. <code>.yaml</code> is accepted. Typed names are preferred, but plain names inside the correct folder are supported for backwards compatibility.</p>
+<h2 id="endpoint-exposure"><a class="anchor" href="#endpoint-exposure" aria-hidden="true" tabindex="-1">#</a>Endpoint Exposure</h2>
+<p>The new model uses one resource kind for callable logic: <code>kind: endpoint</code>.</p>
+<p>Use <code>exposure</code> to choose how it is used:</p>
+<table>
+<thead>
+<tr>
+<th>Exposure</th>
+<th>Meaning</th>
+<th>Client call</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>public</code></td>
+<td>Publicly accessible game API endpoint</td>
+<td><code>NetworkStorage.CallEndpoint(&quot;slug&quot;)</code></td>
+</tr>
+<tr>
+<td><code>internal</code></td>
+<td>Reusable Logic, private to backend endpoint/workflow calls</td>
+<td>not directly callable by clients</td>
+</tr>
+</tbody></table>
+<p>Public endpoints can still be called internally. Internal endpoints are reusable logic only.</p>
+<pre><code class="language-yaml">sourceVersion: 1
+kind: endpoint
+id: mine-ore
+name: Mine Ore
+exposure: public
+method: POST
+input:
+  type: object
+  properties:
+    amount:
+      type: number
+steps:
+  - id: validate_amount
+    type: condition
+    check:
+      field: &quot;{{input.amount}}&quot;
+      op: &quot;&gt;&quot;
+      value: 0
+    routes:
+      false:
+        action: reject
+        status: 400
+        error: INVALID_AMOUNT
+        message: Amount must be positive.
+        webhook: true
+response:
+  status: 200
+  body:
+    ok: true</code></pre>
+<pre><code class="language-yaml">sourceVersion: 1
+kind: endpoint
+id: debit-currency
+name: Debit Currency
+exposure: internal
+params:
+  amount:
+    type: number
+steps:
+  - id: debit
+    type: write
+    collection: players
+    key: &quot;{{steamId}}&quot;
+    ops:
+      - op: inc
+        path: gold
+        value: &quot;{{-params.amount}}&quot;</code></pre>
+<h2 id="endpoint-script-files"><a class="anchor" href="#endpoint-script-files" aria-hidden="true" tabindex="-1">#</a>Endpoint Script Files</h2>
+<p>A JavaScript or TypeScript endpoint can keep its code in a sibling file, so the editor gets highlighting and the <code>ns</code> typings:</p>
+<pre><code>endpoints/hello.endpoint.yml
+endpoints/hello.endpoint.js   (runtime: typescript uses hello.endpoint.ts)</code></pre>
+<pre><code class="language-yaml">sourceVersion: 1
+kind: endpoint
+id: hello
+runtime: javascript</code></pre>
+<ul>
+<li>The file is found by name: <code>&lt;id&gt;.endpoint.js</code> or <code>&lt;id&gt;.endpoint.ts</code>. To use another name, set <code>scriptFile: other.endpoint.js</code>. It must be a file name next to the envelope, with no folders, and its extension must match the runtime.</li>
+<li>Push inlines the file as <code>script</code> in the text sent to the server. The server stores <code>script</code>, which stays the canonical copy.</li>
+<li>Pull writes the server&#39;s <code>script</code> to the sibling file and keeps <code>scriptFile</code> in the envelope. An endpoint pulled to a <code>.json</code> file keeps <code>script</code> inline, because a JSON envelope cannot reference a file.</li>
+<li>These stop the endpoint push before it is sent: <code>scriptFile</code> without <code>runtime</code>; both <code>.js</code> and <code>.ts</code> present for one runtime; <code>script</code> set inline together with a file; a JSON envelope that references a file. A runtime with no file is sent as is, and the server reports <code>MISSING_SCRIPT</code>.</li>
+<li>After an endpoint push or pull, the sync tool downloads the typings to <code>Editor/&lt;DataFolder&gt;/types/ns.d.ts</code>.</li>
+<li>Preflight findings <code>SCRIPT_SYNTAX</code>, <code>SCRIPT_TOO_LARGE</code>, <code>SCRIPT_MODULE_UNSUPPORTED</code>, <code>GLOBAL_CYCLE</code>, <code>GLOBAL_NOT_FOUND</code>, and <code>GLOBAL_EXPORT_NOT_FOUND</code> block the push of the endpoint they name, whatever their severity. The row names the script file and the line and column the server reports. A refused push (HTTP 400) with the same findings blocks the same way.</li>
+</ul>
+<h2 id="flat-and-wrapper-layouts"><a class="anchor" href="#flat-and-wrapper-layouts" aria-hidden="true" tabindex="-1">#</a>Flat And Wrapper Layouts</h2>
+<p>New source should be flat: resource fields live at the top level next to <code>sourceVersion</code>, <code>kind</code>, and <code>id</code>.</p>
+<p>The older wrapper layout is still accepted:</p>
+<pre><code class="language-yaml">sourceVersion: 1
+kind: endpoint
+id: mine-ore
+definition:
+  method: POST
+  steps: []</code></pre>
+<p>The backend source-upgrade route can rewrite safe wrapper layouts into the flat layout. If the backend marks an upgrade unsafe, the sync tool prints a warning and leaves the file unchanged.</p>
+<h2 id="routes-rejection-and-webhooks"><a class="anchor" href="#routes-rejection-and-webhooks" aria-hidden="true" tabindex="-1">#</a>Routes, Rejection, And Webhooks</h2>
+<p>Use canonical <code>routes</code> for branching and rejects. Legacy <code>onFail</code> is still accepted for backwards compatibility, but new files should use <code>routes.false</code>.</p>
+<p>A generic condition failure (<code>CONDITION_FAILED</code> / <code>Condition check failed.</code>) is treated as actionable debugging signal and reports to error webhooks. Domain-specific expected rejections stay quiet unless the route sets <code>webhook: true</code>.</p>
+<h2 id="recursion-and-runtime-protection"><a class="anchor" href="#recursion-and-runtime-protection" aria-hidden="true" tabindex="-1">#</a>Recursion And Runtime Protection</h2>
+<p>Recursive calls and reusable logic are bounded by backend limits. Current defaults are:</p>
+<ul>
+<li>max workflow depth: <code>4</code></li>
+<li>max step visits: <code>20</code></li>
+<li>max sleep per request: <code>1000ms</code></li>
+<li>max wall time: <code>5000ms</code></li>
+</ul>
+<p>When a limit is hit, the endpoint response includes structured error details and the backend reports it through the error path.</p>
+<h2 id="legacy-json"><a class="anchor" href="#legacy-json" aria-hidden="true" tabindex="-1">#</a>Legacy JSON</h2>
+<p>Legacy JSON is still accepted for compatibility and can be compiled into canonical metadata. Keep JSON fixtures/tests around when checking compatibility. Prefer YAML for new authoring.</p>
+<h2 id="yaml-subset"><a class="anchor" href="#yaml-subset" aria-hidden="true" tabindex="-1">#</a>YAML Subset</h2>
+<p>The supported source syntax is a safe YAML subset:</p>
+<ul>
+<li>Plain maps, arrays, strings, numbers, booleans, and null.</li>
+<li>Block strings are allowed for notes and long expressions.</li>
+<li>Custom tags are rejected.</li>
+<li>Anchors, aliases, and merge keys are rejected.</li>
+<li>Duplicate keys are invalid.</li>
+</ul>
+<h2 id="local-validation-and-canonical-preview"><a class="anchor" href="#local-validation-and-canonical-preview" aria-hidden="true" tabindex="-1">#</a>Local Validation And Canonical Preview</h2>
+<pre><code class="language-powershell">python Libraries/sboxcool.network-storage/Editor/source_compiler.py --project-root .
+python Libraries/sboxcool.network-storage/Editor/source_compiler.py --file &quot;Editor/Network Storage/endpoints/mine-ore.endpoint.yml&quot; --json</code></pre>
+<p><code>sync.py --sources</code> validates locally, calls the backend <code>source-upgrade</code> route, writes safe backend upgrades, then uploads canonical definitions through the kind-specific management routes.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage/blob/ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750/source-authoring.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage/source-authoring.md</a> at <code>ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750</code> (ddf9b61).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.6 (<code>0.5.6</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/ba18db0529a36c950165b36089504b3e6ae88632" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.6</code> (<code>ba18db0</code>). <strong>Library:</strong> main source (ddf9b61) (<code>source-ddf9b61</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750</code> (<code>ddf9b61</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.6/source-ddf9b61/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-ddf9b61/api/">HTTP API</a><a href="/docs/versions/0.5.6/source-ddf9b61/library/api/">C# API</a><a href="/docs/versions/0.5.6/source-ddf9b61/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

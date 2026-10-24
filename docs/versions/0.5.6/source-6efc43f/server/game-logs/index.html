@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Game logs | Network Storage docs</title>
+  <meta name="description" content="Structured game events per project: wire format, search and retention.">
+  <link rel="canonical" href="https://sboxns.com/docs/server/game-logs/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Game logs | Network Storage docs">
+  <meta property="og:description" content="Structured game events per project: wire format, search and retention.">
+  <meta property="og:url" content="https://sboxns.com/docs/server/game-logs/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-6efc43f/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.6/source-6efc43f/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.6 · main source (6efc43f)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-6efc43f/server/game-logs/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.4&amp;library=source-6efc43f">0.5.4 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.3&amp;library=source-6efc43f">0.5.3 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.2&amp;library=source-6efc43f">0.5.2 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.1&amp;library=source-6efc43f">0.5.1 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.0&amp;library=source-6efc43f">0.5.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.4.0&amp;library=source-6efc43f">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.3.0&amp;library=source-6efc43f">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.2.0&amp;library=source-6efc43f">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.1.0&amp;library=source-6efc43f">0.1.0 (page unavailable)</option><option value="/docs/versions/0.5.5/source-6efc43f/server/game-logs/">0.5.5</option><option value="/docs/versions/0.5.6/source-6efc43f/server/game-logs/" selected>0.5.6</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.6/source-13f51a8/server/game-logs/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.6/source-d369d1b/server/game-logs/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.6/source-fc58d4e/server/game-logs/">main source (fc58d4e)</option><option value="/docs/versions/0.5.6/source-5369108/server/game-logs/">main source (5369108)</option><option value="/docs/versions/0.5.6/source-9c4a235/server/game-logs/">main source (9c4a235)</option><option value="/docs/versions/0.5.6/source-9b6ec5d/server/game-logs/">main source (9b6ec5d)</option><option value="/docs/versions/0.5.6/source-ddf9b61/server/game-logs/">main source (ddf9b61)</option><option value="/docs/versions/0.5.6/source-7f77770/server/game-logs/">main source (7f77770)</option><option value="/docs/versions/0.5.6/source-470a694/server/game-logs/">main source (470a694)</option><option value="/docs/versions/0.5.6/source-6efc43f/server/game-logs/" selected>main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-6efc43f/server/game-logs/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.4&amp;library=source-6efc43f">Server: 0.5.4 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.3&amp;library=source-6efc43f">Server: 0.5.3 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.2&amp;library=source-6efc43f">Server: 0.5.2 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.1&amp;library=source-6efc43f">Server: 0.5.1 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.5.0&amp;library=source-6efc43f">Server: 0.5.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.4.0&amp;library=source-6efc43f">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.3.0&amp;library=source-6efc43f">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.2.0&amp;library=source-6efc43f">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fgame-logs&amp;server=0.1.0&amp;library=source-6efc43f">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/0.5.5/source-6efc43f/server/game-logs/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.6/source-6efc43f/server/game-logs/">Server: 0.5.6</a></li><li><a href="/docs/versions/0.5.6/source-13f51a8/server/game-logs/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.6/source-d369d1b/server/game-logs/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.6/source-fc58d4e/server/game-logs/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.6/source-5369108/server/game-logs/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.6/source-9c4a235/server/game-logs/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.6/source-9b6ec5d/server/game-logs/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.5.6/source-ddf9b61/server/game-logs/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.6/source-7f77770/server/game-logs/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.6/source-470a694/server/game-logs/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.5.6/source-6efc43f/server/game-logs/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.6/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.6/source-6efc43f/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.6/source-6efc43f/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-6efc43f/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.6/source-6efc43f/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.6/source-6efc43f/library/overview/">Library overview</a><a href="/docs/versions/0.5.6/source-6efc43f/library/getting-started/">Install and configure</a><a href="/docs/versions/0.5.6/source-6efc43f/library/runtime-api/">Runtime guide</a><a href="/docs/versions/0.5.6/source-6efc43f/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.5.6/source-6efc43f/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.6/source-6efc43f/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.6/source-6efc43f/library/examples/">Examples</a><a href="/docs/versions/0.5.6/source-6efc43f/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.5.6/source-6efc43f/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.6/source-6efc43f/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.6/source-6efc43f/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.6/source-6efc43f/server/cli/">CLI reference</a><a href="/docs/versions/0.5.6/source-6efc43f/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.6/source-6efc43f/server/configuration/">Configuration</a><a href="/docs/versions/0.5.6/source-6efc43f/server/database/">Databases</a><a href="/docs/versions/0.5.6/source-6efc43f/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.6/source-6efc43f/server/media/">Media uploads</a><a href="/docs/versions/0.5.6/source-6efc43f/server/game-logs/" aria-current="page">Game logs</a><a href="/docs/versions/0.5.6/source-6efc43f/server/export/">Export and move projects</a><a href="/docs/versions/0.5.6/source-6efc43f/server/modules/">Modules</a><a href="/docs/versions/0.5.6/source-6efc43f/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.6/source-6efc43f/server/alerting/">Alerting</a><a href="/docs/versions/0.5.6/source-6efc43f/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.6/source-6efc43f/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.6/source-6efc43f/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.6/source-6efc43f/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.6/source-6efc43f/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.6/source-6efc43f/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Game logs</span></nav>
+  <article class="prose docs-prose">
+<h1>Game logs</h1>
+<p class="lead">Structured game events per project: wire format, search and retention.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#turn-them-on">Turn them on</a><a href="#streams-and-retention-defaults">Streams and retention defaults</a><a href="#sending-entries">Sending entries</a><a href="#searching">Searching</a><a href="#delivery-and-what-the-owner-sees">Delivery and what the owner sees</a><a href="#limits-of-the-design">Limits of the design</a></nav>
+<p>Game logs are structured events your game sends to the server, stored per project and searchable by the project owner or a tool holding a log-reading key. They are off by default for every project. While a project&#39;s game logs are off, <code>/api/game-logs/{projectId}</code> answers exactly like any unknown route (<code>404 NOT_FOUND</code>).</p>
+<h2 id="turn-them-on"><a class="anchor" href="#turn-them-on" aria-hidden="true" tabindex="-1">#</a>Turn them on</h2>
+<p>Open the project in the owner dashboard and expand <strong>Game logs</strong>:</p>
+<ul>
+<li><strong>Game logs enabled</strong>: master switch for the project.</li>
+<li><strong>Streams</strong>: each stream has an enabled flag, retention in days (1-3650) and sampling (0-1, the fraction of entries kept).</li>
+<li><strong>Allowed client events</strong>: comma- or newline-separated event names that public-key callers may send. Names ending in <code>.*</code> match a prefix.</li>
+<li><strong>Rate limit</strong>: entries per minute for the whole project (default 12,000).</li>
+</ul>
+<h2 id="streams-and-retention-defaults"><a class="anchor" href="#streams-and-retention-defaults" aria-hidden="true" tabindex="-1">#</a>Streams and retention defaults</h2>
+<table>
+<thead>
+<tr>
+<th>Stream</th>
+<th>Default</th>
+<th>Retention</th>
+<th>Who writes it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>default</code></td>
+<td>on</td>
+<td>30 days</td>
+<td>Game events.</td>
+</tr>
+<tr>
+<td><code>audit</code></td>
+<td>on</td>
+<td>365 days</td>
+<td>Admin and audit events.</td>
+</tr>
+<tr>
+<td><code>chat</code></td>
+<td>off</td>
+<td>14 days</td>
+<td>Chat messages. Opt-in: nothing is captured until the owner enables it.</td>
+</tr>
+</tbody></table>
+<p>Entries older than the stream&#39;s retention are purged once a day. Search never returns entries older than retention, even before the purge runs. Disabling a stream stops new writes; its stored rows are kept until they age out (purging on disable is not implemented yet). Rows of a deleted project are removed by the same daily purge, under the default retention.</p>
+<h2 id="sending-entries"><a class="anchor" href="#sending-entries" aria-hidden="true" tabindex="-1">#</a>Sending entries</h2>
+<pre><code>POST /api/game-logs/{projectId}
+x-api-key: &lt;public or secret key&gt;
+x-auth-session: &lt;player session token&gt;      # public-key callers, for player identity
+Content-Type: application/json              # or application/x-ndjson</code></pre>
+<p>A key in the query string (<code>?apiKey=</code>) is refused with <code>400 API_KEY_IN_QUERY</code> before any key lookup. Send the key in the <code>x-api-key</code> header.</p>
+<p>The body is a JSON array of entries, or one JSON object per line as NDJSON.</p>
+<pre><code class="language-json">[
+  { &quot;event&quot;: &quot;match.end&quot;, &quot;level&quot;: &quot;info&quot;, &quot;message&quot;: &quot;Round over&quot;, &quot;attrs&quot;: { &quot;winner&quot;: &quot;red&quot;, &quot;rounds&quot;: 12 } },
+  { &quot;event&quot;: &quot;client.join&quot;, &quot;stream&quot;: &quot;default&quot;, &quot;ts&quot;: 1767225600000 }
+]</code></pre>
+<h3 id="entry-fields"><a class="anchor" href="#entry-fields" aria-hidden="true" tabindex="-1">#</a>Entry fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>event</code></td>
+<td>yes</td>
+<td>Lower-case dotted name such as <code>match.end</code> or <code>client.join</code>. Up to 128 characters.</td>
+</tr>
+<tr>
+<td><code>stream</code></td>
+<td>no</td>
+<td><code>default</code>, <code>chat</code> or <code>audit</code>. Defaults to the stream the event implies: <code>chat.*</code> → <code>chat</code>, <code>admin.*</code> and <code>command.*</code> → <code>audit</code>, anything else → <code>default</code>. The stream must be enabled. Public keys may only send the implied stream, and never <code>audit</code> (<code>STREAM_NOT_PERMITTED</code>).</td>
+</tr>
+<tr>
+<td><code>level</code></td>
+<td>no</td>
+<td><code>debug</code>, <code>info</code>, <code>warn</code> or <code>error</code>. Defaults to <code>info</code>.</td>
+</tr>
+<tr>
+<td><code>ts</code></td>
+<td>no</td>
+<td>Unix milliseconds. Defaults to the server time. Secret-key values must be at most 60 seconds in the future and within the stream&#39;s retention. Public-key values are clamped to within 5 minutes of server receive time; a clamped entry is counted in <code>truncated</code>.</td>
+</tr>
+<tr>
+<td><code>actor</code></td>
+<td>secret key only</td>
+<td>SteamID of the player the event is about. See <a href="#identity-and-the-actor-field">Identity</a>.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>no</td>
+<td>SteamID of a second player involved, for example the victim.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>no</td>
+<td>Free text, up to 2,048 characters. Longer messages are truncated and the response says so.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td>no</td>
+<td>Flat object of scalar values (strings, numbers, booleans) used for filtering. Keys are 1-64 letters, digits or underscores.</td>
+</tr>
+<tr>
+<td><code>revisionId</code>, <code>clientType</code>, <code>libraryVersion</code>, <code>traceId</code></td>
+<td>no</td>
+<td>Optional correlation fields. Client fields are up to 64 characters; <code>traceId</code> up to 128.</td>
+</tr>
+</tbody></table>
+<h3 id="identity-and-the-actor-field"><a class="anchor" href="#identity-and-the-actor-field" aria-hidden="true" tabindex="-1">#</a>Identity and the actor field</h3>
+<ul>
+<li><strong>Public key</strong> (the key the game client holds): the server takes the actor from the verified player session only. An entry that sends <code>actor</code> is rejected with <code>ACTOR_NOT_PERMITTED</code>, and a request that sends <code>x-on-behalf-of</code> gets <code>403 ACTOR_NOT_PERMITTED</code>. A client cannot write logs as another player.</li>
+<li><strong>Secret key</strong> (dedicated servers and trusted tools): the entry&#39;s <code>actor</code> is honoured when it is a valid SteamID. It is rejected with <code>INVALID_ACTOR</code> otherwise. If an entry has no <code>actor</code>, the <code>x-on-behalf-of</code> header is used when present.</li>
+<li><strong>Secret key</strong> ingest requires <code>logs:w</code> (the <code>logs</code> scope set to <code>w</code> or <code>rw</code>). A key whose permissions omit <code>logs</code> gets <code>403 FORBIDDEN</code>. Default secret keys have no <code>logs</code> grant, so the owner adds one in the key editor. Only a key with no permission map at all (full access) passes without it.</li>
+<li>Client IP addresses are never stored.</li>
+<li>Public-key callers may send <code>client.*</code> and <code>chat.*</code> events without restriction. Other events must match the project&#39;s allowed-events list.</li>
+<li>Public-key callers cannot name a stream and cannot write <code>audit</code>. <code>client.*</code> entries go to <code>default</code>, and <code>chat.*</code> entries go to <code>chat</code> (which must be enabled). An entry that would land in <code>audit</code>, such as <code>admin.*</code>, is refused with <code>STREAM_NOT_PERMITTED</code> even if its event is in the allowed-events list. The stream check runs before the event check.</li>
+<li>Each stored row records its <code>source</code>: <code>client</code> for public-key entries, <code>server</code> for secret-key entries. Search returns it.</li>
+</ul>
+<h3 id="response"><a class="anchor" href="#response" aria-hidden="true" tabindex="-1">#</a>Response</h3>
+<pre><code class="language-json">{ &quot;accepted&quot;: 1, &quot;rejected&quot;: [{ &quot;index&quot;: 0, &quot;code&quot;: &quot;EVENT_NOT_ALLOWED&quot; }], &quot;truncated&quot;: 0, &quot;sampled&quot;: 0 }</code></pre>
+<p>Status <code>202 Accepted</code>. Entries are validated one by one: a bad entry is listed in <code>rejected</code> with its index and code, and the rest of the batch is still stored. <code>sampled</code> counts entries dropped by the stream&#39;s sampling rate.</p>
+<h3 id="limits"><a class="anchor" href="#limits" aria-hidden="true" tabindex="-1">#</a>Limits</h3>
+<table>
+<thead>
+<tr>
+<th>Limit</th>
+<th>Value</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Entries per batch</td>
+<td>500</td>
+<td><code>413 BATCH_TOO_LARGE</code></td>
+</tr>
+<tr>
+<td>Bytes per batch</td>
+<td>256 KB</td>
+<td><code>413 BATCH_TOO_LARGE</code></td>
+</tr>
+<tr>
+<td>Bytes per entry</td>
+<td>8 KB</td>
+<td><code>ENTRY_TOO_LARGE</code> (entry)</td>
+</tr>
+<tr>
+<td>Project rate limit</td>
+<td><code>gameLogsRateLimitPerMinute</code> (default 12,000 entries/min)</td>
+<td><code>429 LOG_RATE_LIMITED</code> with <code>Retry-After</code></td>
+</tr>
+<tr>
+<td>Per-actor rate limit (public keys)</td>
+<td>1,200 entries/min per project and player</td>
+<td><code>429 LOG_RATE_LIMITED</code></td>
+</tr>
+<tr>
+<td>Timestamp window</td>
+<td>Secret keys: at most 60 seconds ahead and within retention. Public keys: clamped to 5 minutes either side of receive time.</td>
+<td><code>TIMESTAMP_OUT_OF_WINDOW</code> (entry, secret keys only)</td>
+</tr>
+<tr>
+<td>Queue full</td>
+<td>10,000 entries waiting in memory</td>
+<td><code>QUEUE_FULL</code> (entry, counted as dropped)</td>
+</tr>
+<tr>
+<td>Queued entries per project</td>
+<td>2,500</td>
+<td><code>QUEUE_FULL</code> (entry, counted as dropped)</td>
+</tr>
+</tbody></table>
+<p>Budgets are charged in this order. Identity is resolved first, so a request that fails identity costs nothing. Then the entries are validated, and only entries that pass (sampled ones included) are counted. A public-key request charges the actor bucket next, then the project bucket, so an over-limit player is refused without draining the project&#39;s budget. A request refused by the project limit has already spent its actor tokens.</p>
+<p>Other per-entry codes: <code>INVALID_JSON</code>, <code>INVALID_ENTRY</code>, <code>INVALID_EVENT</code>, <code>INVALID_STREAM</code>, <code>STREAM_DISABLED</code>, <code>STREAM_NOT_PERMITTED</code>, <code>INVALID_LEVEL</code>, <code>INVALID_TIMESTAMP</code>, <code>INVALID_STEAMID</code>, <code>INVALID_ACTOR</code>, <code>ACTOR_NOT_PERMITTED</code>, <code>INVALID_TARGET</code>, <code>INVALID_MESSAGE</code>, <code>INVALID_ATTRS</code>, <code>INVALID_ATTR_KEY</code>, <code>ATTR_KEY_TOO_LONG</code>, <code>ATTR_TOO_DEEP</code>, <code>ATTR_NUMBER_OUT_OF_RANGE</code>, <code>DUPLICATE_ATTR_KEY</code>, <code>TOO_MANY_ATTRS</code>, <code>INVALID_FIELD</code>, <code>INVALID_REVISION</code>, <code>EVENT_NOT_ALLOWED</code>.</p>
+<p>Errors for a whole request use <code>{ &quot;ok&quot;: false, &quot;error&quot;: &quot;&lt;CODE&gt;&quot;, &quot;detail&quot;: &quot;...&quot; }</code>.</p>
+<p>Request-level codes also include <code>API_KEY_IN_QUERY</code> (400) and <code>FORBIDDEN</code> (403).</p>
+<h2 id="searching"><a class="anchor" href="#searching" aria-hidden="true" tabindex="-1">#</a>Searching</h2>
+<pre><code>GET /api/game-logs/{projectId}?player=7656...&amp;event=match.end&amp;attr.team=red&amp;q=elimination
+x-api-key: &lt;secret key with logs:r&gt;</code></pre>
+<p>Search needs a <strong>secret key</strong> whose <code>logs</code> scope includes read (<code>r</code> or <code>rw</code>). Default secret keys do not have it; the owner adds it in the key editor. Public keys cannot search (<code>403 FORBIDDEN</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>from</code>, <code>to</code></td>
+<td>Unix milliseconds or ISO-8601. <code>from</code> must be before <code>to</code>. Required when <code>q</code> or an <code>attr.&lt;key&gt;</code> is used, and at most 31 days apart in that case (<code>TIME_RANGE_REQUIRED</code>, <code>TIME_RANGE_TOO_LARGE</code>).</td>
+</tr>
+<tr>
+<td><code>level</code></td>
+<td><code>debug</code>, <code>info</code>, <code>warn</code> or <code>error</code>.</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>Exact event name.</td>
+</tr>
+<tr>
+<td><code>stream</code></td>
+<td><code>default</code>, <code>chat</code> or <code>audit</code>. Repeatable. Defaults to every enabled stream.</td>
+</tr>
+<tr>
+<td><code>player</code></td>
+<td>Matches entries where the SteamID is the actor or the target.</td>
+</tr>
+<tr>
+<td><code>attr.&lt;key&gt;</code></td>
+<td>Exact match on an attribute. Repeatable; all conditions must match. Values are 1-256 characters.</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>Free text. Words are combined with AND; each word matches a whole token, case-insensitively. There is no prefix, phrase or OR matching.</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>1-500, default 100.</td>
+</tr>
+<tr>
+<td><code>cursor</code></td>
+<td>Opaque value from <code>nextCursor</code> of the previous page.</td>
+</tr>
+</tbody></table>
+<p>Response: <code>{ &quot;entries&quot;: [ { &quot;entryId&quot;, &quot;tsUnixMs&quot;, &quot;stream&quot;, &quot;level&quot;, &quot;event&quot;, &quot;actor&quot;, &quot;target&quot;, &quot;revisionId&quot;, &quot;clientType&quot;, &quot;libraryVersion&quot;, &quot;message&quot;, &quot;attrs&quot;, &quot;traceId&quot;, &quot;source&quot; } ], &quot;nextCursor&quot;: null }</code>. <code>source</code> is <code>client</code> or <code>server</code>. Results are newest first. <code>nextCursor</code> is <code>null</code> on the last page.</p>
+<p>Free-text matching uses SQLite FTS5 (unicode61) on SQLite and a token array on PostgreSQL. Ordinary words behave the same on both; tokenisation of rare Unicode scripts can differ.</p>
+<p>Unknown parameters are rejected with <code>UNKNOWN_PARAMETER</code>.</p>
+<h2 id="delivery-and-what-the-owner-sees"><a class="anchor" href="#delivery-and-what-the-owner-sees" aria-hidden="true" tabindex="-1">#</a>Delivery and what the owner sees</h2>
+<p>Accepted entries wait in a bounded in-memory queue (10,000 entries). One background writer stores them in batches of up to 500, flushed at least once a second. The owner page shows counters since the server started: accepted, written, rejected, sampled, truncated, rate limited, dropped because the queue was full, and write failures.</p>
+<p>A batch that fails to write is dropped and counted under write failures; it is not retried. Dropped entries are never silent.</p>
+<h2 id="limits-of-the-design"><a class="anchor" href="#limits-of-the-design" aria-hidden="true" tabindex="-1">#</a>Limits of the design</h2>
+<ul>
+<li>Entries are not signed or hash-chained; the audit stream is retained for review, not as tamper-evident evidence.</li>
+<li>Free-text search is token based; it is not a substring or regex search.</li>
+<li>There is no explorer or timeline UI and no alerting on log events yet.</li>
+</ul>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/ba18db0529a36c950165b36089504b3e6ae88632/docs/game-logs.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/game-logs.md</a> at <code>v0.5.6</code> (ba18db0).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.6 (<code>0.5.6</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/ba18db0529a36c950165b36089504b3e6ae88632" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.6</code> (<code>ba18db0</code>). <strong>Library:</strong> main source (6efc43f) (<code>source-6efc43f</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/6efc43f065a348b38d51056bfccd162644d03de1" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>6efc43f065a348b38d51056bfccd162644d03de1</code> (<code>6efc43f</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.6/source-6efc43f/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.6/source-6efc43f/api/">HTTP API</a><a href="/docs/versions/0.5.6/source-6efc43f/library/api/">C# API</a><a href="/docs/versions/0.5.6/source-6efc43f/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>
