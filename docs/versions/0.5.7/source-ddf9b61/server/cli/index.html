@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CLI reference | Network Storage docs</title>
+  <meta name="description" content="Every sbox-ns command, grouped.">
+  <link rel="canonical" href="https://sboxns.com/docs/server/cli/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="CLI reference | Network Storage docs">
+  <meta property="og:description" content="Every sbox-ns command, grouped.">
+  <meta property="og:url" content="https://sboxns.com/docs/server/cli/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.7/source-ddf9b61/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.7/source-ddf9b61/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.7 · main source (ddf9b61)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/?missing=server%2Fcli&amp;server=next-8e7623d&amp;library=source-ddf9b61">Next release (unreleased, 8e7623d) (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.5.4&amp;library=source-ddf9b61">0.5.4 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.5.3&amp;library=source-ddf9b61">0.5.3 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.5.2&amp;library=source-ddf9b61">0.5.2 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.5.1&amp;library=source-ddf9b61">0.5.1 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.5.0&amp;library=source-ddf9b61">0.5.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.4.0&amp;library=source-ddf9b61">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.3.0&amp;library=source-ddf9b61">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.2.0&amp;library=source-ddf9b61">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.1.0&amp;library=source-ddf9b61">0.1.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fcli&amp;server=0.5.5&amp;library=source-ddf9b61">0.5.5 (page unavailable)</option><option value="/docs/versions/0.5.6/source-ddf9b61/server/cli/">0.5.6</option><option value="/docs/versions/0.5.7/source-ddf9b61/server/cli/" selected>0.5.7</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.7/source-13f51a8/server/cli/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.7/source-d369d1b/server/cli/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.7/source-fc58d4e/server/cli/">main source (fc58d4e)</option><option value="/docs/versions/0.5.7/source-5369108/server/cli/">main source (5369108)</option><option value="/docs/versions/0.5.7/source-9c4a235/server/cli/">main source (9c4a235)</option><option value="/docs/versions/0.5.7/source-9b6ec5d/server/cli/">main source (9b6ec5d)</option><option value="/docs/versions/0.5.7/source-ddf9b61/server/cli/" selected>main source (ddf9b61)</option><option value="/docs/versions/0.5.7/source-7f77770/server/cli/">main source (7f77770)</option><option value="/docs/versions/0.5.7/source-470a694/server/cli/">main source (470a694)</option><option value="/docs/versions/0.5.7/source-6efc43f/server/cli/">main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=next-8e7623d&amp;library=source-ddf9b61">Server: Next release (unreleased, 8e7623d) (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.5.4&amp;library=source-ddf9b61">Server: 0.5.4 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.5.3&amp;library=source-ddf9b61">Server: 0.5.3 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.5.2&amp;library=source-ddf9b61">Server: 0.5.2 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.5.1&amp;library=source-ddf9b61">Server: 0.5.1 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.5.0&amp;library=source-ddf9b61">Server: 0.5.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.4.0&amp;library=source-ddf9b61">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.3.0&amp;library=source-ddf9b61">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.2.0&amp;library=source-ddf9b61">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.1.0&amp;library=source-ddf9b61">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fcli&amp;server=0.5.5&amp;library=source-ddf9b61">Server: 0.5.5 (page unavailable)</a></li><li><a href="/docs/versions/0.5.6/source-ddf9b61/server/cli/">Server: 0.5.6</a></li><li><a href="/docs/versions/0.5.7/source-ddf9b61/server/cli/">Server: 0.5.7</a></li><li><a href="/docs/versions/0.5.7/source-13f51a8/server/cli/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.7/source-d369d1b/server/cli/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.7/source-fc58d4e/server/cli/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.7/source-5369108/server/cli/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.7/source-9c4a235/server/cli/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.7/source-9b6ec5d/server/cli/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.5.7/source-ddf9b61/server/cli/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.7/source-7f77770/server/cli/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.7/source-470a694/server/cli/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.5.7/source-6efc43f/server/cli/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.7/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.7/source-ddf9b61/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.7/source-ddf9b61/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.7/source-ddf9b61/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.7/source-ddf9b61/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.7/source-ddf9b61/library/overview/">Library overview</a><a href="/docs/versions/0.5.7/source-ddf9b61/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.7/source-ddf9b61/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.7/source-ddf9b61/library/examples/">Examples</a><a href="/docs/versions/0.5.7/source-ddf9b61/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.7/source-ddf9b61/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.7/source-ddf9b61/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/cli/" aria-current="page">CLI reference</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/configuration/">Configuration</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/database/">Databases</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/media/">Media uploads</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/game-logs/">Game logs</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/export/">Export and move projects</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/modules/">Modules</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/alerting/">Alerting</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.7/source-ddf9b61/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.7/source-ddf9b61/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.7/source-ddf9b61/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.7/source-ddf9b61/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.7/source-ddf9b61/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">CLI reference</span></nav>
+  <article class="prose docs-prose">
+<h1>CLI reference</h1>
+<p class="lead">Every sbox-ns command, grouped.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#get-started">Get started</a><a href="#projects-keys-and-owner">Projects, keys and owner</a><a href="#https-and-network">HTTPS and network</a><a href="#data">Data</a><a href="#configuration">Configuration</a><a href="#service-and-updates">Service and updates</a><a href="#optional-services">Optional services</a></nav>
+<p>One <code>sbox-ns</code> binary is the server and its operator CLI. <code>sbox-ns --help</code> prints the full list
+with every flag; this page groups the commands and links the guides. Every command accepts
+<code>--config-dir</code> and <code>--data-dir</code> to pick the folders (<a href="/docs/versions/0.5.7/source-ddf9b61/server/configuration/">configuration</a>).</p>
+<h2 id="get-started"><a class="anchor" href="#get-started" aria-hidden="true" tabindex="-1">#</a>Get started</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>quickstart &lt;name&gt; [--public-url URL] [--json]</code></td>
+<td>Configure if needed, create or reuse the project and keys, print the game&#39;s <code>Configure(...)</code> line. Safe to re-run. Treat <code>--json</code> output as secret.</td>
+</tr>
+<tr>
+<td><code>setup [--non-interactive ...]</code></td>
+<td>Create or update the config folder (<code>--database</code>, <code>--listen</code>, <code>--public-url</code>, <code>--pg-*</code>, <code>--allow-http</code>).</td>
+</tr>
+<tr>
+<td><code>start [--listen ADDR]</code></td>
+<td>Run the server in the foreground.</td>
+</tr>
+<tr>
+<td><code>doctor [--project ID] [--json]</code></td>
+<td>Check config, database, port, TLS, disk and updates, or one project&#39;s authority.</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Print the version.</td>
+</tr>
+</tbody></table>
+<h2 id="projects-keys-and-owner"><a class="anchor" href="#projects-keys-and-owner" aria-hidden="true" tabindex="-1">#</a>Projects, keys and owner</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>project create &lt;name&gt; [--hosting player-hosted|dedicated|hybrid|unset]</code></td>
+<td>Create a project.</td>
+</tr>
+<tr>
+<td><code>project list</code> / <code>project delete &lt;projectId&gt;</code></td>
+<td>List or delete projects.</td>
+</tr>
+<tr>
+<td><code>project clients &lt;projectId&gt; [--days 30] [--json]</code></td>
+<td>Library versions seen and approximate players (<a href="/docs/versions/0.5.7/source-ddf9b61/compat/version-policy/">version policy</a>).</td>
+</tr>
+<tr>
+<td><code>project authority &lt;projectId&gt; [--json]</code></td>
+<td>Advisory check for game data a client could still change.</td>
+</tr>
+<tr>
+<td><code>key create &lt;projectId&gt; --type public|secret [--label L]</code></td>
+<td>Create an API key. Only public keys ship in games.</td>
+</tr>
+<tr>
+<td><code>key list &lt;projectId&gt;</code> / <code>key revoke &lt;projectId&gt; &lt;key&gt;</code></td>
+<td>List or revoke keys.</td>
+</tr>
+<tr>
+<td><code>admin login-link [--minutes N]</code></td>
+<td>Single-use owner sign-in link (creates the owner if none exists). <a href="/docs/versions/0.5.7/source-ddf9b61/server/admin-panel/">Admin panel</a>.</td>
+</tr>
+<tr>
+<td><code>admin create</code> / <code>admin reset-password</code> / <code>admin reset-2fa</code></td>
+<td>Manage the local owner.</td>
+</tr>
+<tr>
+<td><code>adminpanel disable|enable</code></td>
+<td>Turn the owner console off or on; game APIs stay available.</td>
+</tr>
+</tbody></table>
+<p><code>project delete &lt;projectId&gt;</code> atomically removes the project&#39;s database rows and
+revokes its keys, including keys cached by another running server. It then removes
+media blobs and project/key workspace files. If blob or workspace storage is
+unavailable, fix that storage and repeat the same command with the original ID;
+a persisted cleanup journal lets deletion finish even after a restart or after
+the project disappears from <code>project list</code>. Repeating a completed deletion is safe.
+Finish cleanup before importing an archive with that project ID.</p>
+<h2 id="https-and-network"><a class="anchor" href="#https-and-network" aria-hidden="true" tabindex="-1">#</a>HTTPS and network</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tunnel enable|status|disable</code></td>
+<td>Free HTTPS name through a Cloudflare tunnel, no open ports (<a href="/docs/versions/0.5.7/source-ddf9b61/server/self-hosting/#hosted-https-without-a-domain">guide</a>).</td>
+</tr>
+<tr>
+<td><code>dns enable|status|disable</code></td>
+<td>Free <code>sboxns.com</code> name pointing at your own public IP (<a href="/docs/versions/0.5.7/source-ddf9b61/server/self-hosting/#free-hosted-name-with-your-own-ip-sboxnscom">guide</a>).</td>
+</tr>
+<tr>
+<td><code>security status</code> / <code>security rotate-key [--grace-seconds N]</code></td>
+<td>Request encryption keys (<a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/01994503800aafec43bab1b74e392961eb1ec3c8/docs/encrypted-requests-v2.md" target="_blank" rel="noopener">encrypted requests</a>).</td>
+</tr>
+</tbody></table>
+<h2 id="data"><a class="anchor" href="#data" aria-hidden="true" tabindex="-1">#</a>Data</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>db test|status|migrate</code></td>
+<td>Connectivity, schema version, migrations (<a href="/docs/versions/0.5.7/source-ddf9b61/server/database/">databases</a>).</td>
+</tr>
+<tr>
+<td><code>db backup [--output FILE]</code> / <code>db restore &lt;FILE&gt;</code></td>
+<td>Back up and restore (stop the server before restoring).</td>
+</tr>
+<tr>
+<td><code>export [--out FILE] [--no-secrets]</code></td>
+<td>Whole server (data and config) to one <code>.tar.gz</code> (<a href="/docs/versions/0.5.7/source-ddf9b61/server/export/">export</a>).</td>
+</tr>
+<tr>
+<td><code>import &lt;FILE&gt; [--config] [--force] [--verify-only]</code></td>
+<td>Restore an export, or validate it without writing.</td>
+</tr>
+<tr>
+<td><code>compatibility [--json]</code> / <code>schema-info [--json]</code></td>
+<td>Non-mutating schema checks used by rollback and downgrade.</td>
+</tr>
+</tbody></table>
+<h2 id="configuration"><a class="anchor" href="#configuration" aria-hidden="true" tabindex="-1">#</a>Configuration</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>config path|show|validate</code></td>
+<td>Locate, print (with sources) and validate settings.</td>
+</tr>
+<tr>
+<td><code>config get &lt;key&gt;</code> / <code>config set &lt;key&gt; &lt;value&gt;</code></td>
+<td>Read or change one setting; comments are kept.</td>
+</tr>
+<tr>
+<td><code>config edit [file]</code></td>
+<td>Open a config file in <code>$EDITOR</code> and validate it.</td>
+</tr>
+</tbody></table>
+<h2 id="service-and-updates"><a class="anchor" href="#service-and-updates" aria-hidden="true" tabindex="-1">#</a>Service and updates</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>service install|uninstall|start|stop|restart|status</code></td>
+<td>systemd (Linux), launchd (macOS) or Windows service. <code>--instance NAME --port PORT</code> adds an instance; <code>--auto-update</code> installs the update timer.</td>
+</tr>
+<tr>
+<td><code>logs [-f]</code></td>
+<td>Show or follow service logs.</td>
+</tr>
+<tr>
+<td><code>update [--check] [--version X.Y.Z [--allow-downgrade]]</code></td>
+<td>Check for or install a release (<a href="/docs/versions/0.5.7/source-ddf9b61/server/self-hosting/#updates">updates</a>).</td>
+</tr>
+<tr>
+<td><code>update --auto [--all-instances]</code></td>
+<td>Unattended update inside <code>updates.window</code>, health-checked, rolled back on failure.</td>
+</tr>
+<tr>
+<td><code>update verify</code> / <code>update observed-libraries</code></td>
+<td>Post-update regression verdict; library builds served in the last 30 days.</td>
+</tr>
+<tr>
+<td><code>rollback [--keep-data] [--all-instances]</code></td>
+<td>Return to the previous release.</td>
+</tr>
+<tr>
+<td><code>layout migrate [--revert]</code></td>
+<td>Linux, root: move runtime state out of the config folder.</td>
+</tr>
+</tbody></table>
+<h2 id="optional-services"><a class="anchor" href="#optional-services" aria-hidden="true" tabindex="-1">#</a>Optional services</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mcp</code></td>
+<td>Model Context Protocol server over stdio for coding agents (<a href="/docs/versions/0.5.7/source-ddf9b61/server/mcp/">MCP</a>).</td>
+</tr>
+<tr>
+<td><code>register --email ADDRESS</code> / <code>register --remove</code></td>
+<td>Confirmed security and update email notices.</td>
+</tr>
+<tr>
+<td><code>telemetry status|enable|disable|preview</code></td>
+<td>Anonymous usage statistics, off by default.</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/01994503800aafec43bab1b74e392961eb1ec3c8/docs/cli.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/cli.md</a> at <code>v0.5.7</code> (0199450).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.7 (<code>0.5.7</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/01994503800aafec43bab1b74e392961eb1ec3c8" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.7</code> (<code>0199450</code>). <strong>Library:</strong> main source (ddf9b61) (<code>source-ddf9b61</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750</code> (<code>ddf9b61</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.7/source-ddf9b61/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.7/source-ddf9b61/api/">HTTP API</a><a href="/docs/versions/0.5.7/source-ddf9b61/library/api/">C# API</a><a href="/docs/versions/0.5.7/source-ddf9b61/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

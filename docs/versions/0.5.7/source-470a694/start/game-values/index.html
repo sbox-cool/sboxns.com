@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Game values | Network Storage docs</title>
+  <meta name="description" content="Shared numbers your game and server both read: authoring, revisions and a worked anti-exploit example.">
+  <link rel="canonical" href="https://sboxns.com/docs/start/game-values/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Game values | Network Storage docs">
+  <meta property="og:description" content="Shared numbers your game and server both read: authoring, revisions and a worked anti-exploit example.">
+  <meta property="og:url" content="https://sboxns.com/docs/start/game-values/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.7/source-470a694/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.7/source-470a694/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.7 · main source (470a694)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-470a694/start/game-values/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.4&amp;library=source-470a694">0.5.4 (page unavailable)</option><option value="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.3&amp;library=source-470a694">0.5.3 (page unavailable)</option><option value="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.2&amp;library=source-470a694">0.5.2 (page unavailable)</option><option value="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.1&amp;library=source-470a694">0.5.1 (page unavailable)</option><option value="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.0&amp;library=source-470a694">0.5.0 (page unavailable)</option><option value="/docs/versions/?missing=start%2Fgame-values&amp;server=0.4.0&amp;library=source-470a694">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=start%2Fgame-values&amp;server=0.3.0&amp;library=source-470a694">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=start%2Fgame-values&amp;server=0.2.0&amp;library=source-470a694">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=start%2Fgame-values&amp;server=0.1.0&amp;library=source-470a694">0.1.0 (page unavailable)</option><option value="/docs/versions/0.5.5/source-470a694/start/game-values/">0.5.5</option><option value="/docs/versions/0.5.6/source-470a694/start/game-values/">0.5.6</option><option value="/docs/versions/0.5.7/source-470a694/start/game-values/" selected>0.5.7</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.7/source-13f51a8/start/game-values/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.7/source-d369d1b/start/game-values/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.7/source-fc58d4e/start/game-values/">main source (fc58d4e)</option><option value="/docs/versions/0.5.7/source-5369108/start/game-values/">main source (5369108)</option><option value="/docs/versions/0.5.7/source-9c4a235/start/game-values/">main source (9c4a235)</option><option value="/docs/versions/0.5.7/source-9b6ec5d/start/game-values/">main source (9b6ec5d)</option><option value="/docs/versions/0.5.7/source-ddf9b61/start/game-values/">main source (ddf9b61)</option><option value="/docs/versions/0.5.7/source-7f77770/start/game-values/">main source (7f77770)</option><option value="/docs/versions/0.5.7/source-470a694/start/game-values/" selected>main source (470a694)</option><option value="/docs/versions/0.5.7/source-6efc43f/start/game-values/">main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-470a694/start/game-values/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.4&amp;library=source-470a694">Server: 0.5.4 (page unavailable)</a></li><li><a href="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.3&amp;library=source-470a694">Server: 0.5.3 (page unavailable)</a></li><li><a href="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.2&amp;library=source-470a694">Server: 0.5.2 (page unavailable)</a></li><li><a href="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.1&amp;library=source-470a694">Server: 0.5.1 (page unavailable)</a></li><li><a href="/docs/versions/?missing=start%2Fgame-values&amp;server=0.5.0&amp;library=source-470a694">Server: 0.5.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=start%2Fgame-values&amp;server=0.4.0&amp;library=source-470a694">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=start%2Fgame-values&amp;server=0.3.0&amp;library=source-470a694">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=start%2Fgame-values&amp;server=0.2.0&amp;library=source-470a694">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=start%2Fgame-values&amp;server=0.1.0&amp;library=source-470a694">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/0.5.5/source-470a694/start/game-values/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.6/source-470a694/start/game-values/">Server: 0.5.6</a></li><li><a href="/docs/versions/0.5.7/source-470a694/start/game-values/">Server: 0.5.7</a></li><li><a href="/docs/versions/0.5.7/source-13f51a8/start/game-values/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.7/source-d369d1b/start/game-values/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.7/source-fc58d4e/start/game-values/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.7/source-5369108/start/game-values/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.7/source-9c4a235/start/game-values/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.7/source-9b6ec5d/start/game-values/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.5.7/source-ddf9b61/start/game-values/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.7/source-7f77770/start/game-values/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.7/source-470a694/start/game-values/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.5.7/source-6efc43f/start/game-values/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.7/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.7/source-470a694/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.7/source-470a694/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.7/source-470a694/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.7/source-470a694/start/game-values/" aria-current="page">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.7/source-470a694/library/overview/">Library overview</a><a href="/docs/versions/0.5.7/source-470a694/library/getting-started/">Install and configure</a><a href="/docs/versions/0.5.7/source-470a694/library/runtime-api/">Runtime guide</a><a href="/docs/versions/0.5.7/source-470a694/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.5.7/source-470a694/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.7/source-470a694/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.7/source-470a694/library/examples/">Examples</a><a href="/docs/versions/0.5.7/source-470a694/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.5.7/source-470a694/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.7/source-470a694/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.7/source-470a694/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.7/source-470a694/server/cli/">CLI reference</a><a href="/docs/versions/0.5.7/source-470a694/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.7/source-470a694/server/configuration/">Configuration</a><a href="/docs/versions/0.5.7/source-470a694/server/database/">Databases</a><a href="/docs/versions/0.5.7/source-470a694/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.7/source-470a694/server/media/">Media uploads</a><a href="/docs/versions/0.5.7/source-470a694/server/game-logs/">Game logs</a><a href="/docs/versions/0.5.7/source-470a694/server/export/">Export and move projects</a><a href="/docs/versions/0.5.7/source-470a694/server/modules/">Modules</a><a href="/docs/versions/0.5.7/source-470a694/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.7/source-470a694/server/alerting/">Alerting</a><a href="/docs/versions/0.5.7/source-470a694/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.7/source-470a694/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.7/source-470a694/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.7/source-470a694/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.7/source-470a694/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.7/source-470a694/">Docs</a><span aria-hidden="true">/</span><span>Get started</span><span aria-hidden="true">/</span><span aria-current="page">Game values</span></nav>
+  <article class="prose docs-prose">
+<h1>Game values</h1>
+<p class="lead">Shared numbers your game and server both read: authoring, revisions and a worked anti-exploit example.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#what-a-game-value-looks-like">What a game value looks like</a><a href="#authoring">Authoring</a><a href="#reading-them-in-the-game">Reading them in the game</a><a href="#using-them-in-endpoints">Using them in endpoints</a><a href="#versions-and-publishing">Versions and publishing</a><a href="#worked-example-validate-combat-without-a-dedicated-server">Worked example: validate combat without a dedicated server</a><a href="#related-guides">Related guides</a></nav>
+<p>Game values are the shared numbers your game and your server both read: tuning
+constants, named groups such as <code>combat</code>, and typed tables such as <code>weapons</code>.
+You author them once. The editor Sync Tool or the owner console stores them on
+your server, the game reads them with one call, endpoints read the same numbers
+when they check a claim, and every published build keeps the values it shipped
+with.</p>
+<p>This page covers authoring, reading them from the game, using them in
+endpoints, how they follow published revisions, and a worked example that
+checks a combat result on the server. For the owner console screens, see
+<a href="/docs/versions/0.5.7/source-470a694/server/admin-panel/#authoring-and-runtime-diagnostics">admin panel guide</a>.</p>
+<h2 id="what-a-game-value-looks-like"><a class="anchor" href="#what-a-game-value-looks-like" aria-hidden="true" tabindex="-1">#</a>What a game value looks like</h2>
+<p>A project has two kinds of shared data:</p>
+<ul>
+<li><strong>Groups</strong> are named sets of key and value pairs. <code>combat</code> can hold
+<code>zombie_hp_per_level: 20</code>. Endpoints read a group value as
+<code>{{values.combat.zombie_hp_per_level}}</code>.</li>
+<li><strong>Tables</strong> are lists of rows with typed columns. Each column is <code>string</code>,
+<code>number</code> or <code>boolean</code>. A <code>weapons</code> table can hold one row per weapon. Endpoints
+find a row with a <code>lookup</code> or <code>lookup_many</code> step that uses <code>source: values</code>.</li>
+</ul>
+<p>Game code gets both in one response. The game cannot write game values.</p>
+<h2 id="authoring"><a class="anchor" href="#authoring" aria-hidden="true" tabindex="-1">#</a>Authoring</h2>
+<p>There are three ways to author game values. The owner console and the
+management API are the verified paths on release 0.5.4. The current source
+also compiles Sync Tool YAML <code>game_values</code> collections; release 0.5.4 does
+not include that fix. See
+<a href="https://github.com/sbox-cool/sbox-network-storage-server/issues/107" target="_blank" rel="noopener">#107</a>
+for release tracking and the editor-test hold.</p>
+<h3 id="in-the-game-project-with-the-sync-tool"><a class="anchor" href="#in-the-game-project-with-the-sync-tool" aria-hidden="true" tabindex="-1">#</a>In the game project with the Sync Tool</h3>
+<p>The editor Sync Tool reads YAML source from the game project and publishes
+package revisions (<strong>Push Staged</strong> or <strong>Push Live</strong>, below). In the current
+server source, YAML <code>game_values</code> collections are compiled when read, without
+rewriting the stored source or pinned snapshots. On release 0.5.4 the source
+remains uncompiled and its values are not returned by <code>GET /v3/values</code> or
+<code>{{values.*}}</code>.
+On release 0.5.4, use the owner console or
+<code>PUT /v3/manage/{projectId}/game-values</code> (secret key, <code>items</code> format below).</p>
+<h3 id="in-the-owner-console"><a class="anchor" href="#in-the-owner-console" aria-hidden="true" tabindex="-1">#</a>In the owner console</h3>
+<p>Open the project and then <strong>Game values</strong>. The page has <strong>Guided editor</strong>,
+<strong>Raw source</strong> and <strong>Examples</strong> tabs, plus <strong>Check definition</strong> and
+<strong>Save live definition</strong>. Check definition validates the text without saving.
+The console stores a list of <code>items</code>, where each item is a group or a table:</p>
+<pre><code class="language-yaml">items:
+  - id: combat
+    type: group
+    name: Combat rules
+    entries:
+      zombie_hp_per_level: 20
+      max_zombie_level: 50
+  - id: weapons
+    type: table
+    name: Weapons
+    columns:
+      - key: weapon_id
+        type: string
+      - key: damage
+        type: number
+    rows:
+      - weapon_id: pistol
+        damage: 15</code></pre>
+<p>Each <code>id</code> can be used in endpoint expressions. Console saves are stored parsed,
+so comments and formatting from the source text are not kept.</p>
+<p>Within one project, a collection definition wins over a console item with the
+same id. The server only fills in items that no collection defines
+(<code>GameValuesHandler.cs:352-383</code>).</p>
+<h3 id="over-mcp"><a class="anchor" href="#over-mcp" aria-hidden="true" tabindex="-1">#</a>Over MCP</h3>
+<p>Coding agents can read and check game values with the <code>sbox-ns</code> MCP tools.
+Saving needs the operator to set <code>mcp.allow_writes</code>. See the
+<a href="/docs/versions/0.5.7/source-470a694/server/mcp/">MCP guide</a>.</p>
+<h2 id="reading-them-in-the-game"><a class="anchor" href="#reading-them-in-the-game" aria-hidden="true" tabindex="-1">#</a>Reading them in the game</h2>
+<p>The library loads every group and table in one request:</p>
+<pre><code class="language-csharp">var gv = (await NetworkStorage.GetGameValues()).Value;
+var combat = gv.GetProperty( &quot;groups&quot; ).GetProperty( &quot;combat&quot; ).GetProperty( &quot;values&quot; );
+int zombieHp = combat.Int( &quot;zombie_hp_per_level&quot; ) * zombieLevel; // show it before the fight
+var weapons = gv.GetProperty( &quot;tables&quot; ).GetProperty( &quot;weapons&quot; )
+    .ReadList( &quot;rows&quot;, r =&gt; (Id: r.Str( &quot;weapon_id&quot; ), Damage: r.Int( &quot;damage&quot; ), Model: r.Str( &quot;model&quot; )) );</code></pre>
+<p><code>GetGameValues()</code> calls <code>GET /api/values/{projectId}</code> (also <code>/v3/values/...</code>) and returns <code>null</code> when the
+request fails (<code>NetworkStorageGameValues.cs:14</code>). The response has this shape:</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: 3,
+  &quot;updatedAt&quot;: &quot;2026-10-01T12:00:00Z&quot;,
+  &quot;groups&quot;: {
+    &quot;combat&quot;: { &quot;name&quot;: &quot;Combat rules&quot;, &quot;values&quot;: { &quot;zombie_hp_per_level&quot;: 20 } }
+  },
+  &quot;tables&quot;: {
+    &quot;weapons&quot;: {
+      &quot;columns&quot;: [ { &quot;key&quot;: &quot;weapon_id&quot;, &quot;type&quot;: &quot;string&quot; }, { &quot;key&quot;: &quot;damage&quot;, &quot;type&quot;: &quot;number&quot; } ],
+      &quot;rows&quot;: [ { &quot;weapon_id&quot;: &quot;pistol&quot;, &quot;damage&quot;: 15 } ]
+    }
+  }
+}</code></pre>
+<p>The library is API-only. It does not keep an offline copy. Load the values
+when the game starts and keep the result in memory. Lookups after that are
+local, so the game makes no request per item. The game still calls the server
+for that load.</p>
+<p>Good uses are client-side numbers that must match the server (zombie hit
+points, expected damage), item catalogs loaded once, shop prices, drop tables,
+daily reward amounts, and tuning that changes without a game update.</p>
+<h2 id="using-them-in-endpoints"><a class="anchor" href="#using-them-in-endpoints" aria-hidden="true" tabindex="-1">#</a>Using them in endpoints</h2>
+<p>Endpoint expressions read a group value as <code>{{values.&lt;group&gt;.&lt;key&gt;}}</code>. A
+<code>lookup</code> step reads one row from a table, and <code>lookup_many</code> reads a list of
+rows. Both take <code>source: values</code>:</p>
+<pre><code class="language-yaml">  - id: weapon
+    type: lookup
+    source: values
+    table: weapons
+    where:
+      field: weapon_id
+      op: &quot;==&quot;
+      value: &quot;{{input.weapon_id}}&quot;
+    required: true
+    onMissing:
+      status: 404
+      errorCode: UNKNOWN_WEAPON</code></pre>
+<p><code>onMissing</code> sets the error the client sees when no row matches. The
+<a href="#worked-example-validate-combat-without-a-dedicated-server">worked example</a>
+uses both forms.</p>
+<h2 id="versions-and-publishing"><a class="anchor" href="#versions-and-publishing" aria-hidden="true" tabindex="-1">#</a>Versions and publishing</h2>
+<p>Game values are captured in a published revision snapshot, but older builds
+read that snapshot only when the project has an explicit revision policy and
+the revision is retained and within its support window.</p>
+<ul>
+<li><strong>Publish writes a snapshot.</strong> When the Sync Tool publishes a package
+revision (<code>POST /api/manage/{projectId}/package-sync</code>), the server writes an
+immutable snapshot of that revision&#39;s endpoints, workflows, collections,
+queries and game values. See <a href="/docs/versions/0.5.7/source-470a694/compat/version-policy/">version policy</a>.</li>
+<li><strong>Old builds keep their values conditionally.</strong> A published build sends
+<code>x-ns-revision-id</code>; with an explicit policy and retained supported revision,
+the server resolves game values and collection definitions from that
+revision&#39;s snapshot. Without an explicit policy, or with no header, an
+unknown revision or an expired one, reads use live values (expired ones are
+rejected when server enforcement is on). A resource missing from a snapshot
+may also resolve from live definitions; pinning is not a closed-world cutoff.
+See <a href="/docs/versions/0.5.7/source-470a694/compat/version-policy/#pinned-execution">pinned execution</a>.</li>
+<li><strong>Retention.</strong> The server keeps the live values plus the most recent earlier
+revisions. The default is 3 and the range is 0 to 20. A revision inside its
+support window is kept even past that count.</li>
+<li><strong>Push Staged or Push Live.</strong> <strong>Push Staged</strong> sends the publish target <code>next</code>.
+Its changes are promoted when the next package revision is published.
+<strong>Push Live</strong> changes the live target; retained revision snapshots continue
+to resolve independently. See
+<a href="/docs/versions/0.5.7/source-470a694/start/connect-a-game/#staged-pushes-and-editor-play-sessions">client setup</a>.</li>
+</ul>
+<p>Keep schemas backward-compatible across the support window. Player records are
+shared live data, not revision snapshots.</p>
+<p>Revision enforcement is optional and off by default. It can block outdated
+builds, but only when the owner turns it on
+(<a href="/docs/versions/0.5.7/source-470a694/compat/version-policy/#rules">revision policy</a>).</p>
+<p>Player records are not versioned. Old and new builds read and write the same
+live player data, so keep collection schemas backward-compatible across
+revisions.</p>
+<h2 id="worked-example-validate-combat-without-a-dedicated-server"><a class="anchor" href="#worked-example-validate-combat-without-a-dedicated-server" aria-hidden="true" tabindex="-1">#</a>Worked example: validate combat without a dedicated server</h2>
+<p>This example has a game client report the claims for a fight. The server checks
+each claim against the game values and its own clock before it awards anything.
+The client cannot award itself xp. It can only ask for it, and the server decides.</p>
+<p>Game values used:</p>
+<ul>
+<li>Group <code>combat</code>: <code>zombie_hp_per_level: 20</code>, <code>xp_per_zombie_level: 15</code>,
+<code>max_zombie_level: 50</code>, <code>max_clock_skew_ms: 2000</code>.</li>
+<li>Table <code>weapons</code>: rusty pipe 8 damage every 600 ms, pistol 15 every 300 ms,
+shotgun 45 every 900 ms, crossbow 60 every 1200 ms.</li>
+</ul>
+<p>The <code>players</code> collection needs <code>combat</code> and <code>xp</code> fields. Two endpoints do the work.</p>
+<p>For the concurrency check, configure the <code>players</code> collection with
+<code>requireSaveVersion: true</code>. Protected endpoints validate the records they read
+again inside the write transaction; if another request changed that state,
+the stale call returns <code>409 CONFLICT</code> and persists no reward. This setting is
+opt-in. Without it, endpoint writes keep their existing behavior and are not
+safe against simultaneous requests that read and then overwrite the same record.</p>
+<h3 id="start-combat"><a class="anchor" href="#start-combat" aria-hidden="true" tabindex="-1">#</a>start-combat</h3>
+<p><code>endpoints/start-combat.endpoint.yml</code>:</p>
+<pre><code class="language-yaml">sourceVersion: 1
+kind: endpoint
+id: start-combat
+name: Start combat
+description: Stamps the server time a fight starts and returns the zombie's hit points from game values.
+method: POST
+enabled: true
+input:
+  type: object
+  properties:
+    weapon_id:
+      type: string
+    zombie_level:
+      type: number
+  required:
+    - weapon_id
+    - zombie_level
+steps:
+  - id: weapon
+    type: lookup
+    source: values
+    table: weapons
+    where:
+      field: weapon_id
+      op: &quot;==&quot;
+      value: &quot;{{input.weapon_id}}&quot;
+    required: true
+    onMissing:
+      status: 404
+      errorCode: UNKNOWN_WEAPON
+      message: &quot;Unknown weapon {{input.weapon_id}}.&quot;
+  - id: level_ok
+    type: condition
+    check:
+      field: input.zombie_level
+      op: &quot;&lt;=&quot;
+      value: &quot;{{values.combat.max_zombie_level}}&quot;
+    onFail:
+      status: 400
+      error: LEVEL_TOO_HIGH
+  - id: zombie
+    type: compute
+    values:
+      hp: &quot;{{values.combat.zombie_hp_per_level}} * {{input.zombie_level}}&quot;
+  - id: begin
+    type: write
+    collection: players
+    key: &quot;{{steamId}}&quot;
+    ops:
+      - op: set
+        path: combat
+        value:
+          weapon_id: &quot;{{input.weapon_id}}&quot;
+          zombie_level: &quot;{{input.zombie_level}}&quot;
+          zombie_hp: &quot;{{zombie.hp}}&quot;
+          started_ms: &quot;{{_unixMs}}&quot;
+response:
+  status: 200
+  body:
+    zombie_hp: &quot;{{zombie.hp}}&quot;
+    damage_per_hit: &quot;{{weapon.damage}}&quot;
+    server_time_ms: &quot;{{_unixMs}}&quot;</code></pre>
+<h3 id="finish-combat"><a class="anchor" href="#finish-combat" aria-hidden="true" tabindex="-1">#</a>finish-combat</h3>
+<p><code>endpoints/finish-combat.endpoint.yml</code>:</p>
+<pre><code class="language-yaml">sourceVersion: 1
+kind: endpoint
+id: finish-combat
+name: Finish combat
+description: Checks a reported kill against the weapon stats in game values and the server clock before awarding xp.
+method: POST
+enabled: true
+input:
+  type: object
+  properties:
+    hits:
+      type: number
+    client_time_ms:
+      type: number
+  required:
+    - hits
+    - client_time_ms
+steps:
+  - id: player
+    type: read
+    collection: players
+    key: &quot;{{steamId}}&quot;
+  - id: in_combat
+    type: condition
+    check:
+      field: player.combat.started_ms
+      op: exists
+    onFail:
+      status: 409
+      error: NO_COMBAT
+      message: Start combat first.
+  - id: weapon
+    type: lookup
+    source: values
+    table: weapons
+    where:
+      field: weapon_id
+      op: &quot;==&quot;
+      value: &quot;{{player.combat.weapon_id}}&quot;
+    required: true
+    onMissing:
+      status: 404
+      errorCode: UNKNOWN_WEAPON
+  - id: fight
+    type: compute
+    values:
+      damage: &quot;{{input.hits}} * {{weapon.damage}}&quot;
+      elapsed_ms: &quot;{{_unixMs}} - {{player.combat.started_ms}}&quot;
+      max_hits: &quot;floor({{fight.elapsed_ms}} / {{weapon.fire_interval_ms}}) + 1&quot;
+      clock_skew_ms: &quot;abs({{input.client_time_ms}} - {{_unixMs}})&quot;
+      xp: &quot;{{player.combat.zombie_level}} * {{values.combat.xp_per_zombie_level}}&quot;
+  - id: zombie_dead
+    type: condition
+    check:
+      field: fight.damage
+      op: &quot;&gt;=&quot;
+      value: &quot;{{player.combat.zombie_hp}}&quot;
+    onFail:
+      status: 400
+      error: ZOMBIE_ALIVE
+      message: Not enough damage to kill this zombie.
+  - id: hits_possible
+    type: condition
+    check:
+      field: input.hits
+      op: &quot;&lt;=&quot;
+      value: &quot;{{fight.max_hits}}&quot;
+    onFail:
+      status: 400
+      error: TOO_MANY_HITS
+      message: More hits than this weapon can fire in the time since combat started.
+  - id: clock_ok
+    type: condition
+    check:
+      field: fight.clock_skew_ms
+      op: &quot;&lt;=&quot;
+      value: &quot;{{values.combat.max_clock_skew_ms}}&quot;
+    onFail:
+      status: 400
+      error: CLOCK_SKEW
+      message: Client clock is too far from the server clock.
+  - id: reward
+    type: write
+    collection: players
+    key: &quot;{{steamId}}&quot;
+    ops:
+      - op: inc
+        path: xp
+        value: &quot;{{fight.xp}}&quot;
+        source: combat
+        reason: &quot;Killed a level {{player.combat.zombie_level}} zombie&quot;
+      - op: set
+        path: combat
+        value:
+          ended_ms: &quot;{{_unixMs}}&quot;
+response:
+  status: 200
+  body:
+    success: true
+    xp: &quot;{{fight.xp}}&quot;
+    elapsed_ms: &quot;{{fight.elapsed_ms}}&quot;</code></pre>
+<h3 id="results"><a class="anchor" href="#results" aria-hidden="true" tabindex="-1">#</a>Results</h3>
+<p>These responses came from running the two endpoints over HTTP on sbox-ns 0.5.4.
+The test server had authentication turned off. A real game sends the s&amp;box
+identity, which the server verifies.</p>
+<table>
+<thead>
+<tr>
+<th>Request</th>
+<th>Response</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>finish-combat</code> with no <code>start-combat</code></td>
+<td><code>409 NO_COMBAT</code></td>
+<td>No fight is open.</td>
+</tr>
+<tr>
+<td><code>start-combat</code> with an unknown weapon</td>
+<td><code>404 UNKNOWN_WEAPON</code></td>
+<td>No row matches <code>weapon_id</code>.</td>
+</tr>
+<tr>
+<td><code>start-combat</code> with <code>zombie_level: 99</code></td>
+<td><code>400 LEVEL_TOO_HIGH</code></td>
+<td>Above <code>max_zombie_level</code> (50).</td>
+</tr>
+<tr>
+<td><code>start-combat</code> with pistol at level 3</td>
+<td><code>200 {&quot;zombie_hp&quot;: 60, &quot;damage_per_hit&quot;: 15}</code></td>
+<td>20 × 3 hit points.</td>
+</tr>
+<tr>
+<td><code>finish-combat</code> with 4 hits right after start</td>
+<td><code>400 TOO_MANY_HITS</code></td>
+<td>One pistol shot every 300 ms allows 1 hit at 0 ms.</td>
+</tr>
+<tr>
+<td><code>finish-combat</code> with 2 hits right after start</td>
+<td><code>400 ZOMBIE_ALIVE</code></td>
+<td>30 damage does not cover 60 hit points.</td>
+</tr>
+<tr>
+<td><code>finish-combat</code> with the client clock 60 s behind</td>
+<td><code>400 CLOCK_SKEW</code></td>
+<td>Skew is over <code>max_clock_skew_ms</code> (2000).</td>
+</tr>
+<tr>
+<td><code>finish-combat</code> with 4 hits after 1 s</td>
+<td><code>200 {&quot;success&quot;: true, &quot;xp&quot;: 45, &quot;elapsed_ms&quot;: 1020}</code></td>
+<td>60 damage kills a 60 hit point zombie; 3 × 15 xp.</td>
+</tr>
+<tr>
+<td>Replay of the successful <code>finish-combat</code></td>
+<td><code>409 NO_COMBAT</code></td>
+<td>The fight was closed by the first finish.</td>
+</tr>
+</tbody></table>
+<p>Each rejected request leaves the player&#39;s record unchanged, because every
+<code>write</code> step comes after the checks.</p>
+<p>Concurrent completion is a separate case: without <code>requireSaveVersion: true</code>,
+two requests can both pass the initial <code>in_combat</code> check. With it enabled,
+only one request can commit against a given player-record version; the other
+receives <code>409 CONFLICT</code>. Reload the player state before deciding whether to
+submit another action.</p>
+<h3 id="what-the-checks-do-not-prove"><a class="anchor" href="#what-the-checks-do-not-prove" aria-hidden="true" tabindex="-1">#</a>What the checks do not prove</h3>
+<p>The checks limit what a client can claim. A fight cannot award more damage than
+the weapon&#39;s stats allow, faster than its fire rate allows after the server
+start time, or with a clock far from the server&#39;s. They do not prove that a hit
+landed. A client that controls the game can still send four hits that were
+never fired, as long as they fit the rules above. Cap rewards, and treat the
+server as the place where rules are enforced, not where gameplay is proven.</p>
+<h2 id="related-guides"><a class="anchor" href="#related-guides" aria-hidden="true" tabindex="-1">#</a>Related guides</h2>
+<ul>
+<li><a href="/docs/versions/0.5.7/source-470a694/compat/version-policy/">Version policy</a>: revisions, retention, pinned execution
+and revision enforcement.</li>
+<li><a href="/docs/versions/0.5.7/source-470a694/library/script-endpoints/">JavaScript and TypeScript endpoints</a>: scripted
+endpoints that read game values with <code>ns.values.get</code>.</li>
+<li><a href="/docs/versions/0.5.7/source-470a694/server/admin-panel/">Admin panel</a>: the owner console, dry-run endpoint tests and
+the <strong>Game values</strong> page.</li>
+<li><a href="/docs/versions/0.5.7/source-470a694/start/game-client/">Game client</a>: the requests the library sends.</li>
+<li><a href="/docs/versions/0.5.7/source-470a694/start/connect-a-game/">Client setup</a>: Base URL, the Sync Tool and staged pushes.</li>
+<li><a href="/docs/versions/0.5.7/source-470a694/server/mcp/">MCP</a>: coding agents and <code>mcp.allow_writes</code>.</li>
+</ul>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/01994503800aafec43bab1b74e392961eb1ec3c8/docs/game-values.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/game-values.md</a> at <code>v0.5.7</code> (0199450).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.7 (<code>0.5.7</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/01994503800aafec43bab1b74e392961eb1ec3c8" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.7</code> (<code>0199450</code>). <strong>Library:</strong> main source (470a694) (<code>source-470a694</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/470a69426ebe9af83a2f6ae8e77047faa80c1430" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>470a69426ebe9af83a2f6ae8e77047faa80c1430</code> (<code>470a694</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.7/source-470a694/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.7/source-470a694/api/">HTTP API</a><a href="/docs/versions/0.5.7/source-470a694/library/api/">C# API</a><a href="/docs/versions/0.5.7/source-470a694/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

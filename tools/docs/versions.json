@@ -1,6 +1,6 @@
 {
   "defaults": {
-    "server": "0.5.6",
+    "server": "0.5.7",
     "library": "source-13f51a8"
   },
   "servers": [
@@ -75,6 +75,12 @@
       "label": "0.5.6",
       "ref": "v0.5.6",
       "commit": "ba18db0529a36c950165b36089504b3e6ae88632"
+    },
+    {
+      "id": "0.5.7",
+      "label": "0.5.7",
+      "ref": "v0.5.7",
+      "commit": "01994503800aafec43bab1b74e392961eb1ec3c8"
     }
   ],
   "libraries": [

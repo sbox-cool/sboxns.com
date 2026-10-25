@@ -1,6 +1,6 @@
 {
   "defaults": {
-    "server": "0.5.6",
+    "server": "0.5.7",
     "library": "source-13f51a8"
   },
   "versions": [
@@ -2643,6 +2643,226 @@
         "repo": "sbox-cool/sbox-network-storage"
       },
       "basePath": "/docs/versions/0.5.6/source-6efc43f"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-13f51a8",
+        "label": "1.1.0 source (13f51a8)",
+        "ref": "13f51a81f046b1722a6b747712afebccaa9559b3",
+        "commit": "13f51a81f046b1722a6b747712afebccaa9559b3",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-13f51a8"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-d369d1b",
+        "label": "Legacy source (d369d1b)",
+        "ref": "d369d1b0a43e30016fa919f260c696dc6aa255a6",
+        "commit": "d369d1b0a43e30016fa919f260c696dc6aa255a6",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-d369d1b"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-fc58d4e",
+        "label": "main source (fc58d4e)",
+        "ref": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "commit": "fc58d4ef9559ae107f3398d0f0022d9c7fef5a1a",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-fc58d4e"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-5369108",
+        "label": "main source (5369108)",
+        "ref": "5369108f168b35d6fc78fa4aaaa1c3af724232ee",
+        "commit": "5369108f168b35d6fc78fa4aaaa1c3af724232ee",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-5369108"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-9c4a235",
+        "label": "main source (9c4a235)",
+        "ref": "9c4a23516b17a2776183299495a59e7d005ede22",
+        "commit": "9c4a23516b17a2776183299495a59e7d005ede22",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-9c4a235"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-9b6ec5d",
+        "label": "main source (9b6ec5d)",
+        "ref": "9b6ec5d41d99afd1756293d958be1f1330aa73b7",
+        "commit": "9b6ec5d41d99afd1756293d958be1f1330aa73b7",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-9b6ec5d"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-ddf9b61",
+        "label": "main source (ddf9b61)",
+        "ref": "ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750",
+        "commit": "ddf9b617c0c4fdf26c9c0e91c5cd34fa915b1750",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-ddf9b61"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-7f77770",
+        "label": "main source (7f77770)",
+        "ref": "7f77770c81dd6ab84facfa05e9a87010b6f27983",
+        "commit": "7f77770c81dd6ab84facfa05e9a87010b6f27983",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-7f77770"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-470a694",
+        "label": "main source (470a694)",
+        "ref": "470a69426ebe9af83a2f6ae8e77047faa80c1430",
+        "commit": "470a69426ebe9af83a2f6ae8e77047faa80c1430",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-470a694"
+    },
+    {
+      "server": {
+        "id": "0.5.7",
+        "label": "0.5.7",
+        "ref": "v0.5.7",
+        "commit": "01994503800aafec43bab1b74e392961eb1ec3c8",
+        "repo": "sbox-cool/sbox-network-storage-server"
+      },
+      "library": {
+        "id": "source-6efc43f",
+        "label": "main source (6efc43f)",
+        "ref": "6efc43f065a348b38d51056bfccd162644d03de1",
+        "commit": "6efc43f065a348b38d51056bfccd162644d03de1",
+        "publication": {
+          "status": "unverified",
+          "revision": null,
+          "evidence": null
+        },
+        "repo": "sbox-cool/sbox-network-storage"
+      },
+      "basePath": "/docs/versions/0.5.7/source-6efc43f"
     }
   ]
 }

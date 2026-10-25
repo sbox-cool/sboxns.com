@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modules | Network Storage docs</title>
+  <meta name="description" content="Optional server modules and how to enable them.">
+  <link rel="canonical" href="https://sboxns.com/docs/server/modules/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Modules | Network Storage docs">
+  <meta property="og:description" content="Optional server modules and how to enable them.">
+  <meta property="og:url" content="https://sboxns.com/docs/server/modules/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.7/source-6efc43f/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.5.7/source-6efc43f/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.5.7 · main source (6efc43f)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-6efc43f/server/modules/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-6efc43f/server/modules/">0.5.4</option><option value="/docs/versions/0.5.3/source-6efc43f/server/modules/">0.5.3</option><option value="/docs/versions/0.5.2/source-6efc43f/server/modules/">0.5.2</option><option value="/docs/versions/0.5.1/source-6efc43f/server/modules/">0.5.1</option><option value="/docs/versions/?missing=server%2Fmodules&amp;server=0.5.0&amp;library=source-6efc43f">0.5.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmodules&amp;server=0.4.0&amp;library=source-6efc43f">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmodules&amp;server=0.3.0&amp;library=source-6efc43f">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmodules&amp;server=0.2.0&amp;library=source-6efc43f">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=server%2Fmodules&amp;server=0.1.0&amp;library=source-6efc43f">0.1.0 (page unavailable)</option><option value="/docs/versions/0.5.5/source-6efc43f/server/modules/">0.5.5</option><option value="/docs/versions/0.5.6/source-6efc43f/server/modules/">0.5.6</option><option value="/docs/versions/0.5.7/source-6efc43f/server/modules/" selected>0.5.7</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.5.7/source-13f51a8/server/modules/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.5.7/source-d369d1b/server/modules/">Legacy source (d369d1b)</option><option value="/docs/versions/0.5.7/source-fc58d4e/server/modules/">main source (fc58d4e)</option><option value="/docs/versions/0.5.7/source-5369108/server/modules/">main source (5369108)</option><option value="/docs/versions/0.5.7/source-9c4a235/server/modules/">main source (9c4a235)</option><option value="/docs/versions/0.5.7/source-9b6ec5d/server/modules/">main source (9b6ec5d)</option><option value="/docs/versions/0.5.7/source-ddf9b61/server/modules/">main source (ddf9b61)</option><option value="/docs/versions/0.5.7/source-7f77770/server/modules/">main source (7f77770)</option><option value="/docs/versions/0.5.7/source-470a694/server/modules/">main source (470a694)</option><option value="/docs/versions/0.5.7/source-6efc43f/server/modules/" selected>main source (6efc43f)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-6efc43f/server/modules/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-6efc43f/server/modules/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-6efc43f/server/modules/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-6efc43f/server/modules/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-6efc43f/server/modules/">Server: 0.5.1</a></li><li><a href="/docs/versions/?missing=server%2Fmodules&amp;server=0.5.0&amp;library=source-6efc43f">Server: 0.5.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmodules&amp;server=0.4.0&amp;library=source-6efc43f">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmodules&amp;server=0.3.0&amp;library=source-6efc43f">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmodules&amp;server=0.2.0&amp;library=source-6efc43f">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=server%2Fmodules&amp;server=0.1.0&amp;library=source-6efc43f">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/0.5.5/source-6efc43f/server/modules/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.6/source-6efc43f/server/modules/">Server: 0.5.6</a></li><li><a href="/docs/versions/0.5.7/source-6efc43f/server/modules/">Server: 0.5.7</a></li><li><a href="/docs/versions/0.5.7/source-13f51a8/server/modules/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.5.7/source-d369d1b/server/modules/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.5.7/source-fc58d4e/server/modules/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.5.7/source-5369108/server/modules/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.5.7/source-9c4a235/server/modules/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.5.7/source-9b6ec5d/server/modules/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.5.7/source-ddf9b61/server/modules/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.5.7/source-7f77770/server/modules/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.5.7/source-470a694/server/modules/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.5.7/source-6efc43f/server/modules/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.5.7/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.5.7/source-6efc43f/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.5.7/source-6efc43f/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.7/source-6efc43f/start/game-client/">Game client startup</a><a href="/docs/versions/0.5.7/source-6efc43f/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.5.7/source-6efc43f/library/overview/">Library overview</a><a href="/docs/versions/0.5.7/source-6efc43f/library/getting-started/">Install and configure</a><a href="/docs/versions/0.5.7/source-6efc43f/library/runtime-api/">Runtime guide</a><a href="/docs/versions/0.5.7/source-6efc43f/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.5.7/source-6efc43f/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.5.7/source-6efc43f/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/0.5.7/source-6efc43f/library/examples/">Examples</a><a href="/docs/versions/0.5.7/source-6efc43f/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.5.7/source-6efc43f/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.5.7/source-6efc43f/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.5.7/source-6efc43f/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.5.7/source-6efc43f/server/cli/">CLI reference</a><a href="/docs/versions/0.5.7/source-6efc43f/server/hosting-models/">Hosting models</a><a href="/docs/versions/0.5.7/source-6efc43f/server/configuration/">Configuration</a><a href="/docs/versions/0.5.7/source-6efc43f/server/database/">Databases</a><a href="/docs/versions/0.5.7/source-6efc43f/server/admin-panel/">Owner console</a><a href="/docs/versions/0.5.7/source-6efc43f/server/media/">Media uploads</a><a href="/docs/versions/0.5.7/source-6efc43f/server/game-logs/">Game logs</a><a href="/docs/versions/0.5.7/source-6efc43f/server/export/">Export and move projects</a><a href="/docs/versions/0.5.7/source-6efc43f/server/modules/" aria-current="page">Modules</a><a href="/docs/versions/0.5.7/source-6efc43f/server/monitoring/">Monitoring</a><a href="/docs/versions/0.5.7/source-6efc43f/server/alerting/">Alerting</a><a href="/docs/versions/0.5.7/source-6efc43f/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.5.7/source-6efc43f/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/0.5.7/source-6efc43f/compat/version-policy/">Version policy</a><a href="/docs/versions/0.5.7/source-6efc43f/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.5.7/source-6efc43f/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.5.7/source-6efc43f/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Modules</span></nav>
+  <article class="prose docs-prose">
+<h1>Modules</h1>
+<p class="lead">Optional server modules and how to enable them.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#lifecycle">Lifecycle</a><a href="#sync-preservation">Sync preservation</a><a href="#permissions">Permissions</a><a href="#hooks-and-panels">Hooks and panels</a><a href="#manifest-reference">Manifest reference</a><a href="#integrity-monitoring">Integrity monitoring</a><a href="#player-insights">Player insights</a><a href="#latency-overhead">Latency overhead</a></nav>
+<p>Installable server modules: starter kits (economy, progression, inventory, leaderboards),
+integrity monitoring (server-side anticheat) and player insights (analytics). Modules are
+<strong>declarative bundles compiled into the binary</strong>: a manifest plus authored definitions. They
+never download code at runtime and never run outside code.</p>
+<h2 id="lifecycle"><a class="anchor" href="#lifecycle" aria-hidden="true" tabindex="-1">#</a>Lifecycle</h2>
+<ol>
+<li><strong>Catalog.</strong> The dashboard Modules page lists every embedded module with its version,
+description, requested permissions, the definitions it adds, and its install state. Works
+offline; <code>modules.json</code> absent means nothing is installed.</li>
+<li><strong>Preview.</strong> Installing first shows every definition and permission. Name conflicts with
+existing definitions are listed and the install refuses until they are resolved.</li>
+<li><strong>Install.</strong> Definitions are written into the live definition tables with a <code>module</code>
+ownership field under the module&#39;s <code>id_</code> prefix (for example <code>economy_earn</code>). The install
+is audited and shows a toast. Kit endpoints are public-key callable, so they work in
+<code>player-hosted</code> projects.</li>
+<li><strong>Disable.</strong> Hooks stop, panels hide, and the module&#39;s endpoints answer <code>ENDPOINT_DISABLED</code>.
+Data and settings are kept; re-enabling restores everything without data loss.</li>
+<li><strong>Uninstall.</strong> Requires typing the module id. Keep data converts definitions to ordinary
+project definitions (ownership stripped, names and records kept); delete data also removes
+the module&#39;s definitions, its records (ledger entries included) and its game-values items.
+Definitions outside the module&#39;s namespace are never touched.
+Deleting module records has no 10,000-record cutoff; records beyond that boundary are removed
+too and cannot reappear when the module is reinstalled.</li>
+<li><strong>Upgrade.</strong> A catalog upgrade without new permissions applies on next install. A version
+that adds permissions is held: the installed version keeps running until the owner approves
+the new permissions on the Modules page. Applying an upgrade, automatic or approved, first
+checks for conflicts with definitions the module does not own, including retired names from
+the installed version that the owner has replaced. A conflict refuses the upgrade and leaves
+the installed definitions and <code>modules.json</code> unchanged. Deleting old definitions and writing
+their replacements share one transaction, so a failed write rolls back the whole replacement.
+Settings carry over: an explicit value submitted
+with the upgrade wins, then the installed value, then the catalog default. Settings the new
+version no longer declares are dropped. Values are not type-checked on save; consumers fall
+back to their default when a value does not parse. Explicit values submitted with a held
+upgrade are not saved until the owner approves; change them in the settings form first.</li>
+</ol>
+<h2 id="sync-preservation"><a class="anchor" href="#sync-preservation" aria-hidden="true" tabindex="-1">#</a>Sync preservation</h2>
+<p>A package sync or editor push never deletes, overwrites or renames module-owned definitions:
+batch pushes report <code>kept_module_owned</code> per item, single PATCH keeps them, full replacements
+skip them, deletes answer <code>403 MODULE_MANAGED</code>, and full game-values replaces merge owned
+items back. Staged promotion skips owned rows too. Snapshots, project export and import carry
+module-owned definitions verbatim, so old revisions keep working with their kits.</p>
+<h2 id="permissions"><a class="anchor" href="#permissions" aria-hidden="true" tabindex="-1">#</a>Permissions</h2>
+<p>Fixed list: <code>read-player-data</code>, <code>write-player-data</code>, <code>read-analytics</code>, <code>flag-players</code>,
+<code>block-requests</code>, <code>send-alerts</code>. Module background actions only run when granted; a revoked
+permission degrades an automatic action to flag-only and logs it.</p>
+<h2 id="hooks-and-panels"><a class="anchor" href="#hooks-and-panels" aria-hidden="true" tabindex="-1">#</a>Hooks and panels</h2>
+<p>Fixed hooks (all dispatched off the request path through a bounded channel; a full channel
+drops events and counts them instead of delaying requests): <code>endpoint.executed</code>,
+<code>ledger.delta</code>, <code>request.rejected</code>, <code>revision.reported</code>.</p>
+<p>Fixed panels (Razor partials under <code>Views/Owner/Modules/</code>): <code>review-queue</code> (integrity),
+<code>player-overview</code>, <code>player-profile</code>, <code>action-log</code> (insights).</p>
+<h2 id="manifest-reference"><a class="anchor" href="#manifest-reference" aria-hidden="true" tabindex="-1">#</a>Manifest reference</h2>
+<p>Embedded resources <code>SboxNetworkStorage.Infrastructure.Modules.&lt;id&gt;.module.yml</code> and
+<code>&lt;id&gt;.definitions.yml</code>:</p>
+<pre><code class="language-yaml">id: economy            # ^[a-z][a-z0-9-]{0,63}$, matches the file name
+version: 1.0.0         # semantic version
+minServerVersion: 0.6.0
+name: Economy starter kit
+description: ...
+permissions: []        # subset of the fixed list
+hooks: []              # subset of the fixed list
+panels: []             # subset of the fixed list
+settings:             # typed settings with defaults
+  - key: starting_balance
+    type: integer
+    default: &quot;0&quot;
+    description: ...</code></pre>
+<p><code>definitions.yml</code> is a list of <code>{kind, source}</code> where kind is
+<code>collection</code>, <code>endpoint</code>, <code>workflow</code>, <code>query</code> or <code>game-values</code> and source is a definition in
+the existing authoring format. Names must already carry the <code>id_</code> prefix and endpoints and
+queries must not require a secret key; the installer stamps <code>module: &lt;id&gt;</code> and refuses
+anything else. An unknown hook, permission or panel marks only that module unavailable with
+the validation error; other modules load normally.</p>
+<h2 id="integrity-monitoring"><a class="anchor" href="#integrity-monitoring" aria-hidden="true" tabindex="-1">#</a>Integrity monitoring</h2>
+<p>Detectors on data-plane hooks with per-project settings (Modules page): value delta (a
+watched ledger/numeric field rising more than <code>value_delta_per_minute</code> per player per minute),
+call rate (endpoint calls per player per minute above <code>max_calls_per_minute</code>), revision
+tampering (a reported revision id that was never published), repeated anti-rollback conflicts
+and repeated direct-write attempts on endpoint-only collections (5 in 10 minutes by default).
+Secret-key (dedicated-server) traffic is exempt.</p>
+<p>Detection only observes: except for an explicit player block, the module never alters, delays
+or rejects requests. Automatic action per detector: <code>flag-only</code> (default), <code>flag-and-alert</code>
+(through the existing operator alert channels and suppression) or <code>flag-and-block-writes</code>
+for <code>block_duration_minutes</code>. Flags record player, detector, severity, time, evidence and
+state (<code>open</code>, <code>dismissed</code>, <code>confirmed</code>); the review queue groups them by player and every
+decision is audited.</p>
+<p>Response model (<code>response_mode</code>, default <code>off</code>): <code>off</code> takes no response-model path. <code>dry-run</code>
+evaluates each eligible firing (identity not <code>anonymous</code> or blank) against the player&#39;s recent
+counted firings of the same detector and stores the result as <code>wouldApply</code> evidence on the flag:
+<code>stage</code> (<code>flag</code>, <code>rate-limit</code>, <code>shadow</code>, <code>block-writes</code>, <code>block-all</code>), <code>detector</code>, <code>hookSource</code>,
+<code>windowSeconds</code>, <code>priorCount</code>, <code>approximate</code> and <code>schemaVersion</code>, at most 1024 bytes. Any other
+<code>response_mode</code> value is treated as <code>off</code>. <code>response_lookback_hours</code> (default 24, accepted 1 to 168)
+bounds the history counted. Flags in state <code>dismissed</code> or <code>reviewed-legitimate</code> are not counted;
+a repeat within the detector&#39;s window of the previous flag is suppressed and not counted.</p>
+<p>Dry-run records <code>wouldApply</code> only: zero automated blocks, rate limits, overlays or alerts come from
+the response model, and request responses are unchanged. The existing <code>flag-and-block-writes</code>
+action still blocks identities that are not real players until that prerequisite lands. History is
+read per firing and is not coordinated across server processes, so concurrent firings may not see
+each other. Evidence is marked <code>approximate: true</code> when the 16-row read ends before the lookback
+boundary and before four counted firings; the stage is then a lower bound. The value-delta,
+revision and rejection-reason detectors are not live.</p>
+<p>Calibration gate for any future enforcement (not enabled by this change): 30 days of dry-run
+data, reviewed-decision rate at most 1%, at least 300 reviewed legitimate decisions, at least
+1000 players, and zero response-model blocks in that window. The latency figures below are not
+yet measured.</p>
+<p>Player blocks (writes or all, optional expiry and public reason) return <code>403 PLAYER_BLOCKED</code>.
+Unblocking takes effect immediately.
+Write-scope blocks conservatively include all scripted endpoints and endpoints invoking a
+workflow, because either can stage writes outside top-level YAML write steps. A script or
+workflow used only for reading is still classified as potentially mutating; ordinary YAML
+read-only endpoints remain callable. Secret-key trusted callers remain exempt.</p>
+<h2 id="player-insights"><a class="anchor" href="#player-insights" aria-hidden="true" tabindex="-1">#</a>Player insights</h2>
+<p>Overview (daily active players, new players, sessions, median session length for 1/7/30 days;
+day-1 and day-7 return rates) from sessions the server already records. Panels say
+&quot;Not enough data yet&quot; instead of showing placeholder figures. Player search (Steam ID or
+display name) and profiles (first/last seen, revision, sessions, records, ledger, flags,
+block state). The action log records endpoint calls (endpoint, revision, outcome, changed
+fields, time) with configurable retention (default 14 days, 1-90), batched writes that never
+block or fail game requests, drop counting, and optional per-endpoint body capture. Overview
+series and filtered logs export as CSV.</p>
+<h2 id="latency-overhead"><a class="anchor" href="#latency-overhead" aria-hidden="true" tabindex="-1">#</a>Latency overhead</h2>
+<p>Detection adds no more than 2 ms at p95 (measured with the recipe below). Recipe: install the
+four starter kits plus integrity with defaults in a scratch project, run the scripted normal
+play session (<code>scripts/</code> smoke against earn/spend/grant-xp/grant/consume/craft/submit), assert
+zero flags, and compare p95 endpoint latency with the integrity module enabled versus
+uninstalled. Record both numbers here when measured:</p>
+<ul>
+<li>p95 without integrity: <em>to be measured</em></li>
+<li>p95 with integrity (flag-only defaults): <em>to be measured</em></li>
+<li>flags during normal play: <em>to be measured (must be 0)</em></li>
+</ul>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/01994503800aafec43bab1b74e392961eb1ec3c8/docs/modules.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/modules.md</a> at <code>v0.5.7</code> (0199450).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.5.7 (<code>0.5.7</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/01994503800aafec43bab1b74e392961eb1ec3c8" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.5.7</code> (<code>0199450</code>). <strong>Library:</strong> main source (6efc43f) (<code>source-6efc43f</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/6efc43f065a348b38d51056bfccd162644d03de1" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>6efc43f065a348b38d51056bfccd162644d03de1</code> (<code>6efc43f</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.5.7/source-6efc43f/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.5.7/source-6efc43f/api/">HTTP API</a><a href="/docs/versions/0.5.7/source-6efc43f/library/api/">C# API</a><a href="/docs/versions/0.5.7/source-6efc43f/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>
