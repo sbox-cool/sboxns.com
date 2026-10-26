@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Version policy | Network Storage docs</title>
+  <meta name="description" content="Library version reporting and opt-in minimums.">
+  <link rel="canonical" href="https://sboxns.com/docs/compat/version-policy/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Version policy | Network Storage docs">
+  <meta property="og:description" content="Library version reporting and opt-in minimums.">
+  <meta property="og:url" content="https://sboxns.com/docs/compat/version-policy/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">Next release (unreleased, 8e7623d) · main source (9d65d9b)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-9d65d9b/compat/version-policy/" selected>Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-9d65d9b/compat/version-policy/">0.5.4</option><option value="/docs/versions/0.5.3/source-9d65d9b/compat/version-policy/">0.5.3</option><option value="/docs/versions/0.5.2/source-9d65d9b/compat/version-policy/">0.5.2</option><option value="/docs/versions/0.5.1/source-9d65d9b/compat/version-policy/">0.5.1</option><option value="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.5.0&amp;library=source-9d65d9b">0.5.0 (page unavailable)</option><option value="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.4.0&amp;library=source-9d65d9b">0.4.0 (page unavailable)</option><option value="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.3.0&amp;library=source-9d65d9b">0.3.0 (page unavailable)</option><option value="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.2.0&amp;library=source-9d65d9b">0.2.0 (page unavailable)</option><option value="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.1.0&amp;library=source-9d65d9b">0.1.0 (page unavailable)</option><option value="/docs/versions/0.5.5/source-9d65d9b/compat/version-policy/">0.5.5</option><option value="/docs/versions/0.5.6/source-9d65d9b/compat/version-policy/">0.5.6</option><option value="/docs/versions/0.5.7/source-9d65d9b/compat/version-policy/">0.5.7</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/next-8e7623d/source-13f51a8/compat/version-policy/">1.1.0 source (13f51a8)</option><option value="/docs/versions/next-8e7623d/source-d369d1b/compat/version-policy/">Legacy source (d369d1b)</option><option value="/docs/versions/next-8e7623d/source-fc58d4e/compat/version-policy/">main source (fc58d4e)</option><option value="/docs/versions/next-8e7623d/source-5369108/compat/version-policy/">main source (5369108)</option><option value="/docs/versions/next-8e7623d/source-9c4a235/compat/version-policy/">main source (9c4a235)</option><option value="/docs/versions/next-8e7623d/source-9b6ec5d/compat/version-policy/">main source (9b6ec5d)</option><option value="/docs/versions/next-8e7623d/source-ddf9b61/compat/version-policy/">main source (ddf9b61)</option><option value="/docs/versions/next-8e7623d/source-7f77770/compat/version-policy/">main source (7f77770)</option><option value="/docs/versions/next-8e7623d/source-470a694/compat/version-policy/">main source (470a694)</option><option value="/docs/versions/next-8e7623d/source-6efc43f/compat/version-policy/">main source (6efc43f)</option><option value="/docs/versions/next-8e7623d/source-9d65d9b/compat/version-policy/" selected>main source (9d65d9b)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-9d65d9b/compat/version-policy/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-9d65d9b/compat/version-policy/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-9d65d9b/compat/version-policy/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-9d65d9b/compat/version-policy/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-9d65d9b/compat/version-policy/">Server: 0.5.1</a></li><li><a href="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.5.0&amp;library=source-9d65d9b">Server: 0.5.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.4.0&amp;library=source-9d65d9b">Server: 0.4.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.3.0&amp;library=source-9d65d9b">Server: 0.3.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.2.0&amp;library=source-9d65d9b">Server: 0.2.0 (page unavailable)</a></li><li><a href="/docs/versions/?missing=compat%2Fversion-policy&amp;server=0.1.0&amp;library=source-9d65d9b">Server: 0.1.0 (page unavailable)</a></li><li><a href="/docs/versions/0.5.5/source-9d65d9b/compat/version-policy/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.6/source-9d65d9b/compat/version-policy/">Server: 0.5.6</a></li><li><a href="/docs/versions/0.5.7/source-9d65d9b/compat/version-policy/">Server: 0.5.7</a></li><li><a href="/docs/versions/next-8e7623d/source-13f51a8/compat/version-policy/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/next-8e7623d/source-d369d1b/compat/version-policy/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/next-8e7623d/source-fc58d4e/compat/version-policy/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/next-8e7623d/source-5369108/compat/version-policy/">Library: main source (5369108)</a></li><li><a href="/docs/versions/next-8e7623d/source-9c4a235/compat/version-policy/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/next-8e7623d/source-9b6ec5d/compat/version-policy/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/next-8e7623d/source-ddf9b61/compat/version-policy/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/next-8e7623d/source-7f77770/compat/version-policy/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/next-8e7623d/source-470a694/compat/version-policy/">Library: main source (470a694)</a></li><li><a href="/docs/versions/next-8e7623d/source-6efc43f/compat/version-policy/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/next-8e7623d/source-9d65d9b/compat/version-policy/">Library: main source (9d65d9b)</a></li><li><a href="/docs/versions/0.5.7/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/next-8e7623d/source-9d65d9b/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/next-8e7623d/source-9d65d9b/start/connect-a-game/">Connect a game</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/start/game-client/">Game client startup</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/start/game-values/">Game values</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/overview/">Library overview</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/getting-started/">Install and configure</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/runtime-api/">Runtime guide</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/sync-tool/">Sync Tool</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/script-endpoints/">Script endpoints (JavaScript / TypeScript)</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/examples/">Examples</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/next-8e7623d/source-9d65d9b/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/self-hosting/">Self-hosting</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/hosting-models/">Hosting models</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/configuration/">Configuration</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/database/">Databases</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/admin-panel/">Owner console</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/media/">Media uploads</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/game-logs/">Game logs</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/export/">Export and move projects</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/modules/">Modules</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/monitoring/">Monitoring</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/alerting/">Alerting</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/next-8e7623d/source-9d65d9b/compat/compatibility/">Library and server compatibility</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/compat/version-policy/" aria-current="page">Version policy</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/next-8e7623d/source-9d65d9b/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/next-8e7623d/source-9d65d9b/">Docs</a><span aria-hidden="true">/</span><span>Compatibility</span><span aria-hidden="true">/</span><span aria-current="page">Version policy</span></nav>
+  <article class="prose docs-prose">
+<h1>Version policy</h1>
+<p class="lead">Library version reporting and opt-in minimums.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#publishing-flow">Publishing flow</a><a href="#retention">Retention</a><a href="#rules">Rules</a><a href="#revision-init">revision-init</a><a href="#pinned-execution">Pinned execution</a><a href="#shared-records-caveat">Shared records caveat</a><a href="#client-library-requirements">Client library requirements</a></nav>
+<p>Publish new game builds without breaking players on older ones. Each
+package sync that publishes a revision keeps an immutable snapshot of that
+revision&#39;s definitions; owners set support rules; the server tells each
+client what to do and can enforce it server-side (opt-in, off by default).</p>
+<h2 id="publishing-flow"><a class="anchor" href="#publishing-flow" aria-hidden="true" tabindex="-1">#</a>Publishing flow</h2>
+<ol>
+<li>The editor Sync Tool pushes definitions, then <code>POST /api/manage/{projectId}/package-sync</code> with the new <code>currentRevisionId</code>.</li>
+<li>When the revision actually changes, the server promotes staged
+overrides, resets <code>revisionPublishedAt</code> to now (the grace anchor), and
+writes <code>revisions/{revisionId}.json</code>: the full merged endpoints,
+workflows, collections, queries and game values plus the publish time.
+The write is once-only: later live edits never rewrite a snapshot.</li>
+<li><code>revisions/index.json</code> records the retained ids, grace starts and owner
+overrides (ended/extended grace). The Versions page
+(<code>/dashboard/projects/{id}/versions</code>) lists live, in-grace and expired
+revisions with publish times, distinct players per revision (24h, from
+heartbeat/request identity sketches) and non-additive schema warnings.</li>
+</ol>
+<h2 id="retention"><a class="anchor" href="#retention" aria-hidden="true" tabindex="-1">#</a>Retention</h2>
+<p>The server keeps live plus the most recent <code>N</code> earlier revisions (<code>N</code> per
+project, default 3, range 0-20, set under Project → Revision policy). A
+revision still inside its support window is preserved even past the count;
+it is pruned from the index only after the window lapses. Snapshot files
+are definition JSON only (no player records).</p>
+<h2 id="rules"><a class="anchor" href="#rules" aria-hidden="true" tabindex="-1">#</a>Rules</h2>
+<p>Per project (all unset by default; untouched projects behave exactly as
+before — no <code>_revisionStatus</code>, no blocking, live definitions):</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Minimum supported revision</td>
+<td>Clients below it are treated as past grace.</td>
+</tr>
+<tr>
+<td>Grace period (minutes, 0-10080)</td>
+<td>Starts when a newer revision goes live. <code>0</code> means no grace (outdated is immediately past grace); empty means no timed window (the in-grace action applies).</td>
+</tr>
+<tr>
+<td>While in grace</td>
+<td><code>notify</code> (default), <code>rejoin</code>, or <code>continue</code> (silent). Legacy <code>allow_continue</code> maps to <code>notify</code>, <code>force_upgrade</code> to <code>rejoin</code>; stored values are never rewritten.</td>
+</tr>
+<tr>
+<td>After the grace period</td>
+<td><code>block_writes</code> (default) or <code>block_all</code>. Only a client-library hint unless server enforcement is on.</td>
+</tr>
+<tr>
+<td>Server-side enforcement</td>
+<td>Off by default. When on, known revisions below the minimum or past grace get HTTP 403 <code>REVISION_BLOCKED</code> (with <code>action</code>, <code>message</code>, <code>latestRevisionId</code> plus <code>_revisionStatus</code>). <code>block_writes</code> rejects only mutating requests; reads still succeed. Secret-key callers are always exempt; requests without a revision, or with an unknown one, run against live.</td>
+</tr>
+<tr>
+<td>Notice for outdated players</td>
+<td>Owner message surfaced in revision-init and <code>_revisionStatus</code>.</td>
+</tr>
+</tbody></table>
+<p>The owner&#39;s client-library enforcement checkbox (<code>Enforce the revision policy in the client library</code>, legacy <code>allow_continue</code>/<code>force_upgrade</code>
+mode) is unchanged and gates what the client acts on; it never blocks
+server-side by itself.</p>
+<p>End or extend a grace period early from the Versions page (confirm dialog,
+audited as <code>revision.grace.end</code> / <code>revision.grace.extend</code>).</p>
+<h2 id="revision-init"><a class="anchor" href="#revision-init" aria-hidden="true" tabindex="-1">#</a>revision-init</h2>
+<p><code>POST /api/manage/{projectId}/revision-init</code> (also <code>/v3/...</code>) keeps every current field and
+additively returns <code>action</code> (<code>none</code>, <code>notify</code>, <code>rejoin</code>, <code>block_writes</code>,
+<code>block_all</code>; omitted without an explicit policy), the owner&#39;s message for
+outdated clients (replacing the generic outdated text), <code>graceEndsAt</code>
+(unix seconds, when a grace window applies) and <code>minimumRevisionId</code> (when
+set). The handshake stays read-only and never fails because of policy.</p>
+<h2 id="pinned-execution"><a class="anchor" href="#pinned-execution" aria-hidden="true" tabindex="-1">#</a>Pinned execution</h2>
+<p>A data-plane request carrying <code>x-ns-revision-id</code> uses a retained revision&#39;s
+snapshot only when the project has an explicit revision policy and that
+revision is within its support window. Without an explicit policy, requests
+use live definitions even when they carry a revision header. The staged
+overlay (<code>x-ns-publish-target: next</code>) still wins when targeted. Requests without
+a revision, with an unknown one, or with an expired one use live definitions
+(expired ones are rejected instead when server enforcement is on).</p>
+<p>Snapshots are not closed-world: a resource absent from the snapshot may resolve
+from live definitions. For example, an endpoint added after an older revision
+can still run for that revision. Pinning does not hide every newer resource.</p>
+<h2 id="shared-records-caveat"><a class="anchor" href="#shared-records-caveat" aria-hidden="true" tabindex="-1">#</a>Shared records caveat</h2>
+<p>Records are <strong>not</strong> versioned: old-revision endpoints read and write the
+same live player data. Keep collection schemas backward-compatible across
+revisions; the Versions page warns when a newer revision removed a
+collection or fields. Direct record CRUD addresses live data by collection
+id (routing follows live definitions); use <code>minimumRevisionId</code> and
+enforcement for a hard cutoff.</p>
+<h2 id="client-library-requirements"><a class="anchor" href="#client-library-requirements" aria-hidden="true" tabindex="-1">#</a>Client library requirements</h2>
+<p>No client changes are needed. Published game bundles already send
+<code>x-ns-revision-id</code> on runtime calls (<code>NetworkStorageHttp</code>), and every
+endpoint response (including <code>ok: false</code>) is scanned for <code>_revisionStatus</code>
+(<code>NetworkStoragePackageInfo.UpdateFromServerResponse</code>):</p>
+<pre><code class="language-json">&quot;_revisionStatus&quot;: {
+  &quot;isOutdatedRevision&quot;: true,
+  &quot;graceRemainingMinutes&quot;: 42,
+  &quot;graceExpired&quot;: false,
+  &quot;action&quot;: &quot;rejoin&quot;,
+  &quot;message&quot;: &quot;New update is out, please rejoin&quot;,
+  &quot;playerRevision&quot;: 41,
+  &quot;currentRevision&quot;: 42,
+  &quot;enforcementMode&quot;: &quot;allow_continue&quot;,
+  &quot;policy&quot;: {
+    &quot;gracePeriodMinutes&quot;: 60,
+    &quot;postGraceAction&quot;: &quot;block_writes&quot;,
+    &quot;forceEndpointUpgrade&quot;: false,
+    &quot;notifyMessage&quot;: &quot;New update is out, please rejoin&quot;,
+    &quot;showUpdateOptions&quot;: true,
+    &quot;showPopupOnce&quot;: true,
+    &quot;showDefaultMessage&quot;: true,
+    &quot;enforcementMode&quot;: &quot;allow_continue&quot;
+  }
+}</code></pre>
+<p>The in-game outdated UI, grace countdown and auto-disconnect trigger off
+this object; without an explicit server-side policy it is absent and the
+library behaves as before.</p>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/8e7623dda7e37159dc1757b76ad110fad5dd6f11/docs/version-policy.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/version-policy.md</a> at <code>8e7623dda7e37159dc1757b76ad110fad5dd6f11</code> (8e7623d).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> Next release (unreleased, 8e7623d) (<code>next-8e7623d</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/8e7623dda7e37159dc1757b76ad110fad5dd6f11" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>8e7623dda7e37159dc1757b76ad110fad5dd6f11</code> (<code>8e7623d</code>). <strong>Library:</strong> main source (9d65d9b) (<code>source-9d65d9b</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/9d65d9b057b70b9383cd36236601891e0ac3f1c0" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>9d65d9b057b70b9383cd36236601891e0ac3f1c0</code> (<code>9d65d9b</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/next-8e7623d/source-9d65d9b/start/connect-a-game/">Connect a game</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/api/">HTTP API</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/library/api/">C# API</a><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>

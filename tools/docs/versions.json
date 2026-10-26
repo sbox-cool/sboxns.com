@@ -193,6 +193,17 @@
         "revision": null,
         "evidence": null
       }
+    },
+    {
+      "id": "source-9d65d9b",
+      "label": "main source (9d65d9b)",
+      "ref": "9d65d9b057b70b9383cd36236601891e0ac3f1c0",
+      "commit": "9d65d9b057b70b9383cd36236601891e0ac3f1c0",
+      "publication": {
+        "status": "unverified",
+        "revision": null,
+        "evidence": null
+      }
     }
   ]
 }

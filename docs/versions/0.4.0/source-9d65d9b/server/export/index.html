@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Export and move projects | Network Storage docs</title>
+  <meta name="description" content="Portable archives and moving a project between servers.">
+  <link rel="canonical" href="https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/export/">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:site_name" content="sboxns.com">
+  <meta property="og:title" content="Export and move projects | Network Storage docs">
+  <meta property="og:description" content="Portable archives and moving a project between servers.">
+  <meta property="og:url" content="https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/export/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sboxns.com/images/social-card.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=lime2">
+  <link rel="icon" href="/images/favicon.ico?v=lime2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=lime2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=lime2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=lime2">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script src="/theme.js"></script>
+  <script src="/code.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/docs/search.js" defer></script>
+  <script src="/docs/versions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="s&amp;box Network Storage home"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <nav class="links" aria-label="Main"><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.4.0/source-9d65d9b/" aria-current="page">Docs</a><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="GitHub repositories" title="GitHub"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-github"></use></svg></button><span class="nav-drop-menu" hidden><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-server"></use></svg><span>Server<small>sbox-network-storage-server</small></span></a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-book"></use></svg><span>Frontend library<small>sbox-network-storage</small></span></a></span></span><span class="nav-drop"><button type="button" class="nav-ico" aria-expanded="false" aria-haspopup="true" aria-label="Discord communities" title="Discord"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg></button><span class="nav-drop-menu" hidden><a href="/discord-invite/"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>Network Storage<small>sboxns.com</small></span></a><a href="https://sbox.cool/discord" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-discord"></use></svg><span>s&amp;box Cool<small>sbox.cool</small></span></a></span></span></nav>
+  <span class="spacer"></span>
+  <div class="nav-actions">
+    <button type="button" class="icon-btn theme-toggle" aria-label="Switch between dark and light theme" title="Theme"><span class="moon"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-moon"></use></svg></span><span class="sun"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-sun"></use></svg></span></button>
+    <a class="btn sm" href="https://demo.sboxns.com" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-play"></use></svg>Live demo</a>
+    <button type="button" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span class="bars"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg></span><span class="x"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-x"></use></svg></span></button>
+  </div>
+</div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Main" hidden><a href="/#how">How it works</a><a href="/#use-cases">Use cases</a><a href="/install/">Install</a><a href="/docs/versions/0.4.0/source-9d65d9b/" aria-current="page">Docs</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Server source</a><a href="https://github.com/sbox-cool/sbox-network-storage" target="_blank" rel="noopener">Frontend library source</a><a href="/discord-invite/">Network Storage Discord</a><a href="https://sbox.cool/discord" target="_blank" rel="noopener">s&amp;box Cool Discord</a><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a></nav>
+<main id="main" class="wrap doc docs">
+<aside class="docs-side" aria-label="Documentation navigation">
+  <input type="checkbox" class="docs-menu-check" id="docs-menu-check">
+  <label class="docs-menu-toggle" for="docs-menu-check"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-menu"></use></svg><span class="docs-menu-title">Docs menu</span><span class="docs-menu-current">0.4.0 · main source (9d65d9b)</span><span class="chev"><svg class="i" aria-hidden="true"><use href="/images/icons.svg#i-chev"></use></svg></span></label>
+  <div class="docs-menu-panel">
+    <section class="docs-versions" aria-label="Documentation versions">
+    <div class="docs-version-field"><label for="docs-version-server">Server</label><select id="docs-version-server" data-doc-version="server"><option value="/docs/versions/next-8e7623d/source-9d65d9b/server/export/">Next release (unreleased, 8e7623d)</option><option value="/docs/versions/0.5.4/source-9d65d9b/server/export/">0.5.4</option><option value="/docs/versions/0.5.3/source-9d65d9b/server/export/">0.5.3</option><option value="/docs/versions/0.5.2/source-9d65d9b/server/export/">0.5.2</option><option value="/docs/versions/0.5.1/source-9d65d9b/server/export/">0.5.1</option><option value="/docs/versions/0.5.0/source-9d65d9b/server/export/">0.5.0</option><option value="/docs/versions/0.4.0/source-9d65d9b/server/export/" selected>0.4.0</option><option value="/docs/versions/0.3.0/source-9d65d9b/server/export/">0.3.0</option><option value="/docs/versions/0.2.0/source-9d65d9b/server/export/">0.2.0</option><option value="/docs/versions/0.1.0/source-9d65d9b/server/export/">0.1.0</option><option value="/docs/versions/0.5.5/source-9d65d9b/server/export/">0.5.5</option><option value="/docs/versions/0.5.6/source-9d65d9b/server/export/">0.5.6</option><option value="/docs/versions/0.5.7/source-9d65d9b/server/export/">0.5.7</option></select></div>
+    <div class="docs-version-field"><label for="docs-version-library">Library</label><select id="docs-version-library" data-doc-version="library"><option value="/docs/versions/0.4.0/source-13f51a8/server/export/">1.1.0 source (13f51a8)</option><option value="/docs/versions/0.4.0/source-d369d1b/server/export/">Legacy source (d369d1b)</option><option value="/docs/versions/0.4.0/source-fc58d4e/server/export/">main source (fc58d4e)</option><option value="/docs/versions/0.4.0/source-5369108/server/export/">main source (5369108)</option><option value="/docs/versions/0.4.0/source-9c4a235/server/export/">main source (9c4a235)</option><option value="/docs/versions/0.4.0/source-9b6ec5d/server/export/">main source (9b6ec5d)</option><option value="/docs/versions/0.4.0/source-ddf9b61/server/export/">main source (ddf9b61)</option><option value="/docs/versions/0.4.0/source-7f77770/server/export/">main source (7f77770)</option><option value="/docs/versions/0.4.0/source-470a694/server/export/">main source (470a694)</option><option value="/docs/versions/0.4.0/source-6efc43f/server/export/">main source (6efc43f)</option><option value="/docs/versions/0.4.0/source-9d65d9b/server/export/" selected>main source (9d65d9b)</option></select></div>
+    <a class="docs-version-history" href="/docs/versions/">Versions and validation</a>
+    <noscript><ul class="docs-version-links"><li><a href="/docs/versions/next-8e7623d/source-9d65d9b/server/export/">Server: Next release (unreleased, 8e7623d)</a></li><li><a href="/docs/versions/0.5.4/source-9d65d9b/server/export/">Server: 0.5.4</a></li><li><a href="/docs/versions/0.5.3/source-9d65d9b/server/export/">Server: 0.5.3</a></li><li><a href="/docs/versions/0.5.2/source-9d65d9b/server/export/">Server: 0.5.2</a></li><li><a href="/docs/versions/0.5.1/source-9d65d9b/server/export/">Server: 0.5.1</a></li><li><a href="/docs/versions/0.5.0/source-9d65d9b/server/export/">Server: 0.5.0</a></li><li><a href="/docs/versions/0.4.0/source-9d65d9b/server/export/">Server: 0.4.0</a></li><li><a href="/docs/versions/0.3.0/source-9d65d9b/server/export/">Server: 0.3.0</a></li><li><a href="/docs/versions/0.2.0/source-9d65d9b/server/export/">Server: 0.2.0</a></li><li><a href="/docs/versions/0.1.0/source-9d65d9b/server/export/">Server: 0.1.0</a></li><li><a href="/docs/versions/0.5.5/source-9d65d9b/server/export/">Server: 0.5.5</a></li><li><a href="/docs/versions/0.5.6/source-9d65d9b/server/export/">Server: 0.5.6</a></li><li><a href="/docs/versions/0.5.7/source-9d65d9b/server/export/">Server: 0.5.7</a></li><li><a href="/docs/versions/0.4.0/source-13f51a8/server/export/">Library: 1.1.0 source (13f51a8)</a></li><li><a href="/docs/versions/0.4.0/source-d369d1b/server/export/">Library: Legacy source (d369d1b)</a></li><li><a href="/docs/versions/0.4.0/source-fc58d4e/server/export/">Library: main source (fc58d4e)</a></li><li><a href="/docs/versions/0.4.0/source-5369108/server/export/">Library: main source (5369108)</a></li><li><a href="/docs/versions/0.4.0/source-9c4a235/server/export/">Library: main source (9c4a235)</a></li><li><a href="/docs/versions/0.4.0/source-9b6ec5d/server/export/">Library: main source (9b6ec5d)</a></li><li><a href="/docs/versions/0.4.0/source-ddf9b61/server/export/">Library: main source (ddf9b61)</a></li><li><a href="/docs/versions/0.4.0/source-7f77770/server/export/">Library: main source (7f77770)</a></li><li><a href="/docs/versions/0.4.0/source-470a694/server/export/">Library: main source (470a694)</a></li><li><a href="/docs/versions/0.4.0/source-6efc43f/server/export/">Library: main source (6efc43f)</a></li><li><a href="/docs/versions/0.4.0/source-9d65d9b/server/export/">Library: main source (9d65d9b)</a></li><li><a href="/docs/versions/0.5.7/source-13f51a8/">Default version</a></li></ul></noscript>
+  </section>
+    <nav class="doc-nav docs-nav" aria-label="Documentation"><a href="/docs/versions/0.4.0/source-9d65d9b/">Docs home</a><p class="doc-nav-h">Get started</p><a href="/docs/versions/0.4.0/source-9d65d9b/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.4.0/source-9d65d9b/start/game-client/">Game client startup</a><p class="doc-nav-h">Game library</p><a href="/docs/versions/0.4.0/source-9d65d9b/library/overview/">Library overview</a><a href="/docs/versions/0.4.0/source-9d65d9b/library/getting-started/">Install and configure</a><a href="/docs/versions/0.4.0/source-9d65d9b/library/runtime-api/">Runtime guide</a><a href="/docs/versions/0.4.0/source-9d65d9b/library/sync-tool/">Sync Tool</a><a href="/docs/versions/0.4.0/source-9d65d9b/library/source-authoring/">Authoring collections and endpoints</a><a href="/docs/versions/0.4.0/source-9d65d9b/library/examples/">Examples</a><a href="/docs/versions/0.4.0/source-9d65d9b/library/agent-tools/">Coding agent tools (in engine)</a><a href="/docs/versions/0.4.0/source-9d65d9b/library/api/">C# API reference</a><p class="doc-nav-h">HTTP API</p><a href="/docs/versions/0.4.0/source-9d65d9b/api/">HTTP API reference</a><p class="doc-nav-h">Self-hosting</p><a href="/docs/versions/0.4.0/source-9d65d9b/server/self-hosting/">Self-hosting</a><a href="/docs/versions/0.4.0/source-9d65d9b/server/configuration/">Configuration</a><a href="/docs/versions/0.4.0/source-9d65d9b/server/database/">Databases</a><a href="/docs/versions/0.4.0/source-9d65d9b/server/admin-panel/">Owner console</a><a href="/docs/versions/0.4.0/source-9d65d9b/server/export/" aria-current="page">Export and move projects</a><a href="/docs/versions/0.4.0/source-9d65d9b/server/alerting/">Alerting</a><a href="/docs/versions/0.4.0/source-9d65d9b/server/mcp/">Coding agents (MCP)</a><p class="doc-nav-h">Compatibility</p><a href="/docs/versions/0.4.0/source-9d65d9b/compat/certification/">Library certification</a></nav>
+  </div>
+</aside>
+<div class="docs-body">
+  <div class="docs-search" role="search" data-index="/docs/versions/0.4.0/source-9d65d9b/search-index.json"><label class="sr-only" for="docs-q">Search the docs</label><input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off"><div class="docs-results" id="docs-results" hidden></div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/versions/0.4.0/source-9d65d9b/">Docs</a><span aria-hidden="true">/</span><span>Self-hosting</span><span aria-hidden="true">/</span><span aria-current="page">Export and move projects</span></nav>
+  <article class="prose docs-prose">
+<h1>Export and move projects</h1>
+<p class="lead">Portable archives and moving a project between servers.</p>
+<nav class="docs-toc" aria-label="On this page"><p>On this page</p><a href="#backup-or-export">Backup or export?</a><a href="#move-a-server-to-another-machine">Move a server to another machine</a><a href="#switch-from-sqlite-to-postgresql">Switch from SQLite to PostgreSQL</a><a href="#what---config-restores">What --config restores</a><a href="#what-the-archive-contains">What the archive contains</a><a href="#import-rules">Import rules</a><a href="#verify-an-archive-without-importing">Verify an archive without importing</a><a href="#archive-contract-archives-produced-outside-sbox-ns">Archive contract (archives produced outside sbox-ns)</a><a href="#security-of-archives">Security of archives</a></nav>
+<p><code>sbox-ns export</code> writes the whole server (every project, its data, and the
+config folder) into one <code>.tar.gz</code>. <code>sbox-ns import</code> restores that archive into
+whatever database the target server is configured for. Two commands move a
+server to another machine or switch it from SQLite to PostgreSQL.</p>
+<pre><code class="language-sh">sbox-ns export                       # &lt;data dir&gt;/exports/sbox-ns-export-&lt;time&gt;.tar.gz, secrets included
+sbox-ns export --out ns.tar.gz --no-secrets
+sbox-ns import ns.tar.gz             # refuses a database that already has projects
+sbox-ns import ns.tar.gz --config    # also restore the config folder (and secrets, if archived)
+sbox-ns import ns.tar.gz --force     # merge into a non-empty database
+sbox-ns import ns.tar.gz --verify-only  # validate only; writes nothing to this server</code></pre>
+<p>The owner dashboard has the same export: <strong>Export server → Download export</strong>
+(<code>POST /dashboard/export</code>). It leaves secrets out unless you tick
+<strong>Include secrets</strong>. Every dashboard download is written to each project&#39;s
+audit log (<code>server.export</code>) and logged as a warning with the owner name and
+client address. Only one export runs at a time.</p>
+<h2 id="backup-or-export"><a class="anchor" href="#backup-or-export" aria-hidden="true" tabindex="-1">#</a>Backup or export?</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>sbox-ns db backup</code> / <code>db restore</code></th>
+<th><code>sbox-ns export</code> / <code>import</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Format</td>
+<td>Native: SQLite file copy, or <code>pg_dump</code> custom format</td>
+<td>Driver-neutral JSON lines in a <code>.tar.gz</code></td>
+</tr>
+<tr>
+<td>Restores into</td>
+<td>The same database driver only</td>
+<td>SQLite or PostgreSQL, whichever the target uses</td>
+</tr>
+<tr>
+<td>Contents</td>
+<td>Every table byte for byte, including logs and usage counters</td>
+<td>All project data and settings (see below), plus the config folder</td>
+</tr>
+<tr>
+<td>Config and secrets</td>
+<td>Not included</td>
+<td>Included (secrets optional)</td>
+</tr>
+<tr>
+<td>Needs</td>
+<td><code>pg_dump</code>/<code>pg_restore</code> for PostgreSQL</td>
+<td>Nothing extra</td>
+</tr>
+<tr>
+<td>Use it for</td>
+<td>Nightly backups, rollback before updates</td>
+<td>Moving servers, switching drivers, a portable copy</td>
+</tr>
+</tbody></table>
+<p>Keep taking <code>db backup</code> for routine backups; an export is the portable copy.</p>
+<h2 id="move-a-server-to-another-machine"><a class="anchor" href="#move-a-server-to-another-machine" aria-hidden="true" tabindex="-1">#</a>Move a server to another machine</h2>
+<ol>
+<li>On the old server: <code>sbox-ns export --out ns.tar.gz</code> (prints a warning
+because the archive holds secrets).</li>
+<li>Copy <code>ns.tar.gz</code> to the new machine over SSH (<code>scp</code>), never through a
+public location.</li>
+<li>On the new machine install sbox-ns, run <code>sbox-ns setup</code>, stop the
+service (<code>sbox-ns service stop</code>), then
+<code>sbox-ns import ns.tar.gz --config</code>.</li>
+<li>Check <code>server.toml</code> (listen address, <code>public_url</code>, TLS) for the new
+machine, then <code>sbox-ns service start</code>. Point your DNS at the new machine.</li>
+<li>Delete <code>ns.tar.gz</code> from both machines.</li>
+</ol>
+<p>With <code>--config</code> the old server&#39;s secrets are restored, so player sessions,
+secret API keys and signed security configs keep working. The old server&#39;s
+owner login is part of the data and replaces the login created on the new
+server.</p>
+<h2 id="switch-from-sqlite-to-postgresql"><a class="anchor" href="#switch-from-sqlite-to-postgresql" aria-hidden="true" tabindex="-1">#</a>Switch from SQLite to PostgreSQL</h2>
+<ol>
+<li><code>sbox-ns export --out ns.tar.gz</code> while still on SQLite.</li>
+<li>Stop the service. Point <code>database.toml</code> at PostgreSQL
+(<code>sbox-ns config set database.provider postgres</code> plus the
+<code>database.postgres.*</code> keys, see <a href="/docs/versions/0.4.0/source-9d65d9b/server/database/">database.md</a>); check it with
+<code>sbox-ns db test</code>.</li>
+<li><code>sbox-ns import ns.tar.gz</code>. The schema is created automatically and the
+data lands in PostgreSQL. <code>--config</code> is not needed on the same machine,
+because the config folder and secrets are already in place.</li>
+<li>Start the service. The old SQLite file stays untouched in the data folder
+until you delete it.</li>
+</ol>
+<p>The reverse (PostgreSQL to SQLite) works the same way.</p>
+<h2 id="what---config-restores"><a class="anchor" href="#what---config-restores" aria-hidden="true" tabindex="-1">#</a>What <code>--config</code> restores</h2>
+<ul>
+<li><code>server.toml</code>, <code>updates.toml</code>, <code>alerts.toml</code> and <code>conf.d/*.toml</code>.</li>
+<li><code>secrets/</code> and any other secret file the settings point to inside the
+config folder, written with owner-only permissions (0600).</li>
+<li><code>database.toml</code> is never replaced: the import has already gone into the
+database this server is configured for. The archived copy is saved as
+<code>database.toml.from-export</code> for reference. If you keep database settings in
+<code>conf.d/</code>, review them after the import.</li>
+<li>Every replaced file is kept next to it as <code>*.before-import</code>.</li>
+</ul>
+<p>Files are written atomically (temp file + rename). Restart the server after
+an import so it reads the new config.</p>
+<h2 id="what-the-archive-contains"><a class="anchor" href="#what-the-archive-contains" aria-hidden="true" tabindex="-1">#</a>What the archive contains</h2>
+<pre><code>manifest.json                          format version, sbox-ns version, schema version,
+                                       provider, createdAt, project ids and row counts
+data/workspace-objects.jsonl           project lists, packages, key indexes, owner login
+data/memberships.jsonl                 project ownership
+data/projects/&lt;id&gt;/&lt;resource&gt;.jsonl    one JSON object per line, per resource
+config/...                             the config folder (see above)</code></pre>
+<p>Per project: the project record, collections, per-player records, ledger
+entries, global records, endpoints, workflows, queries, API keys, pages, game
+values, rate limits, checkpoint cursor, player profiles, each player&#39;s current
+session, player analytics events, audit logs, and the cumulative storage
+footprint.</p>
+<p>Not included, because they are operational history the server rebuilds:
+request logs, storage error logs, query run history, monthly/daily usage
+counters (only the total storage footprint is carried over), record
+idempotency keys, analytics issue buckets and ended player sessions. Records
+are found through their collection definitions, so records left behind in a
+collection whose definition was deleted are not exported. Analytics events
+are found through player profiles.</p>
+<p>The export reads the database through the same storage interface for both
+drivers, while the server keeps running. Writes that happen during an export
+may or may not be in it; stop the server first if you need an exact cut-over.
+Version numbers, hashes and payloads are kept exactly. Write timestamps the
+database stamps itself (<code>updated_at</code> of collections, records, endpoints,
+workflows, queries, keys, game values and rate limits; <code>created_at</code> of ledger
+entries and global records) take the time of the import. Pages, audit logs,
+memberships, player profiles, sessions and events keep their timestamps.</p>
+<h2 id="import-rules"><a class="anchor" href="#import-rules" aria-hidden="true" tabindex="-1">#</a>Import rules</h2>
+<ul>
+<li><code>manifest.json</code> must be the first entry. An archive written by a newer
+sbox-ns with a newer export format version is refused with a message to
+upgrade sbox-ns first. Older formats stay readable.</li>
+<li>The target must be empty: no projects for the owner, no project data, and
+none of the archived project ids. An owner login alone does not count, so a
+freshly set-up server accepts an import. <code>--force</code> merges instead: rows
+with the same keys are overwritten by the archive, all other rows are kept.</li>
+<li>Every row is an upsert, so running the same import again gives the same
+result. If an import stops halfway (for example a full disk), fix the cause
+and run it again with <code>--force</code>.</li>
+<li>Archive entries must be regular files with plain relative paths; links,
+absolute paths and <code>..</code> are rejected.</li>
+<li>All manifest-declared data entries and their row counts are validated before
+database writes. Missing entries and truncated data are rejected.</li>
+<li>Config restoration rejects symlinked or reparse-point destinations and
+ancestors, including the config root, rather than following them outside it.</li>
+</ul>
+<h3 id="portable-project-imports"><a class="anchor" href="#portable-project-imports" aria-hidden="true" tabindex="-1">#</a>Portable project imports</h3>
+<p>The dashboard&#39;s single-project import is separate from whole-server CLI replay.
+It accepts only a project archive without instance configuration or secrets,
+and never overwrites an existing project ID. SQLite and PostgreSQL claim that ID
+at the database boundary in the same transaction as every imported project row,
+owner membership, workspace object and storage-footprint counter. Concurrent
+importers sharing a database have only one winner; a losing import changes
+nothing. Malformed rows, cancellation and storage failures roll back the entire
+project, so after fixing the cause the corrected archive can be retried normally.</p>
+<h2 id="verify-an-archive-without-importing"><a class="anchor" href="#verify-an-archive-without-importing" aria-hidden="true" tabindex="-1">#</a>Verify an archive without importing</h2>
+<p><code>sbox-ns import &lt;FILE&gt; --verify-only</code> checks an archive and changes nothing on
+the server: it needs no configuration, no stopped service and no empty
+database. It runs every import rule below, checks the archive contract, then
+replays all rows into a throwaway SQLite database in a temporary folder (deleted
+afterwards), so a row the real import would reject fails here too. It prints the
+projects and row counts and exits 0 when the archive is importable, 1 with the
+first problem otherwise.</p>
+<h2 id="archive-contract-archives-produced-outside-sbox-ns"><a class="anchor" href="#archive-contract-archives-produced-outside-sbox-ns" aria-hidden="true" tabindex="-1">#</a>Archive contract (archives produced outside sbox-ns)</h2>
+<p>Any tool can produce an archive <code>sbox-ns import</code> accepts, for example to move a
+project from the hosted sboxcool.com service onto a self-hosted server. Check
+the result with <code>sbox-ns import &lt;FILE&gt; --verify-only</code> before using it.</p>
+<p><strong>Container.</strong> A gzip-compressed POSIX tar (<code>.tar.gz</code>). Only regular files with
+plain relative paths (no links, no absolute paths, no <code>.</code> or <code>..</code> segments, no
+backslashes, no entry twice). <code>manifest.json</code> must be the first entry. Every
+other entry is <code>data/...</code> (below) or <code>config/...</code> (a config folder; leave it
+out of migration archives).</p>
+<p><strong><code>manifest.json</code></strong> (camelCase JSON):</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>format</code></td>
+<td>string</td>
+<td>Always <code>&quot;sbox-ns-export&quot;</code></td>
+</tr>
+<tr>
+<td><code>formatVersion</code></td>
+<td>integer</td>
+<td><code>1</code>; newer versions are refused by older servers</td>
+</tr>
+<tr>
+<td><code>sboxNsVersion</code></td>
+<td>string</td>
+<td>Producer and its version, informational (e.g. <code>&quot;sboxcool-hosted 2026.10&quot;</code>)</td>
+</tr>
+<tr>
+<td><code>schemaVersion</code></td>
+<td>integer</td>
+<td>Producer schema version, informational (<code>1</code>)</td>
+</tr>
+<tr>
+<td><code>provider</code></td>
+<td>string</td>
+<td>Source store, informational (e.g. <code>&quot;scylladb&quot;</code>)</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td>string</td>
+<td>ISO 8601 time of the export</td>
+</tr>
+<tr>
+<td><code>includesConfig</code></td>
+<td>bool</td>
+<td><code>false</code> for migration archives</td>
+</tr>
+<tr>
+<td><code>includesSecrets</code></td>
+<td>bool</td>
+<td><code>false</code> for migration archives (secrets are installed separately)</td>
+</tr>
+<tr>
+<td><code>workspaceObjects</code></td>
+<td>integer</td>
+<td>Rows in <code>data/workspace-objects.jsonl</code></td>
+</tr>
+<tr>
+<td><code>memberships</code></td>
+<td>integer</td>
+<td>Rows in <code>data/memberships.jsonl</code></td>
+</tr>
+<tr>
+<td><code>projects</code></td>
+<td>array</td>
+<td><code>[{ &quot;id&quot;: &quot;&lt;projectId&gt;&quot;, &quot;counts&quot;: { &quot;&lt;resource&gt;&quot;: &lt;rows&gt;, ... } }]</code></td>
+</tr>
+</tbody></table>
+<p>Every data file declared with a count above 0 must be present with exactly that
+many rows; resources with 0 rows may be omitted from <code>counts</code> and from the
+archive. Project ids match <code>^[a-zA-Z0-9_-]{1,128}$</code> and are kept as-is.</p>
+<p><strong>Data files.</strong> UTF-8 JSON lines, one object per line, snake_case columns.
+Columns marked <em>required</em> must be present (JSON <code>null</code> reads as empty / 0 /
+false); <code>*_json</code> columns marked <em>JSON</em> take any JSON value and may be omitted
+(<code>null</code>); integers are 64-bit; <code>*_unix_ms</code> are Unix milliseconds.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Columns</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>data/workspace-objects.jsonl</code></td>
+<td><code>path</code>, <code>content</code> (string, usually JSON text)</td>
+</tr>
+<tr>
+<td><code>data/memberships.jsonl</code></td>
+<td><code>user_id</code> = <code>&quot;1&quot;</code>, <code>project_id</code>, <code>role</code> = <code>&quot;owner&quot;</code>, <code>created_at_unix_ms</code></td>
+</tr>
+<tr>
+<td><code>data/projects/&lt;id&gt;/project.jsonl</code></td>
+<td>exactly one row: <code>payload</code> (JSON, the project document)</td>
+</tr>
+<tr>
+<td><code>.../collections.jsonl</code></td>
+<td><code>collection_id</code>, <code>name</code>, <code>visibility</code>, <code>version</code>; <code>definition_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../records.jsonl</code></td>
+<td><code>collection_id</code>, <code>record_key</code>, <code>deleted</code>, <code>version</code>; <code>payload_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../ledger-entries.jsonl</code></td>
+<td><code>collection_id</code>, <code>record_key</code>, <code>sequence</code>; <code>entry_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../global-records.jsonl</code></td>
+<td><code>collection_id</code>, <code>record_id</code>, <code>version</code>; <code>payload_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../endpoints.jsonl</code></td>
+<td><code>endpoint_id</code>, <code>slug</code>, <code>method</code>, <code>enabled</code>, <code>version_hash</code> (nullable), <code>version</code>; <code>definition_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../workflows.jsonl</code></td>
+<td><code>workflow_id</code>, <code>name</code>, <code>version_hash</code> (nullable), <code>version</code>; <code>definition_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../queries.jsonl</code></td>
+<td><code>query_id</code>, <code>name</code>, <code>requires_secret_key</code>, <code>version</code>; <code>definition_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../api-keys.jsonl</code></td>
+<td><code>api_key</code>, <code>user_id</code> = <code>&quot;1&quot;</code>, <code>key_type</code> (<code>public</code>/<code>secret</code>), <code>key_hash</code>, <code>key_identifier</code>, <code>label</code>, <code>enabled</code>, <code>version</code>; <code>permissions_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../pages.jsonl</code></td>
+<td><code>page_slug</code>, <code>title</code>, <code>content_json</code> (string), <code>created_at_unix_ms</code>, <code>updated_at_unix_ms</code></td>
+</tr>
+<tr>
+<td><code>.../game-values.jsonl</code></td>
+<td><code>version_hash</code> (nullable), <code>version</code>; <code>payload_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../rate-limits.jsonl</code></td>
+<td><code>version</code>; <code>rules_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../checkpoint-cursor.jsonl</code></td>
+<td><code>latest_sequence</code>, <code>manifest_path</code> (nullable), <code>version</code></td>
+</tr>
+<tr>
+<td><code>.../player-profiles.jsonl</code></td>
+<td><code>steam_id</code>, <code>player_name</code>, <code>is_online</code>, <code>online_since_unix_ms</code> (nullable), <code>last_seen_unix_ms</code>, <code>last_heartbeat_unix_ms</code> (nullable), <code>current_session_id</code> (nullable), <code>current_session_last_seconds</code> (nullable), <code>total_seconds</code>, <code>session_count</code>, <code>last_event_type</code> (nullable), <code>last_endpoint_slug</code> (nullable), <code>updated_at_unix_ms</code>; <code>managed_counters_json</code> (JSON, default <code>{}</code>)</td>
+</tr>
+<tr>
+<td><code>.../player-sessions.jsonl</code></td>
+<td><code>steam_id</code>, <code>session_id</code>, <code>started_at_unix_ms</code>, <code>last_heartbeat_at_unix_ms</code>, <code>ended_at_unix_ms</code> (all three nullable); <code>last_metrics_json</code>, <code>summary_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../player-events.jsonl</code></td>
+<td><code>steam_id</code>, <code>created_at_unix_ms</code>, <code>event_id</code>, <code>event_type</code>, <code>category</code>, <code>label</code>, <code>endpoint_slug</code>, <code>collection_id</code>; <code>payload_json</code> (JSON)</td>
+</tr>
+<tr>
+<td><code>.../audit-logs.jsonl</code></td>
+<td><code>created_at_unix_ms</code>, <code>log_id</code>, <code>user_id</code>, <code>action</code>, <code>actor_json</code>, <code>target_json</code>, <code>summary_json</code>, <code>diff_json</code> (all strings)</td>
+</tr>
+<tr>
+<td><code>.../usage.jsonl</code></td>
+<td>one row: <code>storage_bytes</code> (cumulative storage footprint)</td>
+</tr>
+</tbody></table>
+<p><strong>Single owner.</strong> A self-hosted server has exactly one account, the local owner
+with user id <code>1</code>. Archives from a multi-user source must be rewritten to it:</p>
+<ul>
+<li>every project has a membership row <code>{&quot;user_id&quot;: &quot;1&quot;, &quot;project_id&quot;: &quot;&lt;id&gt;&quot;, &quot;role&quot;: &quot;owner&quot;, ...}</code>;</li>
+<li>the project payload&#39;s <code>storageOwnerUserId</code> (if present) is <code>&quot;1&quot;</code>;</li>
+<li>every API key row has <code>user_id</code> <code>&quot;1&quot;</code> (keys resolve storage paths through it).
+<code>key_hash</code> and <code>key_identifier</code> are kept unchanged; secret keys keep working
+only when the server uses the source&#39;s <code>storage_encryption_key</code>;</li>
+<li>workspace objects use <code>network-storage/users/1/&lt;projectId&gt;/...</code> for project
+files (rewrite <code>network-storage/users/&lt;hostedUserId&gt;/</code> to
+<code>network-storage/users/1/</code>), <code>network-storage/users/1/projects.json</code> for the
+owner&#39;s project list, and <code>network-storage/keys/projects/&lt;projectId&gt;/...</code> for
+key indexes. The server also writes matching key files under
+<code>network-storage-api/keys/projects/&lt;projectId&gt;/...</code>; those are accepted too.
+JSON content that names the owner (<code>userId</code> in key and page indexes) uses <code>1</code>.
+Other paths outside <code>network-storage/</code> (except <code>server/identity/...</code> owner
+login, which migration archives leave out) and project folders of projects
+not in the manifest are rejected.</li>
+</ul>
+<p><strong>Import behaviour that matters to producers.</strong> Rows are upserts keyed like
+the database, so re-importing the same archive with <code>--force</code> converges.
+Versions, hashes and payloads are kept exactly; the write timestamps listed in
+<a href="#what-the-archive-contains">What the archive contains</a> take the import time.
+The security config keeps the source&#39;s key id when <code>auth.security_signing_key_id</code>
+is set to it (and the source&#39;s signing key is installed as
+<code>secrets/security_signing_key.pem</code>).</p>
+<h2 id="security-of-archives"><a class="anchor" href="#security-of-archives" aria-hidden="true" tabindex="-1">#</a>Security of archives</h2>
+<p>An archive holds everything a server holds: player records, hashed API keys,
+the owner&#39;s password hash, and (unless <code>--no-secrets</code>) the server secrets.
+With the secrets, anyone holding the archive can forge player sessions and
+sign security configs.</p>
+<ul>
+<li><code>sbox-ns export</code> always creates the file readable by its owner only (0600)
+and refuses to overwrite an existing file.</li>
+<li>Exports are staged in <code>&lt;data dir&gt;/tmp/</code> with owner-only permissions and
+removed when the archive is written. Staging left behind by a crash is
+removed by the next export after a day.</li>
+<li><code>--no-secrets</code> (and the dashboard default) leaves out <code>secrets/</code>, the
+secret files settings point to, and blanks inline secret values
+(<code>database.postgres.password</code>, <code>database.postgres.connection_string</code>,
+<code>alerts.discord.webhook_url</code>, <code>alerts.smtp.password</code>). Use it for archives
+you store or share. Restoring such an archive on a server without the
+original secrets keeps all data, but secret API keys and existing player
+sessions stop working; create new secret keys with <code>sbox-ns key create</code>.</li>
+<li>Secret files configured outside the config folder are never included;
+<code>sbox-ns export</code> lists them so you can copy them yourself.</li>
+<li>Transfer archives over SSH, keep them off shared storage, and delete them
+once the move is done.</li>
+</ul>
+
+  </article>
+  <p class="doc-source">Generated from <a href="https://github.com/sbox-cool/sbox-network-storage-server/blob/705f8cc95f69ac18d7c4569f561ac576136c688f/docs/export.md" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server/docs/export.md</a> at <code>v0.4.0</code> (705f8cc).</p>
+  <details class="docs-provenance">
+  <summary>Publication and source</summary>
+  <p><strong>GitHub source; s&amp;box publication unverified.</strong> No confirmed package revision. <a href="/docs/versions/">All versions</a></p>
+  <p><strong>Server:</strong> 0.4.0 (<code>0.4.0</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage-server/tree/705f8cc95f69ac18d7c4569f561ac576136c688f" target="_blank" rel="noopener">sbox-cool/sbox-network-storage-server</a> at <code>v0.4.0</code> (<code>705f8cc</code>). <strong>Library:</strong> main source (9d65d9b) (<code>source-9d65d9b</code>), GitHub source <a href="https://github.com/sbox-cool/sbox-network-storage/tree/9d65d9b057b70b9383cd36236601891e0ac3f1c0" target="_blank" rel="noopener">sbox-cool/sbox-network-storage</a> at <code>9d65d9b057b70b9383cd36236601891e0ac3f1c0</code> (<code>9d65d9b</code>).</p>
+</details>
+</div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div><a class="brand" href="/"><img src="/images/icon.svg" alt="" width="28" height="28">Network Storage <small>for s&amp;box</small></a>
+  <p>Open-source (AGPL-3.0) and pre-1.0. These docs are generated from the server and library repositories.</p></div>
+  <nav aria-labelledby="f-product"><h2 id="f-product">Product</h2><a href="https://demo.sboxns.com" target="_blank" rel="noopener">Live demo</a><a href="/install/">Install</a><a href="https://github.com/sbox-cool/sbox-network-storage-server/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/sbox-cool/sbox-network-storage-server" target="_blank" rel="noopener">Source on GitHub</a></nav>
+  <nav aria-labelledby="f-docs"><h2 id="f-docs">Docs</h2><a href="/docs/versions/0.4.0/source-9d65d9b/start/connect-a-game/">Connect a game</a><a href="/docs/versions/0.4.0/source-9d65d9b/api/">HTTP API</a><a href="/docs/versions/0.4.0/source-9d65d9b/library/api/">C# API</a><a href="/docs/versions/0.4.0/source-9d65d9b/server/self-hosting/">Self-hosting</a></nav>
+  <nav aria-labelledby="f-trust"><h2 id="f-trust">Trust</h2><a href="/install/#boundaries">Data boundaries</a><a href="/privacy/">Privacy</a><a href="https://sboxcool.com/network-storage/hosted-names/acceptable-use" target="_blank" rel="noopener">Acceptable use</a><a href="https://sboxcool.com/support" target="_blank" rel="noopener">Support</a></nav>
+</div></footer>
+</body>
