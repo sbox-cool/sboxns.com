@@ -31,22 +31,30 @@
   <url><loc>https://sboxns.com/docs/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/start/game-values/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/library/agent-tools/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/library/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/library/examples/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/library/getting-started/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/library/overview/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/library/runtime-api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/library/source-authoring/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/library/sync-tool/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/server/alerting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/server/configuration/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/server/export/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/server/mcp/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/start/connect-a-game/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-085ca29/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/server/alerting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/server/configuration/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/server/database/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/server/export/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/server/mcp/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/start/connect-a-game/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-13f51a8/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-470a694/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-470a694/library/agent-tools/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-470a694/library/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-470a694/library/examples/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-470a694/library/getting-started/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-470a694/library/overview/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-470a694/library/runtime-api/</loc></url>
@@ -84,7 +92,6 @@
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-9d65d9b/library/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-9d65d9b/library/overview/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-9d65d9b/library/runtime-api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.1.0/source-9d65d9b/library/source-authoring/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-9d65d9b/library/sync-tool/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-d369d1b/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-d369d1b/api/</loc></url>
@@ -98,11 +105,13 @@
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-fc58d4e/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-fc58d4e/library/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.1.0/source-fc58d4e/library/overview/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.2.0/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.2.0/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.2.0/source-085ca29/server/configuration/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.2.0/source-085ca29/server/mcp/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.2.0/source-085ca29/server/self-hosting/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.2.0/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.2.0/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.2.0/source-13f51a8/server/configuration/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.2.0/source-13f51a8/server/mcp/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.2.0/source-13f51a8/server/self-hosting/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.2.0/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.2.0/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.2.0/source-5369108/</loc></url>
@@ -123,12 +132,14 @@
   <url><loc>https://sboxns.com/docs/versions/0.2.0/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.2.0/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.2.0/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-085ca29/server/export/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-085ca29/start/connect-a-game/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.3.0/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.3.0/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-13f51a8/server/export/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.3.0/source-13f51a8/start/connect-a-game/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.3.0/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.3.0/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.3.0/source-5369108/</loc></url>
@@ -149,12 +160,14 @@
   <url><loc>https://sboxns.com/docs/versions/0.3.0/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.3.0/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.3.0/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-085ca29/server/configuration/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-085ca29/server/export/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-085ca29/server/self-hosting/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.4.0/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.4.0/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/configuration/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/export/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.4.0/source-13f51a8/server/self-hosting/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.4.0/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.4.0/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.4.0/source-5369108/</loc></url>
@@ -175,19 +188,21 @@
   <url><loc>https://sboxns.com/docs/versions/0.4.0/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.4.0/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.4.0/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/server/alerting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/server/configuration/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/server/export/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/server/hosting-models/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/server/mcp/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/start/connect-a-game/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-085ca29/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/compat/compatibility/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/server/alerting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/server/configuration/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/server/database/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/server/export/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/server/hosting-models/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/server/mcp/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/start/connect-a-game/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.0/source-13f51a8/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.0/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.0/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.0/source-5369108/</loc></url>
@@ -208,16 +223,18 @@
   <url><loc>https://sboxns.com/docs/versions/0.5.0/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.0/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.0/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/compat/version-policy/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/server/alerting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/server/modules/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-085ca29/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/compat/compatibility/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/compat/version-policy/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/server/alerting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/server/database/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/server/modules/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.1/source-13f51a8/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.1/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.1/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.1/source-5369108/</loc></url>
@@ -238,13 +255,15 @@
   <url><loc>https://sboxns.com/docs/versions/0.5.1/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.1/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.1/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-085ca29/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-085ca29/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.2/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.2/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-13f51a8/compat/compatibility/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-13f51a8/server/database/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.2/source-13f51a8/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.2/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.2/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.2/source-5369108/</loc></url>
@@ -265,13 +284,15 @@
   <url><loc>https://sboxns.com/docs/versions/0.5.2/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.2/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.2/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-085ca29/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-085ca29/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.3/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.3/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-13f51a8/compat/compatibility/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-13f51a8/server/database/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.3/source-13f51a8/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.3/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.3/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.3/source-5369108/</loc></url>
@@ -292,13 +313,15 @@
   <url><loc>https://sboxns.com/docs/versions/0.5.3/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.3/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.3/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-085ca29/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-085ca29/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.4/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.4/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-13f51a8/compat/compatibility/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-13f51a8/server/database/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.4/source-13f51a8/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.4/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.4/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.4/source-5369108/</loc></url>
@@ -319,21 +342,23 @@
   <url><loc>https://sboxns.com/docs/versions/0.5.4/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.4/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.4/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/library/script-endpoints/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/server/alerting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/server/configuration/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/server/export/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/server/mcp/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/server/media/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/server/modules/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/start/connect-a-game/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-085ca29/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/compat/compatibility/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/library/script-endpoints/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/server/alerting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/server/configuration/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/server/database/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/server/export/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/server/mcp/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/server/media/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/server/modules/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/start/connect-a-game/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.5/source-13f51a8/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.5/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.5/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.5/source-5369108/</loc></url>
@@ -354,15 +379,21 @@
   <url><loc>https://sboxns.com/docs/versions/0.5.5/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.5/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.5/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/library/script-endpoints/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/server/cli/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/server/configuration/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/server/export/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/server/mcp/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/start/connect-a-game/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-085ca29/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.6/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.6/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-13f51a8/compat/compatibility/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-13f51a8/library/script-endpoints/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-13f51a8/server/cli/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-13f51a8/server/database/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/0.5.6/source-13f51a8/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.6/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.6/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.6/source-5369108/</loc></url>
@@ -383,6 +414,17 @@
   <url><loc>https://sboxns.com/docs/versions/0.5.6/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.6/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.6/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-085ca29/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-085ca29/library/script-endpoints/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-085ca29/server/cli/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-085ca29/start/game-client/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-13f51a8/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.7/source-13f51a8/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.7/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.7/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.7/source-5369108/</loc></url>
@@ -403,15 +445,39 @@
   <url><loc>https://sboxns.com/docs/versions/0.5.7/source-ddf9b61/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.7/source-fc58d4e/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/0.5.7/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-470a694/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-470a694/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-5369108/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-5369108/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-6efc43f/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-6efc43f/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-7f77770/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-7f77770/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-9b6ec5d/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-9b6ec5d/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-9c4a235/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-9c4a235/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-9d65d9b/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-9d65d9b/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-d369d1b/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-d369d1b/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-ddf9b61/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-ddf9b61/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-fc58d4e/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/0.5.8/source-fc58d4e/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-085ca29/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-085ca29/api/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-085ca29/compat/compatibility/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-085ca29/library/script-endpoints/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-085ca29/server/admin-panel/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-085ca29/server/configuration/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-085ca29/server/database/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-085ca29/server/self-hosting/</loc></url>
+  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-085ca29/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/api/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/compat/compatibility/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/library/script-endpoints/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/server/admin-panel/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/server/configuration/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/server/database/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/server/self-hosting/</loc></url>
-  <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-13f51a8/start/game-client/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-470a694/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-470a694/api/</loc></url>
   <url><loc>https://sboxns.com/docs/versions/next-8e7623d/source-5369108/</loc></url>
