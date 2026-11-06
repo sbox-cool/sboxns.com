@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-05T10:52:05.974Z",
+  "updatedAt": "2026-11-06T12:42:47.897Z",
   "validationRequest": {
-    "serverRef": "v0.5.9",
-    "serverCommit": "a4b3f22daf9d5434b3f080e8f4f691c745be41bb",
+    "serverRef": "v0.5.10",
+    "serverCommit": "ed27d855a42fdfb7d58dd5fa42839a83af952975",
     "libraryRevision": "429205",
     "status": "pending-native-validation"
   },
@@ -22,7 +22,7 @@
   },
   "server": {
     "repo": "sbox-cool/sbox-network-storage-server",
-    "newest": "0.5.9",
+    "newest": "0.5.10",
     "releases": [
       {
         "tag": "v0.1.0",
@@ -107,6 +107,12 @@
         "id": "0.5.9",
         "commit": "a4b3f22daf9d5434b3f080e8f4f691c745be41bb",
         "publishedAt": "2026-11-05T10:13:02Z"
+      },
+      {
+        "tag": "v0.5.10",
+        "id": "0.5.10",
+        "commit": "ed27d855a42fdfb7d58dd5fa42839a83af952975",
+        "publishedAt": "2026-11-06T09:44:56Z"
       }
     ]
   },
